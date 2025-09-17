@@ -20,9 +20,9 @@ public class Entity_CardData : ScriptableObject
 		public string ID;
 		public string Class;
 		public string Rarity;
+		public string Type;
 		public string Name;
 		public int Cost;
-		public string Type;
 		public int Attack;
 		public int Health;
 	}
