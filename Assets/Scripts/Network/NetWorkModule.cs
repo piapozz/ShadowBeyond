@@ -64,4 +64,24 @@ public class NetWorkModule
 
         return bytes;
     }
+
+    private static int[] UnpackInputData(byte[] packData, ref InputType input, ref int[] param)
+    {
+        // byte‚©‚çulong‚É•ÏŠ·
+        ulong unPack = 0;
+        int paramSize = packData.Length;
+        for (int i = 0; i < paramSize; i++)
+        {
+            unPack |= (ulong)packData[i] << (8 * i);
+        }
+
+        // Žæ‚èo‚µ
+        InputType type = (InputType)((unPack >> 4) & 0xF);
+        for (int i = 1; i < (paramSize - 1); i++)
+        {
+            param[i] = (int)((unPack >> (4 * i)) & 0xF);
+        }
+
+        return param;
+    }
 }
