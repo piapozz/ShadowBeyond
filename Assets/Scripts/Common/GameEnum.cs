@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class GameEnum
 {
+    /// <summary>
+    /// カードレアリティ
+    /// </summary>
     public enum CardRarity
     {
         INVALID = -1,
@@ -15,7 +18,10 @@ public class GameEnum
         MAX
     }
 
-    public enum Class
+    /// <summary>
+    /// リーダークラス
+    /// </summary>
+    public enum LeaderClass
     {
         INVALID = -1,
         NEUTRAL,
@@ -29,6 +35,9 @@ public class GameEnum
         MAX
     }
 
+    /// <summary>
+    /// カードの種類
+    /// </summary>
     public enum  CardType
     {
         INVALID = -1,
@@ -48,6 +57,38 @@ public class GameEnum
     public enum SE
     {
 
+        MAX
+    }
+
+    /// <summary>
+    /// 同期する種類
+    /// </summary>
+    public enum SyncType
+    {
+        INVALID = -1,
+        DECK_DATA,
+        SEED,
+        INPUT,
+        MAX
+    }
+
+    /// <summary>
+    /// 入力の種類
+    /// </summary>
+    public enum InputType
+    {
+        INVALID = -1,
+        PLAY_CARD,
+        ATTACK,
+        EVOLVE,
+        SUPER_EVOLVE,
+        ACT,
+        FUSION,
+        TURN_END,
+        EXTRA_PP,
+        OPTION,
+        CARD_DETAIL,
+        BATTLE_HISTORY,
         MAX
     }
 }
