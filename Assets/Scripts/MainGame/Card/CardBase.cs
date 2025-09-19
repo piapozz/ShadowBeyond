@@ -12,7 +12,7 @@ public class CardBase
     public struct CardData
     {
         public string m_ID;
-        public Class m_class;
+        public LeaderClass m_class;
         public CardRarity m_rarity;
         public CardType m_type;
         public string m_name;
@@ -20,7 +20,7 @@ public class CardBase
         public FollowerStatus m_status;
         public List<CardAbility> m_ability;
 
-        public CardData(string setID, Class setClass, CardRarity setRarity, CardType setType, string setName, int setCost, FollowerStatus setStatus, List<CardAbility> setAbility)
+        public CardData(string setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, FollowerStatus setStatus, List<CardAbility> setAbility)
         {
             m_ID = setID;
             m_class = setClass;
@@ -68,6 +68,16 @@ public class CardBase
     public void DealDamage(int damage)
     {
         _damage += damage;
+    }
+
+    /// <summary>
+    /// ‰ñ•œ‚·‚é
+    /// </summary>
+    /// <param name="heal"></param>
+    public void HealDamage(int heal)
+    {
+        _damage -= heal;
+        if (_damage < 0) _damage = 0;
     }
 
     /// <summary>
