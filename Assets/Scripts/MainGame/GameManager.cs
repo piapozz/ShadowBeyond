@@ -19,10 +19,18 @@ public class GameManager : SystemObject
 
     private int _seed = -1;
     private int _turnPlayer = -1;
+    private Queue<SendData> _recieveQueue = null;
 
     public async override UniTask Initialize()
     {
+        _recieveQueue = new Queue<SendData>();
+        PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
         await StartBattle();
+    }
+
+    private void OnEvent(EventData photonEvent)
+    {
+        byte[] data = (byte[])photonEvent.CustomData;
     }
 
     /// <summary>
@@ -39,11 +47,6 @@ public class GameManager : SystemObject
             sendData.type = SyncType.SEED;
             sendData.param = new int[] { _seed };
             await NetWorkModule.SendSyncData(sendData);
-        }
-        // クライアントはシードを受信
-        else
-        {
-
         }
 
         await TurnProc();
