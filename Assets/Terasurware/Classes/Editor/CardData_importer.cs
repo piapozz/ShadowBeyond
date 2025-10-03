@@ -50,14 +50,16 @@ public class CardData_importer : AssetPostprocessor {
 						
 						Entity_CardData.Param p = new Entity_CardData.Param ();
 						
-					cell = row.GetCell(0); p.ID = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(1); p.Class = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(2); p.Rarity = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(3); p.Type = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(4); p.Name = (cell == null ? "" : cell.StringCellValue);
-					cell = row.GetCell(5); p.Cost = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(6); p.Attack = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(7); p.Health = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(0); p.ID = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(2); p.Class = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(4); p.Rarity = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(6); p.Type = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(7); p.Name = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(8); p.Cost = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(9); p.Attack = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(10); p.Defence = (int)(cell == null ? 0 : cell.NumericCellValue);
+					cell = row.GetCell(11); p.Text = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(12); p.IllustID = (int)(cell == null ? 0 : cell.NumericCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

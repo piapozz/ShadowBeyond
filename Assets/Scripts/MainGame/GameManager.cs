@@ -18,13 +18,14 @@ public class GameManager : SystemObject
     }
 
     private int _seed = -1;
-    private int _turnPlayer = -1;
     private Queue<SendData> _recieveQueue = null;
+    private TurnManager _turnManager = null;
 
     public async override UniTask Initialize()
     {
         _recieveQueue = new Queue<SendData>();
         PhotonNetwork.NetworkingClient.EventReceived += OnEvent;
+        _turnManager = new TurnManager();
         await StartBattle();
     }
 

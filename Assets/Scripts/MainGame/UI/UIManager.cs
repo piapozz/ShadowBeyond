@@ -16,11 +16,13 @@ using static GameManager;
 // ・バトル履歴UI
 // ・PPUI
 // ・バトル情報UI
-public class UIManager : MonoBehaviour
+public class UIManager : SystemObject
 {
     [SerializeField] private Transform UICanvas;
 
+    [SerializeField] private CardObject cardObject;
     [SerializeField] private HandUI handUI;
+    [SerializeField] private RectTransform handField;
     [SerializeField] private TurnUI turnUI;
     [SerializeField] private DeckUI deckUI;
     [SerializeField] private FieldUI fieldUI;
@@ -30,16 +32,52 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PPUI ppUI;
     [SerializeField] private InfoUI infoUI;
 
+    public static UIManager instance { get; private set; }
+
     private UniTaskCompletionSource _uniTaskCompletionSource = null;
 
-    // Start is called before the first frame update
-    void Start()
+    public override UniTask Initialize()
     {
+        instance = this;
         // UIを生成
-        handUI = Instantiate(handUI, transform);
+        handUI = Instantiate(handUI);
+        fieldUI = Instantiate(fieldUI);
 
         // それぞれのUIにコールバック設定
-        handUI.AddHandCard(new CardUI());
+
+
+        return UniTask.CompletedTask;
+    }
+
+    private void Start()
+    {
+        MasterDataManager.LoadAllData();
+
+        instance = this;
+        handUI = Instantiate(handUI);
+        fieldUI = Instantiate(fieldUI);
+
+        for (int i = 0; i < 4; i++)
+        {
+            var cardData = CardMasterUtility.GetCardMaster(0);
+            CardBase.FollowerStatus status = new CardBase.FollowerStatus(cardData.Attack, cardData.Defence);
+            CardBase.CardData setData = new CardBase.CardData(
+                cardData.ID,
+                (GameEnum.LeaderClass)cardData.Class,
+                (GameEnum.CardRarity)cardData.Rarity,
+                (GameEnum.CardType)cardData.Type,
+                cardData.Name,
+                cardData.Cost,
+                status,
+                new List<BaseCardAbility>());
+            CardBase card = new CardBase();
+            card.SetData(setData);
+            CardObject handObject = Instantiate(cardObject);
+            handObject.SetCard(card);
+            handUI.AddHandCard(handObject);
+            CardObject fieldCard = Instantiate(cardObject);
+            fieldUI.AddOpponentFieldCard(fieldCard);
+        }
     }
 
     // Update is called once per frame
@@ -51,7 +89,7 @@ public class UIManager : MonoBehaviour
     }
 
     // ターン開始
-    public void TurnStart()
+    public void StartTurn()
     {
         // ターンUI更新
 
@@ -67,7 +105,7 @@ public class UIManager : MonoBehaviour
     }
 
     // ターン終了
-    public void TurnEnd()
+    public void EndTurn()
     {
         // ターンUI更新
 
@@ -83,5 +121,26 @@ public class UIManager : MonoBehaviour
 
         await _uniTaskCompletionSource.Task;
         return new SendData();
+    }
+
+    public void SetCardDrop(CardObject setCard)
+    {
+        Vector3 mousePos = Input.mousePosition;
+
+        // 手札領域か判定
+        bool isInside = RectTransformUtility.RectangleContainsScreenPoint(handField, mousePos);
+        // 手札に戻す
+        if (isInside)
+        {
+            handUI.ArrangeHandCard();
+        }
+        // カードをプレイ
+        else
+        {
+            // 手札から除外しフィールドに追加
+            handUI.RemoveHandCard(setCard);
+            setCard.SetCardState(CardObject.CardState.FIELD);
+            fieldUI.AddOwnFieldCard(setCard);
+        }
     }
 }

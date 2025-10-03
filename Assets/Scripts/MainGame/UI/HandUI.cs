@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class HandUI : BaseUI
 {
+    [SerializeField] private Transform handRoot = null;
     private bool isAcssessible = false;
-    private List<CardUI> handCards = new List<CardUI>();
+    private List<CardObject> handCards = new List<CardObject>();
 
-    [SerializeField] private BoxCollider handArea;
+    private const float HAND_SCALE_X = 6.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -30,15 +31,17 @@ public class HandUI : BaseUI
     }
 
     // 手札エリアにカードを追加する
-    public void AddHandCard(CardUI card)
+    public void AddHandCard(CardObject card)
     {
         handCards.Add(card);
+        card.transform.SetParent(handRoot);
+        card.SetCardState(CardObject.CardState.HAND);
 
         ArrangeHandCard();
     }
 
     // 手札エリアからカードを削除する
-    public void RemoveHandCard(CardUI card)
+    public void RemoveHandCard(CardObject card)
     {
         handCards.Remove(card);
 
@@ -48,7 +51,7 @@ public class HandUI : BaseUI
     // 手札エリアにカードを整列させる
     public void ArrangeHandCard()
     {
-        float areaWidth = handArea.size.x;
+        float areaWidth = HAND_SCALE_X;
         float cardWidth = 1.0f;          // 仮のカード幅
         float cardThickness = 0.15f;     // カードの厚み（Y方向のずらし幅）
         int cardCount = handCards.Count;

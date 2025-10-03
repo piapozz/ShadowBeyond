@@ -205,6 +205,34 @@ public class CommonModule
         targetList.Add(member);
     }
 
+    /// <summary>
+    /// マウスの座標をワールド座標に変換して返す
+    /// </summary>
+    /// <returns></returns>
+    public static Vector3 GetMouseWorldPosition(Transform objectTransform, Camera mainCamera)
+    {
+        // マウスのスクリーン座標を取得し、ワールド座標に変換
+        Vector3 mousePoint = Input.mousePosition;
+        // カメラからの距離を設定
+        mousePoint.z = mainCamera.WorldToScreenPoint(objectTransform.position).z;
+        return mainCamera.ScreenToWorldPoint(mousePoint);
+    }
+
+    /// <summary>
+    /// 2次ベジェ曲線の取得
+    /// </summary>
+    /// <param name="start"></param>
+    /// <param name="end"></param>
+    /// <param name="control"></param>
+    /// <param name="t"></param>
+    /// <returns></returns>
+    public static Vector3 GetBezierCurve2(Vector3 start, Vector3 end, Vector3 control, float t)
+    {
+        Vector3 P1 = Vector3.Lerp(start, control, t);
+        Vector3 P2 = Vector3.Lerp(control, end, t);
+        return Vector3.Lerp(P1, P2, t);
+    }
+
     #region WaitAction(sec)
 
     /// <summary>
