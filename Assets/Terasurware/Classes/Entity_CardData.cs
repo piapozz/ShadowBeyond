@@ -17,14 +17,16 @@ public class Entity_CardData : ScriptableObject
 	public class Param
 	{
 		
-		public string ID;
-		public string Class;
-		public string Rarity;
-		public string Type;
+		public int ID;
+		public int Class;
+		public int Rarity;
+		public int Type;
 		public string Name;
 		public int Cost;
 		public int Attack;
-		public int Health;
+		public int Defence;
+		public string Text;
+		public int IllustID;
 	}
 }
 
