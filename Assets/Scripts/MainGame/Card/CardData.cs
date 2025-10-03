@@ -30,9 +30,9 @@ public class CardData
     // アクト可能かどうか
     public bool canAct { get; private set; }
     // カードの種類
-    public CardType cardType { get; private set; }
+    public CardType type { get; private set; }
     // 持っているカードタイプ
-    public List<CardTypeDetail> cardTypeDetail { get; private set; }
+    public List<CardTypeDetail> typeDetail { get; private set; }
     // カードid
     public int id { get; private set; }
     // リーダークラス
@@ -46,18 +46,29 @@ public class CardData
     // カードアビリティ
     public List<CardAbility> ability { get; private set; }
 
+    public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence)
+    {
+        id = setID;
+        leaderClass = setClass;
+        rarity = setRarity;
+        type = setType;
+        name = setName;
+        cost = setCost;
+        status = new FollowerStatus(setAttack, setDefence);
+    }
+
     public void SetType(CardType newType)
     {
-        cardType = newType;
+        type = newType;
     }
 
     public void AddTypeDetail(CardTypeDetail newTypeDetail)
     {
-        if (cardTypeDetail == null)
+        if (typeDetail == null)
         {
-            cardTypeDetail = new List<CardTypeDetail>();
+            typeDetail = new List<CardTypeDetail>();
         }
-        cardTypeDetail.Add(newTypeDetail);
+        typeDetail.Add(newTypeDetail);
     }
     public void SetCost(int newCost)
     {

@@ -40,7 +40,7 @@ public class CardObject : MonoBehaviour
     private CardState currentState = CardState.HAND;
 
     // カードクラスの参照
-    private CardBase card = null;
+    private CardData cardData = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
     private Camera mainCamera = null;
 
@@ -62,9 +62,10 @@ public class CardObject : MonoBehaviour
     /// <summary>
     /// カードクラスを渡す
     /// </summary>
-    public void SetCard(CardBase setCard)
+    public void SetCardData(CardData setCard)
     {
-        card = setCard;
+        cardData = setCard;
+        SetCardLook();
     }
 
     private void OnMouseDown()
@@ -175,11 +176,11 @@ public class CardObject : MonoBehaviour
         switch (currentState)
         {
             case CardState.HAND:
-                cardObject[(int)CardObjectType.HAND_FOLLOWER].SetActive(true);
+                cardObject[(int)CardState.HAND].SetActive(true);
                 break;
             case CardState.FIELD:
-                cardObject[(int)CardObjectType.HAND_FOLLOWER].SetActive(false);
-                cardObject[(int)CardObjectType.FIELD_FOLLOWER].SetActive(true);
+                cardObject[(int)CardState.HAND].SetActive(false);
+                cardObject[(int)CardState.FIELD].SetActive(true);
                 break;
         }
     }
@@ -189,10 +190,8 @@ public class CardObject : MonoBehaviour
     /// </summary>
     public void SetCardLook()
     {
-        // カードデータから見た目を適用
-        CardBase.CardData data = card._data;
         // オブジェクト設定
-        switch (data.m_type)
+        switch (cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_FOLLOWER];
@@ -200,6 +199,7 @@ public class CardObject : MonoBehaviour
                 break;
             case GameEnum.CardType.SPELL:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_SPELL];
+                cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.HAND_SPELL];
                 break;
             case GameEnum.CardType.AMULET:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_AMULET];
@@ -211,17 +211,17 @@ public class CardObject : MonoBehaviour
         // テキスト設定
         CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
         if (handLook == null) return;
-        handLook.SetCardText(data);
+        handLook.SetCardText(cardData);
         // マテリアル設定
-        handLook.SetCardMaterial(cardMaterial[(int)data.m_rarity]);
+        handLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
 
         // フィールドオブジェクト設定
         // テキスト設定
-        CardLook fieldLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (handLook == null) return;
-        fieldLook.SetCardText(data);
+        fieldLook.SetCardText(cardData);
         // マテリアル設定
-        fieldLook.SetCardMaterial(cardMaterial[(int)data.m_rarity]);
+        fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
     }
 
     public void PlayCard()
@@ -244,11 +244,6 @@ public class CardObject : MonoBehaviour
 
 
         // 進化後挙動
-
-    }
-
-    public void AttackFollower()
-    {
 
     }
 }

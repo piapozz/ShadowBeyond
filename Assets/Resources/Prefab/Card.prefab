@@ -62,14 +62,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82506418ea664b84496413ba613e4c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardObject:
+  cardPrefab:
   - {fileID: 8559279082673887550}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 7982435413641128798}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7982435413641128798}
+  - {fileID: 7982435413641128798}
+  - {fileID: 7982435413641128798}
+  - {fileID: 7982435413641128798}
+  - {fileID: 7982435413641128798}
   lineRenderer: {fileID: 1735497269602815245}
   cardMaterial:
   - {fileID: 2100000, guid: fc874b06d075056408983e93e72f5a03, type: 2}

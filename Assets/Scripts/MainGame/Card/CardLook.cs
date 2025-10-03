@@ -16,12 +16,12 @@ public class CardLook : MonoBehaviour
     [SerializeField]
     private List<MeshRenderer> cardFrame = null;
 
-    public void SetCardText(CardBase.CardData setCardData)
+    public void SetCardText(CardData setCardData)
     {
-        SetCardName(setCardData.m_name);
-        SetCardCost(setCardData.m_cost);
-        SetCardAttack(setCardData.m_status.m_attack);
-        SetCardDefence(setCardData.m_status.m_health);
+        SetCardName(setCardData.name);
+        SetCardCost(setCardData.cost);
+        SetCardAttack(setCardData.status.m_attack);
+        SetCardDefence(setCardData.status.m_health);
     }
 
     public void SetCardName(string setName)
