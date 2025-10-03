@@ -15,211 +15,263 @@ MonoBehaviour:
   sheets:
   - name: CardData
     list:
-    - ID: 1_N_001
-      Class: Neutral
-      Rarity: Bronze
-      Type: Follower
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: "\u30B4\u30D6\u30EA\u30F3"
       Cost: 1
       Attack: 1
-      Health: 2
-    - ID: 1_N_002
-      Class: Neutral
-      Rarity: Bronze
-      Type: Follower
+      Defence: 2
+      Text: 
+      IllustID: 0
+    - ID: 1
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: "\u30D5\u30A1\u30A4\u30BF\u30FC"
       Cost: 2
       Attack: 2
-      Health: 2
-    - ID: 1_N_003
-      Class: Neutral
-      Rarity: Bronze
-      Type: Follower
+      Defence: 2
+      Text: 
+      IllustID: 0
+    - ID: 2
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: "\u30B4\u30EA\u30A2\u30C6"
       Cost: 4
       Attack: 3
-      Health: 4
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 4
+      Text: 
+      IllustID: 0
+    - ID: 100
+      Class: 1
+      Rarity: 0
+      Type: 0
+      Name: "\u30D5\u30A7\u30A2\u30EA\u30FC"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+    - ID: 200
+      Class: 2
+      Rarity: 0
+      Type: 0
+      Name: "\u30CA\u30A4\u30C8"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+    - ID: 300
+      Class: 3
+      Rarity: 0
+      Type: 1
+      Name: "\u77E5\u6075\u306E\u5149"
+      Cost: 1
+      Attack: -1
+      Defence: -1
+      Text: 
+      IllustID: 0
+    - ID: 400
+      Class: 4
+      Rarity: 0
+      Type: 1
+      Name: "\u7ADC\u306E\u8A17\u5BA3"
+      Cost: 2
+      Attack: -1
+      Defence: -1
+      Text: 
+      IllustID: 0
+    - ID: 500
+      Class: 5
+      Rarity: 0
+      Type: 0
+      Name: "\u30B4\u30FC\u30B9\u30C8"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+    - ID: 600
+      Class: 6
+      Rarity: 0
+      Type: 1
+      Name: "\u6F06\u9ED2\u306E\u6CD5\u5178"
+      Cost: 2
+      Attack: -1
+      Defence: -1
+      Text: 
+      IllustID: 0
+    - ID: 700
+      Class: 7
+      Rarity: 0
+      Type: 0
+      Name: "\u64CD\u308A\u4EBA\u5F62"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+    - ID: 1100
+      Class: 1
+      Rarity: 2
+      Type: 0
+      Name: "\u30EA\u30CE\u30BB\u30A6\u30B9"
+      Cost: 2
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
+      Defence: 0
+      Text: 
+      IllustID: 0
+    - ID: 0
+      Class: 0
+      Rarity: 0
+      Type: 0
       Name: 
       Cost: 0
       Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
-    - ID: 
-      Class: 
-      Rarity: 
-      Type: 
-      Name: 
-      Cost: 0
-      Attack: 0
-      Health: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
