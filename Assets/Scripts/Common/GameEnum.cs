@@ -46,6 +46,31 @@ public class GameEnum
         AMULET,
         MAX
     }
+    /// <summary>
+    /// カードのタイプ
+    /// </summary>
+    public enum CardTypeDetail
+    {
+        INVALID = -1,
+        MACHINA,    // 機械
+        NATURA,     // 自然
+        FESTIVE,    // 宴楽
+        CONDEMNED,  // 八獄
+        ACADEMIC,   // 学園
+        COMMANDER,  // 指揮官
+        OFFICER,    // 兵士
+        LOOT,       // 財宝
+        LEVIN,      // レヴィオン
+        HEROIC,     // ヒーロー
+        EARTH_SIGIL,// 土の印
+        MYSTERIA,   // マナリア
+        CHESS,      // チェス
+        ARMED,      // 武装
+        ARTIFACT,   // アーティファクト
+        ALL,        // すべて
+        DEPARTED,   // 死者
+        PIXIE       // 妖精
+    }
 
     public enum BGM
     {
