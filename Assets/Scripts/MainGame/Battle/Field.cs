@@ -101,7 +101,7 @@ public class Field
     // タイプを付与
     public void AddType(CardData card, CardTypeDetail newType)
     {
-        if (!card.cardTypeDetail.Contains(newType))
+        if (!card.typeDetail.Contains(newType))
             card.AddTypeDetail(newType);
     }
 

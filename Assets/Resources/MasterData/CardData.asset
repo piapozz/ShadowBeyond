@@ -125,14 +125,14 @@ MonoBehaviour:
       Defence: 1
       Text: 
       IllustID: 0
-    - ID: 0
-      Class: 0
-      Rarity: 0
+    - ID: 1200
+      Class: 2
+      Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u30EC\u30F4\u30A3\u30AA\u30F3\u306E\u8FC5\u96F7\u30FB\u30A2\u30EB\u30D9\u30FC\u30EB"
+      Cost: 5
+      Attack: 3
+      Defence: 5
       Text: 
       IllustID: 0
     - ID: 0

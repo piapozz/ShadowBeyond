@@ -59,23 +59,22 @@ public class UIManager : SystemObject
 
         for (int i = 0; i < 4; i++)
         {
-            var cardData = CardMasterUtility.GetCardMaster(0);
-            CardBase.FollowerStatus status = new CardBase.FollowerStatus(cardData.Attack, cardData.Defence);
-            CardBase.CardData setData = new CardBase.CardData(
+            var cardData = CardMasterUtility.GetCardMaster(1200);
+            CardData.FollowerStatus status = new CardData.FollowerStatus(cardData.Attack, cardData.Defence);
+            CardData setData = new CardData(
                 cardData.ID,
                 (GameEnum.LeaderClass)cardData.Class,
                 (GameEnum.CardRarity)cardData.Rarity,
                 (GameEnum.CardType)cardData.Type,
                 cardData.Name,
                 cardData.Cost,
-                status,
-                new List<BaseCardAbility>());
-            CardBase card = new CardBase();
-            card.SetData(setData);
+                cardData.Attack,
+                cardData.Defence);
             CardObject handObject = Instantiate(cardObject);
-            handObject.SetCard(card);
+            handObject.SetCardData(setData);
             handUI.AddHandCard(handObject);
             CardObject fieldCard = Instantiate(cardObject);
+            fieldCard.SetCardData(setData);
             fieldUI.AddOpponentFieldCard(fieldCard);
         }
     }
