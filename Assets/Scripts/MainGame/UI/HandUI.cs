@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class HandUI : BaseUI
 {
@@ -67,14 +68,11 @@ public class HandUI : BaseUI
 
         for (int i = 0; i < cardCount; i++)
         {
-            // +X‚©‚ç-X‚É”z’u‚·‚é‚Ì‚Å index‚ð”½“]
-            int reversedIndex = cardCount - 1 - i;
-
             // ¶’[Šî€‚ÌX
-            float xPosition = -totalWidth / 2 + actualWidth * reversedIndex + actualWidth / 2;
+            float xPosition = -totalWidth / 2 + actualWidth * i + actualWidth / 2;
 
-            // Y‚ÍŒú‚Ý•ª‰º‚°‚é
-            float yPosition = -cardThickness * i;
+            // Y‚ÍŒú‚Ý•ªã‚°‚é
+            float yPosition = cardThickness * i;
 
             handCards[i].transform.localPosition = new Vector3(xPosition, yPosition, 0);
         }

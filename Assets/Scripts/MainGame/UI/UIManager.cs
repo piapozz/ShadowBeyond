@@ -57,24 +57,14 @@ public class UIManager : SystemObject
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
-            var cardData = CardMasterUtility.GetCardMaster(1200);
-            CardData.FollowerStatus status = new CardData.FollowerStatus(cardData.Attack, cardData.Defence);
-            CardData setData = new CardData(
-                cardData.ID,
-                (GameEnum.LeaderClass)cardData.Class,
-                (GameEnum.CardRarity)cardData.Rarity,
-                (GameEnum.CardType)cardData.Type,
-                cardData.Name,
-                cardData.Cost,
-                cardData.Attack,
-                cardData.Defence);
+            CardData cardData = CardMasterUtility.GetRandomCardData();
             CardObject handObject = Instantiate(cardObject);
-            handObject.SetCardData(setData);
+            handObject.SetCardData(cardData);
             handUI.AddHandCard(handObject);
             CardObject fieldCard = Instantiate(cardObject);
-            fieldCard.SetCardData(setData);
+            fieldCard.SetCardData(cardData);
             fieldUI.AddOpponentFieldCard(fieldCard);
         }
     }
@@ -122,7 +112,11 @@ public class UIManager : SystemObject
         return new SendData();
     }
 
-    public void SetCardDrop(CardObject setCard)
+    /// <summary>
+    /// カードがドロップされたときの処理
+    /// </summary>
+    /// <param name="setCard"></param>
+    public void DropCard(CardObject setCard)
     {
         Vector3 mousePos = Input.mousePosition;
 
@@ -138,8 +132,17 @@ public class UIManager : SystemObject
         {
             // 手札から除外しフィールドに追加
             handUI.RemoveHandCard(setCard);
-            setCard.SetCardState(CardObject.CardState.FIELD);
-            fieldUI.AddOwnFieldCard(setCard);
+            switch (setCard.cardData.type)
+            {
+                case GameEnum.CardType.FOLLOWER:
+                case GameEnum.CardType.AMULET:
+                    fieldUI.AddOwnFieldCard(setCard);
+                    break;
+                case GameEnum.CardType.SPELL:
+                    setCard.SetCardState(CardObject.CardState.UNUSE);
+                    break;
+                default: break;
+            }
         }
     }
 }

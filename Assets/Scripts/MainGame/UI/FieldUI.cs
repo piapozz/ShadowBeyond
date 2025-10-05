@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class FieldUI : BaseUI
 {
@@ -58,11 +59,8 @@ public class FieldUI : BaseUI
 
         for (int i = 0; i < cardCount; i++)
         {
-            // +Xから-Xに配置するので indexを反転
-            int reversedIndex = cardCount - 1 - i;
-
             // 左端基準のX
-            float xPosition = -totalWidth / 2 + actualWidth * reversedIndex + actualWidth / 2;
+            float xPosition = -totalWidth / 2 + actualWidth * i + actualWidth / 2;
 
             ownCards[i].transform.localPosition = new Vector3(xPosition, 0, 0);
         }
@@ -85,11 +83,8 @@ public class FieldUI : BaseUI
 
         for (int i = 0; i < cardCount; i++)
         {
-            // +Xから-Xに配置するので indexを反転
-            int reversedIndex = cardCount - 1 - i;
-
             // 左端基準のX
-            float xPosition = -totalWidth / 2 + actualWidth * reversedIndex + actualWidth / 2;
+            float xPosition = totalWidth / 2 - actualWidth * i - actualWidth / 2;
 
             opponentCards[i].transform.localPosition = new Vector3(xPosition, 0, 0);
         }

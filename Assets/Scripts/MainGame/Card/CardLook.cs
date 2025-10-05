@@ -14,7 +14,7 @@ public class CardLook : MonoBehaviour
     [SerializeField]
     private TextMeshPro cardDefence = null;
     [SerializeField]
-    private List<MeshRenderer> cardFrame = null;
+    private MeshRenderer cardFrame = null;
 
     public void SetCardText(CardData setCardData)
     {
@@ -50,9 +50,6 @@ public class CardLook : MonoBehaviour
 
     public void SetCardMaterial(Material setMaterial)
     {
-        for (int i = 0, max = cardFrame.Count; i < max; i++)
-        {
-            cardFrame[i].material = setMaterial;
-        }
+        cardFrame.material = setMaterial;
     }
 }
