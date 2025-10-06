@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using DG.Tweening;
 public class HandUI : BaseUI
 {
     [SerializeField] private Transform handRoot = null;
+    [SerializeField] private Transform drawRoot = null;
     private bool isAcssessible = false;
     private List<CardObject> handCards = new List<CardObject>();
 
@@ -32,12 +34,18 @@ public class HandUI : BaseUI
     }
 
     // 手札エリアにカードを追加する
-    public void AddHandCard(CardObject card)
+    public async UniTask AddHandCard(List<CardObject> drawCard)
     {
-        handCards.Add(card);
-        card.transform.SetParent(handRoot);
-        card.SetCardState(CardObject.CardState.HAND);
+        for (int i = 0, max = drawCard.Count; i < max; i++)
+        {
+            CardObject card = drawCard[i];
+            handCards.Add(card);
+            card.transform.SetParent(handRoot);
+            card.SetCardState(CardObject.CardState.HAND);
 
+            await card.DrawCard(drawRoot, handRoot);
+        }
+        // 手札の整列
         ArrangeHandCard();
     }
 

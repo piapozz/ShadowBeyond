@@ -5151,18 +5151,6 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 00000000
-    - ID: 115210
-      Class: 2
-      Rarity: 3
-      Type: 0
-      Name: "\u7121\u6557\u306E\u5263\u8056\u30FB\u30AB\u30B2\u30DF\u30C4"
-      Cost: 1
-      Attack: 0
-      Defence: 1
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
     - ID: 100100
       Class: 1
       Rarity: 0
@@ -12363,1146 +12351,6 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 00000000
-    - ID: 103200
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103201
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103202
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103203
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103204
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103205
-      Class: 2
-      Rarity: 1
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103206
-      Class: 2
-      Rarity: 1
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103207
-      Class: 2
-      Rarity: 1
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103208
-      Class: 2
-      Rarity: 1
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103209
-      Class: 2
-      Rarity: 2
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103210
-      Class: 2
-      Rarity: 2
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103211
-      Class: 2
-      Rarity: 2
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103212
-      Class: 2
-      Rarity: 3
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103213
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103214
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103215
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103216
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103217
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103218
-      Class: 2
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103048
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103049
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103050
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103051
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103052
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103053
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103054
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103055
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103056
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103057
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103058
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103059
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103060
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103061
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103062
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103063
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103064
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103065
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103066
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103067
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103068
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103069
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103070
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103071
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103072
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103073
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103074
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103075
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103076
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103077
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103078
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103079
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103080
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103081
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103082
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103083
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103084
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103085
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103086
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103087
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103088
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103089
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103090
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103091
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103092
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103093
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103094
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103095
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103096
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103097
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103098
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103099
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103100
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103101
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103102
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103103
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103104
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103105
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103106
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103107
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103108
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103109
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103110
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103111
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103112
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103113
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103114
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103115
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103116
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103117
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103118
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103119
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103120
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103121
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103122
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
-    - ID: 103123
-      Class: 0
-      Rarity: 0
-      Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
-      Text: 
-      IllustID: 0
-      Token: 0
-      Trait: 00000000
     - ID: 103124
       Class: 0
       Rarity: 0
@@ -14416,6 +13264,18 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103200
+      Class: 2
+      Rarity: 0
+      Type: 0
+      Name: "\u30B5\u30E0\u30E9\u30A4"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103200
       Class: 0
       Rarity: 0
       Type: 0
@@ -14423,6 +13283,18 @@ MonoBehaviour:
       Cost: 0
       Attack: 0
       Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103201
+      Class: 2
+      Rarity: 0
+      Type: 0
+      Name: "\u30D6\u30EA\u30C3\u30C4\u30E9\u30F3\u30B5\u30FC"
+      Cost: 3
+      Attack: 3
+      Defence: 2
       Text: 
       IllustID: 0
       Token: 0
@@ -14440,6 +13312,18 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103202
+      Class: 2
+      Rarity: 0
+      Type: 0
+      Name: "\u30B7\u30FC\u30D5"
+      Cost: 3
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103202
       Class: 0
       Rarity: 0
       Type: 0
@@ -14452,11 +13336,35 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103203
+      Class: 2
+      Rarity: 0
+      Type: 0
+      Name: "\u30BD\u30FC\u30C9\u30A6\u30A3\u30C3\u30D7\u30E1\u30A4\u30C9"
+      Cost: 6
+      Attack: 5
+      Defence: 6
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103203
       Class: 0
       Rarity: 0
       Type: 0
       Name: 
       Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103204
+      Class: 2
+      Rarity: 0
+      Type: 1
+      Name: "\u30CB\u30F3\u30B8\u30E3\u30A2\u30FC\u30C4"
+      Cost: 3
       Attack: 0
       Defence: 0
       Text: 
@@ -14476,6 +13384,18 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103205
+      Class: 2
+      Rarity: 1
+      Type: 0
+      Name: "\u30B5\u30D6\u30EA\u30FC\u30C0\u30FC\u30FB\u30B2\u30EB\u30C8"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103205
       Class: 0
       Rarity: 0
       Type: 0
@@ -14483,6 +13403,18 @@ MonoBehaviour:
       Cost: 0
       Attack: 0
       Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103206
+      Class: 2
+      Rarity: 1
+      Type: 0
+      Name: "\u30EC\u30F4\u30A3\u30AA\u30F3\u30F4\u30A1\u30F3\u30AC\u30FC\u30C9\u30FB\u30B8\u30A7\u30CE"
+      Cost: 4
+      Attack: 4
+      Defence: 3
       Text: 
       IllustID: 0
       Token: 0
@@ -14500,8 +13432,1184 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103207
+      Class: 2
+      Rarity: 1
+      Type: 0
+      Name: "\u84BC\u7A79\u306E\u63D0\u7763\u30FB\u30E2\u30CB\u30AB"
+      Cost: 5
+      Attack: 4
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103207
       Class: 0
       Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103208
+      Class: 2
+      Rarity: 1
+      Type: 1
+      Name: "\u65CB\u98A8\u5203"
+      Cost: 5
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103209
+      Class: 2
+      Rarity: 2
+      Type: 0
+      Name: "\u767D\u9280\u306E\u9A0E\u58EB\u30FB\u30A8\u30DF\u30EA\u30A2"
+      Cost: 4
+      Attack: 3
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103210
+      Class: 2
+      Rarity: 2
+      Type: 0
+      Name: "\u30D5\u30A1\u30F3\u30B0\u30B9\u30EC\u30A4\u30E4\u30FC"
+      Cost: 8
+      Attack: 3
+      Defence: 8
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103211
+      Class: 2
+      Rarity: 2
+      Type: 2
+      Name: "\u5929\u7A7A\u57CE"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103212
+      Class: 2
+      Rarity: 3
+      Type: 0
+      Name: "\u30EC\u30F4\u30A3\u30AA\u30F3\u30BB\u30A4\u30D0\u30FC\u30FB\u30A2\u30EB\u30D9\u30FC\u30EB"
+      Cost: 5
+      Attack: 3
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103300
+      Class: 3
+      Rarity: 0
+      Type: 0
+      Name: "\u30DE\u30CA\u30EA\u30A2\u30A6\u30A3\u30B6\u30FC\u30C9\u30FB\u30AF\u30EC\u30A4\u30B0"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103301
+      Class: 3
+      Rarity: 0
+      Type: 0
+      Name: "\u30BF\u30A4\u30E0\u30EC\u30B9\u30A6\u30A3\u30C3\u30C1"
+      Cost: 4
+      Attack: 3
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103302
+      Class: 3
+      Rarity: 0
+      Type: 0
+      Name: "\u30B2\u30A4\u30B6\u30FC"
+      Cost: 5
+      Attack: 3
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103303
+      Class: 3
+      Rarity: 0
+      Type: 0
+      Name: "\u5203\u306E\u9B54\u8853\u5E2B"
+      Cost: 6
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103304
+      Class: 3
+      Rarity: 0
+      Type: 1
+      Name: "\u7834\u9B54\u306E\u8853\u5F0F"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103305
+      Class: 3
+      Rarity: 1
+      Type: 0
+      Name: "\u30C9\u30EF\u30FC\u30D5\u30A2\u30EB\u30B1\u30DF\u30B9\u30C8"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103306
+      Class: 3
+      Rarity: 1
+      Type: 0
+      Name: "\u795E\u79D8\u306E\u63A2\u6C42\u8005\u30FB\u30AF\u30E9\u30FC\u30AF"
+      Cost: 3
+      Attack: 2
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103307
+      Class: 3
+      Rarity: 1
+      Type: 0
+      Name: "\u30C7\u30A3\u30B6\u30B9\u30BF\u30FC\u30A6\u30A3\u30C3\u30C1"
+      Cost: 6
+      Attack: 5
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103308
+      Class: 3
+      Rarity: 1
+      Type: 1
+      Name: "\u30EB\u30FC\u30F3\u306E\u8CAB\u304D"
+      Cost: 4
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103309
+      Class: 3
+      Rarity: 2
+      Type: 0
+      Name: "\u7981\u5FCC\u306E\u7814\u7A76\u8005"
+      Cost: 6
+      Attack: 3
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103310
+      Class: 3
+      Rarity: 2
+      Type: 0
+      Name: "\u30D7\u30EA\u30F3\u30BB\u30B9\u30DE\u30CA\u30EA\u30A2\u30FB\u30A2\u30F3"
+      Cost: 8
+      Attack: 3
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103311
+      Class: 3
+      Rarity: 2
+      Type: 1
+      Name: "\u30A8\u30E9\u30B9\u30E0\u30B9\u306E\u79D8\u5100"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103312
+      Class: 3
+      Rarity: 3
+      Type: 0
+      Name: "\u6B21\u5143\u306E\u9B54\u5973\u30FB\u30C9\u30ED\u30B7\u30FC"
+      Cost: 9
+      Attack: 5
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103400
+      Class: 4
+      Rarity: 0
+      Type: 0
+      Name: "\u30C9\u30E9\u30B4\u30F3\u30C6\u30A4\u30DE\u30FC"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103401
+      Class: 4
+      Rarity: 0
+      Type: 0
+      Name: "\u714C\u7259\u306E\u6226\u58EB\u30FB\u30AD\u30C3\u30C8"
+      Cost: 2
+      Attack: 2
+      Defence: 1
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103402
+      Class: 4
+      Rarity: 0
+      Type: 0
+      Name: "\u30B0\u30EA\u30D5\u30A9\u30F3\u30CA\u30A4\u30C8"
+      Cost: 3
+      Attack: 2
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103403
+      Class: 4
+      Rarity: 0
+      Type: 0
+      Name: "\u30EF\u30A4\u30EA\u30FC\u30EF\u30A4\u30D0\u30FC\u30F3"
+      Cost: 5
+      Attack: 4
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103404
+      Class: 4
+      Rarity: 0
+      Type: 2
+      Name: "\u7ADC\u722A\u306E\u9996\u98FE\u308A"
+      Cost: 5
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103405
+      Class: 4
+      Rarity: 1
+      Type: 0
+      Name: "\u30EF\u30A4\u30D0\u30FC\u30F3\u30E9\u30A4\u30C0\u30FC\u30FB\u30A8\u30A4\u30D5\u30A1"
+      Cost: 3
+      Attack: 2
+      Defence: 1
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103406
+      Class: 4
+      Rarity: 1
+      Type: 0
+      Name: "\u8F1D\u77F3\u306E\u30C9\u30E9\u30B4\u30F3"
+      Cost: 4
+      Attack: 3
+      Defence: 4
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103407
+      Class: 4
+      Rarity: 1
+      Type: 0
+      Name: "\u30AA\u30A6\u30EB\u30AC\u30FC\u30C7\u30A3\u30A2\u30F3"
+      Cost: 6
+      Attack: 4
+      Defence: 6
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103408
+      Class: 4
+      Rarity: 1
+      Type: 1
+      Name: "\u7ADC\u306E\u95D8\u6C17"
+      Cost: 5
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103409
+      Class: 4
+      Rarity: 2
+      Type: 0
+      Name: "\u4F0A\u9054\u653F\u5B97"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103410
+      Class: 4
+      Rarity: 2
+      Type: 0
+      Name: "\u30DE\u30CA\u30EA\u30A2\u30C9\u30E9\u30B3\u30FB\u30B0\u30EC\u30A2"
+      Cost: 8
+      Attack: 3
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103411
+      Class: 4
+      Rarity: 2
+      Type: 1
+      Name: "\u30B5\u30E9\u30DE\u30F3\u30C0\u30FC\u30D6\u30EC\u30B9"
+      Cost: 2
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103412
+      Class: 4
+      Rarity: 3
+      Type: 0
+      Name: "\u30A4\u30F3\u30DA\u30EA\u30A2\u30EB\u30C9\u30E9\u30B0\u30FC\u30F3"
+      Cost: 9
+      Attack: 5
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103500
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u602A\u72AC\u306E\u5893\u5B88"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103501
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u53CC\u7FFC\u306E\u8B66\u8B77\u8005"
+      Cost: 3
+      Attack: 3
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103502
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u95C7\u306E\u5F93\u8005"
+      Cost: 3
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103503
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u6D77\u8CCA\u30BE\u30F3\u30D3"
+      Cost: 3
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103504
+      Class: 8
+      Rarity: 0
+      Type: 1
+      Name: "\u6028\u55DF\u306E\u58F0"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103505
+      Class: 8
+      Rarity: 1
+      Type: 0
+      Name: "\u3088\u308D\u3081\u304F\u4E0D\u6B7B\u8005"
+      Cost: 2
+      Attack: 1
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103506
+      Class: 8
+      Rarity: 1
+      Type: 0
+      Name: "\u30CD\u30AF\u30ED\u30A2\u30B5\u30B7\u30F3"
+      Cost: 4
+      Attack: 3
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103507
+      Class: 8
+      Rarity: 1
+      Type: 0
+      Name: "\u51A5\u5B88\u306E\u6226\u58EB\u30FB\u30AB\u30E0\u30E9"
+      Cost: 7
+      Attack: 4
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103508
+      Class: 8
+      Rarity: 1
+      Type: 1
+      Name: "\u6B7B\u970A\u306E\u624B"
+      Cost: 1
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103509
+      Class: 8
+      Rarity: 2
+      Type: 0
+      Name: "\u30B7\u30E3\u30C9\u30A6\u30EA\u30FC\u30D1\u30FC"
+      Cost: 2
+      Attack: 1
+      Defence: 1
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103510
+      Class: 8
+      Rarity: 2
+      Type: 0
+      Name: "\u30D0\u30ED\u30FC\u30EB"
+      Cost: 6
+      Attack: 3
+      Defence: 6
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103511
+      Class: 8
+      Rarity: 2
+      Type: 1
+      Name: "\u51A5\u5E9C\u795E\u3068\u306E\u5951\u7D04"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103512
+      Class: 8
+      Rarity: 3
+      Type: 0
+      Name: "\u30CD\u30D5\u30C6\u30A3\u30B9"
+      Cost: 8
+      Attack: 5
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103600
+      Class: 9
+      Rarity: 0
+      Type: 0
+      Name: "\u30EC\u30F4\u30A3\u30AA\u30F3\u30C7\u30E5\u30FC\u30AF\u30FB\u30E6\u30EA\u30A6\u30B9"
+      Cost: 2
+      Attack: 1
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103601
+      Class: 9
+      Rarity: 0
+      Type: 0
+      Name: "\u4EBA\u72FC\u306E\u7FA4\u308C\u9577"
+      Cost: 3
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103602
+      Class: 9
+      Rarity: 0
+      Type: 0
+      Name: "\u30B8\u30E5\u30A8\u30EB\u30C7\u30D3\u30EB\u30FB\u30E2\u30EA\u30A2\u30CA"
+      Cost: 4
+      Attack: 3
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103603
+      Class: 9
+      Rarity: 0
+      Type: 0
+      Name: "\u9AD8\u6162\u306A\u308B\u60AA\u9B54"
+      Cost: 6
+      Attack: 3
+      Defence: 7
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103604
+      Class: 9
+      Rarity: 0
+      Type: 1
+      Name: "\u51E6\u5211\u4EBA\u306E\u65A7"
+      Cost: 1
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103605
+      Class: 9
+      Rarity: 1
+      Type: 0
+      Name: "\u5438\u8840\u8CB4\u30FB\u30F4\u30A1\u30A4\u30C8"
+      Cost: 3
+      Attack: 3
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103606
+      Class: 9
+      Rarity: 1
+      Type: 0
+      Name: "\u5343\u96E8\u306E\u69CD\u4F7F\u3044"
+      Cost: 5
+      Attack: 4
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103607
+      Class: 9
+      Rarity: 1
+      Type: 0
+      Name: "\u30AD\u30E3\u30BF\u30E9\u30AF\u30C8\u30D3\u30FC\u30B9\u30C8"
+      Cost: 6
+      Attack: 4
+      Defence: 6
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103608
+      Class: 9
+      Rarity: 1
+      Type: 1
+      Name: "\u7FA4\u308C\u306A\u3059\u98E2\u9913"
+      Cost: 2
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103609
+      Class: 9
+      Rarity: 2
+      Type: 0
+      Name: "\u30DE\u30B9\u30C6\u30DE"
+      Cost: 5
+      Attack: 6
+      Defence: 6
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103610
+      Class: 9
+      Rarity: 2
+      Type: 0
+      Name: "\u6C37\u5263\u306E\u6226\u9B3C"
+      Cost: 7
+      Attack: 5
+      Defence: 7
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103611
+      Class: 9
+      Rarity: 2
+      Type: 1
+      Name: "\u30B5\u30C7\u30A3\u30B9\u30C6\u30A3\u30C3\u30AF\u30CA\u30A4\u30C8"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103612
+      Class: 9
+      Rarity: 3
+      Type: 0
+      Name: "\u8840\u9913\u306E\u5973\u5E1D"
+      Cost: 7
+      Attack: 4
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103700
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u30D5\u30ED\u30C3\u30B0\u30AF\u30EC\u30EA\u30C3\u30AF"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103701
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u30DE\u30B9\u30BF\u30FC\u30EC\u30C7\u30A3\u30BB\u30FC\u30B8"
+      Cost: 3
+      Attack: 1
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103702
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u719F\u9054\u306E\u8ABF\u6559\u5E2B"
+      Cost: 4
+      Attack: 2
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103703
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u30BD\u30A6\u30EB\u30B3\u30EC\u30AF\u30BF\u30FC"
+      Cost: 7
+      Attack: 4
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103704
+      Class: 6
+      Rarity: 0
+      Type: 1
+      Name: "\u4FE1\u4EF0\u306E\u5177\u73FE\u5316"
+      Cost: 7
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103705
+      Class: 6
+      Rarity: 1
+      Type: 0
+      Name: "\u714C\u7FFC\u306E\u6226\u58EB\u30FB\u30EA\u30CE"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103706
+      Class: 6
+      Rarity: 1
+      Type: 0
+      Name: "\u90AA\u60AA\u306A\u308B\u4E88\u8A00\u8005\u30FB\u30C0\u30E0\u30B9"
+      Cost: 3
+      Attack: 3
+      Defence: 2
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103707
+      Class: 6
+      Rarity: 1
+      Type: 0
+      Name: "\u30A8\u30F3\u30B7\u30A7\u30F3\u30C8\u30EC\u30AA\u30B9\u30D4\u30EA\u30C3\u30C8"
+      Cost: 5
+      Attack: 4
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103708
+      Class: 6
+      Rarity: 1
+      Type: 2
+      Name: "\u30DA\u30AC\u30B5\u30B9\u306E\u7D50\u6676\u50CF"
+      Cost: 3
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103709
+      Class: 6
+      Rarity: 2
+      Type: 0
+      Name: "\u30F4\u30A1\u30EB\u30CF\u30E9\u30B8\u30A7\u30CD\u30E9\u30EB"
+      Cost: 6
+      Attack: 3
+      Defence: 3
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103710
+      Class: 6
+      Rarity: 2
+      Type: 0
+      Name: "\u714C\u89D2\u306E\u6226\u58EB\u30FB\u30B5\u30EA\u30C3\u30B5"
+      Cost: 7
+      Attack: 5
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103711
+      Class: 6
+      Rarity: 2
+      Type: 2
+      Name: "\u795E\u9B54\u88C1\u5224\u6240"
+      Cost: 4
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 103712
+      Class: 6
+      Rarity: 3
+      Type: 0
+      Name: "\u72C2\u4FE1\u306E\u5076\u50CF"
+      Cost: 5
+      Attack: 0
+      Defence: 5
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104000
+      Class: 0
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104001
+      Class: 0
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104002
+      Class: 0
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104003
+      Class: 0
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104004
+      Class: 0
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104005
+      Class: 0
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104006
+      Class: 0
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104007
+      Class: 0
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104008
+      Class: 0
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104009
+      Class: 0
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104010
+      Class: 0
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104011
+      Class: 0
+      Rarity: 3
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104012
+      Class: 0
+      Rarity: 3
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104013
+      Class: 0
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104100
+      Class: 1
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104101
+      Class: 1
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104102
+      Class: 1
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104103
+      Class: 1
+      Rarity: 0
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104104
+      Class: 1
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104105
+      Class: 1
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104106
+      Class: 1
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104107
+      Class: 1
+      Rarity: 1
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104108
+      Class: 1
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104109
+      Class: 1
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104110
+      Class: 1
+      Rarity: 2
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104111
+      Class: 1
+      Rarity: 3
+      Type: 0
+      Name: 
+      Cost: 0
+      Attack: 0
+      Defence: 0
+      Text: 
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 104112
+      Class: 1
+      Rarity: 3
       Type: 0
       Name: 
       Cost: 0

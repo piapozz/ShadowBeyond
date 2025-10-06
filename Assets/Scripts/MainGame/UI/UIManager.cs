@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
-using static GameManager;
+using static NetWorkModule;
 
 // UIを管理するマネージャー
 
@@ -31,41 +32,34 @@ public class UIManager : SystemObject
     [SerializeField] private HistoryUI historyUI;
     [SerializeField] private PPUI ppUI;
     [SerializeField] private InfoUI infoUI;
+    [SerializeField] private GameObject deckObject;
 
     public static UIManager instance { get; private set; }
 
     private UniTaskCompletionSource _uniTaskCompletionSource = null;
 
-    public override UniTask Initialize()
+    private List<CardObject> poolCardObject = null;
+    private Transform deckTransform = null;
+
+    private const int POOL_CARD_NUM = 30;
+
+    public override async UniTask Initialize()
     {
+        MasterDataManager.LoadAllData();
         instance = this;
         // UIを生成
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
+        deckTransform = Instantiate(deckObject).transform;
 
-        // それぞれのUIにコールバック設定
-
-
-        return UniTask.CompletedTask;
-    }
-
-    private void Start()
-    {
-        MasterDataManager.LoadAllData();
-
-        instance = this;
-        handUI = Instantiate(handUI);
-        fieldUI = Instantiate(fieldUI);
-
-        for (int i = 0; i < 5; i++)
+        // カードオブジェクトをプール
+        poolCardObject = new List<CardObject>(POOL_CARD_NUM);
+        for (int i = 0; i < POOL_CARD_NUM; i++)
         {
-            CardData cardData = CardMasterUtility.GetRandomCardData();
-            CardObject handObject = Instantiate(cardObject);
-            handObject.SetCardData(cardData);
-            handUI.AddHandCard(handObject);
-            CardObject fieldCard = Instantiate(cardObject);
-            fieldCard.SetCardData(cardData);
-            fieldUI.AddOpponentFieldCard(fieldCard);
+            CardObject card = Instantiate(cardObject);
+            card.transform.SetParent(transform);
+            card.gameObject.SetActive(false);
+            poolCardObject.Add(card);
         }
     }
 
@@ -77,8 +71,14 @@ public class UIManager : SystemObject
         // HistoryUI更新
     }
 
+    public void StartBattle()
+    {
+        // 各UI表示
+
+    }
+
     // ターン開始
-    public void StartTurn()
+    public void StartTurn(int playerIndex)
     {
         // ターンUI更新
 
@@ -113,6 +113,21 @@ public class UIManager : SystemObject
     }
 
     /// <summary>
+    /// 未使用のカードオブジェクトを取得
+    /// </summary>
+    /// <returns></returns>
+    private CardObject GetUnuseCardObject()
+    {
+        for (int i = 0, max = poolCardObject.Count; i < max; i++)
+        {
+            cardObject = poolCardObject[i];
+            if (cardObject.gameObject.activeSelf) continue;
+            return cardObject;
+        }
+        return Instantiate(cardObject);
+    }
+
+    /// <summary>
     /// カードがドロップされたときの処理
     /// </summary>
     /// <param name="setCard"></param>
@@ -144,5 +159,46 @@ public class UIManager : SystemObject
                 default: break;
             }
         }
+    }
+
+    /// <summary>
+    /// デッキからカードをドローする
+    /// </summary>
+    /// <param name="playerID"></param>
+    /// <param name="drawCard"></param>
+    public async UniTask DrawCards(int playerID, List<CardData> drawCard)
+    {
+        int drawCardNum = drawCard.Count;
+        List<CardObject> drawCardObjects = new List<CardObject>(drawCardNum);
+        for (int i = 0; i < drawCardNum; i++)
+        {
+            CardObject cardObject = GetUnuseCardObject();
+            // オブジェクトの座標と回転をセット
+            Transform cardTransform = cardObject.transform;
+            cardTransform.position = deckTransform.position;
+            cardTransform.rotation = deckTransform.rotation;
+
+            cardObject.gameObject.SetActive(true);
+            // カードデータセット
+            cardObject.SetCardData(drawCard[0]);
+            cardObject.SetCardState(CardObject.CardState.HAND);
+            drawCardObjects.Add(cardObject);
+        }
+        await handUI.AddHandCard(drawCardObjects);
+    }
+
+    public void ShuffleDeck(int playerID)
+    {
+
+    }
+
+    public void PlayDeckToField(int playerID, CardData playCard)
+    {
+
+    }
+
+    public void RemoveDeckCards(int playerID)
+    {
+
     }
 }

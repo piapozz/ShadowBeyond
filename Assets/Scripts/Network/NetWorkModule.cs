@@ -7,11 +7,14 @@ using System.Collections.Generic;
 using UnityEditor.Sprites;
 using UnityEngine;
 using static GameEnum;
-using static GameManager;
 
 public class NetWorkModule
 {
-
+    public struct SendData
+    {
+        public SyncType type;
+        public int[] param;
+    }
 
     /// <summary>
     /// “¯Šú“à—e‚ğ‘—M

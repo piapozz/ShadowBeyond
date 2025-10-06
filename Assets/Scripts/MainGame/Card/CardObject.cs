@@ -238,19 +238,31 @@ public class CardObject : MonoBehaviour
 
     public void FlipCard()
     {
-        transform.DORotate(new Vector3(0, 180, 0), 0.5f, RotateMode.LocalAxisAdd);
+        transform.DORotate(new Vector3(0, 0, 180), 0.5f, RotateMode.LocalAxisAdd);
     }
 
-    public async UniTask DrawCard()
+    public async UniTask DrawCard(Transform drawRoot, Transform handRoot)
     {
-        Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DORotate(new Vector3(90, 0, 0), 0.5f));
-        await seq.AsyncWaitForCompletion();
+        // ドロールートまでの挙動
+        Sequence drawSeq = DOTween.Sequence();
+        drawSeq.Append(transform.DORotate(drawRoot.localEulerAngles, 0.5f))
+            .Join(transform.DOMove(drawRoot.position, 0.5f));
+        await drawSeq.AsyncWaitForCompletion();
+
+        // 手札までの挙動
+        Sequence handSeq = DOTween.Sequence();
+        handSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
+            .Join(transform.DOMove(handRoot.position, 0.5f));
+        await handSeq.AsyncWaitForCompletion();
     }
 
     public void PlayCard()
     {
+        // 選択が必要な能力なら選択ウィンドウを出す
+        // 何かしらに渡す
 
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCardToField(cardData);
     }
 
     public void EvolveFollower()
