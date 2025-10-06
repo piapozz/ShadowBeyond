@@ -20,10 +20,10 @@ public class Field
 
     // ===== フィールド操作 =====
     // カードを出す
-    public void PlayCard(CardData card, bool isMine = true)
+    public void PlayCard(CardData card, int currentIndex)
     {
         if (card == null) return;
-        var targetList = isMine ? _fieldCardList : _otherFieldCardList;
+        var targetList = currentIndex == 0 ? _fieldCardList : _otherFieldCardList;
         if (targetList.Count >= MAX_FIELD) return; 
         targetList.Add(card);
     }

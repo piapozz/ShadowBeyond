@@ -3,17 +3,30 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.XR;
 
 // 手札クラス
 public class Hand 
 {
-    public List<CardData> _handCardList;
+    private List<CardData> handCardList;
 
     public const int MAX_HAND = 9;
 
+    private int playerID = 0;
+
+    private Field field;
+    private Deck deck;
+
+    public void SetPlayerID(int index)
+    {
+        playerID = index;
+        field = BattleManager.instance.field;
+        deck = BattleManager.instance.GetPlayer(index).deck;
+    }
+
     public void Init(List<CardData> initialCards)
     {
-        _handCardList = new List<CardData>(initialCards);
+        handCardList = new List<CardData>(initialCards);
     }
 
     /// <summary>
@@ -23,8 +36,8 @@ public class Hand
     public void AddCard(CardData card)
     {
         if (card == null) return;
-        if (_handCardList.Count >= MAX_HAND) return;
-        _handCardList.Add(card);
+        if (handCardList.Count >= MAX_HAND) return;
+        handCardList.Add(card);
     }
 
     /// <summary>
@@ -34,8 +47,14 @@ public class Hand
     public void PlayCardToField(CardData card)
     {
         if (card == null) return;
-        // field.PlayCard(card);
-        _handCardList.Remove(card);
+        handCardList.Remove(card);
+        // スペルならここで能力発動
+        if (card.type == GameEnum.CardType.SPELL)
+        {
+
+        }
+
+        field.PlayCard(card, playerID);
     }
 
     /// <summary>
@@ -43,7 +62,7 @@ public class Hand
     /// </summary>
     public List<CardData> GetCards(Func<CardData, bool> condition)
     {
-        return _handCardList.Where(condition).ToList();
+        return handCardList.Where(condition).ToList();
     }
 
     /// <summary>
@@ -61,7 +80,7 @@ public class Hand
     /// </summary>
     public void RemoveCards(Func<CardData, bool> condition)
     {
-        _handCardList.RemoveAll(c => condition(c));
+        handCardList.RemoveAll(c => condition(c));
     }
 
     /// <summary>
@@ -69,7 +88,7 @@ public class Hand
     /// </summary>
     public int GetHandCount()
     {
-        return _handCardList.Count;
+        return handCardList.Count;
     }
 
     /// <summary>
@@ -77,7 +96,7 @@ public class Hand
     /// </summary>
     public CardData GetMinCostCard()
     {
-        return _handCardList.OrderBy(c => c.cost).FirstOrDefault();
+        return handCardList.OrderBy(c => c.cost).FirstOrDefault();
     }
 
     /// <summary>
@@ -85,6 +104,6 @@ public class Hand
     /// </summary>
     public CardData GetMaxCostCard()
     {
-        return _handCardList.OrderByDescending(c => c.cost).FirstOrDefault();
+        return handCardList.OrderByDescending(c => c.cost).FirstOrDefault();
     }
 }

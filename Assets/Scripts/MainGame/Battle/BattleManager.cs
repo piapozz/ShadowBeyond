@@ -1,4 +1,4 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +6,8 @@ using UnityEngine;
 // バトル全体の管理
 public class BattleManager : SystemObject
 {
+    public static BattleManager instance { get; private set; } = null;
+
     const int PLAYPOINT_MAX = 10;
 
     public enum BattleState
@@ -20,9 +22,9 @@ public class BattleManager : SystemObject
 
     public struct Player
     {
-        private Hand _hand;
-        private Leader _leader;
-        private Deck _deck;
+        public Hand hand;
+        public Leader leader;
+        public Deck deck;
 
         int turn;
         int playPoint;
@@ -33,53 +35,72 @@ public class BattleManager : SystemObject
             turn = 0;
             playPoint = 0;
             extraPoint = false;
-            _hand = new Hand();
-            _deck = new Deck();
+            hand = new Hand();
+            deck = new Deck();
+            List<CardData> deckList = new List<CardData>(40);
+            for (int i = 0; i < 40; i++)
+            {
+                deckList.Add(CardMasterUtility.GetRandomCardData());
+            }
+
+            deck.Init(deckList);
+            hand.Init(new List<CardData>());
         }
 
         public void SetLeader(Leader leader)
         {
-            _leader = leader;
+            this.leader = leader;
         }
 
-        public void nextTurn()
+        public async UniTask NextTurn()
         {
             turn++;
             if (playPoint < PLAYPOINT_MAX) playPoint++;
-            _leader.SetMaxPlayPoint(playPoint);
+            leader.SetMaxPlayPoint(playPoint);
+            await deck.DrawDeck(1);
+        }
+
+        public void SetPlayerID(int index)
+        {
+            hand.SetPlayerID(index);
+            deck.SetPlayerID(index);
+            leader.SetPlayerID(index);
         }
     }
+    public Player[] player { get; private set; }
 
-    private Field _field;
+    public int currentPlayerIndex { get; private set; }
 
-    private Player[] _player;
+    public Field field { get; private set; }
 
-    private int _currentPlayerIndex = 0;
+    private BattleState currentState = BattleState.INVALID;
 
-    private BattleState _currentState = BattleState.INVALID;
-
-    public void Init()
+    public override async UniTask Initialize()
     {
-        _player = new Player[2];
-        _player[0].Init();
-        _player[1].Init();
-        _field = new Field();
-        _player[0].SetLeader(new Leader(0, 0));
-        _player[1].SetLeader(new Leader(1, 0));
-        _currentState = BattleState.START_BATTLE;
+        instance = this;
+        player = new Player[2];
+        player[0].Init();
+        player[1].Init();
+        field = new Field();
+        player[0].SetLeader(new Leader(0));
+        player[1].SetLeader(new Leader(0));
+        player[0].SetPlayerID(0);
+        player[1].SetPlayerID(1);
+        currentState = BattleState.START_BATTLE;
+        await UniTask.CompletedTask;
     }
 
     public void Update()
     {
-        switch(_currentState)
+        switch(currentState)
         {
             case BattleState.START_BATTLE:
                 StartBattle();
-                _currentState = BattleState.START_TURN;
+                currentState = BattleState.START_TURN;
                 break;
             case BattleState.START_TURN:
                 StartTurn();
-                _currentState = BattleState.MAIN_TURN;
+                currentState = BattleState.MAIN_TURN;
                 break;
             case BattleState.MAIN_TURN:
                 // メインフェイズ処理
@@ -88,7 +109,7 @@ public class BattleManager : SystemObject
                 break;
             case BattleState.END_TURN:
                 EndTurn();
-                _currentState = BattleState.START_TURN;
+                currentState = BattleState.START_TURN;
                 break;
             case BattleState.END_BATTLE:
                 // バトル終了処理
@@ -105,29 +126,28 @@ public class BattleManager : SystemObject
 
         // 先攻後攻決める
         int first = Random.Range(0, 2);
-        _currentPlayerIndex = first;
+        currentPlayerIndex = first;
 
         // UIだす
+        UIManager.instance.StartBattle();
     }
 
-    public void StartTurn()
+    public async UniTask StartTurn()
     {
         // ターン開始処理
-        _player[_currentPlayerIndex].nextTurn();
-
-        // ドロー
+        await player[currentPlayerIndex].NextTurn();
     }
 
     public void MainTurn()
     {
         // メインフェイズ処理
-        _currentState = BattleState.END_TURN; // 仮でターン終了へ
+        currentState = BattleState.END_TURN; // 仮でターン終了へ
     }
 
     public void EndTurn()
     {
         // ターン終了処理
-        _currentPlayerIndex = (_currentPlayerIndex + 1) % 2;
+        currentPlayerIndex = (currentPlayerIndex + 1) % 2;
     }
 
     public void EndBattle()
@@ -135,6 +155,15 @@ public class BattleManager : SystemObject
         // バトル終了処理
     }
 
-    public BattleState GetCurrentState() { return _currentState; }
+    public BattleState GetCurrentState() { return currentState; }
 
+    public Player GetCurrentPlayer()
+    {
+        return player[currentPlayerIndex];
+    }
+
+    public Player GetPlayer(int index)
+    {
+        return player[index];
+    }
 }

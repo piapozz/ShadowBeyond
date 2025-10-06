@@ -44,11 +44,23 @@ using UnityEngine.TextCore.Text;
 /// </summary>
 public class Deck
 {
-    public List<CardData> _deckCardList;
+    private List<CardData> deckCardList;
+
+    int playerID = 0;
+
+    private Field field;
+    private Hand hand;
+
+    public void SetPlayerID(int index)
+    {
+        playerID = index;
+        field = BattleManager.instance.field;
+        hand = BattleManager.instance.GetPlayer(index).hand;
+    }
 
     public void Init(List<CardData> initialCards)
     {
-        _deckCardList = new List<CardData>(initialCards);
+        deckCardList = new List<CardData>(initialCards);
         ShuffleDeck();
     }
 
@@ -57,32 +69,34 @@ public class Deck
     /// </summary>
     public void ShuffleDeck()
     {
-        int deckCount = _deckCardList.Count;
+        int deckCount = deckCardList.Count;
         for (int i = deckCount - 1; i > 0; i--)
         {
             int n = UnityEngine.Random.Range(0, i + 1);
-            CardData card = _deckCardList[i];
-            _deckCardList[i] = _deckCardList[n];
-            _deckCardList[n] = card;
+            CardData card = deckCardList[i];
+            deckCardList[i] = deckCardList[n];
+            deckCardList[n] = card;
         }
+
+        UIManager.instance.ShuffleDeck(playerID);
     }
 
     /// <summary>
     /// デッキから指定枚数ドロー
     /// </summary>
-    public async UniTask<List<CardData>> DrawDeck(int drawCount)
+    public async UniTask DrawDeck(int drawCount)
     {
-        List<CardData> drawCards = new List<CardData>();
+        List<CardData> drawCards = new List<CardData>(drawCount);
 
         for (int i = 0; i < drawCount; i++)
         {
-            if (_deckCardList.Count == 0) break;
-            CardData card = _deckCardList[0];
-            _deckCardList.RemoveAt(0);
+            if (deckCardList.Count == 0) break;
+            CardData card = deckCardList[0];
+            deckCardList.RemoveAt(0);
             drawCards.Add(card);
         }
 
-        return drawCards;
+        await UIManager.instance.DrawCards(playerID, drawCards);
     }
 
     /// <summary>
@@ -92,19 +106,22 @@ public class Deck
     public void AddCardToHand(CardData card)
     {
         if (card == null) return;
-        // hand.AddCard(card);
-        _deckCardList.Remove(card);
+        hand.AddCard(card);
+        deckCardList.Remove(card);
+        List<CardData> addCards = new List<CardData> { card };
+        UIManager.instance.DrawCards(playerID, addCards);
     }
 
     /// <summary>
     /// 指定カードを場に出す
     /// </summary>
     /// <param name="card"></param>
-    public void PlayCardToField(CardData card)
+    public void PlayDeckToField(CardData card)
     {
         if (card == null) return;
-        // field.PlayCard(card);
-        _deckCardList.Remove(card);
+        field.PlayCard(card, playerID);
+        deckCardList.Remove(card);
+        UIManager.instance.PlayDeckToField(playerID, card);
     }
 
     /// <summary>
@@ -112,7 +129,7 @@ public class Deck
     /// </summary>
     public List<CardData> GetCards(Func<CardData, bool> condition)
     {
-        return _deckCardList.Where(condition).ToList();
+        return deckCardList.Where(condition).ToList();
     }
 
     /// <summary>
@@ -130,7 +147,9 @@ public class Deck
     /// </summary>
     public void RemoveCards(Func<CardData, bool> condition)
     {
-        _deckCardList.RemoveAll(c => condition(c));
+        deckCardList.RemoveAll(c => condition(c));
+
+        UIManager.instance.RemoveDeckCards(playerID);
     }
 
     /// <summary>
@@ -138,7 +157,7 @@ public class Deck
     /// </summary>
     public void AddCard(CardData card)
     {
-        _deckCardList.Add(card);
+        deckCardList.Add(card);
     }
 
     /// <summary>
@@ -146,7 +165,7 @@ public class Deck
     /// </summary>
     public int GetDeckCount()
     {
-        return _deckCardList.Count;
+        return deckCardList.Count;
     }
 
     /// <summary>
@@ -154,7 +173,7 @@ public class Deck
     /// </summary>
     public int GetUniqueNameCount()
     {
-        return _deckCardList.Select(c => c.name).Distinct().Count();
+        return deckCardList.Select(c => c.name).Distinct().Count();
     }
 
     /// <summary>
@@ -162,7 +181,7 @@ public class Deck
     /// </summary>
     public CardData GetMinCostCard()
     {
-        return _deckCardList.OrderBy(c => c.cost).FirstOrDefault();
+        return deckCardList.OrderBy(c => c.cost).FirstOrDefault();
     }
 
     /// <summary>
@@ -170,7 +189,7 @@ public class Deck
     /// </summary>
     public CardData GetMaxCostCard()
     {
-        return _deckCardList.OrderByDescending(c => c.cost).FirstOrDefault();
+        return deckCardList.OrderByDescending(c => c.cost).FirstOrDefault();
     }
 
     /// <summary>
@@ -178,7 +197,7 @@ public class Deck
     /// </summary>
     public bool HasDuplicate()
     {
-        return _deckCardList.GroupBy(c => c.id).Any(g => g.Count() > 1);
+        return deckCardList.GroupBy(c => c.id).Any(g => g.Count() > 1);
     }
 
     /// <summary>
@@ -186,6 +205,6 @@ public class Deck
     /// </summary>
     public void ReplaceDeck(List<CardData> newDeck)
     {
-        _deckCardList = new List<CardData>(newDeck);
+        deckCardList = new List<CardData>(newDeck);
     }
 }

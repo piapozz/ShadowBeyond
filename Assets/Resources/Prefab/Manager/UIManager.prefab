@@ -57,6 +57,7 @@ MonoBehaviour:
   historyUI: {fileID: 0}
   ppUI: {fileID: 0}
   infoUI: {fileID: 0}
+  deckObject: {fileID: 5520862138499083975, guid: 3e6a5fde0cfc4f841b377ca0c55d4ab5, type: 3}
 --- !u!1001 &5787681214764409900
 PrefabInstance:
   m_ObjectHideFlags: 0

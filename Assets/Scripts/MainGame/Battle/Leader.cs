@@ -56,50 +56,54 @@ public class BattleStatValue
 public class Leader
 {
     // Šî–{î•ñ
-    public int PlayerID { get; private set; }
-    public int MaxDefense { get; private set; }
-    public int CurrentDefense { get; private set; }
-    public int Cemetery { get; private set; }
-    public int EvolutionPoint { get; private set; }
-    public int SuperEvolutionPoint { get; private set; }
-    public int MaxPlayPoint { get; private set; }
-    public int CurrentPlayPoint { get; private set; }
-    public int ComboCount { get; private set; }
+    public int playerID { get; private set; }
+    public int maxDefense { get; private set; }
+    public int currentDefense { get; private set; }
+    public int cemetery { get; private set; }
+    public int evolutionPoint { get; private set; }
+    public int superEvolutionPoint { get; private set; }
+    public int maxPlayPoint { get; private set; }
+    public int currentPlayPoint { get; private set; }
+    public int comboCount { get; private set; }
 
     // ƒoƒgƒ‹î•ñ
     private Dictionary<BattleStatType, BattleStatValue> battleStats = new Dictionary<BattleStatType, BattleStatValue>();
 
-    public Leader(int playerID, int maxDefense = 20, int maxPP = 0)
+    public void SetPlayerID(int index)
     {
-        PlayerID = playerID;
-        MaxDefense = maxDefense;
-        CurrentDefense = maxDefense;
-        MaxPlayPoint = maxPP;
-        CurrentPlayPoint = maxPP;
+        playerID = index;
+    }
+
+    public Leader(int maxDefense = 20, int maxPP = 0)
+    {
+        this.maxDefense = maxDefense;
+        currentDefense = maxDefense;
+        maxPlayPoint = maxPP;
+        currentPlayPoint = maxPP;
     }
 
     public void SetMaxDefense(int value)
     {
-        MaxDefense = value;
-        if (CurrentDefense > MaxDefense)
-            CurrentDefense = MaxDefense;
+        maxDefense = value;
+        if (currentDefense > maxDefense)
+            currentDefense = maxDefense;
     }
 
     public void SetCurrentDefense(int value)
     {
-        CurrentDefense = Mathf.Clamp(value, 0, MaxDefense);
+        currentDefense = Mathf.Clamp(value, 0, maxDefense);
     }
 
     public void SetMaxPlayPoint(int value)
     {
-        MaxPlayPoint = value;
-        if (CurrentPlayPoint > MaxPlayPoint)
-            CurrentPlayPoint = MaxPlayPoint;
+        maxPlayPoint = value;
+        if (currentPlayPoint > maxPlayPoint)
+            currentPlayPoint = maxPlayPoint;
     }
 
     public void SetCurrentPlayPoint(int value)
     {
-        CurrentPlayPoint = Mathf.Clamp(value, 0, MaxPlayPoint);
+        currentPlayPoint = Mathf.Clamp(value, 0, maxPlayPoint);
     }
 
 
