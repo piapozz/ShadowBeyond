@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
+using DG.Tweening;
 using static CommonModule;
 
 /// <summary>
@@ -32,6 +34,7 @@ public class CardObject : MonoBehaviour
     public enum CardState
     {
         INVALID = -1,
+        UNUSE,
         HAND,
         FIELD,
         MAX
@@ -40,7 +43,7 @@ public class CardObject : MonoBehaviour
     private CardState currentState = CardState.HAND;
 
     // カードクラスの参照
-    private CardData cardData = null;
+    public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
     private Camera mainCamera = null;
 
@@ -78,6 +81,7 @@ public class CardObject : MonoBehaviour
                 // 攻撃の線を出す
                 lineRenderer.enabled = true;
                 break;
+            default: break;
         }
     }
 
@@ -95,6 +99,7 @@ public class CardObject : MonoBehaviour
                 // 攻撃の線を出す
                 SetLineRenderer();
                 break;
+            default: break;
         }
     }
 
@@ -104,14 +109,16 @@ public class CardObject : MonoBehaviour
         {
             case CardState.HAND:
                 // オブジェクトをUIにセット
-                UIManager.instance.SetCardDrop(this);
+                UIManager.instance.DropCard(this);
                 break;
             case CardState.FIELD:
                 lineRenderer.enabled = false;
                 // 攻撃処理
                 Attack();
                 break;
+            default: break;
         }
+        FlipCard();
     }
 
     /// <summary>
@@ -182,6 +189,11 @@ public class CardObject : MonoBehaviour
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(true);
                 break;
+            case CardState.UNUSE:
+                cardObject[(int)CardState.HAND].SetActive(false);
+                cardObject[(int)CardState.FIELD].SetActive(false);
+                break;
+            default: break;
         }
     }
 
@@ -222,6 +234,18 @@ public class CardObject : MonoBehaviour
         fieldLook.SetCardText(cardData);
         // マテリアル設定
         fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+    }
+
+    public void FlipCard()
+    {
+        transform.DORotate(new Vector3(0, 180, 0), 0.5f, RotateMode.LocalAxisAdd);
+    }
+
+    public async UniTask DrawCard()
+    {
+        Sequence seq = DOTween.Sequence();
+        seq.Append(transform.DORotate(new Vector3(90, 0, 0), 0.5f));
+        await seq.AsyncWaitForCompletion();
     }
 
     public void PlayCard()

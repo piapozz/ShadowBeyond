@@ -27,6 +27,8 @@ public class Entity_CardData : ScriptableObject
 		public int Defence;
 		public string Text;
 		public int IllustID;
+		public bool Token;
+		public int[] Trait;
 	}
 }
 
