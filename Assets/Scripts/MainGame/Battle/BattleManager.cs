@@ -166,4 +166,12 @@ public class BattleManager : SystemObject
     {
         return player[index];
     }
+
+    public void CardCombat(CardData attackCard, CardData DefanceCard)
+    {
+        // í“¬ƒJ[ƒh‚Ì“o˜^
+        CombatProcessor processor = new CombatProcessor(attackCard, DefanceCard);
+
+        processor.Combat();
+    }
 }
