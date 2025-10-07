@@ -11,12 +11,12 @@ public class CardData
     public struct FollowerStatus
     {
         public int m_attack;    // 攻撃力
-        public int m_health;    // 体力
+        public int m_defance;    // 体力
 
-        public FollowerStatus(int attack, int health)
+        public FollowerStatus(int attack, int defance)
         {
             m_attack = attack;
-            m_health = health;
+            m_defance = defance;
         }
     }
     // ダメージの蓄積
@@ -45,6 +45,8 @@ public class CardData
     public int cost { get; private set; }
     // カードアビリティ
     public List<CardAbility> ability { get; private set; }
+    // 破壊された
+    public bool isDestroyed { get; private set; }
 
     public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence)
     {
@@ -116,6 +118,27 @@ public class CardData
     public void DealDamage(int damage)
     {
         this.damage += damage;
+
+        CheckDestroyed();
+    }
+
+    // 破壊されたか
+    public bool CheckDestroyed()
+    {
+        int defance = GetCurrentStatus().m_defance;
+        if (defance <= 0)
+        {
+            Destroy();
+        }
+        return isDestroyed;
+    }
+
+    // 破壊する
+    public void Destroy()
+    {
+        isDestroyed = true;
+        // ラストワード発動タイミング
+
     }
 
     /// <summary>
@@ -128,11 +151,11 @@ public class CardData
         if (damage < 0) damage = 0;
     }
 
-    public void AddStatus(int attack, int health)
+    public void AddStatus(int attack, int defance)
     {
         FollowerStatus status = new FollowerStatus();
         status.m_attack = attack;
-        status.m_health = health;
+        status.m_defance = defance;
         addStatus.Add(status);
     }
 
@@ -161,9 +184,9 @@ public class CardData
         for (int i = 0, max = addStatus.Count; i < max; i++)
         {
             currentStatus.m_attack += addStatus[i].m_attack;
-            currentStatus.m_health += addStatus[i].m_health;
+            currentStatus.m_defance += addStatus[i].m_defance;
         }
-        currentStatus.m_health -= damage;
+        currentStatus.m_defance -= damage;
 
         return currentStatus;
     }
