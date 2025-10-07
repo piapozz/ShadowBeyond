@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static CardData;
 
 public class CardLook : MonoBehaviour
 {
@@ -20,8 +21,9 @@ public class CardLook : MonoBehaviour
     {
         SetCardName(setCardData.name);
         SetCardCost(setCardData.cost);
-        SetCardAttack(setCardData.status.m_attack);
-        SetCardDefence(setCardData.status.m_health);
+        FollowerStatus status = setCardData.GetCurrentStatus();
+        SetCardAttack(status.m_attack);
+        SetCardDefence(status.m_defance);
     }
 
     public void SetCardName(string setName)

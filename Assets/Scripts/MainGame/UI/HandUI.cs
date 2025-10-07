@@ -34,17 +34,19 @@ public class HandUI : BaseUI
     }
 
     // 手札エリアにカードを追加する
-    public async UniTask AddHandCard(List<CardObject> drawCard)
+    public void AddHandCard(List<CardObject> drawCards, Transform deckRoot)
     {
-        for (int i = 0, max = drawCard.Count; i < max; i++)
+        List<Sequence> sequenceList = new List<Sequence>();
+        for (int i = 0, max = drawCards.Count; i < max; i++)
         {
-            CardObject card = drawCard[i];
+            CardObject card = drawCards[i];
             handCards.Add(card);
-            card.transform.SetParent(handRoot);
             card.SetCardState(CardObject.CardState.HAND);
 
-            await card.DrawCard(drawRoot, handRoot);
+            sequenceList.Add(card.DrawCard(deckRoot, drawRoot, handRoot));
         }
+        UIManager.instance.AddSequence(sequenceList);
+
         // 手札の整列
         ArrangeHandCard();
     }

@@ -52,12 +52,12 @@ public class BattleManager : SystemObject
             this.leader = leader;
         }
 
-        public async UniTask NextTurn()
+        public void NextTurn()
         {
             turn++;
             if (playPoint < PLAYPOINT_MAX) playPoint++;
             leader.SetMaxPlayPoint(playPoint);
-            await deck.DrawDeck(1);
+            deck.DrawDeck(1);
         }
 
         public void SetPlayerID(int index)
@@ -132,14 +132,15 @@ public class BattleManager : SystemObject
         UIManager.instance.StartBattle();
     }
 
-    public async UniTask StartTurn()
+    public void StartTurn()
     {
         // ターン開始処理
-        await player[currentPlayerIndex].NextTurn();
+        player[currentPlayerIndex].NextTurn();
     }
 
     public void MainTurn()
     {
+        if (!UIManager.instance.IsCompleteAllSequence()) return;
         // メインフェイズ処理
         currentState = BattleState.END_TURN; // 仮でターン終了へ
     }

@@ -68,6 +68,7 @@ public class CardObject : MonoBehaviour
     public void SetCardData(CardData setCard)
     {
         cardData = setCard;
+        cardData.SetGetObjectAction(() => { return this; });
         SetCardLook();
     }
 
@@ -169,7 +170,7 @@ public class CardObject : MonoBehaviour
         // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
 
         // 攻撃処理を依頼
-
+        BattleManager.instance.CardCombat(cardData, target.cardData);
     }
 
     /// <summary>
@@ -236,24 +237,40 @@ public class CardObject : MonoBehaviour
         fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
     }
 
+    public void UpdateText()
+    {
+        // 手札オブジェクト設定
+        // テキスト設定
+        CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+        if (handLook == null) return;
+        handLook.SetCardText(cardData);
+
+        // フィールドオブジェクト設定
+        // テキスト設定
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
+        if (handLook == null) return;
+        fieldLook.SetCardText(cardData);
+    }
+
     public void FlipCard()
     {
         transform.DORotate(new Vector3(0, 0, 180), 0.5f, RotateMode.LocalAxisAdd);
     }
 
-    public async UniTask DrawCard(Transform drawRoot, Transform handRoot)
+    public Sequence DrawCard(Transform deckRoot, Transform drawRoot, Transform handRoot)
     {
         // ドロールートまでの挙動
         Sequence drawSeq = DOTween.Sequence();
-        drawSeq.Append(transform.DORotate(drawRoot.localEulerAngles, 0.5f))
+        drawSeq.AppendCallback(() => transform.position = deckRoot.position)
+            .JoinCallback(() => transform.rotation = deckRoot.rotation)
+            .JoinCallback(() => gameObject.SetActive(true))
+            .Join(transform.DORotate(drawRoot.localEulerAngles, 0.5f))
             .Join(transform.DOMove(drawRoot.position, 0.5f));
-        await drawSeq.AsyncWaitForCompletion();
-
-        // 手札までの挙動
-        Sequence handSeq = DOTween.Sequence();
-        handSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
-            .Join(transform.DOMove(handRoot.position, 0.5f));
-        await handSeq.AsyncWaitForCompletion();
+        // 手札ルートまでの挙動
+        drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
+            .Join(transform.DOMove(handRoot.position, 0.5f))
+            .JoinCallback(() => transform.SetParent(handRoot));
+        return drawSeq;
     }
 
     public void PlayCard()

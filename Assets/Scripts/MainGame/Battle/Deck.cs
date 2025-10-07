@@ -84,7 +84,7 @@ public class Deck
     /// <summary>
     /// デッキから指定枚数ドロー
     /// </summary>
-    public async UniTask DrawDeck(int drawCount)
+    public void DrawDeck(int drawCount)
     {
         List<CardData> drawCards = new List<CardData>(drawCount);
 
@@ -96,7 +96,7 @@ public class Deck
             drawCards.Add(card);
         }
 
-        await UIManager.instance.DrawCards(playerID, drawCards);
+        UIManager.instance.DrawCards(playerID, drawCards);
     }
 
     /// <summary>

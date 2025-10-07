@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -36,6 +37,9 @@ public class UIManager : SystemObject
 
     public static UIManager instance { get; private set; }
 
+    public Queue<List<Sequence>> uiSequence { get; private set; } = null;
+    private List<Sequence> currentSequenceList = null;
+
     private UniTaskCompletionSource _uniTaskCompletionSource = null;
 
     private List<CardObject> poolCardObject = null;
@@ -45,8 +49,13 @@ public class UIManager : SystemObject
 
     public override async UniTask Initialize()
     {
-        MasterDataManager.LoadAllData();
+        // DOTween初期化
+        DOTween.Init();
+        DOTween.defaultAutoPlay = AutoPlay.None;
+
         instance = this;
+        uiSequence = new Queue<List<Sequence>>();
+        currentSequenceList = new List<Sequence>();
         // UIを生成
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
@@ -61,14 +70,58 @@ public class UIManager : SystemObject
             card.gameObject.SetActive(false);
             poolCardObject.Add(card);
         }
+
+        for (int i = 0; i < 5; i++)
+        {
+            CardObject addObject = GetUnuseCardObject();
+            addObject.gameObject.SetActive(true);
+            addObject.SetCardData(CardMasterUtility.GetRandomCardData());
+            fieldUI.AddOwnFieldCard(addObject);
+            addObject = GetUnuseCardObject();
+            addObject.gameObject.SetActive(true);
+            addObject.SetCardData(CardMasterUtility.GetRandomCardData());
+            fieldUI.AddOpponentFieldCard(addObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
+        // UIシーケンス処理
+        if (uiSequence.Count == 0) return;
+        // シーケンスがたまっていて、現在のシーケンスが終了していたら次のシーケンスを再生
+        if (IsCompleteCurrentSequence())
+        {
+            currentSequenceList = uiSequence.Dequeue();
+            for (int i = 0, max = currentSequenceList.Count; i < max; i++)
+            {
+                currentSequenceList[i].Play();
+            }
+        }
+
         // 情報UI更新
         // OptionUI更新
         // HistoryUI更新
+    }
+
+    private bool IsCompleteCurrentSequence()
+    {
+        for (int i = 0, max = currentSequenceList.Count; i < max; i++)
+        {
+            if (!currentSequenceList[i].IsActive()) return false;
+
+            if (currentSequenceList[i].IsActive() && !currentSequenceList[i].IsComplete()) return false;
+        }
+        return true;
+    }
+
+    public void AddSequence(List<Sequence> addSequences)
+    {
+        uiSequence.Enqueue(addSequences);
+    }
+
+    public bool IsCompleteAllSequence()
+    {
+        return uiSequence.Count > 0;
     }
 
     public void StartBattle()
@@ -166,25 +219,19 @@ public class UIManager : SystemObject
     /// </summary>
     /// <param name="playerID"></param>
     /// <param name="drawCard"></param>
-    public async UniTask DrawCards(int playerID, List<CardData> drawCard)
+    public void DrawCards(int playerID, List<CardData> drawCard)
     {
         int drawCardNum = drawCard.Count;
         List<CardObject> drawCardObjects = new List<CardObject>(drawCardNum);
         for (int i = 0; i < drawCardNum; i++)
         {
             CardObject cardObject = GetUnuseCardObject();
-            // オブジェクトの座標と回転をセット
-            Transform cardTransform = cardObject.transform;
-            cardTransform.position = deckTransform.position;
-            cardTransform.rotation = deckTransform.rotation;
-
-            cardObject.gameObject.SetActive(true);
             // カードデータセット
             cardObject.SetCardData(drawCard[0]);
             cardObject.SetCardState(CardObject.CardState.HAND);
             drawCardObjects.Add(cardObject);
         }
-        await handUI.AddHandCard(drawCardObjects);
+        handUI.AddHandCard(drawCardObjects, deckTransform);
     }
 
     public void ShuffleDeck(int playerID)

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 using static GameEnum;
@@ -20,7 +21,7 @@ public class CardData
         }
     }
     // ダメージの蓄積
-    public int damage { get; private set; }
+    public int damage { get; private set; } = 0;
     // ステータスのバフ/デバフ
     public List<FollowerStatus> addStatus { get; private set; }
     // 基本ステータス
@@ -48,6 +49,13 @@ public class CardData
     // 破壊された
     public bool isDestroyed { get; private set; }
 
+    public Func<CardObject> GetObject;
+
+    public void SetGetObjectAction(Func<CardObject> action)
+    {
+        GetObject = action;
+    }
+
     public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence)
     {
         id = setID;
@@ -57,6 +65,13 @@ public class CardData
         name = setName;
         cost = setCost;
         status = new FollowerStatus(setAttack, setDefence);
+
+        Init();
+    }
+
+    public void Init()
+    {
+        addStatus = new List<FollowerStatus>();
     }
 
     public void SetType(CardType newType)
@@ -120,6 +135,7 @@ public class CardData
         this.damage += damage;
 
         CheckDestroyed();
+        GetObject().UpdateText();
     }
 
     // 破壊されたか
@@ -139,6 +155,9 @@ public class CardData
         isDestroyed = true;
         // ラストワード発動タイミング
 
+        // フィールドから除去
+        BattleManager.instance.field.RemoveCard(this);
+        GetObject().SetCardState(CardObject.CardState.UNUSE);
     }
 
     /// <summary>
