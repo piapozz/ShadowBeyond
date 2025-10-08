@@ -123,7 +123,7 @@ public class CardObject : MonoBehaviour
     }
 
     /// <summary>
-    /// LineRendererの設定
+    /// 攻撃線の設定
     /// </summary>
     private void SetLineRenderer()
     {
@@ -257,17 +257,43 @@ public class CardObject : MonoBehaviour
         transform.DORotate(new Vector3(0, 0, 180), 0.5f, RotateMode.LocalAxisAdd);
     }
 
-    public Sequence DrawCard(Transform deckRoot, Transform drawRoot, Transform handRoot)
+    /// <summary>
+    /// 自分のドロー
+    /// </summary>
+    /// <param name="deckRoot"></param>
+    /// <param name="drawRoot"></param>
+    /// <param name="handRoot"></param>
+    /// <returns></returns>
+    public Sequence DrawOwnCard(Transform deckRoot, Transform drawRoot, Transform handRoot)
     {
         // ドロールートまでの挙動
         Sequence drawSeq = DOTween.Sequence();
         drawSeq.AppendCallback(() => transform.position = deckRoot.position)
             .JoinCallback(() => transform.rotation = deckRoot.rotation)
             .JoinCallback(() => gameObject.SetActive(true))
-            .Join(transform.DORotate(drawRoot.localEulerAngles, 0.5f))
-            .Join(transform.DOMove(drawRoot.position, 0.5f));
+            .Join(transform.DOMove(drawRoot.position, 0.5f))
+            .Join(transform.DORotate(drawRoot.localEulerAngles, 0.5f));
         // 手札ルートまでの挙動
         drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
+            .Join(transform.DOMove(handRoot.position, 0.5f))
+            .JoinCallback(() => transform.SetParent(handRoot));
+        return drawSeq;
+    }
+
+    /// <summary>
+    /// 相手のドロー
+    /// </summary>
+    /// <param name="deckRoot"></param>
+    /// <param name="handRoot"></param>
+    /// <returns></returns>
+    public Sequence DrawOpponentCard(Transform deckRoot, Transform handRoot)
+    {
+        Sequence drawSeq = DOTween.Sequence();
+        // 手札ルートまでの挙動
+        drawSeq.AppendCallback(() => transform.position = deckRoot.position)
+            .JoinCallback(() => transform.rotation = deckRoot.rotation)
+            .JoinCallback(() => gameObject.SetActive(true))
+            .Join(transform.DORotate(handRoot.localEulerAngles, 0.5f))
             .Join(transform.DOMove(handRoot.position, 0.5f))
             .JoinCallback(() => transform.SetParent(handRoot));
         return drawSeq;

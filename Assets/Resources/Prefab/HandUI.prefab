@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7187618634654337124}
   m_Layer: 0
-  m_Name: HandRoot
+  m_Name: OwnHandRoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276239203374025246}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 6, y: 0, z: -4}
+  m_LocalPosition: {x: 4.5, y: 0, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55,7 +55,38 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2625893344058931463}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 5.11, y: 0, z: -2.45}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 951120982510872612}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2956681060803413706
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1665937865088923621}
+  m_Layer: 0
+  m_Name: OpponentHandRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1665937865088923621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2956681060803413706}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.5, y: 0, z: 4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -92,6 +123,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7187618634654337124}
+  - {fileID: 1665937865088923621}
   - {fileID: 2007218605646532530}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -108,6 +140,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d41eacc59e4fab14d9091adf04fdbdc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  root: {fileID: 951120982510872612}
-  handRoot: {fileID: 7187618634654337124}
-  drawRoot: {fileID: 2007218605646532530}
+  ownHandRoot: {fileID: 7187618634654337124}
+  opponentHandRoot: {fileID: 1665937865088923621}
+  ownDrawRoot: {fileID: 2007218605646532530}
