@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using static NetWorkModule;
+using static NetworkManager;
 
 // UIを管理するマネージャー
 
@@ -158,14 +158,14 @@ public class UIManager : SystemObject
     }
 
     // Unitaskでなにかがおこるまで待つ関数
-    public async UniTask<SendData> InputUI()
+    public async UniTask<SendBattleData> InputUI()
     {
         _uniTaskCompletionSource = new UniTaskCompletionSource();
 
 
 
         await _uniTaskCompletionSource.Task;
-        return new SendData();
+        return new SendBattleData();
     }
 
     /// <summary>
