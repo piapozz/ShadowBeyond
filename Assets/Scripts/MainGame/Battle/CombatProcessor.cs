@@ -51,6 +51,8 @@ public class CombatProcessor
         // 一ターンに～回攻撃出来る能力タイミング
 
 
+        Debug.Log("Attack : " + attackerCard.name + "Target : " + defenderCard.name);
+        Debug.Log("Attacker Damage : " + attackerDamage + "Defender Damage : " + defenderDamage);
     }
 
     // 超進化戦闘

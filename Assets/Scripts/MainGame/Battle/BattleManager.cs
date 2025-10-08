@@ -143,6 +143,54 @@ public class BattleManager : SystemObject
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
         // メインフェイズ処理
+
+        // 相手のターンなら受信
+        NetworkManager.SendBattleData data = (NetworkManager.SendBattleData)NetworkManager.Instance.GetNextReceivedData();
+        switch(data.type)
+        {
+            case GameEnum.InputType.PLAY_CARD:
+                // カードをプレイ
+                int handIndex = data.param[0];
+                int fieldIndex = data.param[1];
+                //CardData playCard = player[currentPlayerIndex].hand.GetCard(handIndex);
+                
+                break;
+            case GameEnum.InputType.ATTACK:
+                // 攻撃
+                int attackIndex = data.param[0];
+                int defanceIndex = data.param[1];
+                break;
+
+            case GameEnum.InputType.EVOLVE:
+                // 進化
+                int evolveIndex = data.param[0];
+                break;
+
+            case GameEnum.InputType.SUPER_EVOLVE:
+                // 超進化
+                int superEvolveIndex = data.param[0];
+                break;
+
+            case GameEnum.InputType.ACT:
+                // 能力使用
+                int actIndex = data.param[0];
+                break;
+
+            case GameEnum.InputType.FUSION:
+                // 融合
+                break;
+
+            case GameEnum.InputType.EXTRA_PP:
+            // エクストラPP
+                break;
+
+            case GameEnum.InputType.TURN_END:
+                // ターン終了
+                SetCurrentState(BattleState.END_TURN);
+                break;
+            default:
+                break;
+        }
     }
 
     public void EndTurn()
@@ -154,6 +202,14 @@ public class BattleManager : SystemObject
     public void EndBattle()
     {
         // バトル終了処理
+    }
+
+    public void SendInputData(GameEnum.InputType type, int[] param)
+    {
+        NetworkManager.SendBattleData data = new NetworkManager.SendBattleData();
+        data.type = type;
+        data.param = param;
+        NetworkManager.Instance.SendData(data);
     }
 
     public BattleState GetCurrentState() { return currentState; }
