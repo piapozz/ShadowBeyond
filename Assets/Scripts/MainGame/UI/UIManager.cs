@@ -1,9 +1,11 @@
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.UI;
 using static NetWorkModule;
 
 // UIを管理するマネージャー
@@ -24,14 +26,14 @@ public class UIManager : SystemObject
 
     [SerializeField] private CardObject cardObject;
     [SerializeField] private HandUI handUI;
-    [SerializeField] private RectTransform handField;
-    [SerializeField] private TurnUI turnUI;
-    [SerializeField] private DeckUI deckUI;
     [SerializeField] private FieldUI fieldUI;
     [SerializeField] private LeaderUI leaderUI;
+    [SerializeField] private RectTransform fieldArea;
+    [SerializeField] private Button turnUI;
+    [SerializeField] private PPUI ownPPUI;
+    [SerializeField] private PPUI opponentPPUI;
     [SerializeField] private OptionUI optionUI;
     [SerializeField] private HistoryUI historyUI;
-    [SerializeField] private PPUI ppUI;
     [SerializeField] private InfoUI infoUI;
     [SerializeField] private GameObject deckObject;
 
@@ -55,7 +57,6 @@ public class UIManager : SystemObject
 
         instance = this;
         uiSequence = new Queue<List<Sequence>>();
-        currentSequenceList = new List<Sequence>();
         // UIを生成
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
@@ -87,7 +88,7 @@ public class UIManager : SystemObject
     private void Update()
     {
         // UIシーケンス処理
-        if (uiSequence.Count == 0) return;
+        if (IsCompleteAllSequence()) return;
         // シーケンスがたまっていて、現在のシーケンスが終了していたら次のシーケンスを再生
         if (IsCompleteCurrentSequence())
         {
@@ -105,9 +106,11 @@ public class UIManager : SystemObject
 
     private bool IsCompleteCurrentSequence()
     {
+        if (currentSequenceList == null) return true;
+
         for (int i = 0, max = currentSequenceList.Count; i < max; i++)
         {
-            if (!currentSequenceList[i].IsActive()) return false;
+            if (!currentSequenceList[i].IsActive()) continue;
 
             if (currentSequenceList[i].IsActive() && !currentSequenceList[i].IsComplete()) return false;
         }
@@ -121,7 +124,7 @@ public class UIManager : SystemObject
 
     public bool IsCompleteAllSequence()
     {
-        return uiSequence.Count > 0;
+        return uiSequence.Count == 0;
     }
 
     public void StartBattle()
@@ -188,18 +191,13 @@ public class UIManager : SystemObject
     {
         Vector3 mousePos = Input.mousePosition;
 
-        // 手札領域か判定
-        bool isInside = RectTransformUtility.RectangleContainsScreenPoint(handField, mousePos);
-        // 手札に戻す
-        if (isInside)
-        {
-            handUI.ArrangeHandCard();
-        }
+        // フィールド領域か判定
+        bool isField = RectTransformUtility.RectangleContainsScreenPoint(fieldArea, mousePos);
         // カードをプレイ
-        else
+        if (isField)
         {
             // 手札から除外しフィールドに追加
-            handUI.RemoveHandCard(setCard);
+            handUI.RemoveHandCard(true, setCard);
             switch (setCard.cardData.type)
             {
                 case GameEnum.CardType.FOLLOWER:
@@ -212,12 +210,17 @@ public class UIManager : SystemObject
                 default: break;
             }
         }
+        // 手札に戻す
+        else
+        {
+            handUI.ArrangeHandCard(true);
+        }
     }
 
     /// <summary>
     /// デッキからカードをドローする
     /// </summary>
-    /// <param name="playerID"></param>
+    /// <param name="isMine"></param>
     /// <param name="drawCard"></param>
     public void DrawCards(int playerID, List<CardData> drawCard)
     {
@@ -231,7 +234,8 @@ public class UIManager : SystemObject
             cardObject.SetCardState(CardObject.CardState.HAND);
             drawCardObjects.Add(cardObject);
         }
-        handUI.AddHandCard(drawCardObjects, deckTransform);
+        bool isMine = playerID == 0;
+        handUI.DrawCard(isMine, drawCardObjects, deckTransform);
     }
 
     public void ShuffleDeck(int playerID)
@@ -247,5 +251,17 @@ public class UIManager : SystemObject
     public void RemoveDeckCards(int playerID)
     {
 
+    }
+
+    public void SetEndTurnButton(Action setAction)
+    {
+        turnUI.onClick.AddListener(() => setAction());
+    }
+
+    public void UpdatePPUI(int playerID, int ppMax, int ppCurrent)
+    {
+        bool isMine = playerID == 0;
+        if (isMine) ownPPUI.SetPPText(ppMax, ppCurrent);
+        else opponentPPUI.SetPPText(ppMax, ppCurrent);
     }
 }

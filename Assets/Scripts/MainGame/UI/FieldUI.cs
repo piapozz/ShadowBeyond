@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class FieldUI : BaseUI
+public class FieldUI : MonoBehaviour
 {
     private List<CardObject> ownCards = new List<CardObject>();
     private List<CardObject> opponentCards = new List<CardObject>();

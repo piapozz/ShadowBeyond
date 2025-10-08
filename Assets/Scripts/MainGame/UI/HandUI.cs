@@ -4,14 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class HandUI : BaseUI
+public class HandUI : MonoBehaviour
 {
-    [SerializeField] private Transform handRoot = null;
-    [SerializeField] private Transform drawRoot = null;
+    [SerializeField] private Transform ownHandRoot = null;
+    [SerializeField] private Transform opponentHandRoot = null;
+    [SerializeField] private Transform ownDrawRoot = null;
     private bool isAcssessible = false;
-    private List<CardObject> handCards = new List<CardObject>();
+    private List<CardObject> ownHandCards = new List<CardObject>();
+    private List<CardObject> opponentHandCards = new List<CardObject>();
 
-    private const float HAND_SCALE_X = 6.5f;
+    private const float HAND_SCALE_X = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,41 +35,64 @@ public class HandUI : BaseUI
         isAcssessible = value;
     }
 
-    // 手札エリアにカードを追加する
-    public void AddHandCard(List<CardObject> drawCards, Transform deckRoot)
+    // 自分のカードをドローする
+    public void DrawCard(bool isMine, List<CardObject> drawCards, Transform deckRoot)
     {
         List<Sequence> sequenceList = new List<Sequence>();
         for (int i = 0, max = drawCards.Count; i < max; i++)
         {
             CardObject card = drawCards[i];
-            handCards.Add(card);
             card.SetCardState(CardObject.CardState.HAND);
-
-            sequenceList.Add(card.DrawCard(deckRoot, drawRoot, handRoot));
+            if (isMine)
+            {
+                ownHandCards.Add(card);
+                // 手札を引くDOTweenのSequenceを取得
+                sequenceList.Add(card.DrawOwnCard(deckRoot, ownDrawRoot, ownHandRoot));
+            }
+            else
+            {
+                opponentHandCards.Add(card);
+                sequenceList.Add(card.DrawOpponentCard(deckRoot, opponentHandRoot));
+            }
         }
+        // ドローの挙動と整列の挙動を登録
         UIManager.instance.AddSequence(sequenceList);
-
-        // 手札の整列
-        ArrangeHandCard();
+        UIManager.instance.AddSequence(ArrangeHandCard(isMine));
     }
 
     // 手札エリアからカードを削除する
-    public void RemoveHandCard(CardObject card)
+    public void RemoveHandCard(bool isMine, CardObject card)
     {
-        handCards.Remove(card);
-
-        ArrangeHandCard();
+        if (isMine)
+        {
+            ownHandCards.Remove(card);
+            UIManager.instance.AddSequence(ArrangeHandCard(isMine));
+        }
+        else
+        {
+            opponentHandCards.Remove(card);
+            UIManager.instance.AddSequence(ArrangeHandCard(isMine));
+        }
     }
 
-    // 手札エリアにカードを整列させる
-    public void ArrangeHandCard()
+    /// <summary>
+    /// 手札のカードを整列する
+    /// </summary>
+    /// <param name="isMine"></param>
+    public List<Sequence> ArrangeHandCard(bool isMine)
     {
         float areaWidth = HAND_SCALE_X;
         float cardWidth = 1.0f;          // 仮のカード幅
         float cardThickness = 0.15f;     // カードの厚み（Y方向のずらし幅）
-        int cardCount = handCards.Count;
 
-        if (cardCount == 0) return;
+        List<CardObject> cardList = null;
+        if (isMine) cardList = ownHandCards;
+        else cardList = opponentHandCards;
+        int cardCount = cardList.Count;
+
+        if (cardCount == 0) return null;
+
+        List<Sequence> sequenceList = new List<Sequence>();
 
         // 「通常の幅」と「エリア内に収めるための幅」を計算
         float maxCardWidth = areaWidth / cardCount;
@@ -84,10 +109,12 @@ public class HandUI : BaseUI
             // Yは厚み分上げる
             float yPosition = cardThickness * i;
 
-            handCards[i].transform.localPosition = new Vector3(xPosition, yPosition, 0);
+            Sequence arrangeHandSeq = DOTween.Sequence();
+            arrangeHandSeq.Append(cardList[i].transform.DOLocalMove(new Vector3(xPosition, yPosition, 0), 0.5f));
+            sequenceList.Add(arrangeHandSeq);
         }
+        return sequenceList;
     }
-
 
     // 手札使用時のコールバック設定
     public void SetUseCardCallback(System.Action useCard)

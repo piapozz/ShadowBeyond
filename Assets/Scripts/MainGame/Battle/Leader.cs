@@ -78,8 +78,7 @@ public class Leader
     {
         this.maxDefense = maxDefense;
         currentDefense = maxDefense;
-        maxPlayPoint = maxPP;
-        currentPlayPoint = maxPP;
+        SetMaxPlayPoint(maxPP);
     }
 
     public void SetMaxDefense(int value)
@@ -99,11 +98,13 @@ public class Leader
         maxPlayPoint = value;
         if (currentPlayPoint > maxPlayPoint)
             currentPlayPoint = maxPlayPoint;
+        UIManager.instance.UpdatePPUI(playerID, maxPlayPoint, currentPlayPoint);
     }
 
     public void SetCurrentPlayPoint(int value)
     {
         currentPlayPoint = Mathf.Clamp(value, 0, maxPlayPoint);
+        UIManager.instance.UpdatePPUI(playerID, maxPlayPoint, currentPlayPoint);
     }
 
 

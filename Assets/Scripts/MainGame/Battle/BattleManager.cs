@@ -129,6 +129,7 @@ public class BattleManager : SystemObject
         currentPlayerIndex = first;
 
         // UIだす
+        UIManager.instance.SetEndTurnButton(() => SetCurrentState(BattleState.END_TURN));
         UIManager.instance.StartBattle();
     }
 
@@ -142,7 +143,6 @@ public class BattleManager : SystemObject
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
         // メインフェイズ処理
-        currentState = BattleState.END_TURN; // 仮でターン終了へ
     }
 
     public void EndTurn()
@@ -157,6 +157,11 @@ public class BattleManager : SystemObject
     }
 
     public BattleState GetCurrentState() { return currentState; }
+
+    private void SetCurrentState(BattleState setState)
+    {
+        currentState = setState;
+    }
 
     public Player GetCurrentPlayer()
     {

@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
-public class PPUI : BaseUI
+public class PPUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private TextMeshProUGUI ppMax = null;
+    [SerializeField]
+    private TextMeshProUGUI ppCurrent = null;
 
-    // Update is called once per frame
-    void Update()
+    public void SetPPText(int setPPMax, int setPPCurrent)
     {
-        
+        ppMax.text = setPPMax.ToString();
+        ppCurrent.text = setPPCurrent.ToString();
     }
 }
