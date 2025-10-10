@@ -1,6 +1,7 @@
 ﻿using Fusion;
 using Fusion.Sockets;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,10 +13,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
     public static NetworkManager Instance { get; private set; }
 
-    private NetworkRunner _runner;
+    private bool isConnecting = false;
 
+    private NetworkRunner runner;
     private const int MaxBufferCount = 5;
-    private bool _isConnecting = false;
     private const string SessionName = "BattleSession";
     private const int MaxPlayers = 2;
 
@@ -86,19 +87,19 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     // -----------------------------------
     public async void StartMatchmaking()
     {
-        if (_isConnecting) return;
-        _isConnecting = true;
+        if (isConnecting) return;
+        isConnecting = true;
 
         Debug.Log("[Network] 🔍 マッチング開始...");
 
         // NetworkRunner生成
-        _runner = gameObject.AddComponent<NetworkRunner>();
-        _runner.ProvideInput = false;
-        _runner.AddCallbacks(this);
+        runner = gameObject.AddComponent<NetworkRunner>();
+        runner.ProvideInput = false;
+        runner.AddCallbacks(this);
 
-        // 既存セッションリスト取得
-        var result = await _runner.StartGame(new StartGameArgs()
-        {
+        // ゲーム開始（ホストまたはクライアント）
+        var result = await runner.StartGame(new StartGameArgs()
+    {
             GameMode = GameMode.AutoHostOrClient,
             SessionName = SessionName,
             PlayerCount = MaxPlayers,
@@ -108,11 +109,35 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         if (!result.Ok)
         {
             Debug.LogError($"[Network] 接続失敗: {result.ShutdownReason}");
-            _isConnecting = false;
+            isConnecting = false;
             return;
         }
 
         Debug.Log($"[Network] ✅ 接続成功: {result.GetHashCode()}");
+
+        // 👇 プレイヤー人数が揃うまで待機
+        StartCoroutine(WaitForPlayers());
+    }
+
+    private IEnumerator WaitForPlayers()
+    {
+        Debug.Log($"[Network] ⏳ プレイヤー待機中... (現在 {runner.SessionInfo.PlayerCount}/{MaxPlayers})");
+
+        // MaxPlayers が揃うまでループ
+        while (runner != null && runner.SessionInfo != null && runner.SessionInfo.PlayerCount < MaxPlayers)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        if (runner == null) yield break;
+
+        Debug.Log("[Network] 🎮 全プレイヤーが揃いました！シーンをロードします...");
+        SceneManager.LoadScene("MainScene");
+    }
+
+    public bool IsConnected()
+    {
+        return runner != null && isConnecting;
     }
 
     //==================================
@@ -149,7 +174,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     // -----------------------------------
     public void SendData(SendBattleData data)
     {
-        if (_runner == null)
+        if (runner == null)
             return;
 
         byte[] rawData = data.ToBytes();
@@ -179,10 +204,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         // 全プレイヤーへ信頼性送信
-        foreach (var player in _runner.ActivePlayers)
+        foreach (var player in runner.ActivePlayers)
         {
             ReliableKey reliable = default;
-            _runner.SendReliableDataToPlayer(player, reliable, fullPacket);
+            runner.SendReliableDataToPlayer(player, reliable, fullPacket);
         }
 
         Debug.Log($"[Network] Sent seq={seq}, size={rawData.Length}");
