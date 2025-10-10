@@ -141,12 +141,14 @@ public class BattleManager : SystemObject
 
     public void MainTurn()
     {
-        if (!UIManager.instance.IsCompleteAllSequence()) return;
         // メインフェイズ処理
 
         // 相手のターンなら受信
         NetworkManager.SendBattleData data = (NetworkManager.SendBattleData)NetworkManager.Instance.GetNextReceivedData();
-        switch(data.type)
+
+        if(data.type == GameEnum.InputType.INVALID) return;
+
+        switch (data.type)
         {
             case GameEnum.InputType.PLAY_CARD:
                 // カードをプレイ
@@ -195,6 +197,7 @@ public class BattleManager : SystemObject
 
     public void EndTurn()
     {
+        if (!UIManager.instance.IsCompleteAllSequence()) return;
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
     }
