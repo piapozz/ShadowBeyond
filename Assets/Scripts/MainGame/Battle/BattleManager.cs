@@ -1,14 +1,18 @@
-using Cysharp.Threading.Tasks;
+ï»¿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ƒ^[ƒ“is
-// ƒoƒgƒ‹‘S‘Ì‚ÌŠÇ—
+// ã‚¿ãƒ¼ãƒ³é€²è¡Œ
+// ãƒãƒˆãƒ«å…¨ä½“ã®ç®¡ç†
 public class BattleManager : SystemObject
 {
     public static BattleManager instance { get; private set; } = null;
 
     const int PLAYPOINT_MAX = 10;
+    public int localPlayerIndex = -1;
+    public int seed = 0;
+
+    private System.Random rand; // ã‚·ãƒ¼ãƒ‰ä¿æŒç”¨
 
     public enum BattleState
     {
@@ -87,6 +91,7 @@ public class BattleManager : SystemObject
         player[0].SetPlayerID(0);
         player[1].SetPlayerID(1);
         currentState = BattleState.START_BATTLE;
+        localPlayerIndex = NetworkManager.Instance.localPlayerId;
         await UniTask.CompletedTask;
     }
 
@@ -103,8 +108,8 @@ public class BattleManager : SystemObject
                 currentState = BattleState.MAIN_TURN;
                 break;
             case BattleState.MAIN_TURN:
-                // ƒƒCƒ“ƒtƒFƒCƒYˆ—
-                // ğŒ‚ğ–‚½‚µ‚½‚çƒ^[ƒ“I—¹‚Ö
+                // ãƒ¡ã‚¤ãƒ³ãƒ•ã‚§ã‚¤ã‚ºå‡¦ç†
+                // æ¡ä»¶ã‚’æº€ãŸã—ãŸã‚‰ã‚¿ãƒ¼ãƒ³çµ‚äº†ã¸
                 MainTurn();
                 break;
             case BattleState.END_TURN:
@@ -112,7 +117,7 @@ public class BattleManager : SystemObject
                 currentState = BattleState.START_TURN;
                 break;
             case BattleState.END_BATTLE:
-                // ƒoƒgƒ‹I—¹ˆ—
+                // ãƒãƒˆãƒ«çµ‚äº†å‡¦ç†
                 EndBattle();
                 break;
             default:
@@ -122,13 +127,30 @@ public class BattleManager : SystemObject
 
     public void StartBattle()
     {
-        // ƒoƒgƒ‹ŠJnˆ—
+        // ãƒãƒˆãƒ«é–‹å§‹å‡¦ç†
 
-        // æUŒãUŒˆ‚ß‚é
-        int first = Random.Range(0, 2);
-        currentPlayerIndex = first;
+        if (localPlayerIndex == 1)
+        {
+            // ã‚·ãƒ¼ãƒ‰å€¤ç”Ÿæˆ
+            seed = Random.Range(int.MinValue, int.MaxValue);
+            NetworkManager.Instance.SendSeedData(seed);
+        }
+        else
+        {
+            Debug.Log("[Battle] ğŸŒ± ã‚·ãƒ¼ãƒ‰å€¤ã‚’å¾…æ©Ÿä¸­...");
+            if (!NetworkManager.Instance.IsSeedReceived) return;
 
-        // ƒ^[ƒ“ƒGƒ“ƒh‚ÌƒR[ƒ‹ƒoƒbƒN
+            seed = NetworkManager.Instance.GetReceivedSeed();
+            Debug.Log($"[Battle] ğŸ² ã‚·ãƒ¼ãƒ‰å€¤ã‚’å–å¾—: {seed}");
+        }
+
+        rand = new System.Random(seed);
+
+        // å…ˆæ”»å¾Œæ”»æ±ºã‚ã‚‹
+        int first = rand.Next(0, 2);
+        currentPlayerIndex = (first + localPlayerIndex) % 2;
+
+        // ã‚¿ãƒ¼ãƒ³ã‚¨ãƒ³ãƒ‰ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
         UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
         UIManager.instance.StartBattle();
     }
@@ -137,15 +159,15 @@ public class BattleManager : SystemObject
 
     public void StartTurn()
     {
-        // ƒ^[ƒ“ŠJnˆ—
+        // ã‚¿ãƒ¼ãƒ³é–‹å§‹å‡¦ç†
         player[currentPlayerIndex].NextTurn();
     }
 
     public void MainTurn()
     {
-        // ƒƒCƒ“ƒtƒFƒCƒYˆ—
+        // ãƒ¡ã‚¤ãƒ³ãƒ•ã‚§ã‚¤ã‚ºå‡¦ç†
 
-        // ‘Šè‚Ìƒ^[ƒ“‚È‚çóM
+        // ç›¸æ‰‹ã®ã‚¿ãƒ¼ãƒ³ãªã‚‰å—ä¿¡
         NetworkManager.SendBattleData data = NetworkManager.Instance.GetNextReceivedData();
 
         if(data.type == GameEnum.InputType.INVALID) return;
@@ -153,40 +175,40 @@ public class BattleManager : SystemObject
         switch (data.type)
         {
             case GameEnum.InputType.PLAY_CARD:
-                // ƒJ[ƒh‚ğƒvƒŒƒC
+                // ã‚«ãƒ¼ãƒ‰ã‚’ãƒ—ãƒ¬ã‚¤
                 int handIndex = data.param[0];
                 break;
             case GameEnum.InputType.ATTACK:
-                // UŒ‚
+                // æ”»æ’ƒ
                 int attackIndex = data.param[0];
                 int defanceIndex = data.param[1];
                 break;
 
             case GameEnum.InputType.EVOLVE:
-                // i‰»
+                // é€²åŒ–
                 int evolveIndex = data.param[0];
                 break;
 
             case GameEnum.InputType.SUPER_EVOLVE:
-                // ’´i‰»
+                // è¶…é€²åŒ–
                 int superEvolveIndex = data.param[0];
                 break;
 
             case GameEnum.InputType.ACT:
-                // ”\—Íg—p
+                // èƒ½åŠ›ä½¿ç”¨
                 int actIndex = data.param[0];
                 break;
 
             case GameEnum.InputType.FUSION:
-                // —Z‡
+                // èåˆ
                 break;
 
             case GameEnum.InputType.EXTRA_PP:
-            // ƒGƒNƒXƒgƒ‰PP
+            // ã‚¨ã‚¯ã‚¹ãƒˆãƒ©PP
                 break;
 
             case GameEnum.InputType.TURN_END:
-                // ƒ^[ƒ“I—¹
+                // ã‚¿ãƒ¼ãƒ³çµ‚äº†
                 SetCurrentState(BattleState.END_TURN);
                 break;
             default:
@@ -197,13 +219,13 @@ public class BattleManager : SystemObject
     public void EndTurn()
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
-        // ƒ^[ƒ“I—¹ˆ—
+        // ã‚¿ãƒ¼ãƒ³çµ‚äº†å‡¦ç†
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
     }
 
     public void EndBattle()
     {
-        // ƒoƒgƒ‹I—¹ˆ—
+        // ãƒãƒˆãƒ«çµ‚äº†å‡¦ç†
     }
 
     public void SendInputData(GameEnum.InputType type, int[] param = null)
@@ -233,7 +255,7 @@ public class BattleManager : SystemObject
 
     public void CardCombat(CardData attackCard, CardData DefanceCard)
     {
-        // í“¬ƒJ[ƒh‚Ì“o˜^
+        // æˆ¦é—˜ã‚«ãƒ¼ãƒ‰ã®ç™»éŒ²
         CombatProcessor processor = new CombatProcessor(attackCard, DefanceCard);
 
         processor.Combat();
