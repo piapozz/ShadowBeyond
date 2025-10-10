@@ -184,6 +184,16 @@ public class UIManager : SystemObject
     }
 
     /// <summary>
+    /// オブジェクト参照の自身の手札のインデックス取得
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public int GetOwnHandIndex(CardObject card)
+    {
+        return handUI.GetOwnHandIndex(card);
+    }
+
+    /// <summary>
     /// カードがドロップされたときの処理
     /// </summary>
     /// <param name="setCard"></param>
@@ -197,7 +207,7 @@ public class UIManager : SystemObject
         if (isField)
         {
             // 手札から除外しフィールドに追加
-            handUI.RemoveHandCard(true, setCard);
+            int handIndex = handUI.RemoveHandCard(true, setCard);
             switch (setCard.cardData.type)
             {
                 case GameEnum.CardType.FOLLOWER:
@@ -209,6 +219,7 @@ public class UIManager : SystemObject
                     break;
                 default: break;
             }
+            setCard.PlayCard(handIndex);
         }
         // 手札に戻す
         else

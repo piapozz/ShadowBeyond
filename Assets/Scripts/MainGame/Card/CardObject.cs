@@ -171,6 +171,8 @@ public class CardObject : MonoBehaviour
 
         // 攻撃処理を依頼
         BattleManager.instance.CardCombat(cardData, target.cardData);
+        // 情報を送信
+        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK, new int[2] { 0, 0 });
     }
 
     /// <summary>
@@ -299,13 +301,16 @@ public class CardObject : MonoBehaviour
         return drawSeq;
     }
 
-    public void PlayCard()
+    public void PlayCard(int handIndex)
     {
         // 選択が必要な能力なら選択ウィンドウを出す
         // 何かしらに渡す
 
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
+
+        int[] param = new int[1] { handIndex };
+        BattleManager.instance.SendInputData(GameEnum.InputType.PLAY_CARD, param);
     }
 
     public void EvolveFollower()

@@ -247,9 +247,13 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     // BattleManager が呼び出す
     // 一番古い未処理データを順番に返す
     // -----------------------------------
-    public SendBattleData? GetNextReceivedData()
+    public SendBattleData GetNextReceivedData()
     {
-        if (Instance == null || runner == null) return null;
+        SendBattleData data;
+        data.type = InputType.INVALID;
+        data.param = null;
+
+        if (Instance == null || runner == null) return data;
 
         foreach (var kvp in recvBuffer)
         {
@@ -261,7 +265,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
                 return SendBattleData.FromBytes(kvp.Value);
             }
         }
-        return null;
+        return data;
     }
 
     // -----------------------------------
