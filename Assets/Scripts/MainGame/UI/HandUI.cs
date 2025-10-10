@@ -61,18 +61,22 @@ public class HandUI : MonoBehaviour
     }
 
     // 手札エリアからカードを削除する
-    public void RemoveHandCard(bool isMine, CardObject card)
+    public int RemoveHandCard(bool isMine, CardObject card)
     {
+        int index = -1;
         if (isMine)
         {
+            index = ownHandCards.IndexOf(card);
             ownHandCards.Remove(card);
             UIManager.instance.AddSequence(ArrangeHandCard(isMine));
         }
         else
         {
+            index = opponentHandCards.IndexOf(card);
             opponentHandCards.Remove(card);
             UIManager.instance.AddSequence(ArrangeHandCard(isMine));
         }
+        return index;
     }
 
     /// <summary>
@@ -126,5 +130,19 @@ public class HandUI : MonoBehaviour
     public void UpdateHandCard()
     {
         
+    }
+
+    /// <summary>
+    /// オブジェクト参照の自身の手札のインデックスを取得
+    /// </summary>
+    /// <param name="cardObject"></param>
+    /// <returns></returns>
+    public int GetOwnHandIndex(CardObject cardObject)
+    {
+        for (int i = 0, max = ownHandCards.Count; i < max; i++)
+        {
+            if (ownHandCards[i] == cardObject) return i;
+        }
+        return -1;
     }
 }

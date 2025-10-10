@@ -128,10 +128,12 @@ public class BattleManager : SystemObject
         int first = Random.Range(0, 2);
         currentPlayerIndex = first;
 
-        // UIだす
-        UIManager.instance.SetEndTurnButton(() => SetCurrentState(BattleState.END_TURN));
+        // ターンエンドのコールバック
+        UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
         UIManager.instance.StartBattle();
     }
+
+
 
     public void StartTurn()
     {
@@ -144,7 +146,7 @@ public class BattleManager : SystemObject
         // メインフェイズ処理
 
         // 相手のターンなら受信
-        NetworkManager.SendBattleData data = (NetworkManager.SendBattleData)NetworkManager.Instance.GetNextReceivedData();
+        NetworkManager.SendBattleData data = NetworkManager.Instance.GetNextReceivedData();
 
         if(data.type == GameEnum.InputType.INVALID) return;
 
@@ -153,9 +155,6 @@ public class BattleManager : SystemObject
             case GameEnum.InputType.PLAY_CARD:
                 // カードをプレイ
                 int handIndex = data.param[0];
-                int fieldIndex = data.param[1];
-                //CardData playCard = player[currentPlayerIndex].hand.GetCard(handIndex);
-                
                 break;
             case GameEnum.InputType.ATTACK:
                 // 攻撃
@@ -207,7 +206,7 @@ public class BattleManager : SystemObject
         // バトル終了処理
     }
 
-    public void SendInputData(GameEnum.InputType type, int[] param)
+    public void SendInputData(GameEnum.InputType type, int[] param = null)
     {
         NetworkManager.SendBattleData data = new NetworkManager.SendBattleData();
         data.type = type;
