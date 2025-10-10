@@ -155,8 +155,6 @@ public class BattleManager : SystemObject
         UIManager.instance.StartBattle();
     }
 
-
-
     public void StartTurn()
     {
         // ターン開始処理

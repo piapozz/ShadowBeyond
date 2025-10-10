@@ -267,12 +267,12 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     // -----------------------------------
     // データ受信
     // -----------------------------------
-    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, byte[] data)
+    public void HandleReliableData(byte[] data)
     {
         using MemoryStream ms = new MemoryStream(data);
         using BinaryReader br = new BinaryReader(ms);
 
-        // 1️⃣ 通信タイプを最初に読む
+        // 1通信タイプを最初に読む
         SyncTypeEnum syncType = (SyncTypeEnum)br.ReadByte();
 
         switch (syncType)
@@ -316,6 +316,17 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
                 Debug.LogWarning($"[Network] 未対応のSyncType受信: {syncType}");
                 break;
         }
+    }
+
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, byte[] data)
+    {
+        HandleReliableData(data);
+    }
+
+    // ArraySegment<byte> 版もこちらに統一
+    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data)
+    {
+        HandleReliableData(data.ToArray());
     }
 
 
@@ -372,11 +383,6 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void OnReliableDataReceived(NetworkRunner runner, PlayerRef player, ReliableKey key, ArraySegment<byte> data)
     {
         throw new NotImplementedException();
     }
