@@ -249,6 +249,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     // -----------------------------------
     public SendBattleData? GetNextReceivedData()
     {
+        if (Instance == null || runner == null) return null;
+
         foreach (var kvp in recvBuffer)
         {
             int seq = kvp.Key;
