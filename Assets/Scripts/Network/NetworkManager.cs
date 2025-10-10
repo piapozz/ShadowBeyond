@@ -13,6 +13,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 {
     public static NetworkManager Instance { get; private set; }
 
+    public int localPlayerId = -1;
+
     private bool isConnecting = false;
 
     private NetworkRunner runner;
@@ -20,11 +22,26 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     private const string SessionName = "BattleSession";
     private const int MaxPlayers = 2;
 
+
     private readonly Dictionary<int, byte[]> sendHistory = new(); // seq→data
     private readonly SortedDictionary<int, byte[]> recvBuffer = new(); // seq→data
 
     private int localSequence = 0;     // 自分が送信するデータの通し番号
     private int lastDeliveredSeq = -1; // BattleManagerに最後に渡したデータ番号
+
+    public enum SyncTypeEnum : byte
+    {
+        SYNC_NONE = 0,
+        SYNC_BATTLE = 1,   // バトルデータ（既存）
+        SYNC_SEED = 2,     // シード値
+        SYNC_RESULT = 3,   // （将来的な拡張用）
+    }
+
+    private bool seedReceived = false;
+    private int receivedSeed = 0;
+
+    public bool IsSeedReceived => seedReceived;
+    public int GetReceivedSeed() => receivedSeed;
 
     public struct SendBattleData
     {
@@ -131,6 +148,17 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         if (runner == null) yield break;
 
+        if(runner.LocalPlayer != null)
+        {
+            localPlayerId = runner.LocalPlayer.PlayerId;
+            Debug.Log($"[Network] 🎉 自分のPlayerIdは {localPlayerId} です");
+        }
+        else
+        {
+            Debug.LogError("[Network] ❌ 自分のPlayerIdが取得できません");
+            yield break;
+        }
+
         Debug.Log("[Network] 🎮 全プレイヤーが揃いました！シーンをロードします...");
         SceneManager.LoadScene("MainScene");
     }
@@ -178,22 +206,22 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             return;
 
         byte[] rawData = data.ToBytes();
-
-        if(rawData == null || rawData.Length == 0)
+        if (rawData == null || rawData.Length == 0)
             return;
 
-        // 通し番号をつけて送信データを構築
         int seq = ++localSequence;
 
         using MemoryStream ms = new MemoryStream();
         using BinaryWriter bw = new BinaryWriter(ms);
+
+        // 先頭に通信タイプ
+        bw.Write((byte)SyncTypeEnum.SYNC_BATTLE);
         bw.Write(seq);
         bw.Write(rawData.Length);
         bw.Write(rawData);
 
         byte[] fullPacket = ms.ToArray();
 
-        // 履歴に保存（最大3件）
         sendHistory[seq] = fullPacket;
         if (sendHistory.Count > MaxBufferCount)
         {
@@ -203,14 +231,37 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             sendHistory.Remove(oldest);
         }
 
-        // 全プレイヤーへ信頼性送信
         foreach (var player in runner.ActivePlayers)
         {
             ReliableKey reliable = default;
             runner.SendReliableDataToPlayer(player, reliable, fullPacket);
         }
 
-        Debug.Log($"[Network] Sent seq={seq}, size={rawData.Length}");
+        Debug.Log($"[Network] Sent [SYNC_BATTLE] seq={seq}, size={rawData.Length}");
+    }
+
+
+    public void SendSeedData(int seedIndex)
+    {
+        if (runner == null)
+            return;
+
+        using MemoryStream ms = new MemoryStream();
+        using BinaryWriter bw = new BinaryWriter(ms);
+
+        // 通信タイプを最初に書き込む
+        bw.Write((byte)SyncTypeEnum.SYNC_SEED);
+        bw.Write(seedIndex);
+
+        byte[] sendData = ms.ToArray();
+
+        foreach (var player in runner.ActivePlayers)
+        {
+            ReliableKey reliable = default;
+            runner.SendReliableDataToPlayer(player, reliable, sendData);
+        }
+
+        Debug.Log($"[Network] 🌱 シード値送信: {seedIndex}");
     }
 
     // -----------------------------------
@@ -221,27 +272,52 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         using MemoryStream ms = new MemoryStream(data);
         using BinaryReader br = new BinaryReader(ms);
 
-        int seq = br.ReadInt32();
-        int len = br.ReadInt32();
-        byte[] payload = br.ReadBytes(len);
+        // 1️⃣ 通信タイプを最初に読む
+        SyncTypeEnum syncType = (SyncTypeEnum)br.ReadByte();
 
-        // 既に受信済みなら無視（重複排除）
-        if (recvBuffer.ContainsKey(seq) || seq <= lastDeliveredSeq)
-            return;
-
-        recvBuffer[seq] = payload;
-
-        // 最大3件制限
-        while (recvBuffer.Count > MaxBufferCount)
+        switch (syncType)
         {
-            int oldest = int.MaxValue;
-            foreach (int bufferKey in recvBuffer.Keys)
-                oldest = Mathf.Min(oldest, bufferKey);
-            recvBuffer.Remove(oldest);
-        }
+            // 🌱 シード値受信
+            case SyncTypeEnum.SYNC_SEED:
+            {
+                int seedValue = br.ReadInt32();
+                receivedSeed = seedValue;
+                seedReceived = true;
+                Debug.Log($"[Network] 🌱 シード値を受信: {seedValue}");
+                break;
+            }
 
-        Debug.Log($"[Network] Received seq={seq}, size={len}");
+            // ⚔ バトルデータ受信
+            case SyncTypeEnum.SYNC_BATTLE:
+            {
+                int seq = br.ReadInt32();
+                int len = br.ReadInt32();
+                byte[] payload = br.ReadBytes(len);
+
+                if (recvBuffer.ContainsKey(seq) || seq <= lastDeliveredSeq)
+                    return;
+
+                recvBuffer[seq] = payload;
+
+                while (recvBuffer.Count > MaxBufferCount)
+                {
+                    int oldest = int.MaxValue;
+                    foreach (int bufferKey in recvBuffer.Keys)
+                        oldest = Mathf.Min(oldest, bufferKey);
+                    recvBuffer.Remove(oldest);
+                }
+
+                Debug.Log($"[Network] ⚔ 受信 seq={seq}, size={len}");
+                break;
+            }
+
+            // その他（将来的な拡張）
+            default:
+                Debug.LogWarning($"[Network] 未対応のSyncType受信: {syncType}");
+                break;
+        }
     }
+
 
     // -----------------------------------
     // BattleManager が呼び出す
