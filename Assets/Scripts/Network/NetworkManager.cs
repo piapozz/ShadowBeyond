@@ -357,9 +357,14 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             {
                 lastDeliveredSeq = seq;
                 recvBuffer.Remove(seq);
-                return SendBattleData.FromBytes(kvp.Value);
+
+                data = SendBattleData.FromBytes(kvp.Value);
+                Debug.Log($"[Network] ⚔ 処理データ seq={seq}, type={data.type}, param=[{(data.param != null ? string.Join(",", data.param) : "")}]");
+
+                return data;
             }
         }
+
         return data;
     }
 

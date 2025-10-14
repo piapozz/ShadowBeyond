@@ -1,8 +1,9 @@
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
 public class HandUI : MonoBehaviour
 {
@@ -61,22 +62,38 @@ public class HandUI : MonoBehaviour
     }
 
     // 手札エリアからカードを削除する
-    public int RemoveHandCard(bool isMine, CardObject card)
+    public void RemoveHandCard(bool isMine, CardObject card)
     {
-        int index = -1;
         if (isMine)
         {
-            index = ownHandCards.IndexOf(card);
             ownHandCards.Remove(card);
-            UIManager.instance.AddSequence(ArrangeHandCard(isMine));
         }
         else
         {
-            index = opponentHandCards.IndexOf(card);
             opponentHandCards.Remove(card);
-            UIManager.instance.AddSequence(ArrangeHandCard(isMine));
         }
-        return index;
+        UIManager.instance.AddSequence(ArrangeHandCard(isMine));
+    }
+
+    /// <summary>
+    /// オブジェクトからインデックスを取得
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public int GetOwnCardIndex(CardObject card)
+    {
+        return ownHandCards.IndexOf(card);
+    }
+
+    /// <summary>
+    /// インデックスからオブジェクトを取得
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public CardObject GetOpponentCardObject(int index)
+    {
+        if (index < 0 || index >= opponentHandCards.Count) return null;
+        return opponentHandCards[index];
     }
 
     /// <summary>

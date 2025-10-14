@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
@@ -195,26 +196,56 @@ public class UIManager : SystemObject
         // カードをプレイ
         if (isField)
         {
-            // 手札から除外しフィールドに追加
-            int handIndex = handUI.RemoveHandCard(true, setCard);
-            switch (setCard.cardData.type)
-            {
-                case GameEnum.CardType.FOLLOWER:
-                case GameEnum.CardType.AMULET:
-                    fieldUI.AddOwnFieldCard(setCard);
-                    break;
-                case GameEnum.CardType.SPELL:
-                    setCard.SetCardState(CardObject.CardState.UNUSE);
-                    break;
-                default: break;
-            }
-            setCard.PlayCard(handIndex);
+            PlayOwnCard(setCard);
         }
         // 手札に戻す
         else
         {
             handUI.ArrangeHandCard(true);
         }
+    }
+
+    /// <summary>
+    /// オブジェクト指定のカードをプレイ
+    /// </summary>
+    /// <param name="playCard"></param>
+    /// <param name="isMine"></param>
+    public void PlayOwnCard(CardObject playCard)
+    {
+        // 手札から除外しフィールドに追加
+        int handIndex =　handUI.GetOwnHandIndex(playCard);
+        handUI.RemoveHandCard(true, playCard);
+        switch (playCard.cardData.type)
+        {
+            case GameEnum.CardType.FOLLOWER:
+            case GameEnum.CardType.AMULET:
+                fieldUI.AddOwnFieldCard(playCard);
+                break;
+            case GameEnum.CardType.SPELL:
+                playCard.SetCardState(CardObject.CardState.UNUSE);
+                break;
+            default: break;
+        }
+        playCard.PlayCard(handIndex);
+    }
+
+    public void PlayOpponentCard(int handIndex)
+    {
+        // 手札から除外しフィールドに追加
+        CardObject playCard = handUI.GetOpponentCardObject(handIndex);
+        handUI.RemoveHandCard(false, playCard);
+        switch (playCard.cardData.type)
+        {
+            case GameEnum.CardType.FOLLOWER:
+            case GameEnum.CardType.AMULET:
+                fieldUI.AddOwnFieldCard(playCard);
+                break;
+            case GameEnum.CardType.SPELL:
+                playCard.SetCardState(CardObject.CardState.UNUSE);
+                break;
+            default: break;
+        }
+        playCard.PlayCard(handIndex);
     }
 
     /// <summary>
