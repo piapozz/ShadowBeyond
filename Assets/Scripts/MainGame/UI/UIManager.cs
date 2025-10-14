@@ -72,7 +72,10 @@ public class UIManager : SystemObject
             card.gameObject.SetActive(false);
             poolCardObject.Add(card);
         }
+    }
 
+    public void RandomTest()
+    {
         // 仮でフィールドに出す
         for (int i = 0; i < 5; i++)
         {
