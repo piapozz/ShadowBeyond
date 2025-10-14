@@ -70,7 +70,7 @@ public class CardMasterUtility
     public static CardData GetRandomCardData()
     {
         List<Param> cardMasterList = MasterDataManager.cardData[0];
-        int randomIndex = Random.Range(0, cardMasterList.Count);
+        int randomIndex = BattleManager.instance.rand.Next(0, cardMasterList.Count);
         return GetCardData(cardMasterList[randomIndex]);
     }
 }
