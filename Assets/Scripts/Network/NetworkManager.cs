@@ -37,10 +37,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         SYNC_RESULT = 3,   // （将来的な拡張用）
     }
 
-    private bool seedReceived = false;
+    public bool seedReceived { get; private set; } = false;
     private int receivedSeed = 0;
-
-    public bool IsSeedReceived => seedReceived;
     public int GetReceivedSeed() => receivedSeed;
 
     public struct SendBattleData
@@ -233,6 +231,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         foreach (var player in runner.ActivePlayers)
         {
+            if (player == runner.LocalPlayer) continue;
             ReliableKey reliable = default;
             runner.SendReliableDataToPlayer(player, reliable, fullPacket);
         }
@@ -255,13 +254,21 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         byte[] sendData = ms.ToArray();
 
+
+        if (runner.SessionInfo.PlayerCount < 2)
+        {
+            Debug.Log("[Network] ⚠️ まだ相手がいないため送信できません");
+            return;
+        }
+
         foreach (var player in runner.ActivePlayers)
         {
+            if (player == runner.LocalPlayer) continue;
+            Debug.Log($"[Network] 🌱 シード値送信: {seedIndex} [size] : {sendData.Length}");
+
             ReliableKey reliable = default;
             runner.SendReliableDataToPlayer(player, reliable, sendData);
         }
-
-        Debug.Log($"[Network] 🌱 シード値送信: {seedIndex}");
     }
 
     // -----------------------------------
