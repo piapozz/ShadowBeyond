@@ -57,6 +57,7 @@ public class UIManager : SystemObject
 
         instance = this;
         uiSequence = new Queue<List<Sequence>>();
+        currentSequenceList = new List<Sequence>();
         // UIを生成
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
@@ -71,22 +72,6 @@ public class UIManager : SystemObject
             card.transform.SetParent(transform);
             card.gameObject.SetActive(false);
             poolCardObject.Add(card);
-        }
-    }
-
-    public void RandomTest()
-    {
-        // 仮でフィールドに出す
-        for (int i = 0; i < 5; i++)
-        {
-            CardObject addObject = GetUnuseCardObject();
-            addObject.gameObject.SetActive(true);
-            addObject.SetCardData(CardMasterUtility.GetRandomCardData());
-            fieldUI.AddOwnFieldCard(addObject);
-            addObject = GetUnuseCardObject();
-            addObject.gameObject.SetActive(true);
-            addObject.SetCardData(CardMasterUtility.GetRandomCardData());
-            fieldUI.AddOpponentFieldCard(addObject);
         }
     }
 
@@ -111,8 +96,6 @@ public class UIManager : SystemObject
 
     private bool IsCompleteCurrentSequence()
     {
-        if (currentSequenceList == null) return true;
-
         for (int i = 0, max = currentSequenceList.Count; i < max; i++)
         {
             if (!currentSequenceList[i].IsActive()) continue;
@@ -124,6 +107,7 @@ public class UIManager : SystemObject
 
     public void AddSequence(List<Sequence> addSequences)
     {
+        if (addSequences == null) return;
         uiSequence.Enqueue(addSequences);
     }
 

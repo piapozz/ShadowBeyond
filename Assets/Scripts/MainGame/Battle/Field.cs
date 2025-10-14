@@ -74,7 +74,7 @@ public class Field
     {
         var list = GetCards(condition, includeOpponent);
         if (list.Count == 0) return null;
-        return list[UnityEngine.Random.Range(0, list.Count)];
+        return list[BattleManager.instance.rand.Next(0, list.Count)];
     }
 
     // ===== Œø‰ÊŒn =====

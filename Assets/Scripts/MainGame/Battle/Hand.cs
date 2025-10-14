@@ -72,7 +72,7 @@ public class Hand
     {
         var matches = GetCards(condition);
         if (matches.Count == 0) return null;
-        return matches[UnityEngine.Random.Range(0, matches.Count)];
+        return matches[BattleManager.instance.rand.Next(0, matches.Count)];
     }
 
     /// <summary>

@@ -72,7 +72,7 @@ public class Deck
         int deckCount = deckCardList.Count;
         for (int i = deckCount - 1; i > 0; i--)
         {
-            int n = UnityEngine.Random.Range(0, i + 1);
+            int n = BattleManager.instance.rand.Next(0, i + 1);
             CardData card = deckCardList[i];
             deckCardList[i] = deckCardList[n];
             deckCardList[n] = card;
@@ -139,7 +139,7 @@ public class Deck
     {
         var matches = GetCards(condition);
         if (matches.Count == 0) return null;
-        return matches[UnityEngine.Random.Range(0, matches.Count)];
+        return matches[BattleManager.instance.rand.Next(0, matches.Count)];
     }
 
     /// <summary>
