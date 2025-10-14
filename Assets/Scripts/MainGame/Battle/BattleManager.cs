@@ -159,8 +159,6 @@ public class BattleManager : SystemObject
         player[0].SetPlayerID(0);
         player[1].SetPlayerID(1);
 
-        UIManager.instance.RandomTest();
-
         // 先攻後攻決める
         int first = rand.Next(0, 2);
         currentPlayerIndex = (first + localPlayerIndex) % 2;
