@@ -190,6 +190,7 @@ public class BattleManager : SystemObject
             case GameEnum.InputType.PLAY_CARD:
                 // カードをプレイ
                 int handIndex = data.param[0];
+                UIManager.instance.PlayOpponentCard(handIndex);
                 break;
             case GameEnum.InputType.ATTACK:
                 // 攻撃
