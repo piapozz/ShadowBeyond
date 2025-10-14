@@ -35,7 +35,8 @@ public class UIManager : SystemObject
     [SerializeField] private OptionUI optionUI;
     [SerializeField] private HistoryUI historyUI;
     [SerializeField] private InfoUI infoUI;
-    [SerializeField] private GameObject deckObject;
+    [SerializeField] private GameObject ownDeckObject;
+    [SerializeField] private GameObject opponentDeckObject;
 
     public static UIManager instance { get; private set; }
 
@@ -45,7 +46,6 @@ public class UIManager : SystemObject
     private UniTaskCompletionSource _uniTaskCompletionSource = null;
 
     private List<CardObject> poolCardObject = null;
-    private Transform deckTransform = null;
 
     private const int POOL_CARD_NUM = 30;
 
@@ -60,7 +60,8 @@ public class UIManager : SystemObject
         // UIを生成
         handUI = Instantiate(handUI);
         fieldUI = Instantiate(fieldUI);
-        deckTransform = Instantiate(deckObject).transform;
+        ownDeckObject = Instantiate(ownDeckObject);
+        opponentDeckObject = Instantiate(opponentDeckObject);
 
         // カードオブジェクトをプール
         poolCardObject = new List<CardObject>(POOL_CARD_NUM);
@@ -72,6 +73,7 @@ public class UIManager : SystemObject
             poolCardObject.Add(card);
         }
 
+        // 仮でフィールドに出す
         for (int i = 0; i < 5; i++)
         {
             CardObject addObject = GetUnuseCardObject();
@@ -246,6 +248,7 @@ public class UIManager : SystemObject
             drawCardObjects.Add(cardObject);
         }
         bool isMine = playerID == 0;
+        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
         handUI.DrawCard(isMine, drawCardObjects, deckTransform);
     }
 

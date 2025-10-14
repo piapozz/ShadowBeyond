@@ -10,9 +10,9 @@ public class BattleManager : SystemObject
 
     const int PLAYPOINT_MAX = 10;
     public int localPlayerIndex = -1;
-    public int seed = 0;
+    private int seed = 0;
 
-    private System.Random rand; // シード保持用
+    public System.Random rand { get; private set; } // シード保持用
 
     public enum BattleState
     {
@@ -31,13 +31,11 @@ public class BattleManager : SystemObject
         public Deck deck;
 
         int turn;
-        int playPoint;
         bool extraPoint;
 
         public void Init()
         {
             turn = 0;
-            playPoint = 0;
             extraPoint = false;
             hand = new Hand();
             deck = new Deck();
@@ -59,8 +57,10 @@ public class BattleManager : SystemObject
         public void NextTurn()
         {
             turn++;
+            int playPoint = leader.maxPlayPoint;
             if (playPoint < PLAYPOINT_MAX) playPoint++;
             leader.SetMaxPlayPoint(playPoint);
+            leader.SetCurrentPlayPoint(playPoint);
             deck.DrawDeck(1);
         }
 
