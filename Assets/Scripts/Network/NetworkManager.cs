@@ -240,10 +240,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     }
 
 
-    public void SendSeedData(int seedIndex)
+    public int SendSeedData(int seedIndex)
     {
         if (runner == null)
-            return;
+            return -1;
 
         using MemoryStream ms = new MemoryStream();
         using BinaryWriter bw = new BinaryWriter(ms);
@@ -254,11 +254,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         byte[] sendData = ms.ToArray();
 
-
-        if (runner.SessionInfo.PlayerCount < 2)
+        if (runner.ActivePlayers.Count() < 2)
         {
             Debug.Log("[Network] ⚠️ まだ相手がいないため送信できません");
-            return;
+            return -1;
         }
 
         foreach (var player in runner.ActivePlayers)
@@ -269,6 +268,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             ReliableKey reliable = default;
             runner.SendReliableDataToPlayer(player, reliable, sendData);
         }
+
+        return 0;
     }
 
     // -----------------------------------
@@ -360,6 +361,11 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             }
         }
         return data;
+    }
+
+    public int GetActivePlayerCount()
+    {
+        return runner.ActivePlayers.Count();
     }
 
     // -----------------------------------

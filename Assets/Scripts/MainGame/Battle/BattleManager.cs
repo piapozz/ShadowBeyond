@@ -94,7 +94,6 @@ public class BattleManager : SystemObject
         {
             case BattleState.START_BATTLE:
                 StartBattle();
-                currentState = BattleState.START_TURN;
                 break;
             case BattleState.START_TURN:
                 StartTurn();
@@ -121,13 +120,24 @@ public class BattleManager : SystemObject
     public void StartBattle()
     {
         // バトル開始処理
+        // プレイヤー数が揃っていなければ開始しない
+        if (NetworkManager.Instance.GetActivePlayerCount() < 2)
+        {
+            return;
+        }
 
         // シード値を決定
         if (localPlayerIndex == 1)
         {
             // シード値生成
             seed = Random.Range(int.MinValue, int.MaxValue);
-            NetworkManager.Instance.SendSeedData(seed);
+            int result = NetworkManager.Instance.SendSeedData(seed);
+
+            if (result != 0)
+            {
+                Debug.Log("[Battle] ❌ シード値の送信に失敗しました");
+                return;
+            }
         }
         else
         {
@@ -158,6 +168,8 @@ public class BattleManager : SystemObject
         // ターンエンドのコールバック
         UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
         UIManager.instance.StartBattle();
+
+        currentState = BattleState.START_TURN;
     }
 
     public void StartTurn()
