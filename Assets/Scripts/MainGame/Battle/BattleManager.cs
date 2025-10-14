@@ -138,7 +138,7 @@ public class BattleManager : SystemObject
         else
         {
             Debug.Log("[Battle] 🌱 シード値を待機中...");
-            if (!NetworkManager.Instance.IsSeedReceived) return;
+            if (!NetworkManager.Instance.seedReceived) return;
 
             seed = NetworkManager.Instance.GetReceivedSeed();
             Debug.Log($"[Battle] 🎲 シード値を取得: {seed}");
