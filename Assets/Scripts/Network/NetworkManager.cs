@@ -171,11 +171,20 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     //==================================
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        Debug.Log($"[Network] Player joined: {player.PlayerId}");
+        Debug.Log($"[Network] 👤 プレイヤー参加: {player.PlayerId}");
+        Debug.Log($"[Network] 現在のプレイヤー数: {runner.ActivePlayers.Count()}");
 
         // 2人揃ったらバトルシーンへ遷移
         if (runner.ActivePlayers.Count() == MaxPlayers)
         {
+            // セッションを閉じて他プレイヤーを拒否
+            if (runner.IsServer)
+            {
+                Debug.Log("[Network] 🚪 定員到達 → 部屋をクローズします");
+                runner.SessionInfo.IsOpen = false;  // 新規参加を禁止
+                runner.SessionInfo.IsVisible = false; // ロビー一覧にも非表示
+            }
+
             Debug.Log("[Network] 🎮 プレイヤーが揃いました、バトル開始！");
             LoadBattleScene();
         }
