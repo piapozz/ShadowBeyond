@@ -82,14 +82,7 @@ public class BattleManager : SystemObject
     public override async UniTask Initialize()
     {
         instance = this;
-        player = new Player[2];
-        player[0].Init();
-        player[1].Init();
-        field = new Field();
-        player[0].SetLeader(new Leader(0));
-        player[1].SetLeader(new Leader(0));
-        player[0].SetPlayerID(0);
-        player[1].SetPlayerID(1);
+       
         currentState = BattleState.START_BATTLE;
         localPlayerIndex = NetworkManager.Instance.localPlayerId;
         await UniTask.CompletedTask;
@@ -129,6 +122,7 @@ public class BattleManager : SystemObject
     {
         // バトル開始処理
 
+        // シード値を決定
         if (localPlayerIndex == 1)
         {
             // シード値生成
@@ -145,6 +139,17 @@ public class BattleManager : SystemObject
         }
 
         rand = new System.Random(seed);
+
+        player = new Player[2];
+        player[0].Init();
+        player[1].Init();
+        field = new Field();
+        player[0].SetLeader(new Leader(0));
+        player[1].SetLeader(new Leader(0));
+        player[0].SetPlayerID(0);
+        player[1].SetPlayerID(1);
+
+        UIManager.instance.RandomTest();
 
         // 先攻後攻決める
         int first = rand.Next(0, 2);
