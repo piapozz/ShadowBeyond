@@ -9,6 +9,7 @@ public class BattleManager : SystemObject
     public static BattleManager instance { get; private set; } = null;
 
     const int PLAYPOINT_MAX = 10;
+    const int FIELD_CARD_MAX = 5;
     public int localPlayerIndex = -1;
     private int seed = 0;
 
@@ -198,15 +199,15 @@ public class BattleManager : SystemObject
                 int handIndex = data.param[0];
                 UIManager.instance.PlayOpponentCard(handIndex);
                 break;
-            case GameEnum.InputType.ATTACK:
+            case GameEnum.InputType.ATTACK_FOLLOWER:
                 // 攻撃
                 int attackIndex = data.param[0];
                 int defanceIndex = data.param[1];
 
                 Debug.Log($"[Battle] 🗡️ 攻撃: {attackIndex} -> {defanceIndex}");
 
-                CardData attackCard = field.GetFieldCard(attackIndex);
-                CardData defanceCard = field.GetOpponentFieldCard(defanceIndex);
+                CardData attackCard = field.GetOpponentFieldCard(attackIndex);
+                CardData defanceCard = field.GetFieldCard(defanceIndex);
 
                 if (attackCard == null || defanceCard == null)
                 {
@@ -215,6 +216,23 @@ public class BattleManager : SystemObject
                 }
 
                 CardCombat(attackCard, defanceCard);
+                break;
+
+            case GameEnum.InputType.ATTACK_LEADER:
+                // リーダー攻撃
+                int attackLeaderIndex = data.param[0];
+
+                Debug.Log($"[Battle] 🗡️ リーダー攻撃: {attackLeaderIndex} -> Leader");
+                CardData attackLeaderCard = field.GetOpponentFieldCard(attackLeaderIndex);
+
+                if (attackLeaderCard == null)
+                {
+                    Debug.Log("[Battle] ❌ 攻撃カードが存在しません");
+                    return;
+                }
+
+                Leader defanceLeader = player[(currentPlayerIndex + 1) % 2].leader;
+                LeaderCombat(attackLeaderCard, defanceLeader);
                 break;
 
             case GameEnum.InputType.EVOLVE:
@@ -286,10 +304,18 @@ public class BattleManager : SystemObject
         return player[index];
     }
 
-    public void CardCombat(CardData attackCard, CardData DefanceCard)
+    public void CardCombat(CardData attackCard, CardData defanceCard)
     {
         // 戦闘カードの登録
-        CombatProcessor processor = new CombatProcessor(attackCard, DefanceCard);
+        CombatProcessor processor = new CombatProcessor(attackCard, defanceCard);
+
+        processor.Combat();
+    }
+
+    public void LeaderCombat(CardData attackCard, Leader defanceLeader)
+    {
+        // 戦闘カードの登録
+        CombatProcessor processor = new CombatProcessor(attackCard, defanceLeader);
 
         processor.Combat();
     }
