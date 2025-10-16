@@ -37,6 +37,22 @@ public class Field
     }
 
     // ===== 条件検索 =====
+
+    // 指定番目のカード
+    public CardData GetFieldCard(int index, bool includeOpponent = false)
+    {
+        var list = includeOpponent ? GetAllFieldCards() : _fieldCardList;
+        if (index < 0 || index >= list.Count) return null;
+        return list[index];
+    }
+
+    // 相手の指定番目のカード
+    public CardData GetOpponentFieldCard(int index)
+    {
+        if (index < 0 || index >= _otherFieldCardList.Count) return null;
+        return _otherFieldCardList[index];
+    }
+
     // 攻撃可能カード
     public List<CardData> GetAttackableCards(bool includeOpponent = false)
     {

@@ -17,6 +17,7 @@ public class FieldUI : MonoBehaviour
     public void AddOwnFieldCard(CardObject addCard)
     {
         ownCards.Add(addCard);
+        Debug.Log(addCard.cardData.name);
         addCard.transform.SetParent(ownFieldRoot);
         addCard.SetCardState(CardObject.CardState.FIELD);
         ArrangeOwnFieldCard();
@@ -31,6 +32,7 @@ public class FieldUI : MonoBehaviour
     public void AddOpponentFieldCard(CardObject addCard)
     {
         opponentCards.Add(addCard);
+        Debug.Log(addCard.cardData.name);
         addCard.transform.SetParent(opponentFieldRoot);
         addCard.SetCardState(CardObject.CardState.FIELD);
         ArrangeOpponentFieldCard();
@@ -38,7 +40,7 @@ public class FieldUI : MonoBehaviour
 
     public void RemoveOpponentFieldCard(CardObject removeCard)
     {
-        ownCards.Remove(removeCard);
+        opponentCards.Remove(removeCard);
         ArrangeOpponentFieldCard();
     }
 
@@ -88,5 +90,19 @@ public class FieldUI : MonoBehaviour
 
             opponentCards[i].transform.localPosition = new Vector3(xPosition, 0, 0);
         }
+    }
+
+    public int GetOwnFieldIndex(CardObject cardObject)
+    {
+        if (cardObject == null) return -1;
+
+        return ownCards.IndexOf(cardObject);
+    }
+
+    public int GetOpponentFieldIndex(CardObject cardObject)
+    {
+        if (cardObject == null) return -1;
+
+        return opponentCards.IndexOf(cardObject);
     }
 }
