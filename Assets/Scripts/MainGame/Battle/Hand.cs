@@ -113,7 +113,7 @@ public class Hand
     public List<CardData> GetPlayableCards()
     {
         // 自分のターンでなければ空リストを返す
-        if (!BattleManager.instance.IsLocalTurnPlayer()) return new List<CardData>();
+        if (BattleManager.instance.currentPlayerIndex != (int)GameEnum.PlayerType.OWN) return new List<CardData>();
 
         // 相手のターンなら終わる
         if (BattleManager.instance.currentPlayerIndex != BattleManager.instance.localPlayerIndex) return new List<CardData>();
