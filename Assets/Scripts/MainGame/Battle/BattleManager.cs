@@ -274,4 +274,10 @@ public class BattleManager : SystemObject
 
         processor.Combat();
     }
+
+    // 今のターンプレイヤーがローカルプレイヤーか
+    public bool IsLocalTurnPlayer()
+    {
+        return (currentPlayerIndex + 1) == localPlayerIndex;
+    }
 }
