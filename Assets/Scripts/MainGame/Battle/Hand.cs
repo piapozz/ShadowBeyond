@@ -51,7 +51,7 @@ public class Hand
         // ƒXƒyƒ‹‚È‚ç‚±‚±‚Å”\—Í”­“®
         if (card.type == GameEnum.CardType.SPELL)
         {
-
+            return;
         }
 
         field.PlayCard(card, playerID);

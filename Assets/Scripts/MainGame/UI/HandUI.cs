@@ -36,7 +36,7 @@ public class HandUI : MonoBehaviour
         isAcssessible = value;
     }
 
-    // 自分のカードをドローする
+    // カードをドローする
     public void DrawCard(bool isMine, List<CardObject> drawCards, Transform deckRoot)
     {
         List<Sequence> sequenceList = new List<Sequence>();
@@ -44,6 +44,7 @@ public class HandUI : MonoBehaviour
         {
             CardObject card = drawCards[i];
             card.SetCardState(CardObject.CardState.HAND);
+            card.SetIsLocal(isMine);
             if (isMine)
             {
                 ownHandCards.Add(card);

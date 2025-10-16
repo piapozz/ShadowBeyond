@@ -46,6 +46,7 @@ public class CardObject : MonoBehaviour
     public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
     private Camera mainCamera = null;
+    public bool isLocal { get; private set; } = false;
 
     // カードをドラッグした時の高さオフセット
     private const float OFFSET_Y = 1.0f;
@@ -74,6 +75,7 @@ public class CardObject : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -88,6 +90,7 @@ public class CardObject : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -106,6 +109,7 @@ public class CardObject : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -119,7 +123,6 @@ public class CardObject : MonoBehaviour
                 break;
             default: break;
         }
-        FlipCard();
     }
 
     /// <summary>
@@ -168,11 +171,14 @@ public class CardObject : MonoBehaviour
         }
         if (target == null) return;
         // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
-
+        if (target.isLocal) return;
+        if (target.cardData.type != GameEnum.CardType.FOLLOWER) return;
+        // 情報を送信
+        int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
+        int targetIndex = UIManager.instance.GetOpponentFieldIndex(target);
+        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK, new int[2] { sourceIndex, targetIndex });
         // 攻撃処理を依頼
         BattleManager.instance.CardCombat(cardData, target.cardData);
-        // 情報を送信
-        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK, new int[2] { 0, 0 });
     }
 
     /// <summary>
@@ -301,16 +307,13 @@ public class CardObject : MonoBehaviour
         return drawSeq;
     }
 
-    public void PlayCard(int handIndex)
+    public void PlayCard()
     {
         // 選択が必要な能力なら選択ウィンドウを出す
         // 何かしらに渡す
 
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
-
-        int[] param = new int[1] { handIndex };
-        BattleManager.instance.SendInputData(GameEnum.InputType.PLAY_CARD, param);
     }
 
     public void EvolveFollower()
@@ -329,5 +332,21 @@ public class CardObject : MonoBehaviour
 
         // 進化後挙動
 
+    }
+
+    public void DestroyCard()
+    {
+        // 破壊エフェクト
+
+        // オブジェクト非表示
+        SetCardState(CardState.UNUSE);
+
+        // フィールドから除外
+        UIManager.instance.RemoveFieldCard(this);
+    }
+
+    public void SetIsLocal(bool setlocal)
+    {
+        isLocal = setlocal;
     }
 }

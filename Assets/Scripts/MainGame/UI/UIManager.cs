@@ -183,6 +183,16 @@ public class UIManager : SystemObject
         return handUI.GetOwnHandIndex(card);
     }
 
+    public int GetOwnFieldIndex(CardObject card)
+    {
+        return fieldUI.GetOwnFieldIndex(card);
+    }
+
+    public int GetOpponentFieldIndex(CardObject card)
+    {
+        return fieldUI.GetOpponentFieldIndex(card);
+    }
+
     /// <summary>
     /// カードがドロップされたときの処理
     /// </summary>
@@ -226,7 +236,9 @@ public class UIManager : SystemObject
                 break;
             default: break;
         }
-        playCard.PlayCard(handIndex);
+        playCard.PlayCard();
+        int[] param = new int[1] { handIndex };
+        BattleManager.instance.SendInputData(GameEnum.InputType.PLAY_CARD, param);
     }
 
     public void PlayOpponentCard(int handIndex)
@@ -238,14 +250,14 @@ public class UIManager : SystemObject
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
-                fieldUI.AddOwnFieldCard(playCard);
+                fieldUI.AddOpponentFieldCard(playCard);
                 break;
             case GameEnum.CardType.SPELL:
                 playCard.SetCardState(CardObject.CardState.UNUSE);
                 break;
             default: break;
         }
-        playCard.PlayCard(handIndex);
+        playCard.PlayCard();
     }
 
     /// <summary>
@@ -295,5 +307,17 @@ public class UIManager : SystemObject
         bool isMine = playerID == 0;
         if (isMine) ownPPUI.SetPPText(ppMax, ppCurrent);
         else opponentPPUI.SetPPText(ppMax, ppCurrent);
+    }
+
+    public void RemoveFieldCard(CardObject card)
+    {
+        if (card.isLocal)
+        {
+            fieldUI.RemoveOwnFieldCard(card);
+        }
+        else
+        {
+            fieldUI.RemoveOpponentFieldCard(card);
+        }
     }
 }

@@ -152,18 +152,20 @@ public class BattleManager : SystemObject
 
         player = new Player[(int)GameEnum.PlayerType.MAX];
 
-        for (int i = 0; i < (int)GameEnum.PlayerType.MAX; i++)
-        {
-            player[i].Init();
-            player[i].SetLeader(new Leader(0));
-            player[i].SetPlayerID(i);
-        }
-
         field = new Field();
 
         // 先攻後攻決める
         int first = rand.Next(0, 2);
         currentPlayerIndex = (first + localPlayerIndex) % 2;
+
+        for (int i = 0; i < (int)GameEnum.PlayerType.MAX; i++)
+        {
+            int index = (currentPlayerIndex + i) % 2;
+
+            player[index].Init();
+            player[index].SetLeader(new Leader(0));
+            player[index].SetPlayerID(index);
+        }
 
         Debug.Log($"[Battle] 🥊 バトル開始 先攻: {currentPlayerIndex}");
 
@@ -200,6 +202,19 @@ public class BattleManager : SystemObject
                 // 攻撃
                 int attackIndex = data.param[0];
                 int defanceIndex = data.param[1];
+
+                Debug.Log($"[Battle] 🗡️ 攻撃: {attackIndex} -> {defanceIndex}");
+
+                CardData attackCard = field.GetFieldCard(attackIndex);
+                CardData defanceCard = field.GetOpponentFieldCard(defanceIndex);
+
+                if (attackCard == null || defanceCard == null)
+                {
+                    Debug.Log("[Battle] ❌ 攻撃または防御カードが存在しません");
+                    return;
+                }
+
+                CardCombat(attackCard, defanceCard);
                 break;
 
             case GameEnum.InputType.EVOLVE:
