@@ -104,7 +104,8 @@ public class GameEnum
     {
         INVALID = -1,
         PLAY_CARD,
-        ATTACK,
+        ATTACK_FOLLOWER,
+        ATTACK_LEADER,
         EVOLVE,
         SUPER_EVOLVE,
         ACT,

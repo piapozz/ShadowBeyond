@@ -115,6 +115,12 @@ public class Leader
         return battleStats[type];
     }
 
+    public void DealDamage(int damage)
+    {
+        SetCurrentDefense(currentDefense - damage);
+        // ダメージを受けた時の処理
+    }
+
     // --- 数値操作 ---
     public int GetCount(BattleStatType type) => GetOrCreate(type).Count;
     public void AddCount(BattleStatType type, int value = 1) => GetOrCreate(type).Add(value);

@@ -139,8 +139,8 @@
                 fixed minScreen = min(_MainTex_TexelSize.z, _MainTex_TexelSize.w);
                 fixX *= (minScreen / _MainTex_TexelSize.w);
                 fixY *= (minScreen / _MainTex_TexelSize.z);
-                fixed length = sqrt(fixX * fixX + fixY * fixY);
-                hueColor = (HUEtoRGB((length + hueOffset + timeRotation) % 1) / _HueBlendRate);
+                fixed len = sqrt(fixX * fixX + fixY * fixY);
+                hueColor = (HUEtoRGB((len + hueOffset + timeRotation) % 1) / _HueBlendRate);
 
 #elif _GRADATIONTYPE_VERTICAL
                 hueColor = (HUEtoRGB((IN.uv.y + hueOffset + timeRotation) % 1) / _HueBlendRate);

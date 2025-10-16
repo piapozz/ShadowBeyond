@@ -42,6 +42,8 @@ public class Field
     public CardData GetFieldCard(int index, bool includeOpponent = false)
     {
         var list = includeOpponent ? GetAllFieldCards() : _fieldCardList;
+        Debug.Log
+            ($"[Field] GetFieldCard index:{index} listCount:{list.Count}");
         if (index < 0 || index >= list.Count) return null;
         return list[index];
     }
@@ -49,6 +51,7 @@ public class Field
     // 相手の指定番目のカード
     public CardData GetOpponentFieldCard(int index)
     {
+        Debug.Log($"[Field] GetOpponentFieldCard index:{index} otherFieldCount:{_otherFieldCardList.Count}");
         if (index < 0 || index >= _otherFieldCardList.Count) return null;
         return _otherFieldCardList[index];
     }

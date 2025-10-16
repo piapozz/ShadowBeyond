@@ -10,10 +10,18 @@ public class CombatProcessor
     // 防御する側のカード
     private CardData defenderCard;
 
+    private Leader defenderLeader;
+
     public CombatProcessor(CardData setAttackerCard, CardData setDefenderCard)
     {
         this.attackerCard = setAttackerCard;
         this.defenderCard = setDefenderCard;
+    }
+
+    public CombatProcessor(CardData setAttackerCard, Leader setDefenderLeader)
+    {
+        this.attackerCard = setAttackerCard;
+        this.defenderLeader = setDefenderLeader;
     }
 
     // 通常戦闘
@@ -92,5 +100,24 @@ public class CombatProcessor
         // 一ターンに～回攻撃出来る能力タイミング
     }
 
+    // リーダーへの攻撃
+    public void LeaderCombat()
+    {
+        // 攻撃時能力タイミング
+        int attackerDamage = attackerCard.status.m_attack;
+
+        // リーダーへの攻撃時能力タイミング
+
+        // リーダーへのダメージ軽減能力タイミング
+        // リーダーにダメージ
+        defenderLeader.DealDamage(attackerDamage);
+        // ドレイン能力タイミング
+        // 必殺能力タイミング
+        // 攻撃権限消費
+        attackerCard.SetCanAttack(false);
+        // 一ターンに～回攻撃出来る能力タイミング
+        Debug.Log("Attack : " + attackerCard.name + "Target : Leader");
+        Debug.Log("Attacker Damage : " + attackerDamage);
+    }
 
 }
