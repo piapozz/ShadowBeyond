@@ -116,4 +116,15 @@ public class GameEnum
         BATTLE_HISTORY,
         MAX
     }
+
+    /// <summary>
+    /// ƒvƒŒƒCƒ„[‚Ìí—Ş
+    /// </summary>
+    public enum PlayerType
+    {
+        OWN,
+        OPPONENT,
+
+        MAX
+    }
 }

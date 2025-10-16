@@ -150,18 +150,22 @@ public class BattleManager : SystemObject
 
         rand = new System.Random(seed);
 
-        player = new Player[2];
-        player[0].Init();
-        player[1].Init();
+        player = new Player[(int)GameEnum.PlayerType.MAX];
+
+        for (int i = 0; i < (int)GameEnum.PlayerType.MAX; i++)
+        {
+            player[i].Init();
+            player[i].SetLeader(new Leader(0));
+            player[i].SetPlayerID(i);
+        }
+
         field = new Field();
-        player[0].SetLeader(new Leader(0));
-        player[1].SetLeader(new Leader(0));
-        player[0].SetPlayerID(0);
-        player[1].SetPlayerID(1);
 
         // 先攻後攻決める
         int first = rand.Next(0, 2);
         currentPlayerIndex = (first + localPlayerIndex) % 2;
+
+        Debug.Log($"[Battle] 🥊 バトル開始 先攻: {currentPlayerIndex}");
 
         // ターンエンドのコールバック
         UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
@@ -273,11 +277,5 @@ public class BattleManager : SystemObject
         CombatProcessor processor = new CombatProcessor(attackCard, DefanceCard);
 
         processor.Combat();
-    }
-
-    // 今のターンプレイヤーがローカルプレイヤーか
-    public bool IsLocalTurnPlayer()
-    {
-        return (currentPlayerIndex + 1) == localPlayerIndex;
     }
 }
