@@ -106,4 +106,19 @@ public class Hand
     {
         return handCardList.OrderByDescending(c => c.cost).FirstOrDefault();
     }
+
+    /// <summary>
+    /// プレイ可能なカードをすべて取得
+    /// </summary>
+    public List<CardData> GetPlayableCards()
+    {
+        // 自分のターンでなければ空リストを返す
+        if (!BattleManager.instance.IsLocalTurnPlayer()) return new List<CardData>();
+
+        // 相手のターンなら終わる
+        if (BattleManager.instance.currentPlayerIndex != BattleManager.instance.localPlayerIndex) return new List<CardData>();
+
+        var leader = BattleManager.instance.GetPlayer(BattleManager.instance.localPlayerIndex).leader;
+        return GetCards(c => c.cost <= leader.currentPlayPoint);
+    }
 }
