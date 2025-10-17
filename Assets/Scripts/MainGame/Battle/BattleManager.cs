@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 // ターン進行
 // バトル全体の管理
@@ -279,6 +280,10 @@ public class BattleManager : SystemObject
     public void EndBattle()
     {
         // バトル終了処理
+        Debug.Log("[Battle] 🏁 バトル終了");
+
+        // リザルト画面へ
+        SceneManager.LoadScene("Result");
     }
 
     public void SendInputData(GameEnum.InputType type, int[] param = null)
@@ -325,5 +330,11 @@ public class BattleManager : SystemObject
     public bool IsOwnTurn()
     {
         return currentPlayerIndex == (int)GameEnum.PlayerType.OWN;
+    }
+
+    public void LeaderDefeated(int playerID)
+    {
+        Debug.Log($"[Battle] 🏳️ プレイヤー{playerID}のリーダーが敗北しました");
+        currentState = BattleState.END_BATTLE;
     }
 }

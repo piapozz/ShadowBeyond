@@ -19,8 +19,16 @@ public class MatchingButton : MonoBehaviour
         // ボタンイベント設定
         matchingButton.onClick.AddListener(() =>
         {
-            Debug.Log("MatchingButton clicked");
-            NetworkManager.Instance.StartMatchmaking();
+            if (NetworkManager.Instance.IsConnected())
+            {
+                // マッチング中止
+                NetworkManager.Instance.StopMatchmaking();
+                return;
+            }
+            else
+            {
+                NetworkManager.Instance.StartMatchmaking();
+            }
         });
         // テキストの設定
         matchingButtonText.text = "マッチング開始";
@@ -32,8 +40,8 @@ public class MatchingButton : MonoBehaviour
         // ボタンを押している間はテキストを変更する
         if (NetworkManager.Instance.IsConnected()) 
         {
-            matchingButtonText.text = "マッチング中...";
-            matchingButton.interactable = false;
+            matchingButtonText.text = "マッチング中止";
+            matchingButton.interactable = true;
         }
         else
         {

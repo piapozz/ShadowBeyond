@@ -104,6 +104,12 @@ public class Leader
     {
         currentDefense = Mathf.Clamp(value, 0, maxDefense);
         GetObject().SetDefenceText(currentDefense);
+
+        if (currentDefense <= 0)
+        {
+            // ƒŠ[ƒ_[‚ª”s–k‚µ‚½ˆ—
+            BattleManager.instance.LeaderDefeated(playerID);
+        }
     }
 
     public void SetMaxPlayPoint(int value)
