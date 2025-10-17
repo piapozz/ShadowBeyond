@@ -134,8 +134,26 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         StartCoroutine(WaitForPlayers());
     }
 
+    public void StopMatchmaking()
+    {
+        if (!isConnecting) return;
+        isConnecting = false;
+        Debug.Log("[Network] 🛑 マッチング停止...");
+        if (runner != null)
+        {
+            runner.Shutdown();
+            Destroy(runner);
+            runner = null;
+        }
+    }
+
     private IEnumerator WaitForPlayers()
     {
+        if (runner == null)
+        {
+            yield break;
+        }
+
         Debug.Log($"[Network] ⏳ プレイヤー待機中... (現在 {runner.SessionInfo.PlayerCount}/{MaxPlayers})");
 
         // MaxPlayers が揃うまでループ
