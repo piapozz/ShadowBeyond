@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static GameEnum;
 
@@ -147,5 +148,22 @@ public class Field
     public void HealCard(CardData card, int heal)
     {
         card.HealDamage(heal);
+    }
+
+    /// <summary>
+    /// 攻撃可能な自身のカードを取得
+    /// </summary>
+    /// <returns></returns>
+    public List<CardData> GetAttackableCards()
+    {
+        return _fieldCardList.Where(c => c.canAttack).ToList();
+    }
+
+    public void SetFieldCardAttackable(bool atackable)
+    {
+        for (int i = 0, max = _fieldCardList.Count; i < max; i++)
+        {
+            _fieldCardList[i].SetCanAttack(atackable);
+        }
     }
 }

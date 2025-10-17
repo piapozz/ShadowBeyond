@@ -94,6 +94,7 @@ public class Deck
             CardData card = deckCardList[0];
             deckCardList.RemoveAt(0);
             drawCards.Add(card);
+            hand.AddCard(card);
         }
 
         UIManager.instance.DrawCards(playerID, drawCards);
