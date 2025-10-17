@@ -19,9 +19,9 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
     private NetworkRunner runner;
     private const int MaxBufferCount = 5;
-    private const string SessionName = "BattleSession";
+    private const string SessionNamePrefix = "BattleSession";
     private const int MaxPlayers = 2;
-
+    private List<SessionInfo> cachedSessionList = new(); // 追加：現在のセッション一覧を保持
 
     private readonly Dictionary<int, byte[]> sendHistory = new(); // seq→data
     private readonly SortedDictionary<int, byte[]> recvBuffer = new(); // seq→data
@@ -107,16 +107,17 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log("[Network] 🔍 マッチング開始...");
 
-        // NetworkRunner生成
         runner = gameObject.AddComponent<NetworkRunner>();
         runner.ProvideInput = false;
         runner.AddCallbacks(this);
 
-        // ゲーム開始（ホストまたはクライアント）
+        string sessionName = GenerateUniqueSessionName();
+        Debug.Log($"[Network] 🏠 選ばれたセッション名: {sessionName}");
+
         var result = await runner.StartGame(new StartGameArgs()
     {
             GameMode = GameMode.AutoHostOrClient,
-            SessionName = SessionName,
+            SessionName = sessionName,
             PlayerCount = MaxPlayers,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
         });
@@ -128,10 +129,35 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             return;
         }
 
-        Debug.Log($"[Network] ✅ 接続成功: {result.GetHashCode()}");
-
-        // 👇 プレイヤー人数が揃うまで待機
         StartCoroutine(WaitForPlayers());
+    }
+
+    private string GenerateUniqueSessionName()
+    {
+        const string BaseName = "TestRoom_";
+
+        // キャッシュが空でも、とりあえず _1 から順番に試す
+        for (int i = 1; i <= 9999; i++)
+        {
+            string candidate = $"{BaseName}{i}";
+            bool exists = cachedSessionList.Any(s => s.Name == candidate);
+            if (!exists)
+                return candidate;
+        }
+
+        return $"{BaseName}{UnityEngine.Random.Range(10000, 99999)}";
+    }
+
+    // -----------------------------------
+    // セッションリスト更新時
+    // -----------------------------------
+    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
+    {
+        cachedSessionList = sessionList;
+        Debug.Log($"[Network] 📋 セッション一覧更新: {sessionList.Count}件");
+
+        foreach (var s in sessionList)
+            Debug.Log($"   - {s.Name} ({s.PlayerCount}/{s.MaxPlayers})");
     }
 
     public void StopMatchmaking()
@@ -411,7 +437,6 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
-    public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList) { }
     public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
     public void OnSceneLoadDone(NetworkRunner runner) { }
