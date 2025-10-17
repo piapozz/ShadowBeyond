@@ -74,7 +74,7 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseDown()
     {
-        if (!isLocal) return;
+        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -89,7 +89,7 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseDrag()
     {
-        if (!isLocal) return;
+        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -108,7 +108,7 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseUp()
     {
-        if (!isLocal) return;
+        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -166,6 +166,7 @@ public class CardObject : BaseFieldObject
         if (Physics.Raycast(ray, out hit, 100f))
         {
             hitObject = hit.collider.gameObject;
+            if (hitObject == null) return;
         }
         BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
         if (target == null) return;
@@ -173,8 +174,12 @@ public class CardObject : BaseFieldObject
         if (target.isLocal) return;
         // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
         CardObject targetCard = target as CardObject;
+        if (targetCard != null)
+            AttackFollower(targetCard);
+
         LeaderObject targetLeader = target as LeaderObject;
-        AttackFollower(targetCard);
+        if (targetLeader != null)
+            AttackLeader(targetLeader);
     }
 
     /// <summary>
@@ -191,6 +196,19 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
         // 攻撃処理を依頼
         BattleManager.instance.CardCombat(cardData, targetCard.cardData);
+    }
+
+    /// <summary>
+    /// リーダーへの攻撃
+    /// </summary>
+    /// <param name="leaderCard"></param>
+    private void AttackLeader(LeaderObject leaderCard)
+    {
+        // 情報を送信
+        int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
+        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_LEADER, new int[1] { sourceIndex });
+        // 攻撃処理を依頼
+        BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
     }
 
     /// <summary>

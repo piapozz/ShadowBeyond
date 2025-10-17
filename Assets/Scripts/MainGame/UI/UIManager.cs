@@ -28,7 +28,6 @@ public class UIManager : SystemObject
     [SerializeField] private CardObject cardObject;
     [SerializeField] private HandUI handUI;
     [SerializeField] private FieldUI fieldUI;
-    [SerializeField] private LeaderUI leaderUI;
     [SerializeField] private RectTransform fieldArea;
     [SerializeField] private Button turnUI;
     [SerializeField] private PPUI ownPPUI;
@@ -36,10 +35,9 @@ public class UIManager : SystemObject
     [SerializeField] private OptionUI optionUI;
     [SerializeField] private HistoryUI historyUI;
     [SerializeField] private InfoUI infoUI;
+    [SerializeField] private LeaderUI leaderUI;
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
-    [SerializeField] private LeaderObject ownLeaderObject;
-    [SerializeField] private LeaderObject opponentLeaderObject;
 
     public static UIManager instance { get; private set; }
 
@@ -66,6 +64,7 @@ public class UIManager : SystemObject
         fieldUI = Instantiate(fieldUI);
         ownDeckObject = Instantiate(ownDeckObject);
         opponentDeckObject = Instantiate(opponentDeckObject);
+        leaderUI = Instantiate(leaderUI);
 
         // カードオブジェクトをプール
         poolCardObject = new List<CardObject>(POOL_CARD_NUM);
@@ -275,11 +274,11 @@ public class UIManager : SystemObject
         {
             CardObject cardObject = GetUnuseCardObject();
             // カードデータセット
-            cardObject.SetCardData(drawCard[0]);
+            cardObject.SetCardData(drawCard[i]);
             cardObject.SetCardState(CardObject.CardState.HAND);
             drawCardObjects.Add(cardObject);
         }
-        bool isMine = playerID == 0;
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
         Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
         handUI.DrawCard(isMine, drawCardObjects, deckTransform);
     }
@@ -306,7 +305,7 @@ public class UIManager : SystemObject
 
     public void UpdatePPUI(int playerID, int ppMax, int ppCurrent)
     {
-        bool isMine = playerID == 0;
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
         if (isMine) ownPPUI.SetPPText(ppMax, ppCurrent);
         else opponentPPUI.SetPPText(ppMax, ppCurrent);
     }
@@ -321,5 +320,10 @@ public class UIManager : SystemObject
         {
             fieldUI.RemoveOpponentFieldCard(card);
         }
+    }
+
+    public void SetLeader(Leader setLeader, int index)
+    {
+        leaderUI.Initialize(setLeader, index);
     }
 }

@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class LeaderUI : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private LeaderObject ownLeaderObject = null;
+    [SerializeField]
+    private LeaderObject opponentLeaderObject = null;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize(Leader setLeader, int index)
     {
-        
+        if (index == 0)
+        {
+            ownLeaderObject.SetLeader(setLeader);
+        }
+        else if(index == 1)
+        {
+            opponentLeaderObject.SetLeader(setLeader);
+        }
     }
 }
