@@ -50,7 +50,7 @@ MonoBehaviour:
   handUI: {fileID: 5694881495340510556, guid: 067f118f14e6f0a4887a91d854202e8d, type: 3}
   fieldUI: {fileID: 783247134073671850, guid: 905e86ba656867546b5335a11a3ec0ef, type: 3}
   fieldArea: {fileID: 3491595739895419110}
-  turnUI: {fileID: 7735032470256104998}
+  turnUI: {fileID: 6414901057957622564}
   ownPPUI: {fileID: 3529191324694225296}
   opponentPPUI: {fileID: 6835769086453696188}
   optionUI: {fileID: 0}
@@ -184,6 +184,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6c33a39a60530448ad7be758ca96456, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6414901057957622564 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 673208842886878984, guid: 7b92e40a176cfbc4195cc8c615406c70, type: 3}
+  m_PrefabInstance: {fileID: 5787681214764409900}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 134ffe58ed937cc46bbfcd92eedfa908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6835769086453696188 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1048352048519619216, guid: 7b92e40a176cfbc4195cc8c615406c70, type: 3}
@@ -200,14 +211,3 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3628020627496536146, guid: 7b92e40a176cfbc4195cc8c615406c70, type: 3}
   m_PrefabInstance: {fileID: 5787681214764409900}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7735032470256104998 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4254109902475219466, guid: 7b92e40a176cfbc4195cc8c615406c70, type: 3}
-  m_PrefabInstance: {fileID: 5787681214764409900}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

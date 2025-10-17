@@ -74,12 +74,16 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseDown()
     {
-        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
                 break;
             case CardState.FIELD:
+                // フォロワー以外は攻撃できない
+                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                // 攻撃可否判定
+                if (!cardData.canAttack) return;
                 // 攻撃の線を出す
                 lineRenderer.enabled = true;
                 break;
@@ -89,16 +93,22 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseDrag()
     {
-        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
+                // プレイ可能でないなら返す
+                if (!cardData.canPlay) return;
                 // カードの位置更新
                 Vector3 position = GetMouseWorldPosition(transform, mainCamera);
                 position.y = OFFSET_Y;
                 transform.position = position;
                 break;
             case CardState.FIELD:
+                // フォロワー以外は攻撃できない
+                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                // 攻撃可否判定
+                if (!cardData.canAttack) return;
                 // 攻撃の線を出す
                 SetLineRenderer();
                 break;
@@ -108,14 +118,20 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseUp()
     {
-        if (!isLocal || !BattleManager.instance.IsOwnTurn()) return;
+        if (!isLocal) return;
         switch (currentState)
         {
             case CardState.HAND:
+                // プレイ可能でないなら返す
+                if (!cardData.canPlay) return;
                 // オブジェクトをUIにセット
                 UIManager.instance.DropCard(this);
                 break;
             case CardState.FIELD:
+                // フォロワー以外は攻撃できない
+                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                // 攻撃可否判定
+                if (!cardData.canAttack) return;
                 lineRenderer.enabled = false;
                 // 攻撃処理
                 Attack();
@@ -166,8 +182,8 @@ public class CardObject : BaseFieldObject
         if (Physics.Raycast(ray, out hit, 100f))
         {
             hitObject = hit.collider.gameObject;
-            if (hitObject == null) return;
         }
+        if (hitObject == null) return;
         BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
         if (target == null) return;
         // 自分自身は攻撃できない
@@ -344,8 +360,6 @@ public class CardObject : BaseFieldObject
 
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
-        Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
-        leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardData.cost);
     }
 
     public void EvolveFollower()

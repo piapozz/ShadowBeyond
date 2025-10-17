@@ -48,6 +48,11 @@ public class Hand
     {
         if (card == null) return;
         handCardList.Remove(card);
+        // PP消費
+        Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
+        leader.SetCurrentPlayPoint(leader.currentPlayPoint - card.cost);
+        // 手札のプレイ可否更新
+        UpdatePlayableCards();
         // スペルならここで能力発動
         if (card.type == GameEnum.CardType.SPELL)
         {
@@ -117,5 +122,41 @@ public class Hand
 
         var leader = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN).leader;
         return GetCards(c => c.cost <= leader.currentPlayPoint);
+    }
+
+    /// <summary>
+    /// 手札のプレイ可否更新
+    /// </summary>
+    public void UpdatePlayableCards()
+    {
+        List<CardData> nonPlayableCard = GetNonPlayableCards();
+        for (int i = 0, max = nonPlayableCard.Count; i < max; i++)
+        {
+            nonPlayableCard[i].SetCanPlay(false);
+        }
+    }
+
+    /// <summary>
+    /// プレイ不可なカードをすべて取得
+    /// </summary>
+    public List<CardData> GetNonPlayableCards()
+    {
+        // 自分のターンでなければ空リストを返す
+        if (BattleManager.instance.currentPlayerIndex != (int)GameEnum.PlayerType.OWN) return new List<CardData>();
+
+        var leader = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN).leader;
+        return GetCards(c => c.cost > leader.currentPlayPoint);
+    }
+
+    /// <summary>
+    /// 手札のすべてのカードのプレイ可否を設定
+    /// </summary>
+    /// <param name="playable"></param>
+    public void SetOwnHandCardPlayable(bool playable)
+    {
+        for (int i = 0, max = handCardList.Count; i < max; i++)
+        {
+            handCardList[i].SetCanPlay(playable);
+        }
     }
 }

@@ -29,7 +29,7 @@ public class UIManager : SystemObject
     [SerializeField] private HandUI handUI;
     [SerializeField] private FieldUI fieldUI;
     [SerializeField] private RectTransform fieldArea;
-    [SerializeField] private Button turnUI;
+    [SerializeField] private TurnEndUI turnUI;
     [SerializeField] private PPUI ownPPUI;
     [SerializeField] private PPUI opponentPPUI;
     [SerializeField] private OptionUI optionUI;
@@ -125,38 +125,15 @@ public class UIManager : SystemObject
     }
 
     // ターン開始
-    public void StartTurn(int playerIndex)
+    public void StartTurn(bool isOwnTurn)
     {
-        // ターンUI更新
-
-        // ドロー処理
-
-        // 手札UI更新
-
-        // PPUI更新
-
-        // リーダーUI更新
-
-        // 手札、フィールド、ボタンの操作可能化
+        // ターン終了ボタンの設定
+        turnUI.SetButtonEnable(isOwnTurn);
     }
 
-    // ターン終了
-    public void EndTurn()
+    public void EndTurn(bool isOwnTurn)
     {
-        // ターンUI更新
 
-        // 手札、フィールド、ボタンの操作不可化
-    }
-
-    // Unitaskでなにかがおこるまで待つ関数
-    public async UniTask<SendBattleData> InputUI()
-    {
-        _uniTaskCompletionSource = new UniTaskCompletionSource();
-
-
-
-        await _uniTaskCompletionSource.Task;
-        return new SendBattleData();
     }
 
     /// <summary>
@@ -212,7 +189,7 @@ public class UIManager : SystemObject
         // 手札に戻す
         else
         {
-            handUI.ArrangeHandCard(true);
+            AddSequence(handUI.ArrangeHandCard(true));
         }
     }
 
@@ -300,7 +277,7 @@ public class UIManager : SystemObject
 
     public void SetEndTurnButton(Action setAction)
     {
-        turnUI.onClick.AddListener(() => setAction());
+        turnUI.SetButtonAction(setAction);
     }
 
     public void UpdatePPUI(int playerID, int ppMax, int ppCurrent)

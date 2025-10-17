@@ -184,6 +184,13 @@ public class BattleManager : SystemObject
     {
         // ターン開始処理
         player[currentPlayerIndex].NextTurn();
+        UIManager.instance.StartTurn(IsOwnTurn());
+
+        // 自分のターンなら手札とフィールドのカードの選択可能状態を更新
+        if (!IsOwnTurn()) return;
+        player[currentPlayerIndex].hand.SetOwnHandCardPlayable(true);
+        player[currentPlayerIndex].hand.UpdatePlayableCards();
+        field.SetFieldCardAttackable(true);
     }
 
     public void MainTurn()
@@ -273,6 +280,9 @@ public class BattleManager : SystemObject
     public void EndTurn()
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
+        // 自分の手札をプレイ不能にする
+        if (IsOwnTurn())
+            player[currentPlayerIndex].hand.SetOwnHandCardPlayable(false);
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
     }

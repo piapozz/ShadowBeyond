@@ -27,6 +27,8 @@ public class CardData
     // 基本ステータス
     public FollowerStatus status { get; private set; }
     // 攻撃可能かどうか
+    public bool canPlay { get; private set; }
+    // 攻撃可能かどうか
     public bool canAttack { get; private set; }
     // アクト可能かどうか
     public bool canAct { get; private set; }
@@ -182,6 +184,12 @@ public class CardData
     {
         addStatus.Clear();
     }
+
+    public void SetCanPlay(bool canPlay)
+    {
+        this.canPlay = canPlay;
+    }
+
 
     public void SetCanAttack(bool canAttack)
     {
