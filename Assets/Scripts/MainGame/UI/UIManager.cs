@@ -38,6 +38,8 @@ public class UIManager : SystemObject
     [SerializeField] private InfoUI infoUI;
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
+    [SerializeField] private LeaderObject ownLeaderObject;
+    [SerializeField] private LeaderObject opponentLeaderObject;
 
     public static UIManager instance { get; private set; }
 
