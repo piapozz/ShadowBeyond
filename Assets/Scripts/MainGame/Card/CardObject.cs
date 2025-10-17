@@ -9,7 +9,7 @@ using static CommonModule;
 /// <summary>
 /// カードオブジェクトにアタッチするクラス
 /// </summary>
-public class CardObject : MonoBehaviour
+public class CardObject : BaseFieldObject
 {
     [SerializeField]
     private List<GameObject> cardPrefab = null;
@@ -46,7 +46,6 @@ public class CardObject : MonoBehaviour
     public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
     private Camera mainCamera = null;
-    public bool isLocal { get; private set; } = false;
 
     // カードをドラッグした時の高さオフセット
     private const float OFFSET_Y = 1.0f;
@@ -163,22 +162,35 @@ public class CardObject : MonoBehaviour
         // マウスの座標からオブジェクトを取得
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        CardObject target = null;
+        GameObject hitObject = null;
         if (Physics.Raycast(ray, out hit, 100f))
         {
-            GameObject hitObject = hit.collider.gameObject;
-            target = hitObject.GetComponent<CardObject>();
+            hitObject = hit.collider.gameObject;
         }
+        BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
         if (target == null) return;
-        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
+        // 自分自身は攻撃できない
         if (target.isLocal) return;
-        if (target.cardData.type != GameEnum.CardType.FOLLOWER) return;
+        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
+        CardObject targetCard = target as CardObject;
+        LeaderObject targetLeader = target as LeaderObject;
+        AttackFollower(targetCard);
+    }
+
+    /// <summary>
+    /// フォロワーへの攻撃
+    /// </summary>
+    /// <param name="targetCard"></param>
+    private void AttackFollower(CardObject targetCard)
+    {
+        // フォロワー以外は攻撃できない
+        if (targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return;
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
-        int targetIndex = UIManager.instance.GetOpponentFieldIndex(target);
-        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK, new int[2] { sourceIndex, targetIndex });
+        int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
+        BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
         // 攻撃処理を依頼
-        BattleManager.instance.CardCombat(cardData, target.cardData);
+        BattleManager.instance.CardCombat(cardData, targetCard.cardData);
     }
 
     /// <summary>
@@ -343,10 +355,5 @@ public class CardObject : MonoBehaviour
 
         // フィールドから除外
         UIManager.instance.RemoveFieldCard(this);
-    }
-
-    public void SetIsLocal(bool setlocal)
-    {
-        isLocal = setlocal;
     }
 }

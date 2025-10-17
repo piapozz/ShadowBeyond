@@ -59,6 +59,8 @@ MonoBehaviour:
   infoUI: {fileID: 0}
   ownDeckObject: {fileID: 5520862138499083975, guid: 3e6a5fde0cfc4f841b377ca0c55d4ab5, type: 3}
   opponentDeckObject: {fileID: 5520862138499083975, guid: 30a654039cfd1994cb9c9439ca2bdfad, type: 3}
+  ownLeaderObject: {fileID: 2588341236465294893, guid: 4ca16985e480cf5459576b8005c4916c, type: 3}
+  opponentLeaderObject: {fileID: 6792882863960013088, guid: 86a77c20e67439e4585710d22912f538, type: 3}
 --- !u!1001 &5787681214764409900
 PrefabInstance:
   m_ObjectHideFlags: 0
