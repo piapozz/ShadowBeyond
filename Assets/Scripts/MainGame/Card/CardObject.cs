@@ -344,6 +344,8 @@ public class CardObject : BaseFieldObject
 
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
+        Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
+        leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardData.cost);
     }
 
     public void EvolveFollower()
