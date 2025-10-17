@@ -10,9 +10,14 @@ public class LeaderObject : BaseFieldObject
 
     public Leader leader { get; private set; } = null;
 
+    /// <summary>
+    /// ƒŠ[ƒ_[‚Ìî•ñ‚ğİ’è
+    /// </summary>
+    /// <param name="setLeader"></param>
     public void SetLeader(Leader setLeader)
     {
         leader = setLeader;
+        leader.SetGetObjectAction(() => { return this; });
     }
 
     public void SetDefenceText(int setDefence)

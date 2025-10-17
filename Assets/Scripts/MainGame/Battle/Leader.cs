@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -69,16 +70,26 @@ public class Leader
     // ƒoƒgƒ‹î•ñ
     private Dictionary<BattleStatType, BattleStatValue> battleStats = new Dictionary<BattleStatType, BattleStatValue>();
 
+    public Func<LeaderObject> GetObject;
+
+    public void SetGetObjectAction(Func<LeaderObject> action)
+    {
+        GetObject = action;
+    }
+
+    public void Initialize(int playerID, int maxDefense = 20, int maxPP = 0)
+    {
+        this.playerID = playerID;
+        SetMaxDefense(maxDefense);
+        SetCurrentDefense(maxDefense);
+        SetMaxPlayPoint(maxPP);
+        SetCurrentPlayPoint(0);
+        battleStats.Clear();
+    }
+
     public void SetPlayerID(int index)
     {
         playerID = index;
-    }
-
-    public Leader(int maxDefense = 20, int maxPP = 0)
-    {
-        this.maxDefense = maxDefense;
-        currentDefense = maxDefense;
-        SetMaxPlayPoint(maxPP);
     }
 
     public void SetMaxDefense(int value)
@@ -86,11 +97,13 @@ public class Leader
         maxDefense = value;
         if (currentDefense > maxDefense)
             currentDefense = maxDefense;
+        GetObject().SetDefenceText(maxDefense);
     }
 
     public void SetCurrentDefense(int value)
     {
         currentDefense = Mathf.Clamp(value, 0, maxDefense);
+        GetObject().SetDefenceText(currentDefense);
     }
 
     public void SetMaxPlayPoint(int value)

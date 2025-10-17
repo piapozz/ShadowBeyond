@@ -49,7 +49,6 @@ MonoBehaviour:
   cardObject: {fileID: 4808366437037665239, guid: 011b955926f4d4d48b7d6bd4c79d2c9f, type: 3}
   handUI: {fileID: 5694881495340510556, guid: 067f118f14e6f0a4887a91d854202e8d, type: 3}
   fieldUI: {fileID: 783247134073671850, guid: 905e86ba656867546b5335a11a3ec0ef, type: 3}
-  leaderUI: {fileID: 0}
   fieldArea: {fileID: 3491595739895419110}
   turnUI: {fileID: 7735032470256104998}
   ownPPUI: {fileID: 3529191324694225296}
@@ -57,10 +56,9 @@ MonoBehaviour:
   optionUI: {fileID: 0}
   historyUI: {fileID: 0}
   infoUI: {fileID: 0}
+  leaderUI: {fileID: 4329516237562484667, guid: 846fdb76e3d4450468623fa25b783e11, type: 3}
   ownDeckObject: {fileID: 5520862138499083975, guid: 3e6a5fde0cfc4f841b377ca0c55d4ab5, type: 3}
   opponentDeckObject: {fileID: 5520862138499083975, guid: 30a654039cfd1994cb9c9439ca2bdfad, type: 3}
-  ownLeaderObject: {fileID: 2588341236465294893, guid: 4ca16985e480cf5459576b8005c4916c, type: 3}
-  opponentLeaderObject: {fileID: 6792882863960013088, guid: 86a77c20e67439e4585710d22912f538, type: 3}
 --- !u!1001 &5787681214764409900
 PrefabInstance:
   m_ObjectHideFlags: 0

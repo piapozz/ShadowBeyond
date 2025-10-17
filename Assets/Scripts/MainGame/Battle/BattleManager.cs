@@ -164,7 +164,9 @@ public class BattleManager : SystemObject
             int index = (currentPlayerIndex + i) % 2;
 
             player[index].Init();
-            player[index].SetLeader(new Leader(0));
+            player[index].SetLeader(new Leader());
+            UIManager.instance.SetLeader(player[index].leader, index);
+            player[index].leader.Initialize(index);
             player[index].SetPlayerID(index);
         }
 
@@ -317,6 +319,11 @@ public class BattleManager : SystemObject
         // 戦闘カードの登録
         CombatProcessor processor = new CombatProcessor(attackCard, defanceLeader);
 
-        processor.Combat();
+        processor.LeaderCombat();
+    }
+
+    public bool IsOwnTurn()
+    {
+        return currentPlayerIndex == (int)GameEnum.PlayerType.OWN;
     }
 }

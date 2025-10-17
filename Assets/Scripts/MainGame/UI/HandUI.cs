@@ -10,31 +10,10 @@ public class HandUI : MonoBehaviour
     [SerializeField] private Transform ownHandRoot = null;
     [SerializeField] private Transform opponentHandRoot = null;
     [SerializeField] private Transform ownDrawRoot = null;
-    private bool isAcssessible = false;
     private List<CardObject> ownHandCards = new List<CardObject>();
     private List<CardObject> opponentHandCards = new List<CardObject>();
 
     private const float HAND_SCALE_X = 5.0f;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(!isAcssessible) return;
-
-        UpdateHandCard();
-    }
-
-    // アクセス可能にする
-    public void SetAccessible(bool value)
-    {
-        isAcssessible = value;
-    }
 
     // カードをドローする
     public void DrawCard(bool isMine, List<CardObject> drawCards, Transform deckRoot)
@@ -136,18 +115,6 @@ public class HandUI : MonoBehaviour
             sequenceList.Add(arrangeHandSeq);
         }
         return sequenceList;
-    }
-
-    // 手札使用時のコールバック設定
-    public void SetUseCardCallback(System.Action useCard)
-    {
-
-    }
-
-    // 手札のカードを操作可能にする
-    public void UpdateHandCard()
-    {
-        
     }
 
     /// <summary>
