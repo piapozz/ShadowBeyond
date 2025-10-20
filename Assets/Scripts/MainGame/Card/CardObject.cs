@@ -306,9 +306,11 @@ public class CardObject : BaseFieldObject
         fieldLook.SetCardText(cardData);
     }
 
-    public void FlipCard()
+    public Sequence FlipCard(float flipSpeed)
     {
-        transform.DORotate(new Vector3(0, 0, 180), 0.5f, RotateMode.LocalAxisAdd);
+        Sequence flipSequence = DOTween.Sequence();
+        flipSequence.Append(transform.DORotate(new Vector3(0, 0, 180), flipSpeed, RotateMode.LocalAxisAdd));
+        return flipSequence;
     }
 
     /// <summary>
@@ -316,9 +318,9 @@ public class CardObject : BaseFieldObject
     /// </summary>
     /// <param name="deckRoot"></param>
     /// <param name="drawRoot"></param>
-    /// <param name="handRoot"></param>
+    /// <param name="cardRoot"></param>
     /// <returns></returns>
-    public Sequence DrawOwnCard(Transform deckRoot, Transform drawRoot, Transform handRoot)
+    public Sequence DrawOwnCard(Transform deckRoot, Transform drawRoot, Transform cardRoot, Transform handRoot)
     {
         // ドロールートまでの挙動
         Sequence drawSeq = DOTween.Sequence();
@@ -329,7 +331,7 @@ public class CardObject : BaseFieldObject
             .Join(transform.DORotate(drawRoot.localEulerAngles, 0.5f));
         // 手札ルートまでの挙動
         drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
-            .Join(transform.DOMove(handRoot.position, 0.5f))
+            .Join(transform.DOMove(cardRoot.position, 0.5f))
             .JoinCallback(() => transform.SetParent(handRoot));
         return drawSeq;
     }
@@ -338,28 +340,51 @@ public class CardObject : BaseFieldObject
     /// 相手のドロー
     /// </summary>
     /// <param name="deckRoot"></param>
-    /// <param name="handRoot"></param>
+    /// <param name="cardRoot"></param>
     /// <returns></returns>
-    public Sequence DrawOpponentCard(Transform deckRoot, Transform handRoot)
+    public Sequence DrawOpponentCard(Transform deckRoot, Transform cardRoot, Transform handRoot)
     {
+        // 表を非表示
+        CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+        if (handLook == null) return null;
+        handLook.SetCardFrontActive(false);
         Sequence drawSeq = DOTween.Sequence();
         // 手札ルートまでの挙動
         drawSeq.AppendCallback(() => transform.position = deckRoot.position)
             .JoinCallback(() => transform.rotation = deckRoot.rotation)
             .JoinCallback(() => gameObject.SetActive(true))
             .Join(transform.DORotate(handRoot.localEulerAngles, 0.5f))
-            .Join(transform.DOMove(handRoot.position, 0.5f))
+            .Join(transform.DOMove(cardRoot.position, 0.5f))
             .JoinCallback(() => transform.SetParent(handRoot));
         return drawSeq;
     }
 
-    public void PlayCard()
+    public void PlayCard(bool isOwn, Transform playCardRoot)
     {
+        // データを設定
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCardToField(cardData);
+
+        // 相手のカードなら表を表示
+        if (!isOwn)
+        {
+            CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+            if (handLook == null) return;
+            handLook.SetCardFrontActive(true);
+        }
+        // プレイ時のアニメーション
+        Sequence playSequence = DOTween.Sequence();
+        playSequence.AppendCallback(() => transform.eulerAngles = new Vector3(0, 0, 180))
+            .Join(transform.DOMove(playCardRoot.position, 0.1f))
+            .Join(transform.DORotate(new Vector3(0, 0, 180), 0.1f, RotateMode.LocalAxisAdd))
+            .Join(transform.DOScale(playCardRoot.localScale, 0.1f));
+        //playSequence.Append(() => )
+
+        UIManager.instance.AddSequence(playSequence);
+
         // 選択が必要な能力なら選択ウィンドウを出す
         // 何かしらに渡す
 
-        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCardToField(cardData);
     }
 
     public void EvolveFollower()
