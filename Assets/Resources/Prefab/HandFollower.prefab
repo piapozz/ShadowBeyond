@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbb3fa02fc077d942aa3789640e6c0c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardObject: {fileID: 5895195759444870350}
   cardName: {fileID: 1343329081602289083}
   cardCost: {fileID: 4269850823958621036}
   cardAttack: {fileID: 3535674528478565823}
@@ -921,6 +922,11 @@ PrefabInstance:
 --- !u!23 &1819355475234605559 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 4913777613711978600, guid: 4ac72bc9554aa6343b7ba4a7771f4afc, type: 3}
+  m_PrefabInstance: {fileID: 6705464702913542559}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5895195759444870350 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 4ac72bc9554aa6343b7ba4a7771f4afc, type: 3}
   m_PrefabInstance: {fileID: 6705464702913542559}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &6522375422295514740 stripped

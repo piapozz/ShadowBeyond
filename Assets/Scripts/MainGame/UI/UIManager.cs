@@ -107,6 +107,14 @@ public class UIManager : SystemObject
         return true;
     }
 
+    public void AddSequence(Sequence addSequence)
+    {
+        if (addSequence == null) return;
+        List<Sequence> sequenceList = new List<Sequence>(1);
+        sequenceList.Add(addSequence);
+        uiSequence.Enqueue(sequenceList);
+    }
+
     public void AddSequence(List<Sequence> addSequences)
     {
         if (addSequences == null) return;
@@ -214,7 +222,7 @@ public class UIManager : SystemObject
                 break;
             default: break;
         }
-        playCard.PlayCard();
+        playCard.PlayCard(true, fieldUI.GetPlayCardRoot());
         int[] param = new int[1] { handIndex };
         BattleManager.instance.SendInputData(GameEnum.InputType.PLAY_CARD, param);
     }
@@ -224,6 +232,7 @@ public class UIManager : SystemObject
         // 手札から除外しフィールドに追加
         CardObject playCard = handUI.GetOpponentCardObject(handIndex);
         handUI.RemoveHandCard(false, playCard);
+        playCard.PlayCard(false, fieldUI.GetPlayCardRoot());
         switch (playCard.cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:
@@ -235,7 +244,6 @@ public class UIManager : SystemObject
                 break;
             default: break;
         }
-        playCard.PlayCard();
     }
 
     /// <summary>

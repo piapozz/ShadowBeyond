@@ -7,6 +7,8 @@ using static CardData;
 public class CardLook : MonoBehaviour
 {
     [SerializeField]
+    private GameObject cardObject = null;
+    [SerializeField]
     private TextMeshPro cardName = null;
     [SerializeField]
     private TextMeshPro cardCost = null;
@@ -53,5 +55,14 @@ public class CardLook : MonoBehaviour
     public void SetCardMaterial(Material setMaterial)
     {
         cardFrame.material = setMaterial;
+    }
+
+    public void SetCardFrontActive(bool active)
+    {
+        if (cardObject != null) cardObject.SetActive(active);
+        if (cardName != null) cardName.enabled = active;
+        if (cardCost != null) cardCost.enabled = active;
+        if (cardAttack != null) cardAttack.enabled = active;
+        if (cardDefence != null) cardDefence.enabled = active;
     }
 }
