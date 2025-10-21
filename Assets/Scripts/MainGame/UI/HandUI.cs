@@ -93,6 +93,7 @@ public class HandUI : MonoBehaviour
         List<CardObject> cardList = isMine ? ownHandCards : opponentHandCards;
         int beforeCardNum = cardList.Count;
         int afterCardNum = beforeCardNum + addCardNum;
+        if (afterCardNum == 0) return null;
 
         List<Sequence> sequenceList = new List<Sequence>();
 
