@@ -1,10 +1,13 @@
-﻿using Fusion;
+﻿using Cysharp.Threading.Tasks;
+using Fusion;
 using Fusion.Sockets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameEnum;
@@ -19,12 +22,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
     private NetworkRunner runner;
     private const int MaxBufferCount = 5;
-    private const string SessionNamePrefix = "BattleSession";
     private const int MaxPlayers = 2;
-    private List<SessionInfo> cachedSessionList = new(); // 追加：現在のセッション一覧を保持
 
-    private readonly Dictionary<int, byte[]> sendHistory = new(); // seq→data
-    private readonly SortedDictionary<int, byte[]> recvBuffer = new(); // seq→data
+    private readonly Dictionary<int, byte[]> sendHistory = new();
+    private readonly SortedDictionary<int, byte[]> recvBuffer = new();
 
     private int localSequence = 0;     // 自分が送信するデータの通し番号
     private int lastDeliveredSeq = -1; // BattleManagerに最後に渡したデータ番号
@@ -107,57 +108,82 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
 
         Debug.Log("[Network] 🔍 マッチング開始...");
 
-        runner = gameObject.AddComponent<NetworkRunner>();
+        // NetworkRunner生成
+        var runnerObj = new GameObject("NetworkRunner");
+        runnerObj.transform.parent = transform;
+        runner = runnerObj.AddComponent<NetworkRunner>();
         runner.ProvideInput = false;
         runner.AddCallbacks(this);
 
-        string sessionName = GenerateUniqueSessionName();
-        Debug.Log($"[Network] 🏠 選ばれたセッション名: {sessionName}");
+        StartGameArgs startArgs;
 
-        var result = await runner.StartGame(new StartGameArgs()
-    {
-            GameMode = GameMode.AutoHostOrClient,
-            SessionName = sessionName,
-            PlayerCount = MaxPlayers,
+        Debug.Log($"[Network] 🏠 既存セッションの接続を試みます");
+        startArgs = new StartGameArgs() {
+            GameMode = GameMode.Shared,
+            SessionName = null,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
-        });
 
-        if (!result.Ok)
+            EnableClientSessionCreation = false,
+            MatchmakingMode = Fusion.Photon.Realtime.MatchmakingMode.RandomMatching,
+        };
+
+        var result = await runner.StartGame(startArgs);
+
+        if (result.Ok)
         {
-            Debug.LogError($"[Network] 接続失敗: {result.ShutdownReason}");
-            isConnecting = false;
+            Debug.Log("[Network] 🎉 既存セッションに接続成功！");
+            StartCoroutine(WaitForPlayers());
             return;
         }
+
+        Debug.Log("[Network] ⚠️ 既存セッションの接続に失敗しました。新規セッションを作成します...");
+
+        // ランナーを一旦破棄
+        runner.Shutdown();
+        Destroy(runner);
+        runner = null;
+
+        await UniTask.Delay(100);
+
+        // NetworkRunner生成
+        runnerObj = new GameObject("NetworkRunner");
+        runnerObj.transform.parent = transform;
+        runner = runnerObj.AddComponent<NetworkRunner>();
+        runner.ProvideInput = false;
+        runner.AddCallbacks(this);
+
+
+        // 新規セッション作成
+        Debug.Log($"[Network] 🏗 新規セッション作成");
+            startArgs = new StartGameArgs() {
+                GameMode = GameMode.Shared,
+                SessionName = null,
+                PlayerCount = MaxPlayers,
+                SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
+            };
+
+        var result2 = await runner.StartGame(startArgs);
+
+        if (!result2.Ok)
+        {
+            // 失敗したらリトライする
+            Debug.LogError("[Network] ❌ 再試行します...");
+            isConnecting = false;
+            StartMatchmaking();
+            return;
+        }
+
+        Debug.Log("[Network] 🎉 新規セッション作成成功！");
 
         StartCoroutine(WaitForPlayers());
     }
 
-    private string GenerateUniqueSessionName()
-    {
-        const string BaseName = "TestRoom_";
-
-        // キャッシュが空でも、とりあえず _1 から順番に試す
-        for (int i = 1; i <= 9999; i++)
-        {
-            string candidate = $"{BaseName}{i}";
-            bool exists = cachedSessionList.Any(s => s.Name == candidate);
-            if (!exists)
-                return candidate;
-        }
-
-        return $"{BaseName}{UnityEngine.Random.Range(10000, 99999)}";
-    }
-
-    // -----------------------------------
-    // セッションリスト更新時
-    // -----------------------------------
+    // ==========================================================
+    // INetworkRunnerCallbacks
+    // ==========================================================
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
-        cachedSessionList = sessionList;
-        Debug.Log($"[Network] 📋 セッション一覧更新: {sessionList.Count}件");
 
-        foreach (var s in sessionList)
-            Debug.Log($"   - {s.Name} ({s.PlayerCount}/{s.MaxPlayers})");
     }
 
     public void StopMatchmaking()
@@ -217,35 +243,11 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         Debug.Log($"[Network] 👤 プレイヤー参加: {player.PlayerId}");
         Debug.Log($"[Network] 現在のプレイヤー数: {runner.ActivePlayers.Count()}");
-
-        // 2人揃ったらバトルシーンへ遷移
-        if (runner.ActivePlayers.Count() == MaxPlayers)
-        {
-            // セッションを閉じて他プレイヤーを拒否
-            if (runner.IsServer)
-            {
-                Debug.Log("[Network] 🚪 定員到達 → 部屋をクローズします");
-                runner.SessionInfo.IsOpen = false;  // 新規参加を禁止
-                runner.SessionInfo.IsVisible = false; // ロビー一覧にも非表示
-            }
-
-            Debug.Log("[Network] 🎮 プレイヤーが揃いました、バトル開始！");
-            LoadBattleScene();
-        }
     }
 
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log($"[Network] Player left: {player.PlayerId}");
-    }
-
-    private void LoadBattleScene()
-    {
-        // バトルシーンをロード（NetworkSceneManager経由）
-        if (SceneManager.GetActiveScene().name != "BattleScene")
-        {
-            //_runner.SetActiveScene("BattleScene");
-        }
     }
 
     // -----------------------------------
