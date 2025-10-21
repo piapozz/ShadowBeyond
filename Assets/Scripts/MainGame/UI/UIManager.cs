@@ -215,14 +215,17 @@ public class UIManager : SystemObject
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
-                fieldUI.AddOwnFieldCard(playCard);
+                // UIの挙動
+                fieldUI.PlayFieldCard(true, playCard);
                 break;
             case GameEnum.CardType.SPELL:
-                playCard.SetCardState(CardObject.CardState.UNUSE);
+                // UIの挙動
+                fieldUI.PlaySpellCard(true, playCard);
                 break;
             default: break;
         }
-        playCard.PlayCard(true, fieldUI.GetPlayCardRoot());
+        
+        // 送信
         int[] param = new int[1] { handIndex };
         BattleManager.instance.SendInputData(GameEnum.InputType.PLAY_CARD, param);
     }
@@ -232,15 +235,15 @@ public class UIManager : SystemObject
         // 手札から除外しフィールドに追加
         CardObject playCard = handUI.GetOpponentCardObject(handIndex);
         handUI.RemoveHandCard(false, playCard);
-        playCard.PlayCard(false, fieldUI.GetPlayCardRoot());
+
         switch (playCard.cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
-                fieldUI.AddOpponentFieldCard(playCard);
+                fieldUI.PlayFieldCard(false, playCard);
                 break;
             case GameEnum.CardType.SPELL:
-                playCard.SetCardState(CardObject.CardState.UNUSE);
+                fieldUI.PlaySpellCard(false, playCard);
                 break;
             default: break;
         }

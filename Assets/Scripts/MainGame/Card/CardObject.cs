@@ -359,7 +359,34 @@ public class CardObject : BaseFieldObject
         return drawSeq;
     }
 
-    public void PlayCard(bool isOwn, Transform playCardRoot)
+    public Sequence PlayFieldCard(bool isOwn, Transform playCardRoot, Transform playCardSlot, Transform fieldRoot)
+    {
+        // データを設定
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCardToField(cardData);
+
+        // 相手のカードなら表を表示
+        if (!isOwn)
+        {
+            CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+            if (handLook == null) return null;
+            handLook.SetCardFrontActive(true);
+        }
+        // プレイ時のアニメーション
+        SetPlayAnim(playCardRoot);
+
+        Sequence toFieldSequence = DOTween.Sequence();
+        toFieldSequence.Append(transform.DOMove(playCardSlot.position, 0.3f))
+            .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
+            .JoinCallback(() => transform.SetParent(fieldRoot));
+        // 選択が必要な能力なら選択ウィンドウを出す
+        // 何かしらに渡す
+
+
+        return toFieldSequence;
+    }
+
+    public void PlaySpellCard(bool isOwn, Transform playCardRoot)
     {
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
@@ -373,18 +400,22 @@ public class CardObject : BaseFieldObject
             handLook.SetCardFrontActive(true);
         }
         // プレイ時のアニメーション
-        Sequence playSequence = DOTween.Sequence();
-        playSequence.AppendCallback(() => transform.eulerAngles = new Vector3(0, 0, 180))
-            .Join(transform.DOMove(playCardRoot.position, 0.1f))
-            .Join(transform.DORotate(new Vector3(0, 0, 180), 0.1f, RotateMode.LocalAxisAdd))
-            .Join(transform.DOScale(playCardRoot.localScale, 0.1f));
-        //playSequence.Append(() => )
-
-        UIManager.instance.AddSequence(playSequence);
+        SetPlayAnim(playCardRoot);
 
         // 選択が必要な能力なら選択ウィンドウを出す
         // 何かしらに渡す
 
+    }
+
+    public void SetPlayAnim(Transform playCardRoot)
+    {
+        // プレイ時のアニメーション
+        Sequence playSequence = DOTween.Sequence();
+        playSequence.AppendCallback(() => transform.eulerAngles = new Vector3(0, 0, 180))
+            .Join(transform.DOMove(playCardRoot.position, 0.3f))
+            .Join(transform.DORotate(new Vector3(0, 0, 180), 0.3f, RotateMode.LocalAxisAdd))
+            .Join(transform.DOScale(playCardRoot.localScale, 0.3f));
+        UIManager.instance.AddSequence(playSequence);
     }
 
     public void EvolveFollower()
