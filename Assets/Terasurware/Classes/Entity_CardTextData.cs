@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Entity_CardData : ScriptableObject
+public class Entity_CardTextData : ScriptableObject
 {	
 	public List<Sheet> sheets = new List<Sheet> ();
 
@@ -18,16 +18,8 @@ public class Entity_CardData : ScriptableObject
 	{
 		
 		public int ID;
-		public int Class;
-		public int Rarity;
-		public int Type;
 		public string Name;
-		public int Cost;
-		public int Attack;
-		public int Defence;
-		public int IllustID;
-		public bool Token;
-		public int[] Trait;
+		public string CardText;
 	}
 }
 
