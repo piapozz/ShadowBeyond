@@ -7,10 +7,12 @@ public class MasterDataManager
 	private static readonly string _DATA_PATH = "MasterData/";
 
     public static List<List<Entity_CardData.Param>> cardData = null;
+	public static List<List<Entity_CardTextData.Param>> cardTextData = null;
 
     public static void LoadAllData()
 	{
-        cardData = Load<Entity_CardData, Entity_CardData.Sheet, Entity_CardData.Param>("CardData");
+		cardData = Load<Entity_CardData, Entity_CardData.Sheet, Entity_CardData.Param>("CardData");
+		cardTextData = Load<Entity_CardTextData, Entity_CardTextData.Sheet, Entity_CardTextData.Param>("CardTextData");
     }
 
 	private static List<List<T3>> Load<T1, T2, T3>(string dataName) where T1 : ScriptableObject
