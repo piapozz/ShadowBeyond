@@ -38,14 +38,21 @@ public class UIManager : SystemObject
     [SerializeField] private LeaderUI leaderUI;
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
+    [SerializeField] private Transform playCardRoot;
+
+    public enum UIState
+    {
+        INVALID = -1,
+        DEFAULT,
+        ATTACK,
+        MAX
+    }
 
     public static UIManager instance { get; private set; }
 
-    public Queue<List<Sequence>> uiSequence { get; private set; } = null;
+    public UIState state { get; private set; } = UIState.DEFAULT;
+    private Queue<List<Sequence>> uiSequence = null;
     private List<Sequence> currentSequenceList = null;
-
-    private UniTaskCompletionSource _uniTaskCompletionSource = null;
-
     private List<CardObject> poolCardObject = null;
 
     private const int POOL_CARD_NUM = 30;
@@ -124,6 +131,11 @@ public class UIManager : SystemObject
     public bool IsCompleteAllSequence()
     {
         return uiSequence.Count == 0;
+    }
+
+    public void SetUIState(UIState setState)
+    {
+        state = setState;
     }
 
     public void StartBattle()
@@ -211,6 +223,9 @@ public class UIManager : SystemObject
         // 手札から除外しフィールドに追加
         int handIndex =　handUI.GetOwnHandIndex(playCard);
         handUI.RemoveHandCard(true, playCard);
+        // 手札整列と手札から出すアニメーション登録
+        SetCardPlaySequence(true, playCard);
+
         switch (playCard.cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:
@@ -235,6 +250,8 @@ public class UIManager : SystemObject
         // 手札から除外しフィールドに追加
         CardObject playCard = handUI.GetOpponentCardObject(handIndex);
         handUI.RemoveHandCard(false, playCard);
+        // 手札整列と手札から出すアニメーション登録
+        SetCardPlaySequence(false, playCard);
 
         switch (playCard.cardData.type)
         {
@@ -247,6 +264,16 @@ public class UIManager : SystemObject
                 break;
             default: break;
         }
+    }
+
+    private void SetCardPlaySequence(bool isOwn, CardObject playCard)
+    {
+        // 手札整列と手札から出すアニメーション登録
+        List<Sequence> playSeq = new List<Sequence>();
+        List<Sequence> arrangeSeq = handUI.ArrangeHandCard(true);
+        if (arrangeSeq != null) playSeq.AddRange(arrangeSeq);
+        playSeq.Add(playCard.GetPlaySequence(playCardRoot));
+        AddSequence(playSeq);
     }
 
     /// <summary>
