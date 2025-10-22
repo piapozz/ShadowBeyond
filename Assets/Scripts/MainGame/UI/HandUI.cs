@@ -56,7 +56,6 @@ public class HandUI : MonoBehaviour
         {
             opponentHandCards.Remove(card);
         }
-        UIManager.instance.AddSequence(ArrangeHandCard(isMine));
     }
 
     /// <summary>

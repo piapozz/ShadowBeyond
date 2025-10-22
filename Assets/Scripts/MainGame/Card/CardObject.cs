@@ -84,6 +84,9 @@ public class CardObject : BaseFieldObject
                 if (cardData.type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
                 if (!cardData.canAttack) return;
+                UIManager.instance.SetUIState(UIManager.UIState.ATTACK);
+                // カードを持ち上げる
+                PickupCard(true);
                 // 攻撃の線を出す
                 lineRenderer.enabled = true;
                 break;
@@ -135,9 +138,33 @@ public class CardObject : BaseFieldObject
                 lineRenderer.enabled = false;
                 // 攻撃処理
                 Attack();
+                PickupCard(false);
+                UIManager.instance.SetUIState(UIManager.UIState.DEFAULT);
                 break;
             default: break;
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
+        PickupCard(true);
+    }
+
+    private void OnMouseExit()
+    {
+        if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
+        PickupCard(false);
+    }
+
+    private void PickupCard(bool isPick)
+    {
+        Vector3 scale = isPick ? new Vector3(1.2f, 1.2f, 1.2f) : Vector3.one;
+
+        Sequence pickupSeq = DOTween.Sequence();
+        pickupSeq.Append(transform.DOMoveY(OFFSET_Y, 0.2f))
+            .Join(transform.DOScale(scale, 0.1f));
+        pickupSeq.Play();
     }
 
     /// <summary>
@@ -206,6 +233,9 @@ public class CardObject : BaseFieldObject
     {
         // フォロワー以外は攻撃できない
         if (targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return;
+
+        // 挙動
+        SetAttackFollower(targetCard);
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
         int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
@@ -227,6 +257,42 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
     }
 
+    private void SetAttackFollower(CardObject targetCard)
+    {
+        Sequence attackSequence = DOTween.Sequence();
+        attackSequence.Append(GetAttackSequence());
+        attackSequence.Append(targetCard.GetCounterAttackSequence());
+        attackSequence.Append(GetDefence(isLocal));
+        attackSequence.AppendCallback(() => CheckDestroyCard())
+            .JoinCallback(() => targetCard.CheckDestroyCard());
+        UIManager.instance.AddSequence(attackSequence);
+    }
+
+    private Sequence GetAttackSequence()
+    {
+        Sequence attack = DOTween.Sequence();
+        attack.Append(GetFlipCard(0.1f));
+        return attack;
+    }
+
+    private Sequence GetCounterAttackSequence()
+    {
+        Sequence counterAttack = DOTween.Sequence();
+        counterAttack.Append(GetDefence(isLocal));
+        counterAttack.Append(GetFlipCard(0.1f));
+        return counterAttack;
+    }
+
+    private Sequence GetDefence(bool isLocal)
+    {
+        float direction = isLocal ? -1.0f : 1.0f;
+
+        Sequence defence = DOTween.Sequence();
+        defence.Append(transform.DOMoveZ(direction * 0.5f, 0.1f))
+            .SetLoops(2, LoopType.Yoyo);
+        return defence;
+    }
+
     /// <summary>
     /// カードの状態の設定
     /// </summary>
@@ -238,13 +304,16 @@ public class CardObject : BaseFieldObject
         switch (currentState)
         {
             case CardState.HAND:
+                gameObject.SetActive(true);
                 cardObject[(int)CardState.HAND].SetActive(true);
                 break;
             case CardState.FIELD:
+                gameObject.SetActive(true);
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(true);
                 break;
             case CardState.UNUSE:
+                gameObject.SetActive(false);
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(false);
                 break;
@@ -306,10 +375,10 @@ public class CardObject : BaseFieldObject
         fieldLook.SetCardText(cardData);
     }
 
-    public Sequence FlipCard(float flipSpeed)
+    public Sequence GetFlipCard(float flipSpeed)
     {
         Sequence flipSequence = DOTween.Sequence();
-        flipSequence.Append(transform.DORotate(new Vector3(0, 0, 180), flipSpeed, RotateMode.LocalAxisAdd));
+        flipSequence.Append(transform.DORotate(new Vector3(0, 0, 360), flipSpeed, RotateMode.LocalAxisAdd));
         return flipSequence;
     }
 
@@ -359,7 +428,7 @@ public class CardObject : BaseFieldObject
         return drawSeq;
     }
 
-    public Sequence PlayFieldCard(bool isOwn, Transform playCardRoot, Transform playCardSlot, Transform fieldRoot)
+    public Sequence PlayFieldCard(bool isOwn, Transform playCardSlot, Transform fieldRoot)
     {
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
@@ -372,21 +441,16 @@ public class CardObject : BaseFieldObject
             if (handLook == null) return null;
             handLook.SetCardFrontActive(true);
         }
-        // プレイ時のアニメーション
-        SetPlayAnim(playCardRoot);
 
         Sequence toFieldSequence = DOTween.Sequence();
         toFieldSequence.Append(transform.DOMove(playCardSlot.position, 0.3f))
             .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
             .JoinCallback(() => transform.SetParent(fieldRoot));
-        // 選択が必要な能力なら選択ウィンドウを出す
-        // 何かしらに渡す
-
 
         return toFieldSequence;
     }
 
-    public void PlaySpellCard(bool isOwn, Transform playCardRoot)
+    public void PlaySpellCard(bool isOwn)
     {
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
@@ -399,23 +463,31 @@ public class CardObject : BaseFieldObject
             if (handLook == null) return;
             handLook.SetCardFrontActive(true);
         }
-        // プレイ時のアニメーション
-        SetPlayAnim(playCardRoot);
-
-        // 選択が必要な能力なら選択ウィンドウを出す
-        // 何かしらに渡す
-
     }
 
-    public void SetPlayAnim(Transform playCardRoot)
+    public Sequence GetPlaySequence(Transform playCardRoot)
     {
         // プレイ時のアニメーション
         Sequence playSequence = DOTween.Sequence();
         playSequence.AppendCallback(() => transform.eulerAngles = new Vector3(0, 0, 180))
             .Join(transform.DOMove(playCardRoot.position, 0.3f))
             .Join(transform.DORotate(new Vector3(0, 0, 180), 0.3f, RotateMode.LocalAxisAdd))
-            .Join(transform.DOScale(playCardRoot.localScale, 0.3f));
-        UIManager.instance.AddSequence(playSequence);
+            .Join(transform.DOScale(playCardRoot.localScale, 0.3f))
+            .AppendInterval(0.3f);
+        // カードタイプによって挙動を分ける
+        switch (cardData.type)
+        {
+            case GameEnum.CardType.FOLLOWER:
+            case GameEnum.CardType.AMULET:
+                playSequence.AppendCallback(() => SetCardState(CardState.FIELD));
+                break;
+            case GameEnum.CardType.SPELL:
+                playSequence.AppendCallback(() => SetCardState(CardState.UNUSE))
+                    .JoinCallback(() => transform.localScale = Vector3.one);
+                break;
+            default: break;
+        }
+        return playSequence;
     }
 
     public void EvolveFollower()
@@ -436,8 +508,10 @@ public class CardObject : BaseFieldObject
 
     }
 
-    public void DestroyCard()
+    public void CheckDestroyCard()
     {
+        if (!cardData.isDestroyed) return;
+
         // 破壊エフェクト
 
         // オブジェクト非表示

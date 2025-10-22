@@ -159,7 +159,6 @@ public class CardData
 
         // フィールドから除去
         BattleManager.instance.field.RemoveCard(this);
-        GetObject().DestroyCard();
     }
 
     /// <summary>

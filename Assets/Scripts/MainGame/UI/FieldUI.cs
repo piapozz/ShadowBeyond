@@ -12,7 +12,6 @@ public class FieldUI : MonoBehaviour
 
     [SerializeField] private Transform ownFieldRoot = null;
     [SerializeField] private Transform opponentFieldRoot = null;
-    [SerializeField] private Transform playCardRoot = null;
     [SerializeField] private List<Transform> fieldCardSlotList = null;
 
     private const float FIELD_SCALE_X = 10.0f;
@@ -21,13 +20,13 @@ public class FieldUI : MonoBehaviour
     public void RemoveOwnFieldCard(CardObject removeCard)
     {
         ownCards.Remove(removeCard);
-        ArrangeFieldCard(true);
+        UIManager.instance.AddSequence(ArrangeFieldCard(true));
     }
 
     public void RemoveOpponentFieldCard(CardObject removeCard)
     {
         opponentCards.Remove(removeCard);
-        ArrangeFieldCard(false);
+        UIManager.instance.AddSequence(ArrangeFieldCard(false));
     }
 
     private List<Sequence> ArrangeFieldCard(bool isOwn, int addCardNum = 0)
@@ -79,17 +78,15 @@ public class FieldUI : MonoBehaviour
         // 先に場を整列させる
         List<Sequence> playSequence = new List<Sequence>();
         playSequence.AddRange(ArrangeFieldCard(isOwn, 1));
-        // カードの諸設定をし、アニメーションを登録
-        playCard.SetCardState(CardObject.CardState.FIELD);
         if (isOwn)
         {
             ownCards.Add(playCard);
-            playSequence.Add(playCard.PlayFieldCard(isOwn, playCardRoot, fieldCardSlotList[0], ownFieldRoot));
+            playSequence.Add(playCard.PlayFieldCard(isOwn, fieldCardSlotList[0], ownFieldRoot));
         }
         else
         {
             opponentCards.Add(playCard);
-            playSequence.Add(playCard.PlayFieldCard(isOwn, playCardRoot, fieldCardSlotList[0], opponentFieldRoot));
+            playSequence.Add(playCard.PlayFieldCard(isOwn, fieldCardSlotList[0], opponentFieldRoot));
         }
         // プレイの挙動と整列の挙動を登録
         UIManager.instance.AddSequence(playSequence);
@@ -97,7 +94,7 @@ public class FieldUI : MonoBehaviour
 
     public void PlaySpellCard(bool isOwn, CardObject playCard)
     {
-        playCard.PlaySpellCard(isOwn, playCardRoot);
+        playCard.PlaySpellCard(isOwn);
     }
 
     public int GetOwnFieldIndex(CardObject cardObject)
