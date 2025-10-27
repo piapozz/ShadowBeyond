@@ -46,6 +46,8 @@ public class CardData
     public string name { get; private set; }
     // カードコスト
     public int cost { get; private set; }
+    // カードテキスト
+    public string text { get; private set; }
     // カードアビリティ
     public List<CardAbility> ability { get; private set; }
     // 破壊された
@@ -92,6 +94,11 @@ public class CardData
     public void SetCost(int newCost)
     {
         cost = newCost;
+    }
+
+    public void SetText(string setText)
+    {
+        text = setText;
     }
 
     public void SetAbility(List<CardAbility> newAbility)

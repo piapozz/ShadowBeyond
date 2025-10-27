@@ -6,45 +6,20 @@ using static GameEnum;
 
 public class CardMasterUtility
 {
-    /// <summary>
-    /// ID参照のカードのマスターデータの取得
-    /// </summary>
-    /// <param name="ID"></param>
-    /// <returns></returns>
-    public static Param GetCardMaster(int ID)
+    public static List<CardData> allCardList { get; private set; }
+
+    public static void MakeCardDataList()
     {
         List<List<Param>> cardMasterList = MasterDataManager.cardData;
+        allCardList = new List<CardData>();
         for (int i = 0, max = cardMasterList.Count; i < max; i++)
         {
             for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
             {
-                if (cardMasterList[i][j].ID != ID) continue;
-
-                return cardMasterList[i][j];
+                if (cardMasterList[i][j].ID == -1) continue;
+                allCardList.Add(GetCardData(cardMasterList[i][j]));
             }
         }
-        return null;
-    }
-
-    /// <summary>
-    /// ID参照のCardDataの取得
-    /// </summary>
-    /// <param name="ID"></param>
-    /// <returns></returns>
-    public static CardData GetCardData(int ID)
-    {
-        var cardMaster = GetCardMaster(ID);
-        if (cardMaster == null) return null;
-        CardData cardData = new CardData(
-            cardMaster.ID,
-            (LeaderClass)cardMaster.Class,
-            (CardRarity)cardMaster.Rarity,
-            (CardType)cardMaster.Type,
-            cardMaster.Name,
-            cardMaster.Cost,
-            cardMaster.Attack,
-            cardMaster.Defence);
-        return cardData;
     }
 
     /// <summary>
@@ -63,6 +38,8 @@ public class CardMasterUtility
             cardMaster.Cost,
             cardMaster.Attack,
             cardMaster.Defence);
+        // テキストデータ取得
+        cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID));
         return cardData;
     }
 
@@ -72,29 +49,13 @@ public class CardMasterUtility
     /// <returns></returns>
     public static List<CardData> GetRandomCardData(int cardNum)
     {
-        List<CardData> cardMasterData = GetAllCardData();
         List<CardData> cardData = new List<CardData>();
-        int cardCount = cardMasterData.Count;
+        int cardCount = allCardList.Count;
         for (int i = 0; i < cardCount; i++)
         {
             int randomIndex = BattleManager.instance.rand.Next(0, cardCount);
-            cardData.Add(cardMasterData[randomIndex]);
+            cardData.Add(allCardList[randomIndex]);
         }
         return cardData;
-    }
-
-    public static List<CardData> GetAllCardData()
-    {
-        List<List<Param>> cardMasterList = MasterDataManager.cardData;
-        List<CardData> cardList = new List<CardData>();
-        for (int i = 0, max = cardMasterList.Count; i < max; i++)
-        {
-            for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
-            {
-                if (cardMasterList[i][j].ID == -1) continue;
-                cardList.Add(GetCardData(cardMasterList[i][j]));
-            }
-        }
-        return cardList;
     }
 }
