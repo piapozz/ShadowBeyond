@@ -253,7 +253,7 @@ public class CardObject : BaseFieldObject
         // UŒ‚ˆ—‚ğˆË—Š
         BattleManager.instance.CardCombat(cardData, targetCard.cardData);
         // ‹““®
-        UIManager.instance.SetAttackFollower(this, targetCard);
+        UIManager.instance.SetAttackFollowerSequence(this, targetCard);
     }
 
     /// <summary>
@@ -267,6 +267,8 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_LEADER, new int[1] { sourceIndex });
         // UŒ‚ˆ—‚ğˆË—Š
         BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
+        // ‹““®
+        UIManager.instance.SetAttackLeaderSequence(this);
     }
 
     public Sequence GetAttackSequence()

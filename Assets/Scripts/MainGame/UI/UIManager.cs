@@ -342,7 +342,7 @@ public class UIManager : SystemObject
     /// </summary>
     /// <param name="sourceCard"></param>
     /// <param name="targetCard"></param>
-    public void SetAttackFollower(CardObject sourceCard, CardObject targetCard)
+    public void SetAttackFollowerSequence(CardObject sourceCard, CardObject targetCard)
     {
         Sequence attackSequence = DOTween.Sequence();
         // éùÇøè„Ç∞ÇÈ
@@ -363,11 +363,24 @@ public class UIManager : SystemObject
         AddSequence(attackSequence);
     }
 
+    public void SetAttackLeaderSequence(CardObject sourceCard)
+    {
+        Sequence attackSequence = DOTween.Sequence();
+        // éùÇøè„Ç∞ÇÈ
+        attackSequence.Append(sourceCard.GetPickupSequence(true));
+        // çUåÇ
+        attackSequence.Append(sourceCard.GetAttackSequence());
+        // Ç®ÇÎÇ∑
+        attackSequence.Append(sourceCard.GetPickupSequence(false));
+
+        AddSequence(attackSequence);
+    }
+
     public void SetDefenceFollower(int targetIndex, int sourceIndex)
     {
         CardObject targetCard = fieldUI.GetOwnCard(targetIndex);
         CardObject sourceCard = fieldUI.GetOpponentCard(sourceIndex);
 
-        SetAttackFollower(sourceCard, targetCard);
+        SetAttackFollowerSequence(sourceCard, targetCard);
     }
 }
