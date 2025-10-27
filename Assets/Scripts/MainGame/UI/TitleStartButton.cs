@@ -10,6 +10,9 @@ public class TitleStartButton : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI buttonText = null;
 
+    [SerializeField]
+    private string sceneName = "Select";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +24,7 @@ public class TitleStartButton : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SceneManager.LoadScene("Matching");
+            SceneManager.LoadScene(sceneName);
         }
         // テキストを点滅させる
         float alpha = (Mathf.Sin(Time.time * 3.0f) + 1.0f) / 2.0f;
