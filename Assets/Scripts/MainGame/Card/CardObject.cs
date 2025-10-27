@@ -86,7 +86,7 @@ public class CardObject : BaseFieldObject
                 if (!cardData.canAttack) return;
                 UIManager.instance.SetUIState(UIManager.UIState.ATTACK);
                 // カードを持ち上げる
-                PickupCard(true);
+                GetPickupSequence(true).Play();
                 // 攻撃の線を出す
                 lineRenderer.enabled = true;
                 break;
@@ -137,9 +137,10 @@ public class CardObject : BaseFieldObject
                 if (!cardData.canAttack) return;
                 lineRenderer.enabled = false;
                 // 攻撃処理
-                Attack();
-                PickupCard(false);
+                bool attackResult = Attack();
                 UIManager.instance.SetUIState(UIManager.UIState.DEFAULT);
+                if (!attackResult)
+                    GetPickupSequence(false).Play();
                 break;
             default: break;
         }
@@ -147,24 +148,28 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseEnter()
     {
+        // 攻撃時に相手のフィールドのカードを持ち上げる
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        PickupCard(true);
+        if (currentState != CardState.FIELD) return;
+        GetPickupSequence(true).Play();
     }
 
     private void OnMouseExit()
     {
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        PickupCard(false);
+        if (currentState != CardState.FIELD) return;
+        GetPickupSequence(false).Play();
     }
 
-    private void PickupCard(bool isPick)
+    public Sequence GetPickupSequence(bool isPick)
     {
+        float offsetY = isPick ? OFFSET_Y : 0.0f;
         Vector3 scale = isPick ? new Vector3(1.2f, 1.2f, 1.2f) : Vector3.one;
 
         Sequence pickupSeq = DOTween.Sequence();
-        pickupSeq.Append(transform.DOMoveY(OFFSET_Y, 0.2f))
+        pickupSeq.Append(transform.DOMoveY(offsetY, 0.2f))
             .Join(transform.DOScale(scale, 0.1f));
-        pickupSeq.Play();
+        return pickupSeq;
     }
 
     /// <summary>
@@ -200,7 +205,8 @@ public class CardObject : BaseFieldObject
     /// <summary>
     /// 攻撃処理
     /// </summary>
-    private void Attack()
+    /// <returns>攻撃成功可否</returns>
+    private bool Attack()
     {
         // マウスの座標からオブジェクトを取得
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -210,19 +216,28 @@ public class CardObject : BaseFieldObject
         {
             hitObject = hit.collider.gameObject;
         }
-        if (hitObject == null) return;
+        if (hitObject == null) return false;
         BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
-        if (target == null) return;
+        if (target == null) return false;
         // 自分自身は攻撃できない
-        if (target.isLocal) return;
+        if (target.isLocal) return false;
         // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
         CardObject targetCard = target as CardObject;
         if (targetCard != null)
+        {
+            if (targetCard.currentState != CardState.FIELD) return false;
             AttackFollower(targetCard);
+            return true;
+        }
 
         LeaderObject targetLeader = target as LeaderObject;
         if (targetLeader != null)
+        {
             AttackLeader(targetLeader);
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>
@@ -231,17 +246,14 @@ public class CardObject : BaseFieldObject
     /// <param name="targetCard"></param>
     private void AttackFollower(CardObject targetCard)
     {
-        // フォロワー以外は攻撃できない
-        if (targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return;
-
-        // 挙動
-        SetAttackFollower(targetCard);
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
         int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
         // 攻撃処理を依頼
         BattleManager.instance.CardCombat(cardData, targetCard.cardData);
+        // 挙動
+        UIManager.instance.SetAttackFollower(this, targetCard);
     }
 
     /// <summary>
@@ -257,33 +269,22 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
     }
 
-    private void SetAttackFollower(CardObject targetCard)
-    {
-        Sequence attackSequence = DOTween.Sequence();
-        attackSequence.Append(GetAttackSequence());
-        attackSequence.Append(targetCard.GetCounterAttackSequence());
-        attackSequence.Append(GetDefence(isLocal));
-        attackSequence.AppendCallback(() => CheckDestroyCard())
-            .JoinCallback(() => targetCard.CheckDestroyCard());
-        UIManager.instance.AddSequence(attackSequence);
-    }
-
-    private Sequence GetAttackSequence()
+    public Sequence GetAttackSequence()
     {
         Sequence attack = DOTween.Sequence();
         attack.Append(GetFlipCard(0.1f));
         return attack;
     }
 
-    private Sequence GetCounterAttackSequence()
+    public Sequence GetCounterAttackSequence()
     {
         Sequence counterAttack = DOTween.Sequence();
-        counterAttack.Append(GetDefence(isLocal));
+        counterAttack.Append(GetDefenceSequence());
         counterAttack.Append(GetFlipCard(0.1f));
         return counterAttack;
     }
 
-    private Sequence GetDefence(bool isLocal)
+    public Sequence GetDefenceSequence()
     {
         float direction = isLocal ? -1.0f : 1.0f;
 
