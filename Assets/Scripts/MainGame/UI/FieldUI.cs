@@ -110,4 +110,14 @@ public class FieldUI : MonoBehaviour
 
         return opponentCards.IndexOf(cardObject);
     }
+
+    public CardObject GetOwnCard(int index)
+    {
+        return ownCards[index];
+    }
+
+    public CardObject GetOpponentCard(int index)
+    {
+        return opponentCards[index];
+    }
 }

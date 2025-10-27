@@ -226,6 +226,7 @@ public class BattleManager : SystemObject
                 }
 
                 CardCombat(attackCard, defanceCard);
+                UIManager.instance.SetDefenceFollower(defanceIndex, attackIndex);
                 break;
 
             case GameEnum.InputType.ATTACK_LEADER:
