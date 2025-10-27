@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 396638255}
   - component: {fileID: 396638254}
   - component: {fileID: 396638253}
+  - component: {fileID: 396638257}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -226,6 +227,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &396638257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 396638252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 338d0ca0a008e2a458c7588b19648a76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttonText: {fileID: 1599541870}
+  sceneName: Select
 --- !u!1 &939680624
 GameObject:
   m_ObjectHideFlags: 0
@@ -600,7 +615,6 @@ GameObject:
   - component: {fileID: 1599541868}
   - component: {fileID: 1599541871}
   - component: {fileID: 1599541870}
-  - component: {fileID: 1599541869}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -628,19 +642,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -355}
   m_SizeDelta: {x: 501.24, y: 52.4794}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1599541869
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1599541867}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 338d0ca0a008e2a458c7588b19648a76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttonText: {fileID: 1599541870}
 --- !u!114 &1599541870
 MonoBehaviour:
   m_ObjectHideFlags: 0
