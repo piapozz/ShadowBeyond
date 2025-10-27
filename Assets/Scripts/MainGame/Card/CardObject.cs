@@ -150,14 +150,14 @@ public class CardObject : BaseFieldObject
     {
         // 攻撃時に相手のフィールドのカードを持ち上げる
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        if (currentState != CardState.FIELD) return;
+        if (currentState != CardState.FIELD || cardData.type != GameEnum.CardType.FOLLOWER) return;
         GetPickupSequence(true).Play();
     }
 
     private void OnMouseExit()
     {
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        if (currentState != CardState.FIELD) return;
+        if (currentState != CardState.FIELD || cardData.type != GameEnum.CardType.FOLLOWER) return;
         GetPickupSequence(false).Play();
     }
 
@@ -225,7 +225,7 @@ public class CardObject : BaseFieldObject
         CardObject targetCard = target as CardObject;
         if (targetCard != null)
         {
-            if (targetCard.currentState != CardState.FIELD) return false;
+            if (targetCard.currentState != CardState.FIELD || targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return false;
             AttackFollower(targetCard);
             return true;
         }

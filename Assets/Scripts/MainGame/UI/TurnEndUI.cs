@@ -14,7 +14,7 @@ public class TurnEndUI : MonoBehaviour
     [SerializeField]
     private Button turnEndButton = null;
 
-    public void SetButtonEnable(bool isOwnTurn)
+    public void SetTurnEndButton(bool isOwnTurn)
     {
         if (isOwnTurn)
         {
@@ -28,8 +28,15 @@ public class TurnEndUI : MonoBehaviour
         }
     }
 
+    private void SetButtonEnable(bool enable)
+    {
+        ownTurnButton.SetActive(enable);
+        opponentTurnObject.SetActive(enable);
+    }
+
     public void SetButtonAction(Action setAction)
     {
         turnEndButton.onClick.AddListener(() => setAction());
+        turnEndButton.onClick.AddListener(() => SetButtonEnable(false));
     }
 }
