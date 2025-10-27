@@ -23,6 +23,22 @@ public class CardMasterUtility
     }
 
     /// <summary>
+    /// ID参照のカードのカードデータの取得
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
+    public static CardData GetCardData(int ID)
+    {
+        for (int i = 0, max = allCardList.Count; i < max; i++)
+        {
+            if (allCardList[i].id != ID) continue;
+
+            return allCardList[i];
+        }
+        return null;
+    }
+
+    /// <summary>
     /// カードのマスターデータからCardDataを取得
     /// </summary>
     /// <param name="cardMaster"></param>
