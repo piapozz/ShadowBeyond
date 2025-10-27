@@ -17,7 +17,9 @@ public class CardMasterUtility
             for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
             {
                 if (cardMasterList[i][j].ID == -1) continue;
-                allCardList.Add(GetCardData(cardMasterList[i][j]));
+                CardData setCardData = GetCardData(cardMasterList[i][j]);
+                setCardData.SetPackType((PackType)i);
+                allCardList.Add(setCardData);
             }
         }
     }
@@ -53,7 +55,8 @@ public class CardMasterUtility
             cardMaster.Name,
             cardMaster.Cost,
             cardMaster.Attack,
-            cardMaster.Defence);
+            cardMaster.Defence,
+            cardMaster.Token);
         // テキストデータ取得
         cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID));
         return cardData;
