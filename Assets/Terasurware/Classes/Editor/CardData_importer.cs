@@ -10,7 +10,7 @@ using NPOI.SS.UserModel;
 public class CardData_importer : AssetPostprocessor {
 	private static readonly string filePath = "Assets/Resources/MasterData/CardData.xlsx";
 	private static readonly string exportPath = "Assets/Resources/MasterData/CardData.asset";
-	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","Basic","CLC","DRK","ROB","TOG","WLD","SFL","CGS","DBN","BOS","OOT","ALT","STR","ROG","VEC","UCL","WUP","FOH","SOR","ETA","DOV","RSC","DOC","OOS","EOP","RGW","CDB","EAA","AOA","HOR","ORS","RSL","HOS", };
+	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","Basic","CLC","DRK","ROB","TOG","WLD","ORS", };
 	
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 	{
@@ -58,7 +58,6 @@ public class CardData_importer : AssetPostprocessor {
 					cell = row.GetCell(8); p.Cost = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(9); p.Attack = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(10); p.Defence = (int)(cell == null ? 0 : cell.NumericCellValue);
-					cell = row.GetCell(11); p.IllustID = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(12); p.Token = (cell == null ? false : cell.BooleanCellValue);
 					p.Trait = new int[1];
 					cell = row.GetCell(14); p.Trait[0] = (int)(cell == null ? 0 : cell.NumericCellValue);

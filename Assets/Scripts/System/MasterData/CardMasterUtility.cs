@@ -13,12 +13,15 @@ public class CardMasterUtility
     /// <returns></returns>
     public static Param GetCardMaster(int ID)
     {
-        List<Param> cardMasterList = MasterDataManager.cardData[0];
+        List<List<Param>> cardMasterList = MasterDataManager.cardData;
         for (int i = 0, max = cardMasterList.Count; i < max; i++)
         {
-            if (cardMasterList[i].ID != ID) continue;
+            for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
+            {
+                if (cardMasterList[i][j].ID != ID) continue;
 
-            return cardMasterList[i];
+                return cardMasterList[i][j];
+            }
         }
         return null;
     }
@@ -67,10 +70,31 @@ public class CardMasterUtility
     /// ƒ‰ƒ“ƒ_ƒ€‚ÈCardData‚ğæ“¾
     /// </summary>
     /// <returns></returns>
-    public static CardData GetRandomCardData()
+    public static List<CardData> GetRandomCardData(int cardNum)
     {
-        List<Param> cardMasterList = MasterDataManager.cardData[0];
-        int randomIndex = BattleManager.instance.rand.Next(0, cardMasterList.Count);
-        return GetCardData(cardMasterList[randomIndex]);
+        List<CardData> cardMasterData = GetAllCardData();
+        List<CardData> cardData = new List<CardData>();
+        int cardCount = cardMasterData.Count;
+        for (int i = 0; i < cardCount; i++)
+        {
+            int randomIndex = BattleManager.instance.rand.Next(0, cardCount);
+            cardData.Add(cardMasterData[randomIndex]);
+        }
+        return cardData;
+    }
+
+    public static List<CardData> GetAllCardData()
+    {
+        List<List<Param>> cardMasterList = MasterDataManager.cardData;
+        List<CardData> cardList = new List<CardData>();
+        for (int i = 0, max = cardMasterList.Count; i < max; i++)
+        {
+            for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
+            {
+                if (cardMasterList[i][j].ID == -1) continue;
+                cardList.Add(GetCardData(cardMasterList[i][j]));
+            }
+        }
+        return cardList;
     }
 }

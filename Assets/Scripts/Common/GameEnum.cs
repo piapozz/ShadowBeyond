@@ -128,4 +128,48 @@ public class GameEnum
 
         MAX
     }
+
+    public enum PackType
+    {
+        INVALID = -1,
+        BASIC_BEYOND,
+        LEGENDS_RISE,
+        INFINITY_EVOLVED,
+        HEIRS_OF_THE_OMEN,
+        SKYBOUND_DRAGONS,
+        BASIC,
+        CLC,
+        DRK,
+        ROB,
+        TOG,
+        WLD,
+        SFL,
+        CGS,
+        DBN,
+        BOS,
+        OOT,
+        ALT,
+        STR,
+        ROG,
+        VEC,
+        UCL,
+        WUP,
+        FOH,
+        SOR,
+        ETA,
+        DOV,
+        RSC,
+        DOC,
+        OOS,
+        EOP,
+        RGW,
+        CDB,
+        EAA,
+        AOA,
+        HOR,
+        ORS,
+        RSL,
+        HOS,
+        MAX
+    }
 }

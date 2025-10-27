@@ -41,13 +41,8 @@ public class BattleManager : SystemObject
             extraPoint = false;
             hand = new Hand();
             deck = new Deck();
-            List<CardData> deckList = new List<CardData>(40);
-            for (int i = 0; i < 40; i++)
-            {
-                deckList.Add(CardMasterUtility.GetRandomCardData());
-            }
 
-            deck.Init(deckList);
+            deck.Init(CardMasterUtility.GetRandomCardData(40));
             hand.Init(new List<CardData>());
         }
 
@@ -108,7 +103,6 @@ public class BattleManager : SystemObject
                 break;
             case BattleState.END_TURN:
                 EndTurn();
-                currentState = BattleState.START_TURN;
                 break;
             case BattleState.END_BATTLE:
                 // バトル終了処理
@@ -286,6 +280,8 @@ public class BattleManager : SystemObject
             player[currentPlayerIndex].hand.SetOwnHandCardPlayable(false);
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
+
+        currentState = BattleState.START_TURN;
     }
 
     public void EndBattle()

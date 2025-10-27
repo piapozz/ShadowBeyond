@@ -148,12 +148,7 @@ public class UIManager : SystemObject
     public void StartTurn(bool isOwnTurn)
     {
         // ターン終了ボタンの設定
-        turnUI.SetButtonEnable(isOwnTurn);
-    }
-
-    public void EndTurn(bool isOwnTurn)
-    {
-
+        turnUI.SetTurnEndButton(isOwnTurn);
     }
 
     /// <summary>
@@ -270,7 +265,7 @@ public class UIManager : SystemObject
     {
         // 手札整列と手札から出すアニメーション登録
         List<Sequence> playSeq = new List<Sequence>();
-        List<Sequence> arrangeSeq = handUI.ArrangeHandCard(true);
+        List<Sequence> arrangeSeq = handUI.ArrangeHandCard(isOwn);
         if (arrangeSeq != null) playSeq.AddRange(arrangeSeq);
         playSeq.Add(playCard.GetPlaySequence(playCardRoot));
         AddSequence(playSeq);
