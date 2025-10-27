@@ -73,22 +73,22 @@ MonoBehaviour:
     - ID: 5
       Class: 0
       Rarity: 1
-      Type: 2
-      Name: "\u5192\u967A\u8005\u306E\u30AE\u30EB\u30C9"
-      Cost: 3
-      Attack: 0
-      Defence: 0
+      Type: 0
+      Name: "\u30AD\u30E3\u30E9\u30D0\u30F3\u30DE\u30F3\u30E2\u30B9"
+      Cost: 7
+      Attack: 10
+      Defence: 10
       IllustID: 0
       Token: 0
       Trait: 00000000
     - ID: 6
       Class: 0
       Rarity: 1
-      Type: 0
-      Name: "\u30AD\u30E3\u30E9\u30D0\u30F3\u30DE\u30F3\u30E2\u30B9"
-      Cost: 7
-      Attack: 10
-      Defence: 10
+      Type: 2
+      Name: "\u5192\u967A\u8005\u306E\u30AE\u30EB\u30C9"
+      Cost: 3
+      Attack: 0
+      Defence: 0
       IllustID: 0
       Token: 0
       Trait: 00000000
@@ -732,6 +732,17 @@ MonoBehaviour:
       Trait: 00000000
     - ID: 706
       Class: 7
+      Rarity: 1
+      Type: 2
+      Name: "\u30C9\u30FC\u30EB\u30BA\u30B7\u30A2\u30BF\u30FC"
+      Cost: 2
+      Attack: 0
+      Defence: 0
+      IllustID: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 707
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u64CD\u308A\u4EBA\u5F62"
@@ -741,7 +752,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0b000000
-    - ID: 707
+    - ID: 708
       Class: 7
       Rarity: 0
       Type: 0
@@ -752,7 +763,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0b000000
-    - ID: 708
+    - ID: 709
       Class: 7
       Rarity: 0
       Type: 2
@@ -763,7 +774,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 709
+    - ID: 710
       Class: 7
       Rarity: 0
       Type: 2
@@ -774,7 +785,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 710
+    - ID: 711
       Class: 7
       Rarity: 1
       Type: 0
@@ -785,7 +796,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 711
+    - ID: 712
       Class: 7
       Rarity: 1
       Type: 0
@@ -796,7 +807,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 712
+    - ID: 713
       Class: 7
       Rarity: 2
       Type: 0
@@ -807,7 +818,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 713
+    - ID: 714
       Class: 7
       Rarity: 2
       Type: 0
@@ -818,7 +829,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 714
+    - ID: 715
       Class: 7
       Rarity: 2
       Type: 0
@@ -829,7 +840,7 @@ MonoBehaviour:
       IllustID: 0
       Token: 1
       Trait: 0a000000
-    - ID: 715
+    - ID: 716
       Class: 7
       Rarity: 3
       Type: 0
