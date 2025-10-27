@@ -48,6 +48,8 @@ public class CardData
     public int cost { get; private set; }
     // カードテキスト
     public string text { get; private set; }
+    public bool isToken { get; private set; }
+    public PackType packType { get; private set; }
     // カードアビリティ
     public List<CardAbility> ability { get; private set; }
     // 破壊された
@@ -60,7 +62,7 @@ public class CardData
         GetObject = action;
     }
 
-    public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence)
+    public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence, bool setToken)
     {
         id = setID;
         leaderClass = setClass;
@@ -69,6 +71,7 @@ public class CardData
         name = setName;
         cost = setCost;
         status = new FollowerStatus(setAttack, setDefence);
+        isToken = setToken;
 
         Init();
     }
@@ -78,9 +81,14 @@ public class CardData
         addStatus = new List<FollowerStatus>();
     }
 
-    public void SetType(CardType newType)
+    public void SetType(CardType setType)
     {
-        type = newType;
+        type = setType;
+    }
+
+    public void SetPackType(PackType setPackType)
+    {
+        packType = setPackType;
     }
 
     public void AddTypeDetail(CardTypeDetail newTypeDetail)
