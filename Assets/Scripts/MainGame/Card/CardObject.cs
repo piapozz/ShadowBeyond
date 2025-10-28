@@ -40,7 +40,7 @@ public class CardObject : BaseFieldObject
         MAX
     }
 
-    private CardState currentState = CardState.HAND;
+    public CardState currentState { get; private set; } = CardState.HAND;
 
     // カードクラスの参照
     public CardData cardData { get; private set; } = null;
@@ -209,15 +209,7 @@ public class CardObject : BaseFieldObject
     private bool Attack()
     {
         // マウスの座標からオブジェクトを取得
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        GameObject hitObject = null;
-        if (Physics.Raycast(ray, out hit, 100f))
-        {
-            hitObject = hit.collider.gameObject;
-        }
-        if (hitObject == null) return false;
-        BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
+        BaseFieldObject target = UIManager.instance.GetFieldObject(Input.mousePosition);
         if (target == null) return false;
         // 自分自身は攻撃できない
         if (target.isLocal) return false;

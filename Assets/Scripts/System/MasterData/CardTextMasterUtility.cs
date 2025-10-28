@@ -15,12 +15,15 @@ public class CardTextMasterUtility : MonoBehaviour
     /// <returns></returns>
     public static Param GetCardMaster(int ID)
     {
-        List<Param> cardMasterList = MasterDataManager.cardTextData[0];
-        for (int i = 0, max = cardMasterList.Count; i < max; i++)
+        List<List<Param>> textMasterList = MasterDataManager.cardTextData;
+        for (int i = 0, max = textMasterList.Count; i < max; i++)
         {
-            if (cardMasterList[i].ID != ID) continue;
+            for (int j = 0, paramMax = textMasterList[i].Count; j < paramMax; j++)
+            {
+                if (textMasterList[i][j].ID != ID) continue;
 
-            return cardMasterList[i];
+                return textMasterList[i][j];
+            }
         }
         return null;
     }
