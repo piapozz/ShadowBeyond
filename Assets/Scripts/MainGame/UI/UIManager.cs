@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
+using static CardObject;
 using static NetworkManager;
 
 // UIを管理するマネージャー
@@ -39,6 +40,7 @@ public class UIManager : SystemObject
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
     [SerializeField] private Transform playCardRoot;
+    [SerializeField] private CardDetailUI cardDetailUI;
 
     public enum UIState
     {
@@ -54,6 +56,7 @@ public class UIManager : SystemObject
     private Queue<List<Sequence>> uiSequence = null;
     private List<Sequence> currentSequenceList = null;
     private List<CardObject> poolCardObject = null;
+    private Camera mainCamera = null;
 
     private const int POOL_CARD_NUM = 30;
 
@@ -64,6 +67,7 @@ public class UIManager : SystemObject
         DOTween.defaultAutoPlay = AutoPlay.None;
 
         instance = this;
+        mainCamera = Camera.main;
         uiSequence = new Queue<List<Sequence>>();
         currentSequenceList = new List<Sequence>();
         // UIを生成
@@ -87,6 +91,14 @@ public class UIManager : SystemObject
     private void Update()
     {
         // UIシーケンス処理
+        UISequence();
+
+        CardClick();
+    }
+
+    private void UISequence()
+    {
+        // UIシーケンス処理
         if (IsCompleteAllSequence()) return;
         // シーケンスがたまっていて、現在のシーケンスが終了していたら次のシーケンスを再生
         if (IsCompleteCurrentSequence())
@@ -97,10 +109,36 @@ public class UIManager : SystemObject
                 currentSequenceList[i].Play();
             }
         }
+    }
 
-        // 情報UI更新
-        // OptionUI更新
-        // HistoryUI更新
+    private void CardClick()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        BaseFieldObject target = GetFieldObject(Input.mousePosition);
+        if (target != null && target as CardObject)
+        {
+            CardObject card = target as CardObject;
+            // 相手の手札はクリックできない
+            if (!card.isLocal && card.currentState == CardState.HAND) return;
+            cardDetailUI.EnableUI(true, card.cardData.name, card.cardData.text);
+            return;
+        }
+        cardDetailUI.EnableUI(false);
+    }
+
+    public BaseFieldObject GetFieldObject(Vector2 screenPos)
+    {
+        // カードの詳細画面表示
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        GameObject hitObject = null;
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            hitObject = hit.collider.gameObject;
+        }
+        if (hitObject == null) return null;
+        BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
+        return target;
     }
 
     private bool IsCompleteCurrentSequence()
@@ -382,5 +420,13 @@ public class UIManager : SystemObject
         CardObject sourceCard = fieldUI.GetOpponentCard(sourceIndex);
 
         SetAttackFollowerSequence(sourceCard, targetCard);
+    }
+
+    private void SetCardDetailText(bool enable, CardData setCard = null)
+    {
+        if (setCard == null)
+            cardDetailUI.EnableUI(enable);
+        else
+            cardDetailUI.EnableUI(enable, setCard.name, setCard.text);
     }
 }
