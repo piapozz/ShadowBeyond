@@ -7,6 +7,12 @@ public class LeaderObject : BaseFieldObject
 {
     [SerializeField]
     private TextMeshPro defence = null;
+    [SerializeField]
+    private EvolvePointObject evolvePointObject = null;
+    [SerializeField]
+    private EvolvePointObject superEvolvePointObject = null;
+    [SerializeField]
+    private bool isLocal = false;
 
     public Leader leader { get; private set; } = null;
 
@@ -14,10 +20,12 @@ public class LeaderObject : BaseFieldObject
     /// ƒŠ[ƒ_[‚Ìî•ñ‚ğİ’è
     /// </summary>
     /// <param name="setLeader"></param>
-    public void SetLeader(Leader setLeader)
+    public void Initialize(Leader setLeader)
     {
         leader = setLeader;
         leader.SetGetObjectAction(() => { return this; });
+        evolvePointObject.Initialize(false, isLocal);
+        superEvolvePointObject.Initialize(true, isLocal);
     }
 
     public void SetDefenceText(int setDefence)

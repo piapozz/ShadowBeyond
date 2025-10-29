@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
-
 using DG.Tweening;
-using static CommonModule;
 
 /// <summary>
 /// カードオブジェクトにアタッチするクラス
@@ -45,22 +42,9 @@ public class CardObject : BaseFieldObject
     // カードクラスの参照
     public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
-    private Camera mainCamera = null;
 
     // カードをドラッグした時の高さオフセット
     private const float OFFSET_Y = 1.0f;
-    // 攻撃線の制御点数
-    private const int LINE_CONTROL_POINT_NUM = 20;
-    // 攻撃線の高さ
-    private const float LINE_HEIGHT = 5.0f;
-    // 攻撃線のずらし幅
-    private const float LINE_OFFSET = 2.0f;
-
-    public void Start()
-    {
-        mainCamera = Camera.main;
-        lineRenderer.enabled = false;
-    }
 
     /// <summary>
     /// カードクラスを渡す
@@ -88,6 +72,7 @@ public class CardObject : BaseFieldObject
                 // カードを持ち上げる
                 GetPickupSequence(true).Play();
                 // 攻撃の線を出す
+                UIManager.instance.SetLineRenderer(lineRenderer, transform);
                 lineRenderer.enabled = true;
                 break;
             default: break;
@@ -103,7 +88,7 @@ public class CardObject : BaseFieldObject
                 // プレイ可能でないなら返す
                 if (!cardData.canPlay) return;
                 // カードの位置更新
-                Vector3 position = GetMouseWorldPosition(transform, mainCamera);
+                Vector3 position = UIManager.instance.GetMouseWorldPosition(transform);
                 position.y = OFFSET_Y;
                 transform.position = position;
                 break;
@@ -113,7 +98,7 @@ public class CardObject : BaseFieldObject
                 // 攻撃可否判定
                 if (!cardData.canAttack) return;
                 // 攻撃の線を出す
-                SetLineRenderer();
+                UIManager.instance.SetLineRenderer(lineRenderer, transform);
                 break;
             default: break;
         }
@@ -170,36 +155,6 @@ public class CardObject : BaseFieldObject
         pickupSeq.Append(transform.DOMoveY(offsetY, 0.2f))
             .Join(transform.DOScale(scale, 0.1f));
         return pickupSeq;
-    }
-
-    /// <summary>
-    /// 攻撃線の設定
-    /// </summary>
-    private void SetLineRenderer()
-    {
-        // 制御点の総数
-        int totalPointNum = LINE_CONTROL_POINT_NUM + 2;
-        // 始点終点
-        Vector3 startPoint = transform.position;
-        Vector3 endPoint = GetMouseWorldPosition(transform, mainCamera);
-        // 中間点を曲線が見えるようにずらす
-        Vector3 cameraUp = mainCamera.transform.up;
-        Vector3 midPoint = (startPoint + endPoint) / 2 + Vector3.up * LINE_HEIGHT + cameraUp * LINE_OFFSET;
-
-        // 始点登録
-        lineRenderer.SetPosition(0, startPoint);
-        for (int i = 1; i <= LINE_CONTROL_POINT_NUM; i++)
-        {
-            float t = (float)i / (float)(totalPointNum - 1);
-            Vector3 point = GetBezierCurve2(startPoint, endPoint, midPoint, t);
-            lineRenderer.SetPosition(i, point);
-        }
-        // 終点登録
-        lineRenderer.SetPosition(totalPointNum - 1, endPoint);
-
-        // 太さ設定
-        lineRenderer.startWidth = 0.05f;
-        lineRenderer.endWidth = 0.05f;
     }
 
     /// <summary>
