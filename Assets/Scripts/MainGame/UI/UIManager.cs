@@ -3,12 +3,9 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading.Tasks;
 using UnityEngine;
-using UnityEngine.UI;
 using static CardObject;
-using static NetworkManager;
+using static CommonModule;
 
 // UIを管理するマネージャー
 
@@ -59,6 +56,13 @@ public class UIManager : SystemObject
     private Camera mainCamera = null;
 
     private const int POOL_CARD_NUM = 30;
+    // 攻撃線の制御点数
+    private const int LINE_CONTROL_POINT_NUM = 20;
+    // 攻撃線の高さ
+    private const float LINE_HEIGHT = 5.0f;
+    // 攻撃線のずらし幅
+    private const float LINE_OFFSET = 2.0f;
+
 
     public override async UniTask Initialize()
     {
@@ -422,11 +426,43 @@ public class UIManager : SystemObject
         SetAttackFollowerSequence(sourceCard, targetCard);
     }
 
-    private void SetCardDetailText(bool enable, CardData setCard = null)
+    /// <summary>
+    /// 選択線の設定
+    /// </summary>
+    /// <param name="lineRenderer"></param>
+    /// <param name="setTransform"></param>
+    /// <param name="controlPointNum"></param>
+    /// <param name="lineHeight"></param>
+    /// <param name="lineOffset"></param>
+    public void SetLineRenderer(LineRenderer lineRenderer,　Transform setTransform, int controlPointNum = LINE_CONTROL_POINT_NUM, float lineHeight = LINE_HEIGHT, float lineOffset = LINE_OFFSET)
     {
-        if (setCard == null)
-            cardDetailUI.EnableUI(enable);
-        else
-            cardDetailUI.EnableUI(enable, setCard.name, setCard.text);
+        // 制御点の総数
+        int totalPointNum = controlPointNum + 2;
+        // 始点終点
+        Vector3 startPoint = setTransform.position;
+        Vector3 endPoint = CommonModule.GetMouseWorldPosition(setTransform, mainCamera);
+        // 中間点を曲線が見えるようにずらす
+        Vector3 cameraUp = mainCamera.transform.up;
+        Vector3 midPoint = (startPoint + endPoint) / 2 + Vector3.up * lineHeight + cameraUp * lineOffset;
+
+        // 始点登録
+        lineRenderer.SetPosition(0, startPoint);
+        for (int i = 1; i <= controlPointNum; i++)
+        {
+            float t = (float)i / (float)(totalPointNum - 1);
+            Vector3 point = GetBezierCurve2(startPoint, endPoint, midPoint, t);
+            lineRenderer.SetPosition(i, point);
+        }
+        // 終点登録
+        lineRenderer.SetPosition(totalPointNum - 1, endPoint);
+
+        // 太さ設定
+        lineRenderer.startWidth = 0.05f;
+        lineRenderer.endWidth = 0.05f;
+    }
+
+    public Vector3 GetMouseWorldPosition(Transform transform)
+    {
+        return CommonModule.GetMouseWorldPosition(transform, mainCamera);
     }
 }
