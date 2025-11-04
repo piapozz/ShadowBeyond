@@ -1,5 +1,8 @@
 ﻿using Cysharp.Threading.Tasks;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,6 +16,7 @@ public class BattleManager : SystemObject
     const int FIELD_CARD_MAX = 5;
     public int localPlayerIndex = -1;
     private int seed = 0;
+    private bool isProcessingState = false;
 
     public System.Random rand { get; private set; } // シード保持用
 
@@ -85,69 +89,88 @@ public class BattleManager : SystemObject
         await UniTask.CompletedTask;
     }
 
-    public void Update()
+    public async void Update()
     {
-        switch(currentState)
+        if (isProcessingState) return;
+
+        switch (currentState)
         {
             case BattleState.START_BATTLE:
-                StartBattle();
+                isProcessingState = true;
+                await StartBattle();
+                isProcessingState = false;
                 break;
             case BattleState.START_TURN:
-                StartTurn();
+                isProcessingState = true;
+                await StartTurn();
                 currentState = BattleState.MAIN_TURN;
+                isProcessingState = false;
                 break;
             case BattleState.MAIN_TURN:
-                // メインフェイズ処理
-                // 条件を満たしたらターン終了へ
-                MainTurn();
+                // メインフェイズ処理（継続的に呼ぶ想定）
+                await MainTurn();
                 break;
             case BattleState.END_TURN:
-                EndTurn();
+                isProcessingState = true;
+                await EndTurn();
+                isProcessingState = false;
                 break;
             case BattleState.END_BATTLE:
-                // バトル終了処理
-                EndBattle();
+                isProcessingState = true;
+                await EndBattle();
+                isProcessingState = false;
                 break;
             default:
                 break;
         }
     }
 
-    public void StartBattle()
+    public async UniTask StartBattle()
     {
-        // バトル開始処理
-        // プレイヤー数が揃っていなければ開始しない
+        // プレイヤー数チェック
         if (NetworkManager.Instance.GetActivePlayerCount() < 2)
-        {
             return;
-        }
 
-        // シード値を決定
+        // ① シード値同期
         if (localPlayerIndex == 1)
         {
-            // シード値生成
-            seed = Random.Range(int.MinValue, int.MaxValue);
-            int result = NetworkManager.Instance.SendSeedData(seed);
-
-            if (result != 0)
+            seed = UnityEngine.Random.Range(int.MinValue, int.MaxValue);
+            if (NetworkManager.Instance.SendSeedData(seed) != 0)
             {
-                Debug.Log("[Battle] ❌ シード値の送信に失敗しました");
+                Debug.LogError("[Battle] ❌ シード値送信失敗");
                 return;
             }
+            Debug.Log($"[Battle] 🌱 シード値送信: {seed}");
         }
         else
         {
-            Debug.Log("[Battle] 🌱 シード値を待機中...");
-            if (!NetworkManager.Instance.seedReceived) return;
-
+            Debug.Log("[Battle] 🌱 シード値受信待機中...");
+            await WaitUntil(() => NetworkManager.Instance.seedReceived);
             seed = NetworkManager.Instance.GetReceivedSeed();
             Debug.Log($"[Battle] 🎲 シード値を取得: {seed}");
         }
 
+        // ② デッキ送信
+        var myDeck = DeckRecorder.Instance.GetCurrentDeck();
+        if (myDeck == null || myDeck.Count == 0)
+        {
+            Debug.LogError("[Battle] ❌ デッキが空です");
+            return;
+        }
+
+        NetworkManager.Instance.SendDeckData(myDeck);
+        Debug.Log("[Battle] 📤 デッキ送信完了");
+
+        // ③ 相手デッキ受信待機
+        Debug.Log("[Battle] 📥 相手のデッキ受信待機中...");
+        await WaitUntil(() => NetworkManager.Instance.deckReceived);
+
+        var opponentDeck = NetworkManager.Instance.GetReceivedDeck();
+        Debug.Log($"[Battle] ✅ 相手デッキ受信完了（カード数: {opponentDeck.Count}）");
+        
+
         rand = new System.Random(seed);
-
         player = new Player[(int)GameEnum.PlayerType.MAX];
-
         field = new Field();
 
         // 先攻後攻決める
@@ -165,6 +188,9 @@ public class BattleManager : SystemObject
             player[index].SetPlayerID(index);
         }
 
+        player[0].deck.SetDeckData(DeckRecorder.Instance.GetCurrentDeck());
+        player[1].deck.SetDeckData(opponentDeck);
+
         Debug.Log($"[Battle] 🥊 バトル開始 先攻: {currentPlayerIndex}");
 
         // ターンエンドのコールバック
@@ -174,7 +200,7 @@ public class BattleManager : SystemObject
         currentState = BattleState.START_TURN;
     }
 
-    public void StartTurn()
+    public async UniTask StartTurn()
     {
         // ターン開始処理
         player[currentPlayerIndex].NextTurn();
@@ -187,7 +213,7 @@ public class BattleManager : SystemObject
         field.SetFieldCardAttackable(true);
     }
 
-    public void MainTurn()
+    public async UniTask MainTurn()
     {
         // メインフェイズ処理
 
@@ -272,7 +298,7 @@ public class BattleManager : SystemObject
         }
     }
 
-    public void EndTurn()
+    public async UniTask EndTurn()
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
         // 自分の手札をプレイ不能にする
@@ -284,7 +310,7 @@ public class BattleManager : SystemObject
         currentState = BattleState.START_TURN;
     }
 
-    public void EndBattle()
+    public async UniTask EndBattle()
     {
         // バトル終了処理
         Debug.Log("[Battle] 🏁 バトル終了");
@@ -343,5 +369,11 @@ public class BattleManager : SystemObject
     {
         Debug.Log($"[Battle] 🏳️ プレイヤー{playerID}のリーダーが敗北しました");
         currentState = BattleState.END_BATTLE;
+    }
+
+    private async UniTask WaitUntil(Func<bool> condition)
+    {
+        while (!condition())
+            await UniTask.Delay(50);
     }
 }

@@ -35,12 +35,17 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         SYNC_NONE = 0,
         SYNC_BATTLE = 1,   // バトルデータ（既存）
         SYNC_SEED = 2,     // シード値
-        SYNC_RESULT = 3,   // （将来的な拡張用）
+        SYNC_DECK = 3,     // デッキ
     }
 
     public bool seedReceived { get; private set; } = false;
     private int receivedSeed = 0;
+
+    public bool deckReceived { get; private set; } = false;
+    private List<int> receivedDeck = new List<int>();
+
     public int GetReceivedSeed() => receivedSeed;
+    public List<int> GetReceivedDeck() => receivedDeck;
 
     public struct SendBattleData
     {
@@ -96,6 +101,8 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
         DontDestroyOnLoad(gameObject);
+
+        isConnecting = false;
     }
 
     // -----------------------------------
@@ -327,6 +334,66 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         return 0;
     }
 
+    public int SendDeckData(List<int> deck)
+    {
+        if (runner == null)
+        {
+            Debug.LogError("[Network] ❌ runner が存在しません");
+            return -1;
+        }
+
+        if (deck == null || deck.Count == 0)
+        {
+            Debug.LogWarning("[Network] ⚠️ デッキが空です");
+            return -1;
+        }
+
+        using MemoryStream ms = new MemoryStream();
+        using BinaryWriter bw = new BinaryWriter(ms);
+
+        // 通信タイプ
+        bw.Write((byte)SyncTypeEnum.SYNC_DECK);
+
+        // デッキ枚数
+        bw.Write(deck.Count);
+
+        // 各カードIDを書き込む
+        foreach (int cardId in deck)
+        {
+            if (cardId < 0)
+            {
+                Debug.LogWarning($"[Network] ⚠️ 不正なカードID検出: {cardId}");
+            }
+            bw.Write(cardId);
+        }
+
+        byte[] sendData = ms.ToArray();
+
+        // 相手がいない場合
+        if (runner.ActivePlayers.Count() < 2)
+        {
+            Debug.Log("[Network] ⚠️ まだ相手がいないため送信できません");
+            return -1;
+        }
+
+        // --- 🌱 デバッグ出力 ---
+        string deckPreview = string.Join(", ", deck.Take(5)); // 最初の5枚だけ表示
+        Debug.Log($"[Network] 🌱 デッキ送信準備完了：{deck.Count}枚 / 合計{sendData.Length}バイト");
+        Debug.Log($"[Network] 🃏 送信デッキプレビュー: [{deckPreview}{(deck.Count > 5 ? ", ..." : "")}]");
+
+        foreach (var player in runner.ActivePlayers)
+        {
+            if (player == runner.LocalPlayer) continue;
+
+            ReliableKey reliable = default;
+            runner.SendReliableDataToPlayer(player, reliable, sendData);
+            Debug.Log($"[Network] ✅ デッキデータ送信完了 → Player {player.PlayerId}");
+        }
+
+        return 0;
+    }
+
+
     // -----------------------------------
     // データ受信
     // -----------------------------------
@@ -371,6 +438,24 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
                 }
 
                 Debug.Log($"[Network] ⚔ 受信 seq={seq}, size={len}");
+                break;
+            }
+
+            // 🃏 デッキデータ受信
+            case SyncTypeEnum.SYNC_DECK:
+            {
+                deckReceived = true;
+                // デッキ枚数を取得
+                int cardCount = br.ReadInt32();
+
+                // 各カードIDを読み取る
+                for (int i = 0; i < cardCount; i++)
+                {
+                    int cardId = br.ReadInt32();
+                    receivedDeck.Add(cardId);
+                }
+
+                Debug.Log($"[Network] 🃏 デッキ受信: {cardCount}枚 ({string.Join(",", receivedDeck.Take(Mathf.Min(5, receivedDeck.Count)))}...)");
                 break;
             }
 
