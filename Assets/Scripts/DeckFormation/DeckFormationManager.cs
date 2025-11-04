@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DeckFormationManager : MonoBehaviour
@@ -34,13 +35,41 @@ public class DeckFormationManager : MonoBehaviour
         cardDataList = new List<CardImage>();
     }
 
+    // デッキ保存
+    public void RecordDeck()
+    {
+        List<int> deckCardIds = new List<int>();
+        foreach (var card in cardDataList)
+        {
+            deckCardIds.Add(card.cardId);
+        }
+        DeckRecorder.Instance.SaveNewDeck(deckCardIds);
+
+        // シーンのロード
+        SceneManager.LoadScene("Select");
+    }
+
+
     public void AddCardToDeck(int cardId)
     {
+        // デッキの最大枚数を超えないようにする
+        if (GameConst.DECK_SIZE_MAX + 10 <= cardDataList.Count) return;
+        // 同じカードの最大枚数を超えないようにする
+        int sameCardCount = 0;
+        foreach (var card in cardDataList)
+        {
+            if (card.cardId == cardId)
+            {
+                sameCardCount++;
+            }
+        }
+        if (sameCardCount >= 3) return;
+
         // デッキにカードを追加する処理
         var cardData = CardMasterUtility.GetCardData(cardId);
 
-        var card = Instantiate(CardImage.gameObject, DeckArea);
-        var cardImage = card.GetComponent<CardImage>();
+        var cardObj = Instantiate(CardImage.gameObject, DeckArea);
+        var cardImage = cardObj.GetComponent<CardImage>();
         cardImage.SetCardImage(cardId);
         cardDataList.Add(cardImage);
 
@@ -55,7 +84,7 @@ public class DeckFormationManager : MonoBehaviour
             var cardImage = cardDataList[i].GetComponent<CardImage>();
             if (cardImage.cardId == cardId)
             {
-                Destroy(cardDataList[i]);
+                Destroy(cardDataList[i].gameObject);
                 cardDataList.RemoveAt(i);
                 break;
             }

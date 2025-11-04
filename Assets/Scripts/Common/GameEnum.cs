@@ -29,9 +29,11 @@ public class GameEnum
         SWORD,
         RUNA,
         DRAGON,
-        ABYSS,
+        SHADOW,
+        BLOOD,
         HAVEN,
         PORTAL,
+        ABYSS,
         MAX
     }
 

@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using static CardObject;
 
@@ -18,6 +21,9 @@ public class AllCardList : MonoBehaviour
 
     [SerializeField]
     private CardImage CardImage;
+
+    [SerializeField]
+    private TMP_InputField SearchInputField;
 
     private List<Transform> cardPositions = new List<Transform>();
     private List<GameObject> cardObjects = new List<GameObject>();
@@ -54,7 +60,18 @@ public class AllCardList : MonoBehaviour
             cardObjects.Add(cardObj);
         }
 
-        SortCradData();
+        cardDatas.Clear();
+        cardDatas = CardMasterUtility.allCardList;
+
+        // トークンカードを除外
+        cardDatas.RemoveAll(card =>
+        {
+            var data = CardMasterUtility.GetCardData(card.id);
+            return data.isToken == true;
+        }
+        );
+        SortCardList();
+        maxPage = (cardDatas.Count - 1) / CardsPerPage;
         UpdateCardList();
     }
 
@@ -80,11 +97,18 @@ public class AllCardList : MonoBehaviour
         }
     }
 
+    // 条件更新
+    public void UpdateConditions()
+    {
+        SortCradData();
+        currentPage = 0;
+        UpdateCardList();
+    }
+
     // 現在の検索設定に基づいてデータを更新
     private void SortCradData()
     {
-        cardDatas.Clear();
-        cardDatas = CardMasterUtility.allCardList;
+        cardDatas = new List<CardData>(CardMasterUtility.allCardList);
 
         // トークンカードを除外
         cardDatas.RemoveAll(card => 
@@ -94,6 +118,95 @@ public class AllCardList : MonoBehaviour
             }
         );
 
+        // 条件に基づいてフィルタリング
+        // コスト条件
+        // 1,2,3,4,5,6,7,8,9,10+ 
+        List<bool> costConditions = ConditionManager.Instance.GetCostCondition();
+        cardDatas.RemoveAll(card => 
+        {
+            int cost = card.cost;
+            if (cost >= 10) cost = 10;
+            return costConditions[cost] == false;
+        });
+
+        // カードタイプ条件
+        List<bool> typeConditions = ConditionManager.Instance.GetTypeCondition();
+        cardDatas.RemoveAll(card =>
+        {
+            int typeIndex = (int)card.type;
+            return typeConditions[typeIndex] == false;
+        });
+
+        // リーダー条件
+        List<bool> leaderConditions = ConditionManager.Instance.GetLeaderCondition();
+        cardDatas.RemoveAll(card =>
+        {
+            int leaderIndex = (int)card.leaderClass;
+            return leaderConditions[leaderIndex] == false;
+        });
+
+        // レアリティ条件
+        List<bool> rarityConditions = ConditionManager.Instance.GetRarityCondition();
+        cardDatas.RemoveAll(card =>
+        {
+            int rarityIndex = (int)card.rarity;
+            return rarityConditions[rarityIndex] == false;
+        });
+
+        // パック条件
+        List<bool> packConditions = ConditionManager.Instance.GetPackCondition();
+        cardDatas.RemoveAll(card =>
+        {
+            int packIndex = (int)card.packType;
+            return packConditions[packIndex] == false;
+        });
+
+        SortCardList();
+
+        maxPage = (cardDatas.Count - 1) / CardsPerPage;
+        currentPage = 0;
+    }
+
+    // 文字列条件
+    public void StringCondition()
+    {
+        cardDatas = new List<CardData>(CardMasterUtility.allCardList);
+
+        // トークンカードを除外
+        cardDatas.RemoveAll(card =>
+        {
+            var data = CardMasterUtility.GetCardData(card.id);
+            return data.isToken == true;
+        }
+        );
+
+        string condition = SearchInputField.text;
+
+        if (!string.IsNullOrEmpty(condition))
+        {
+            string[] keywords = condition.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+
+            cardDatas.RemoveAll(card =>
+            {
+                string name = card.name ?? "";
+                string text = card.text ?? "";
+
+                // すべてのキーワードが name または text のどちらかに含まれているか
+                return !keywords.All(k =>
+                    name.Contains(k, StringComparison.OrdinalIgnoreCase) ||
+                    text.Contains(k, StringComparison.OrdinalIgnoreCase));
+            });
+        }
+
+        SortCardList();
+
+        maxPage = (cardDatas.Count - 1) / CardsPerPage;
+        currentPage = 0;
+    }
+
+    // リストの並びに順を揃える
+    public void SortCardList()
+    {
         // コスト順 > リーダー順 > カードタイプ順　> レアリティ順 > 名前順でソート
         cardDatas.Sort((a, b) =>
         {
@@ -108,7 +221,7 @@ public class AllCardList : MonoBehaviour
             return a.name.CompareTo(b.name);
         });
 
-        maxPage = (cardDatas.Count - 1) / CardsPerPage;
+        UpdateCardList();
     }
 
     public void NextPage()

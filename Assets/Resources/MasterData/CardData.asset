@@ -426,7 +426,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 500
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u60AA\u8FA3\u306E\u30EC\u30C3\u30B5\u30FC\u30DE\u30DF\u30FC"
@@ -436,7 +436,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 501
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u591C\u306E\u9B3C\u4EBA"
@@ -446,7 +446,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 502
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30A6\u30EB\u30D5\u30DE\u30B9\u30BF\u30FC"
@@ -456,7 +456,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 503
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 1
       Name: "\u30AB\u30AA\u30C6\u30A3\u30C3\u30AF\u30AB\u30FC\u30B9"
@@ -466,7 +466,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 504
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u9B45\u60D1\u306E\u30B5\u30AD\u30E5\u30D0\u30B9\u30FB\u30EA\u30EA\u30E0"
@@ -476,7 +476,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 505
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u30E9\u30D0\u30FC\u30BA\u30CD\u30AF\u30ED\u30DE\u30F3\u30B5\u30FC"
@@ -486,7 +486,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 506
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 1
       Name: "\u9B42\u306E\u6355\u98DF"
@@ -496,7 +496,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 507
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30D0\u30C3\u30C8"
@@ -506,7 +506,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 508
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30B4\u30FC\u30B9\u30C8"
@@ -516,7 +516,7 @@ MonoBehaviour:
       Token: 0
       Trait: 05000000
     - ID: 600
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6E05\u7D14\u306A\u308B\u767D\u72D0"
@@ -526,7 +526,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 601
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30A6\u30A3\u30F3\u30B0\u30A6\u30A9\u30FC\u30EA\u30A2\u30FC"
@@ -536,7 +536,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 602
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u7652\u3057\u306E\u30B7\u30B9\u30BF\u30FC"
@@ -546,7 +546,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 603
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u6295\u5F71\u306E\u9CE5\u50CF"
@@ -556,7 +556,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 604
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u9244\u62F3\u306E\u795E\u7236"
@@ -566,7 +566,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 605
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30BB\u30A4\u30AF\u30EA\u30C3\u30C9\u30B0\u30EA\u30D5\u30A9\u30F3"
@@ -576,7 +576,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 606
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u6709\u7FFC\u306E\u77F3\u50CF"
@@ -586,7 +586,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 607
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A1\u30EB\u30B3\u30F3"
@@ -596,7 +596,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 608
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u58EE\u9E97\u306A\u308B\u96BC"
@@ -606,7 +606,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 700
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30EA\u30AA\u30CD\u30C3\u30C8\u30E9\u30F3\u30B5\u30FC"
@@ -616,7 +616,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 701
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u7832\u6483\u306E\u732B\u7363\u4EBA"
@@ -626,7 +626,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 702
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u7363\u6027\u306E\u9244\u4EBA"
@@ -636,7 +636,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 703
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 1
       Name: "\u7570\u6B21\u5143\u304B\u3089\u306E\u9283\u6483"
@@ -646,7 +646,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 704
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30A8\u30EC\u30AF\u30C8\u30ED\u30A6\u30A3\u30C3\u30D1\u30FC"
@@ -656,7 +656,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 705
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u9B54\u92FC\u306E\u9A0E\u5175"
@@ -666,7 +666,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 706
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 2
       Name: "\u30C9\u30FC\u30EB\u30BA\u30B7\u30A2\u30BF\u30FC"
@@ -676,7 +676,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 707
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u64CD\u308A\u4EBA\u5F62"
@@ -686,7 +686,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0b000000
     - ID: 708
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u6539\u826F\u578B\u30FB\u64CD\u308A\u4EBA\u5F62"
@@ -696,7 +696,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0b000000
     - ID: 709
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 2
       Name: "\u30D5\u30E5\u30FC\u30C1\u30E3\u30FC\u30FB\u30B3\u30A2"
@@ -706,7 +706,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 710
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 2
       Name: "\u30D1\u30B9\u30C8\u30FB\u30B3\u30A2"
@@ -716,7 +716,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 711
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30A2\u30BF\u30C3\u30AF\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
@@ -726,7 +726,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 712
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30AD\u30E3\u30C3\u30B9\u30EB\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
@@ -736,7 +736,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 713
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30B9\u30C8\u30ED\u30A4\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u03B1"
@@ -746,7 +746,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 714
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30B9\u30C8\u30ED\u30A4\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u03B2"
@@ -756,7 +756,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 715
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30B9\u30C8\u30ED\u30A4\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u03B3"
@@ -766,7 +766,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0a000000
     - ID: 716
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30A4\u30AF\u30B7\u30FC\u30C9\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u03A9"
@@ -1808,7 +1808,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 1500
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u7121\u540D\u306E\u60AA\u9B54"
@@ -1818,7 +1818,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1501
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30DF\u30C3\u30C9\u30CA\u30A4\u30C8\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2\u30FB\u30A8\u30E9\u30EB"
@@ -1828,7 +1828,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1502
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30DC\u30FC\u30F3\u30AC\u30FC\u30EB"
@@ -1838,7 +1838,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1503
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u7981\u7D04\u306E\u60AA\u9B54"
@@ -1848,7 +1848,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1504
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30B8\u30E3\u30B0\u30EA\u30F3\u30B0\u30B4\u30FC\u30B9\u30C8"
@@ -1858,7 +1858,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1505
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 1
       Name: "\u6B7B\u795E\u306E\u4E00\u632F\u308A"
@@ -1868,7 +1868,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1506
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u8FA3\u8155\u306E\u6B7B\u795E\u30FB\u30DF\u30FC\u30CE"
@@ -1878,7 +1878,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1507
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u30CA\u30A4\u30C8\u30E1\u30A2\u30FB\u30F4\u30A7\u30EA\u30A3"
@@ -1888,7 +1888,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1508
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u602A\u5947\u306E\u63A2\u7D22\u8005\u30FB\u30E6\u30CA"
@@ -1898,7 +1898,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1509
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u4E32\u523A\u3057\u516C\u30FB\u30F4\u30E9\u30C9"
@@ -1908,7 +1908,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1510
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 2
       Name: "\u7791\u5730\u306E\u970A\u5712"
@@ -1918,7 +1918,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1511
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u71C3\u3048\u76DB\u308B\u9B54\u5263\u30FB\u30AA\u30EB\u30C8\u30ED\u30B9"
@@ -1928,7 +1928,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1512
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u95C7\u306E\u8CDE\u91D1\u7A3C\u304E\u30FB\u30D0\u30EB\u30C8"
@@ -1938,7 +1938,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1513
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u9752\u8594\u8587\u306E\u4EE4\u5B22\u30FB\u30BB\u30EC\u30B9"
@@ -1948,7 +1948,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1514
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u7791\u5730\u306E\u5929\u5BAE\u30FB\u30E0\u30AB\u30F3"
@@ -1958,7 +1958,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1515
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 1
       Name: "\u86C7\u795E\u306E\u6012\u308A"
@@ -1968,7 +1968,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1516
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u30A8\u30F3\u30C9\u30EC\u30B9\u30CF\u30F3\u30BF\u30FC\u30FB\u30A2\u30E9\u30AC\u30F4\u30A3"
@@ -1978,7 +1978,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1517
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u731B\u6BD2\u59EB\u30FB\u30E1\u30C9\u30A5\u30FC\u30B5"
@@ -1988,7 +1988,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1518
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u5954\u653E\u306A\u308B\u7344\u708E\u30FB\u30B1\u30EB\u30D9\u30ED\u30B9"
@@ -1998,7 +1998,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1519
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3"
@@ -2008,7 +2008,7 @@ MonoBehaviour:
       Token: 1
       Trait: 05000000
     - ID: 1520
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u756A\u72AC\u306E\u53F3\u8155\u30FB\u30DF\u30DF"
@@ -2018,7 +2018,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 1521
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u756A\u72AC\u306E\u5DE6\u8155\u30FB\u30B3\u30B3"
@@ -2028,7 +2028,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 1600
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6F5C\u307F\u3057\u30DE\u30A4\u30CB\u30E5"
@@ -2038,7 +2038,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1601
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u8056\u5FC3\u306E\u30D7\u30EA\u30BA\u30E0\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -2048,7 +2048,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1602
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30BB\u30A4\u30F3\u30C8\u30B7\u30FC\u30EB\u30C0\u30FC"
@@ -2058,7 +2058,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1603
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6A19\u3092\u4E0E\u3048\u308B\u30EC\u30C7\u30A3\u30A2\u30F3\u30B9\u30A8\u30F3\u30B8\u30A7\u30EB"
@@ -2068,7 +2068,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1604
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u30D5\u30A7\u30B6\u30FC\u30EC\u30A4\u30F3"
@@ -2078,7 +2078,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1605
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u7A4F\u3084\u304B\u306A\u308B\u6559\u4F1A"
@@ -2088,7 +2088,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1606
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u714C\u69CD\u306E\u30A2\u30EB\u30DF\u30E9\u30FC\u30B8\u30FB\u30B5\u30EA\u30C3\u30B5"
@@ -2098,7 +2098,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1607
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u714C\u7FFC\u306E\u30D5\u30A7\u30B6\u30FC\u30D5\u30A9\u30EB\u30AF\u30FB\u30EA\u30CE"
@@ -2108,7 +2108,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1608
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u5927\u5730\u306E\u5B88\u8B77\u795E\u30FB\u30DF\u30FC\u30F4\u30A7"
@@ -2118,7 +2118,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1609
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u7981\u5BC6\u306E\u8056\u5730"
@@ -2128,7 +2128,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1610
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u30BB\u30A4\u30AF\u30EA\u30C3\u30C9\u30A4\u30F3\u30B8\u30A7\u30AF\u30B7\u30E7\u30F3"
@@ -2138,7 +2138,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1611
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u7981\u5BC6\u306E\u5929\u5BAE\u30FB\u30ED\u30CA\u30F4\u30A7\u30ED"
@@ -2148,7 +2148,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1612
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u7D42\u7109\u306E\u30B9\u30AB\u30EB\u30D5\u30A7\u30A4\u30F3"
@@ -2158,7 +2158,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1613
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u5927\u3044\u306A\u308B\u71BE\u5929\u4F7F\u30FB\u30E9\u30D4\u30B9"
@@ -2168,7 +2168,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1614
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u7363\u59EB\u306E\u8A93\u7D04"
@@ -2178,7 +2178,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1615
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u90AA\u6559\u306E\u5668"
@@ -2188,7 +2188,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1616
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u6C34\u306E\u5B88\u8B77\u795E\u30FB\u30B5\u30EC\u30D5\u30A1"
@@ -2198,7 +2198,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1617
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u88C1\u6C7A\u306E\u30A2\u30CA\u30C6\u30DE\u30FB\u30ED\u30C7\u30AA"
@@ -2208,7 +2208,7 @@ MonoBehaviour:
       Token: 0
       Trait: 0f000000
     - ID: 1618
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u7D14\u767D\u306E\u8056\u5973\u30FB\u30B8\u30E3\u30F3\u30CC"
@@ -2218,7 +2218,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1619
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30EC\u30A4\u30E0\u30BF\u30A4\u30AC\u30FC"
@@ -2228,7 +2228,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 1700
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30D3\u30D3\u30C3\u30C9\u30A4\u30F3\u30D9\u30F3\u30BF\u30FC\u30FB\u30A4\u30EA\u30B9"
@@ -2238,7 +2238,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1701
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30A2\u30F3\u30B9\u30C8\u30C3\u30D1\u30D6\u30EB\u30AC\u30F3\u30CA\u30FC"
@@ -2248,7 +2248,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1702
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30AA\u30FC\u30C8\u30DE\u30BF\u30A2\u30B5\u30B7\u30F3"
@@ -2258,7 +2258,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1703
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30E1\u30BF\u30EB\u30DE\u30FC\u30BB\u30CA\u30EA\u30FC\u30FB\u30C7\u30A3\u30EB\u30AF"
@@ -2268,7 +2268,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1704
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 1
       Name: "\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u30C1\u30E3\u30FC\u30B8"
@@ -2278,7 +2278,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1705
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 1
       Name: "\u4EBA\u5F62\u306E\u8EAB\u4EE3\u308F\u308A"
@@ -2288,7 +2288,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1706
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u611B\u57F7\u306E\u30C9\u30FC\u30EB\u30E6\u30FC\u30B6\u30FC"
@@ -2298,7 +2298,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1707
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30B9\u30C8\u30E9\u30B0\u30EB\u30EA\u30FC\u30C0\u30FC\u30FB\u30EB\u30AD\u30CA"
@@ -2308,7 +2308,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1708
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u6BBA\u610F\u306E\u7CF8\u30FB\u30CE\u30A2"
@@ -2318,7 +2318,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1709
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 1
       Name: "\u547D\u306E\u5954\u6D41"
@@ -2328,7 +2328,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1710
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 1
       Name: "\u6539\u5883\u306E\u518D\u52D5"
@@ -2338,7 +2338,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1711
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u30EC\u30BE\u30EA\u30E5\u30FC\u30B7\u30E7\u30F3\u30FB\u30DF\u30EA\u30A2\u30E0"
@@ -2348,7 +2348,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1712
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u6539\u5883\u306E\u5929\u5BAE\u30FB\u30A2\u30EB\u30A8\u30C3\u30C8"
@@ -2358,7 +2358,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1713
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u7BB1\u5EAD\u306E\u65AD\u7F6A\u8005\u30FB\u30B7\u30EB\u30F4\u30A3\u30A2"
@@ -2368,7 +2368,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1714
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u72C2\u6C17\u306E\u5275\u9020\u8005\u30FB\u30EA\u30FC\u30A2\u30E0"
@@ -2378,7 +2378,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1715
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 2
       Name: "\u907A\u7523\u306E\u7832\u6483"
@@ -2388,7 +2388,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1716
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u65B0\u305F\u306A\u308B\u5C11\u5973\u30FB\u30A8\u30FC\u30B9"
@@ -2398,7 +2398,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1717
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30D7\u30ED\u30B7\u30FC\u30C9\u30CF\u30FC\u30C8\u30FB\u30AA\u30FC\u30AD\u30B9"
@@ -2408,7 +2408,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1718
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30D6\u30FC\u30B9\u30C8\u30A8\u30AF\u30B9\u30C6\u30F3\u30C9\u30FB\u30E9\u30E9\u30DF\u30A2"
@@ -2418,7 +2418,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 1719
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30ED\u30A4\u30C9"
@@ -2940,7 +2940,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 2500
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u6028\u6068\u306E\u683D\u57F9\u8005"
@@ -2950,7 +2950,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2501
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u30B7\u30EB\u30D0\u30FC\u30D0\u30EC\u30C3\u30C8\u30FB\u30EC\u30A4\u30F4\u30F3"
@@ -2960,7 +2960,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2502
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 1
       Name: "\u30AB\u30FC\u30B9\u30D1\u30FC\u30C6\u30A3\u30FC"
@@ -2970,7 +2970,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2503
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u30D6\u30E9\u30B9\u30C8\u30A6\u30A3\u30F3\u30B0\u30FB\u30D4\u30E6\u30E9"
@@ -2980,7 +2980,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2504
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u30B3\u30FC\u30D7\u30B9\u30BD\u30EB\u30B8\u30E3\u30FC"
@@ -2990,7 +2990,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2505
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 1
       Name: "\u8759\u8760\u306E\u4F7F\u5F79"
@@ -3000,7 +3000,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2506
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u30AF\u30EB\u30FC\u30A8\u30EB\u30A6\u30A9\u30FC\u30FB\u30E9\u30A6\u30E9"
@@ -3010,7 +3010,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2507
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u30CE\u30AF\u30BF\u30FC\u30F3\u30B8\u30A7\u30CD\u30E9\u30EB\u30FB\u30A8\u30AF\u30BB\u30E9"
@@ -3020,7 +3020,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2508
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u6D41\u308C\u5815\u3064\u51A5\u6CB3\u30FB\u30AB\u30ED\u30FC\u30F3"
@@ -3030,7 +3030,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2509
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u53CC\u8F2A\u591C\u884C\u30FB\u30AE\u30F3\u30BB\u30C4\uFF06\u30E6\u30C5\u30AD"
@@ -3040,7 +3040,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2510
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u8150\u81ED\u306E\u30BE\u30F3\u30D3"
@@ -3050,7 +3050,7 @@ MonoBehaviour:
       Token: 1
       Trait: 05000000
     - ID: 2511
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u4E00\u30C4\u5C3E\u72D0"
@@ -3060,7 +3060,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 2600
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30EA\u30B9\u30AA\u30E9\u30AF\u30EB\u30FB\u30C0\u30E0\u30B9"
@@ -3070,7 +3070,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2601
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u7C89\u7815\u306E\u8056\u8077\u8005"
@@ -3080,7 +3080,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2602
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u5149\u306E\u9999\u7089"
@@ -3090,7 +3090,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2603
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30D0\u30E9\u30FC\u30B8\u30A8\u30AF\u30BD\u30B7\u30B9\u30C8\u30FB\u30B3\u30EC\u30C3\u30C8"
@@ -3100,7 +3100,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2604
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u6F54\u7656\u306E\u5BE9\u5224\u8005"
@@ -3110,7 +3110,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2605
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 1
       Name: "\u30C7\u30A3\u30D0\u30A4\u30F3\u30AC\u30FC\u30C9"
@@ -3120,7 +3120,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2606
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u901F\u65AD\u306E\u5203\u30FB\u30A2\u30CB\u30A8\u30B9"
@@ -3130,7 +3130,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2607
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 1
       Name: "\u72C2\u304A\u3057\u304D\u6069\u5BF5"
@@ -3140,7 +3140,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2608
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u55DA\u54BD\u306E\u8056\u9A0E\u58EB\u30FB\u30A6\u30A3\u30EB\u30D0\u30FC\u30C8"
@@ -3150,7 +3150,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2609
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u5929\u306E\u5B88\u8B77\u795E\u30FB\u30A2\u30A4\u30C6\u30FC\u30EB"
@@ -3160,7 +3160,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2610
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u8056\u9A0E\u5175"
@@ -3170,7 +3170,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 2700
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30D1\u30DA\u30C3\u30C8\u30AD\u30E3\u30C3\u30C8"
@@ -3180,7 +3180,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2701
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30A8\u30F3\u30B8\u30F3\u30D6\u30EC\u30A4\u30C0\u30FC"
@@ -3190,7 +3190,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2702
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 2
       Name: "\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8\u30AB\u30BF\u30D1\u30EB\u30C8"
@@ -3200,7 +3200,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2703
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30CF\u30FC\u30C8\u30B9\u30ED\u30FC\u30BF\u30FC\u30FB\u30D5\u30A3\u30A2"
@@ -3210,7 +3210,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2704
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30C7\u30A3\u30B9\u30DA\u30A2\u30ED\u30FC\u30C9\u30FB\u30A2\u30AD\u30E0"
@@ -3220,7 +3220,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2705
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 1
       Name: "\u30A4\u30AB\u30ED\u30B9\u306E\u98DB\u7FD4"
@@ -3230,7 +3230,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2706
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u6697\u7344\u306E\u6B8B\u5149\u30FB\u30B8\u30E3\u30B9\u30D1\u30FC"
@@ -3240,7 +3240,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2707
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 1
       Name: "\u5FC3\u6709\u308B\u5171\u95D8"
@@ -3250,7 +3250,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2708
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30B7\u30F3\u30D5\u30A9\u30CB\u30A2\u30CF\u30FC\u30C8\u30FB\u30C4\u30F4\u30A1\u30A4"
@@ -3260,7 +3260,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2709
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30DE\u30A4\u30F3\u30C9\u30A2\u30FC\u30C4\u30FB\u30AB\u30EB\u30E9"
@@ -3270,7 +3270,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 2710
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30C9\u30FC\u30EB\u30B9\u30ED\u30FC\u30BF\u30FC"
@@ -3280,7 +3280,7 @@ MonoBehaviour:
       Token: 1
       Trait: 0b000000
     - ID: 2711
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u30F4\u30A3\u30AF\u30C8\u30EA\u30A2"
@@ -3862,7 +3862,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3500
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u6DF7\u878D\u306E\u80AF\u5B9A\u8005"
@@ -3872,7 +3872,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3501
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u6CE1\u6CAB\u306E\u9B3C\u59EB"
@@ -3882,7 +3882,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3502
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 1
       Name: "\u66B4\u8650\u306E\u884C\u9032"
@@ -3892,7 +3892,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3503
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u30D5\u30EC\u30C3\u30B7\u30E5\u30B0\u30EC\u30A4\u30D6\u30AD\u30FC\u30D1\u30FC"
@@ -3902,7 +3902,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3504
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u6DF7\u878D\u306E\u7948\u7977\u8005"
@@ -3912,7 +3912,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3505
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 2
       Name: "\u6DF7\u878D\u306E\u57CE"
@@ -3922,7 +3922,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3506
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u6DF7\u878D\u306E\u56E3\u7D50\u8005"
@@ -3932,7 +3932,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3507
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 1
       Name: "\u53EB\u559A\u3068\u618E\u60AA"
@@ -3942,7 +3942,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3508
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u6DF7\u878D\u306E\u7D99\u627F\u8005\u30FB\u30B7\u30E3\u30E0\uFF1D\u30CA\u30AF\u30A2"
@@ -3952,7 +3952,7 @@ MonoBehaviour:
       Token: 0
       Trait: 0e000000
     - ID: 3509
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u7D76\u53EB\u3068\u611B\u7D76\u306E\u9855\u73FE\u30FB\u30EB\u30EB\u30CA\u30A4\uFF06\u30F4\u30A1\u30FC\u30CA\u30EC\u30AF"
@@ -3962,7 +3962,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3510
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 1
       Name: "\u7D76\u53EB\u306E\u62E1\u6563"
@@ -3972,7 +3972,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3511
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 1
       Name: "\u611B\u7D76\u306E\u98DB\u7FD4"
@@ -3982,7 +3982,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3600
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u5B89\u606F\u306E\u80AF\u5B9A\u8005"
@@ -3992,7 +3992,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3601
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u8056\u9A0E\u58EB\u306E\u56E3\u54E1"
@@ -4002,7 +4002,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3602
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u30BB\u30A4\u30F3\u30C8\u30D5\u30E9\u30C3\u30B7\u30E5"
@@ -4012,7 +4012,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3603
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u5B89\u606F\u306E\u7948\u7977\u8005"
@@ -4022,7 +4022,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3604
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u5B89\u606F\u306E\u795E\u6BBF"
@@ -4032,7 +4032,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3605
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u6709\u7FFC\u306E\u7345\u5B50\u50CF"
@@ -4042,7 +4042,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3606
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u5B89\u606F\u306E\u56E3\u7D50\u8005"
@@ -4052,7 +4052,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3607
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u8F1D\u304F\u5931\u610F"
@@ -4062,7 +4062,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3608
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u7D76\u671B\u306E\u9855\u73FE\u30FB\u30DE\u30FC\u30A6\u30A3\u30F3"
@@ -4072,7 +4072,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3609
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u5B89\u606F\u306E\u7D99\u627F\u8005\u30FB\u30D2\u30E1\u30AB"
@@ -4082,7 +4082,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3610
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u7D76\u671B\u306E\u5954\u6D41"
@@ -4092,7 +4092,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3700
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u7834\u58CA\u306E\u80AF\u5B9A\u8005"
@@ -4102,7 +4102,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3701
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u97F3\u901F\u306E\u98DB\u884C\u5175"
@@ -4112,7 +4112,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3702
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 1
       Name: "\u30B9\u30C8\u30EA\u30F3\u30B0\u30A2\u30B5\u30EB\u30C8"
@@ -4122,7 +4122,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3703
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u7834\u58CA\u306E\u7948\u7977\u8005"
@@ -4132,7 +4132,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3704
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u30D5\u30A3\u30FC\u30EB\u30C9\u30A8\u30F3\u30B8\u30CB\u30A2"
@@ -4142,7 +4142,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3705
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 2
       Name: "\u7834\u58CA\u306E\u8352\u91CE"
@@ -4152,7 +4152,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3706
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u7834\u58CA\u306E\u56E3\u7D50\u8005"
@@ -4162,7 +4162,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3707
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 1
       Name: "\u6BB2\u6EC5\u306E\u6B4C\u58F0"
@@ -4172,7 +4172,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3708
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u7834\u58CA\u306E\u7D99\u627F\u8005\u30FB\u30A2\u30AF\u30B7\u30A2"
@@ -4182,7 +4182,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3709
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u594F\u7D76\u306E\u9855\u73FE\u30FB\u30EA\u30FC\u30B7\u30A7\u30CA"
@@ -4192,7 +4192,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 3710
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 1
       Name: "\u594F\u7D76\u306E\u72EC\u5531"
@@ -4202,7 +4202,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3711
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 2
       Name: "\u65B0\u7D04\u30FB\u767D\u306E\u7AE0"
@@ -4212,7 +4212,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 3712
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 2
       Name: "\u65B0\u7D04\u30FB\u9ED2\u306E\u7AE0"
@@ -4684,7 +4684,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4500
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u61A7\u61AC\u306E\u9244\u69CC\u30FB\u30A2\u30EB\u30E1\u30A4\u30C0"
@@ -4694,7 +4694,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4501
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 0
       Name: "\u4E0D\u5C48\u306E\u92ED\u5203\u30FB\u30D0\u30B6\u30E9\u30AC"
@@ -4704,7 +4704,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4502
-      Class: 5
+      Class: 9
       Rarity: 0
       Type: 1
       Name: "\u30F4\u30A1\u30EA\u30A2\u30F3\u30C8\u30A8\u30C3\u30B8"
@@ -4714,7 +4714,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4503
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u611B\u306E\u65C5\u4EBA\u30FB\u30B5\u30C6\u30E5\u30ED\u30B9"
@@ -4724,7 +4724,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4504
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u5143\u7D20\u306E\u5171\u9CF4\u30FB\u30D0\u30A2\u30EB"
@@ -4734,7 +4734,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4505
-      Class: 5
+      Class: 9
       Rarity: 1
       Type: 0
       Name: "\u8987\u7A7A\u306E\u6B66\u795E\u30FB\u30CA\u30BF\u30AF"
@@ -4744,7 +4744,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4506
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 0
       Name: "\u751F\u6EC5\u306E\u6280\u5DE7\u30FB\u30CD\u30CF\u30F3"
@@ -4754,7 +4754,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4507
-      Class: 5
+      Class: 9
       Rarity: 2
       Type: 1
       Name: "\u30B3\u30E9\u30D7\u30B7\u30E7\u30F3"
@@ -4764,7 +4764,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4508
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u95C7\u306E\u7406\u30FB\u30D5\u30A7\u30C7\u30A3\u30A8\u30EB"
@@ -4774,7 +4774,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4509
-      Class: 5
+      Class: 9
       Rarity: 3
       Type: 0
       Name: "\u72E1\u77E5\u306E\u5815\u5929\u53F8\u30FB\u30D9\u30EA\u30A2\u30EB"
@@ -4784,7 +4784,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4600
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6E05\u304F\u6B63\u3057\u3044\u4FEE\u9053\u5973\u30FB\u30E9\u30E0\u30EC\u30C3\u30C0"
@@ -4794,7 +4794,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4601
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u82F1\u96C4\u5E7B\u8996\u30FB\u30C8\u30EB\u30FC"
@@ -4804,7 +4804,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4602
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u30EA\u30FC\u30EA\u30A8\u30FB\u30E9\u30A4\u30C4"
@@ -4814,7 +4814,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4603
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u7802\u795E\u306E\u5DEB\u5973\u30FB\u30B5\u30E9"
@@ -4824,7 +4824,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4604
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30BC\u30A8\u30F3\u6559\u306E\u50E7\u4FB6\u30FB\u30BD\u30D5\u30A3\u30A2"
@@ -4834,7 +4834,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4605
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u7A7A\u3092\u5F81\u304F\u8247"
@@ -4844,7 +4844,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4606
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u9B54\u6756\u306E\u5916\u79D1\u533B\u30FB\u30C6\u30A3\u30B3"
@@ -4854,7 +4854,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4607
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u30EC\u30FB\u30D5\u30A3\u30FC\u30A8\u306E\u5B9D\u77F3"
@@ -4864,7 +4864,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4608
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u571F\u306E\u7406\u30FB\u30AC\u30EC\u30F2\u30F3"
@@ -4874,7 +4874,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4609
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u5A01\u5BB9\u306A\u308B\u661F\u6676\u9A0E\u58EB\u30FB\u30F4\u30A3\u30FC\u30E9"
@@ -4884,7 +4884,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4700
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u7206\u71C3\u306E\u7DCF\u9577\u30FB\u30C4\u30D0\u30B5"
@@ -4894,7 +4894,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4701
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u5831\u6069\u306E\u6280\u5E2B\u30FB\u30A2\u30A4\u30B6\u30C3\u30AF"
@@ -4904,7 +4904,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4702
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u518D\u8D77\u306E\u591C\u738B\u30FB\u30B7\u30E7\u30A6"
@@ -4914,7 +4914,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4703
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u8F5F\u96F7\u306E\u9583\u72FC\u30FB\u30E6\u30FC\u30B9\u30C6\u30B9"
@@ -4924,7 +4924,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4704
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u53B3\u70C8\u306A\u308B\u6559\u5B98\u30FB\u30A4\u30EB\u30B6"
@@ -4934,7 +4934,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4705
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 1
       Name: "\u30B9\u30C8\u30FC\u30F3\u30FB\u30D6\u30EC\u30A4\u30AF"
@@ -4944,7 +4944,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4706
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 0
       Name: "\u7A7A\u6155\u3046\u5E30\u9084\u8005\u30FB\u30AB\u30B7\u30A6\u30B9"
@@ -4954,7 +4954,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4707
-      Class: 7
+      Class: 8
       Rarity: 2
       Type: 1
       Name: "\u30B1\u30A4\u30AA\u30B9\u30FB\u30EC\u30AE\u30AA\u30F3"
@@ -4964,7 +4964,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4708
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u5149\u306E\u7406\u30FB\u30EB\u30FB\u30AA\u30FC"
@@ -4974,7 +4974,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 4709
-      Class: 7
+      Class: 8
       Rarity: 3
       Type: 0
       Name: "\u5168\u4E00\u306E\u738B\u30FB\u30D9\u30EB\u30BC\u30D0\u30D6"
@@ -5576,7 +5576,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30D1\u30EB\u30C8\u30A4\u30B5\u30FC\u30B8\u30A7\u30F3\u30C8"
@@ -5586,7 +5586,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30DA\u30AF\u30BF\u30FC"
@@ -5596,7 +5596,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30EB\u30FC\u30AD\u30FC\u30CD\u30AF\u30ED\u30DE\u30F3\u30B5\u30FC"
@@ -5606,7 +5606,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30A8\u30EB\u30C0\u30FC\u30B9\u30D1\u30EB\u30C8\u30A4\u30BD\u30EB\u30B8\u30E3\u30FC"
@@ -5616,7 +5616,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100504
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B0\u30EC\u30A4\u30D6\u30A6\u30A7\u30A4\u30AB\u30FC"
@@ -5626,7 +5626,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100505
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B4\u30FC\u30B9\u30C8\u30E9\u30A4\u30C0\u30FC"
@@ -5636,7 +5636,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100506
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6D88\u3048\u306C\u6028\u6068"
@@ -5646,7 +5646,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100507
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6DF1\u6DF5\u3078\u306E\u8A98\u3044"
@@ -5656,7 +5656,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100508
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u60AA\u622F\u306A\u30CD\u30AF\u30ED\u30DE\u30F3\u30B5\u30FC"
@@ -5666,7 +5666,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100509
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u5730\u7344\u306E\u89E3\u653E\u8005"
@@ -5676,7 +5676,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100510
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30A2\u30F3\u30C7\u30C3\u30C9\u30AD\u30F3\u30B0"
@@ -5686,7 +5686,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100511
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B4\u30FC\u30B9\u30C8"
@@ -5696,7 +5696,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100512
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30BE\u30F3\u30D3"
@@ -5706,7 +5706,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100513
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30EA\u30C3\u30C1"
@@ -5716,7 +5716,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30CA\u30A4\u30C8\u30E1\u30A2"
@@ -5726,7 +5726,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30A6\u30A3\u30FC\u30C8\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2"
@@ -5736,7 +5736,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u72C2\u6C17\u306E\u51E6\u5211\u4EBA"
@@ -5746,7 +5746,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30B8\u30A7\u30CD\u30E9\u30EB"
@@ -5756,7 +5756,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100604
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30A4\u30F3\u30D7\u30E9\u30F3\u30B5\u30FC"
@@ -5766,7 +5766,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100605
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u8840\u306E\u53D6\u5F15"
@@ -5776,7 +5776,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100606
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u92ED\u5229\u306A\u4E00\u88C2\u304D"
@@ -5786,7 +5786,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100607
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u771F\u7D05\u306E\u7C9B\u6E05"
@@ -5796,7 +5796,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100608
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30EF\u30FC\u30C9\u30ED\u30FC\u30D6\u30EC\u30A4\u30C0\u30FC"
@@ -5806,7 +5806,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100609
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30A2\u30D3\u30B9\u30D3\u30FC\u30B9\u30C8"
@@ -5816,7 +5816,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100610
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u30C7\u30E2\u30F3\u30B9\u30C8\u30FC\u30E0"
@@ -5826,7 +5826,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30CD\u30FC\u30AF\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -5836,7 +5836,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u5927\u4FEE\u9053\u5973"
@@ -5846,7 +5846,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u6C17\u9AD8\u304D\u6559\u7406"
@@ -5856,7 +5856,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u6F06\u9ED2\u306E\u6CD5\u5178"
@@ -5866,7 +5866,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100704
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u7834\u90AA\u306E\u5149"
@@ -5876,7 +5876,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100705
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u5929\u99AC\u53EC\u559A"
@@ -5886,7 +5886,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100706
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u8056\u7363\u3078\u306E\u8A93\u3044"
@@ -5896,7 +5896,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100707
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u767D\u7ADC\u964D\u81E8"
@@ -5906,7 +5906,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100708
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u9244\u69CC\u306E\u50E7\u4FB6"
@@ -5916,7 +5916,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100709
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u9AD8\u4F4D\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -5926,7 +5926,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100710
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u4E8C\u5BFE\u306E\u708E"
@@ -5936,7 +5936,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100711
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30EC\u30A4\u30E0\u30BF\u30A4\u30AC\u30FC"
@@ -5946,7 +5946,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100712
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DA\u30AC\u30B5\u30B9"
@@ -5956,7 +5956,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100713
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u5927\u7FFC\u306E\u767D\u7ADC"
@@ -5966,7 +5966,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100800
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30C9\u30FC\u30EB\u30E6\u30FC\u30B6\u30FC"
@@ -5976,7 +5976,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100801
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30AD\u30CA\u30B5\u30FC\u30F4\u30A1\u30F3\u30C8"
@@ -5986,7 +5986,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100802
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u9B54\u9244\u306E\u7345\u5B50"
@@ -5996,7 +5996,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100803
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30C8\u30A4\u30BD\u30EB\u30B8\u30E3\u30FC"
@@ -6006,7 +6006,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100804
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30AA\u30FC\u30C8\u30DE\u30BF\u30CA\u30A4\u30C8"
@@ -6016,7 +6016,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100805
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u9244\u92FC\u306E\u62F3\u95D8\u58EB"
@@ -6026,7 +6026,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100806
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u9ED2\u9244\u306E\u5175\u58EB"
@@ -6036,7 +6036,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100807
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 1
       Name: "\u6B21\u5143\u65AD"
@@ -6046,7 +6046,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100808
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u9B54\u92FC\u306E\u5080\u5121"
@@ -6056,7 +6056,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100809
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 0
       Name: "\u767D\u9ED2\u7FFC\u30FB\u30CD\u30AF\u30B9"
@@ -6066,7 +6066,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100810
-      Class: 7
+      Class: 8
       Rarity: 1
       Type: 1
       Name: "\u4EBA\u5F62\u9063\u3044\u306E\u7CF8"
@@ -6076,7 +6076,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 100811
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u64CD\u308A\u4EBA\u5F62"
@@ -6086,7 +6086,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100812
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30A2\u30CA\u30E9\u30A4\u30BA\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
@@ -6096,7 +6096,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 100813
-      Class: 7
+      Class: 8
       Rarity: 0
       Type: 0
       Name: "\u30EC\u30C7\u30A3\u30A2\u30F3\u30C8\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
@@ -8188,7 +8188,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30AB\u30EB\u30D3\u30FC\u30B9\u30C8"
@@ -8198,7 +8198,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3\u30F4\u30A1\u30A4\u30D1\u30FC"
@@ -8208,7 +8208,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30AB\u30EB\u30A6\u30A3\u30C9\u30A6"
@@ -8218,7 +8218,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30EF\u30A4\u30C8"
@@ -8228,7 +8228,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101504
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30EC\u30C3\u30B5\u30FC\u30DE\u30DF\u30FC"
@@ -8238,7 +8238,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101505
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u7E8F\u308F\u308A\u3064\u304F\u4EA1\u970A"
@@ -8248,7 +8248,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101506
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30E9\u30D3\u30C3\u30C8\u30CD\u30AF\u30ED\u30DE\u30F3\u30B5\u30FC"
@@ -8258,7 +8258,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101507
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3\u30CA\u30A4\u30C8"
@@ -8268,7 +8268,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101508
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30D1\u30EB\u30C8\u30A4"
@@ -8278,7 +8278,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101509
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30AE\u30EB\u30C6\u30A3\u30AF\u30FC\u30EA\u30A8"
@@ -8288,7 +8288,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101510
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30A4\u30FC\u30BF\u30FC"
@@ -8298,7 +8298,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101511
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30AB\u30FC\u30B9\u30C9\u30BD\u30EB\u30B8\u30E3\u30FC"
@@ -8308,7 +8308,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101512
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30AA\u30EB\u30AF\u30B9"
@@ -8318,7 +8318,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101513
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u30BD\u30A6\u30EB\u30B3\u30F3\u30D0\u30FC\u30B8\u30E7\u30F3"
@@ -8328,7 +8328,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101514
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6B7B\u3078\u306E\u8FD1\u9053"
@@ -8338,7 +8338,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101515
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u30BD\u30A6\u30EB\u30CF\u30F3\u30C8"
@@ -8348,7 +8348,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101516
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6C5A\u308C\u305F\u518D\u751F"
@@ -8358,7 +8358,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101517
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3\u30D5\u30A1\u30A4\u30BF\u30FC"
@@ -8368,7 +8368,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101518
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30C7\u30C3\u30C9\u30EA\u30FC\u30A6\u30A3\u30C9\u30A6"
@@ -8378,7 +8378,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101519
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30CD\u30AF\u30ED\u30A8\u30EC\u30E1\u30F3\u30BF\u30E9\u30FC"
@@ -8388,7 +8388,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101520
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30B4\u30A8\u30C6\u30A3\u30A2\u30E1\u30A4\u30B8"
@@ -8398,7 +8398,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101521
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30B9\u30AB\u30EB\u30E9\u30A4\u30C0\u30FC"
@@ -8408,7 +8408,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101522
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30B0\u30E9\u30C3\u30C8\u30F3"
@@ -8418,7 +8418,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101523
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u9B42\u98E2\u306E\u4EA1\u970A"
@@ -8428,7 +8428,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101524
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30C7\u30E5\u30E9\u30CF\u30F3"
@@ -8438,7 +8438,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101525
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u6B7B\u90FD\u306E\u5973\u738B"
@@ -8448,7 +8448,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101526
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30B0\u30E9\u30A4\u30F3\u30C0\u30FC"
@@ -8458,7 +8458,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101527
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 1
       Name: "\u5E7D\u4F53\u5316"
@@ -8468,7 +8468,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101528
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 1
       Name: "\u518D\u751F\u306E\u546A\u5370"
@@ -8478,7 +8478,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101529
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 2
       Name: "\u96C6\u56E3\u57CB\u846C\u5730"
@@ -8488,7 +8488,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101530
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30DE\u30C0\u30E0\u30EA\u30C3\u30C1"
@@ -8498,7 +8498,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101531
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30EF\u30A4\u30C8\u30AD\u30F3\u30B0"
@@ -8508,7 +8508,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101532
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30D5\u30A1\u30F3\u30C8\u30E0\u30C9\u30E9\u30B4\u30F3"
@@ -8518,7 +8518,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101533
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30B9\u30BF\u30A4\u30E9\u30F3\u30C8"
@@ -8528,7 +8528,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101534
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30E5\u30A8\u30EA\u30B9\u30C8\u30FB\u30E2\u30EB\u30C7\u30A3\u30AB\u30A4"
@@ -8538,7 +8538,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101535
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u8150\u306E\u5D50"
@@ -8548,7 +8548,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101536
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u30D5\u30A1\u30F3\u30C8\u30E0\u30CF\u30A6\u30EB"
@@ -8558,7 +8558,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101537
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u6B7B\u306E\u795D\u798F"
@@ -8568,7 +8568,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101538
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 2
       Name: "\u60AA\u970A\u306E\u9957\u5BB4"
@@ -8578,7 +8578,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101539
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u30B1\u30EB\u30D9\u30ED\u30B9"
@@ -8588,7 +8588,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101540
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u30D7\u30EB\u30FC\u30C8"
@@ -8598,7 +8598,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101541
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u9AB8\u306E\u738B"
@@ -8608,7 +8608,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101542
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3"
@@ -8618,7 +8618,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101543
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 1
       Name: "\u30DF\u30DF"
@@ -8628,7 +8628,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101544
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 1
       Name: "\u30B3\u30B3"
@@ -8638,7 +8638,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u8822\u304F\u6B7B\u970A"
@@ -8648,7 +8648,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30EA\u30EA\u30E0"
@@ -8658,7 +8658,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30F4\u30A7\u30CE\u30E0\u30B3\u30D6\u30E9"
@@ -8668,7 +8668,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30EC\u30A4\u30CB\u30FC\u30C7\u30D3\u30EB"
@@ -8678,7 +8678,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101604
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30D6\u30E9\u30C3\u30C9\u30A6\u30EB\u30D5"
@@ -8688,7 +8688,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101605
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30E1\u30BF\u30EB\u30AC\u30FC\u30B4\u30A4\u30EB"
@@ -8698,7 +8698,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101606
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30AD\u30E9\u30FC\u30C7\u30D3\u30EB"
@@ -8708,7 +8708,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101607
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30E2\u30F3\u30CF\u30F3\u30C9\u30A2\u30B5\u30B7\u30F3"
@@ -8718,7 +8718,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101608
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30E2\u30F3\u30B9\u30CA\u30A4\u30D1\u30FC"
@@ -8728,7 +8728,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101609
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30B5\u30AD\u30E5\u30D0\u30B9"
@@ -8738,7 +8738,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101610
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u61A4\u6012\u306E\u5DE8\u4EBA"
@@ -8748,7 +8748,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101611
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30D0\u30FC\u30D0\u30EA\u30C3\u30AF\u30C7\u30FC\u30E2\u30F3"
@@ -8758,7 +8758,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101612
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u5F37\u6B32\u306A\u9B54\u7363"
@@ -8768,7 +8768,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101613
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30E9\u30F3\u30DA\u30FC\u30B8\u30B8\u30E3\u30A4\u30A2\u30F3\u30C8"
@@ -8778,7 +8778,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101614
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u30EA\u30DF\u30EB\u306E\u79D8\u5BC6"
@@ -8788,7 +8788,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101615
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u7737\u5C5E\u306E\u53EC\u559A"
@@ -8798,7 +8798,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101616
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u30D6\u30E9\u30C3\u30C9\u30EC\u30A4\u30B8"
@@ -8808,7 +8808,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101617
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u546A\u5263\u306E\u5438\u8840\u9B3C"
@@ -8818,7 +8818,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101618
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30E2\u30EB\u30E2"
@@ -8828,7 +8828,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101619
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30B5\u30E2\u30CA\u30FC"
@@ -8838,7 +8838,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101620
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u5FA9\u8B90\u306E\u60AA\u9B54"
@@ -8848,7 +8848,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101621
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30DF\u30C3\u30C9\u30CA\u30A4\u30C8\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2"
@@ -8858,7 +8858,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101622
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2\u30E9\u30A4\u30AB\u30F3"
@@ -8868,7 +8868,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101623
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u4EEE\u9762\u306E\u6BBA\u622E\u8005"
@@ -8878,7 +8878,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101624
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30B2\u30EA\u30E5\u30AA\u30F3"
@@ -8888,7 +8888,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101625
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2\u30D0\u30FC\u30C9"
@@ -8898,7 +8898,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101626
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30A2\u30EB\u30AB\u30FC\u30C9"
@@ -8908,7 +8908,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101627
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u591C\u306E\u7FA4\u308C"
@@ -8918,7 +8918,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101628
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u7370\u731B\u306A\u6355\u98DF"
@@ -8928,7 +8928,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101629
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 2
       Name: "\u9BAE\u8840\u306E\u82B1\u5712"
@@ -8938,7 +8938,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101630
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30E2\u30F3\u30B3\u30DE\u30F3\u30C0\u30FC\u30FB\u30E9\u30A6\u30E9"
@@ -8948,7 +8948,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101631
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u88C1\u304D\u306E\u60AA\u9B54"
@@ -8958,7 +8958,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101632
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30A8\u30EA\u30CB\u30E5\u30B9"
@@ -8968,7 +8968,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101633
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30E1\u30C9\u30A5\u30FC\u30B5"
@@ -8978,7 +8978,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101634
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30D5\u30EA\u30A2\u30A8"
@@ -8988,7 +8988,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101635
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30BB\u30AF\u30B7\u30FC\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2"
@@ -8998,7 +8998,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101636
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 1
       Name: "\u30C7\u30A3\u30A2\u30DC\u30EA\u30C3\u30AF\u30C9\u30EC\u30A4\u30F3"
@@ -9008,7 +9008,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101637
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 1
       Name: "\u9ED9\u793A\u9332"
@@ -9018,7 +9018,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101638
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 2
       Name: "\u6F06\u9ED2\u306E\u5951\u7D04"
@@ -9028,7 +9028,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101639
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30C7\u30A3\u30FC\u30E9\u30FC"
@@ -9038,7 +9038,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101640
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30D3\u30FC\u30B9\u30C8\u30C9\u30DF\u30CD\u30FC\u30BF\u30FC"
@@ -9048,7 +9048,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101641
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30AF\u30A4\u30FC\u30F3\u30F4\u30A1\u30F3\u30D1\u30A4\u30A2"
@@ -9058,7 +9058,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101642
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30D5\u30A9\u30EC\u30B9\u30C8\u30D0\u30C3\u30C8"
@@ -9068,7 +9068,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30E9\u30D3\u30C3\u30C8\u30D2\u30FC\u30E9\u30FC"
@@ -9078,7 +9078,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30A2\u30FC\u30C7\u30F3\u30C8\u30B7\u30B9\u30BF\u30FC"
@@ -9088,7 +9088,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30A4\u30CB\u30E5"
@@ -9098,7 +9098,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u898B\u7FD2\u3044\u30B7\u30B9\u30BF\u30FC"
@@ -9108,7 +9108,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101704
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -9118,7 +9118,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101705
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30AC\u30FC\u30C7\u30A3\u30A2\u30F3\u30B7\u30B9\u30BF\u30FC"
@@ -9128,7 +9128,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101706
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u656C\u8654\u306A\u4FEE\u9053\u5973"
@@ -9138,7 +9138,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101707
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30D2\u30FC\u30EB\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -9148,7 +9148,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101708
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30A3\u30D0\u30A4\u30F3\u30A2\u30FC\u30DE\u30FC"
@@ -9158,7 +9158,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101709
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30B9\u30AF\u30B8\u30E3\u30A4\u30A2\u30F3\u30C8"
@@ -9168,7 +9168,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101710
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u5B88\u8B77\u306E\u529B"
@@ -9178,7 +9178,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101711
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u6CBB\u7652\u306E\u7948\u308A"
@@ -9188,7 +9188,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101712
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u767D\u7FFC\u3078\u306E\u7948\u308A"
@@ -9198,7 +9198,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101713
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u8056\u306A\u308B\u9858\u3044"
@@ -9208,7 +9208,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101714
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u7570\u7AEF\u5BE9\u554F"
@@ -9218,7 +9218,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101715
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u795E\u9CE5\u306E\u547C\u3073\u7B1B"
@@ -9228,7 +9228,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101716
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u6E05\u6D44\u306E\u72D0"
@@ -9238,7 +9238,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101717
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u52A0\u8B77\u306E\u4FEE\u9053\u5973"
@@ -9248,7 +9248,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101718
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u6559\u4F1A\u306E\u8B77\u308A\u624B"
@@ -9258,7 +9258,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101719
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30D7\u30EA\u30BA\u30E0\u30D7\u30EA\u30FC\u30B9\u30C8"
@@ -9268,7 +9268,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101720
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30EC\u30C7\u30A3\u30A2\u30F3\u30C8\u30B7\u30E3\u30FC\u30DE\u30F3"
@@ -9278,7 +9278,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101721
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30E1\u30A4\u30B8"
@@ -9288,7 +9288,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101722
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u6B8B\u5FCD\u306A\u4FEE\u9053\u5973"
@@ -9298,7 +9298,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101723
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30AF\u30EC\u30EA\u30C3\u30AF\u30E9\u30F3\u30B5\u30FC"
@@ -9308,7 +9308,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101724
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30B7\u30E5\u30E9\u30A4\u30F3\u30CA\u30A4\u30C8\u30E1\u30A4\u30C7\u30F3"
@@ -9318,7 +9318,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101725
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u795E\u8A17\u306E\u8CB4\u65CF"
@@ -9328,7 +9328,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101726
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30DB\u30EF\u30A4\u30C8\u30CA\u30A4\u30C8"
@@ -9338,7 +9338,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101727
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u5B88\u8B77\u306E\u967D\u5149"
@@ -9348,7 +9348,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101728
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u8056\u7345\u5B50\u306E\u7259"
@@ -9358,7 +9358,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101729
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u6B7B\u306E\u5BA3\u544A"
@@ -9368,7 +9368,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101730
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u30A2\u30FC\u30AF\u30D3\u30B7\u30E7\u30C3\u30D7\u30FB\u30EC\u30EA\u30A2"
@@ -9378,7 +9378,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101731
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u5149\u8F1D\u30C9\u30E9\u30B4\u30F3"
@@ -9388,7 +9388,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101732
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 1
       Name: "\u611B\u306E\u798F\u97F3"
@@ -9398,7 +9398,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101733
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 1
       Name: "\u30C0\u30FC\u30AF\u30AA\u30D5\u30A1\u30EA\u30F3\u30B0"
@@ -9408,7 +9408,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101734
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 1
       Name: "\u30C6\u30DF\u30B9\u306E\u5BE9\u5224"
@@ -9418,7 +9418,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101735
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u5922\u60F3\u306E\u767D\u514E"
@@ -9428,7 +9428,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101736
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u795E\u57DF\u306E\u5B88\u8B77\u8005"
@@ -9438,7 +9438,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101737
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u5929\u55B0\u3089\u3046\u8056\u7ADC"
@@ -9448,7 +9448,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101738
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u7948\u308A\u306E\u96C6\u7D04"
@@ -9458,7 +9458,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101739
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30E0\u30FC\u30F3\u30A2\u30EB\u30DF\u30E9\u30FC\u30B8"
@@ -9468,7 +9468,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101740
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30B8\u30E3\u30F3\u30CC\u30C0\u30EB\u30AF"
@@ -9478,7 +9478,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101741
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30B9\u30AB\u30EB\u30D5\u30A7\u30A4\u30F3"
@@ -9488,7 +9488,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 101742
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A1\u30EB\u30B3\u30F3"
@@ -9498,7 +9498,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101743
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30C9\u30EA\u30FC\u30E0\u30E9\u30D3\u30C3\u30C8"
@@ -9508,7 +9508,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101744
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30AC\u30FC\u30C7\u30A3\u30A2\u30F3\u30D5\u30A9\u30C3\u30AF\u30B9"
@@ -9518,7 +9518,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101745
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u58EE\u9E97\u306A\u308B\u96BC"
@@ -9528,7 +9528,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 101746
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30D0\u30ED\u30F3"
@@ -10290,7 +10290,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30B3\u30F3\u30B8\u30E5\u30E9\u30FC"
@@ -10300,7 +10300,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u6B7B\u3092\u8FFD\u3046\u8005"
@@ -10310,7 +10310,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30D1\u30EB\u30C8\u30A4\u30BD\u30EB\u30B8\u30E3\u30FC"
@@ -10320,7 +10320,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30EA\u30B9\u30B4\u30FC\u30B9\u30C8"
@@ -10330,7 +10330,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102504
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30B9\u30C8\u30ED\u30A4\u30E4\u30FC\u30BA\u30B3\u30DE\u30F3\u30C0\u30FC"
@@ -10340,7 +10340,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102505
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6B7B\u306E\u4E00\u9583"
@@ -10350,7 +10350,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102506
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30DC\u30FC\u30F3\u30AD\u30DE\u30A4\u30E9"
@@ -10360,7 +10360,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102507
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30AB\u30ED\u30FC\u30F3"
@@ -10370,7 +10370,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102508
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30A2\u30F3\u30C9\u30E9\u30B9"
@@ -10380,7 +10380,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102509
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 1
       Name: "\u6B7B\u8005\u306E\u5E30\u9084"
@@ -10390,7 +10390,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102510
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30B1\u30EA\u30C9\u30A6\u30A7\u30F3"
@@ -10400,7 +10400,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102511
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 2
       Name: "\u9B42\u306E\u518D\u5229\u7528"
@@ -10410,7 +10410,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102512
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 2
       Name: "\u6B7B\u970A\u306E\u5BB4"
@@ -10420,7 +10420,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102513
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u877F\u306E\u738B"
@@ -10430,7 +10430,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102514
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u7D76\u901F\u306E\u7532\u866B"
@@ -10440,7 +10440,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102515
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u7D76\u6B7B\u306E\u6BD2\u8702"
@@ -10450,7 +10450,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102516
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u7D76\u8B77\u306E\u9B54\u880D"
@@ -10460,7 +10460,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u4EAB\u697D\u306E\u60AA\u9B54"
@@ -10470,7 +10470,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30B5\u30FC\u30DA\u30F3\u30C8\u30C1\u30E3\u30FC\u30DE\u30FC"
@@ -10480,7 +10480,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30DF\u30CB\u30C7\u30D3\u30EB"
@@ -10490,7 +10490,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30CA\u30D3\u30B2\u30FC\u30BF\u30FC"
@@ -10500,7 +10500,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102604
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30E2\u30F3\u30B9\u30E9\u30EB"
@@ -10510,7 +10510,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102605
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u9BAE\u8840\u306E\u53E3\u4ED8\u3051"
@@ -10520,7 +10520,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102606
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30E9\u30D3\u30EA\u30F3\u30B9\u30C7\u30D3\u30EB"
@@ -10530,7 +10530,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102607
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30B8\u30E3\u30AC\u30FC\u30CE\u30FC\u30C8"
@@ -10540,7 +10540,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102608
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u8CB4\u304D\u8840\u7259"
@@ -10550,7 +10550,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102609
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u30E1\u30C9\u30A5\u30FC\u30B5\u306E\u9B54\u773C"
@@ -10560,7 +10560,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102610
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u5438\u8840\u59EB\u30FB\u30F4\u30A1\u30F3\u30D4\u30A3"
@@ -10570,7 +10570,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102611
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30A2\u30B6\u30BC\u30EB"
@@ -10580,7 +10580,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102612
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 2
       Name: "\u5438\u8840\u9B3C\u306E\u53E4\u57CE"
@@ -10590,7 +10590,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102613
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30D6\u30E9\u30C3\u30C7\u30A3\u30FB\u30E1\u30A2\u30EA\u30FC"
@@ -10600,7 +10600,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u5929\u754C\u306E\u5FE0\u72AC"
@@ -10610,7 +10610,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30AB\u30A4\u30B9\u30D4\u30EA\u30C3\u30C8"
@@ -10620,7 +10620,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30FC\u30EA\u30FC\u30D5\u30A9\u30C3\u30AF\u30B9\u30FB\u30B0\u30EA\u30E2\u30FC"
@@ -10630,7 +10630,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u7FFC\u306E\u738B\u5B50"
@@ -10640,7 +10640,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102704
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u50E7\u4FB6\u306E\u8056\u6C34"
@@ -10650,7 +10650,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102705
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u795E\u9244\u306E\u7FFC"
@@ -10660,7 +10660,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102706
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30B9\u30EC\u30C3\u30B8\u30A8\u30AF\u30BD\u30B7\u30B9\u30C8"
@@ -10670,7 +10670,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102707
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30EC\u30C7\u30A3\u30A2\u30F3\u30B9\u30A8\u30F3\u30B8\u30A7\u30EB"
@@ -10680,7 +10680,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102708
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u7363\u59EB\u306E\u547C\u3073\u58F0"
@@ -10690,7 +10690,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102709
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u8A60\u5531\uFF1A\u7981\u3058\u3089\u308C\u305F\u5100\u5F0F"
@@ -10700,7 +10700,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102710
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u30AB\u30B0\u30E4"
@@ -10710,7 +10710,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102711
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u5929\u7A7A\u306E\u5B88\u8B77\u8005\u30FB\u30AC\u30EB\u30E9"
@@ -10720,7 +10720,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102712
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u30A8\u30A4\u30E9\u306E\u7948\u7977"
@@ -10730,7 +10730,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102713
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 2
       Name: "\u5C01\u3058\u3089\u308C\u3057\u71BE\u5929\u4F7F"
@@ -10740,7 +10740,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 102714
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30A2\u30C0\u30DE\u30F3\u30C8\u30D0\u30FC\u30C9"
@@ -10750,7 +10750,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102715
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u3046\u305F\u304B\u305F\u306E\u6708"
@@ -10760,7 +10760,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102716
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 2
       Name: "\u76EE\u899A\u3081\u3057\u71BE\u5929\u4F7F"
@@ -10770,7 +10770,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102717
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 2
       Name: "\u8607\u308A\u3057\u71BE\u5929\u4F7F"
@@ -10780,7 +10780,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 102718
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 2
       Name: "\u6804\u5149\u306E\u30BB\u30E9\u30D5\u30FB\u30E9\u30D4\u30B9"
@@ -11472,7 +11472,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u602A\u72AC\u306E\u5893\u5B88"
@@ -11482,7 +11482,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u53CC\u7FFC\u306E\u8B66\u8B77\u8005"
@@ -11492,7 +11492,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u95C7\u306E\u5F93\u8005"
@@ -11502,7 +11502,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u6D77\u8CCA\u30BE\u30F3\u30D3"
@@ -11512,7 +11512,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103504
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u6028\u55DF\u306E\u58F0"
@@ -11522,7 +11522,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103505
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u3088\u308D\u3081\u304F\u4E0D\u6B7B\u8005"
@@ -11532,7 +11532,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103506
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30CD\u30AF\u30ED\u30A2\u30B5\u30B7\u30F3"
@@ -11542,7 +11542,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103507
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u51A5\u5B88\u306E\u6226\u58EB\u30FB\u30AB\u30E0\u30E9"
@@ -11552,7 +11552,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103508
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 1
       Name: "\u6B7B\u970A\u306E\u624B"
@@ -11562,7 +11562,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103509
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30B7\u30E3\u30C9\u30A6\u30EA\u30FC\u30D1\u30FC"
@@ -11572,7 +11572,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103510
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30D0\u30ED\u30FC\u30EB"
@@ -11582,7 +11582,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103511
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u51A5\u5E9C\u795E\u3068\u306E\u5951\u7D04"
@@ -11592,7 +11592,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103512
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u30CD\u30D5\u30C6\u30A3\u30B9"
@@ -11602,7 +11602,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30EC\u30F4\u30A3\u30AA\u30F3\u30C7\u30E5\u30FC\u30AF\u30FB\u30E6\u30EA\u30A6\u30B9"
@@ -11612,7 +11612,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u4EBA\u72FC\u306E\u7FA4\u308C\u9577"
@@ -11622,7 +11622,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30B8\u30E5\u30A8\u30EB\u30C7\u30D3\u30EB\u30FB\u30E2\u30EA\u30A2\u30CA"
@@ -11632,7 +11632,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u9AD8\u6162\u306A\u308B\u60AA\u9B54"
@@ -11642,7 +11642,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103604
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u51E6\u5211\u4EBA\u306E\u65A7"
@@ -11652,7 +11652,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103605
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u5438\u8840\u8CB4\u30FB\u30F4\u30A1\u30A4\u30C8"
@@ -11662,7 +11662,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103606
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u5343\u96E8\u306E\u69CD\u4F7F\u3044"
@@ -11672,7 +11672,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103607
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30AD\u30E3\u30BF\u30E9\u30AF\u30C8\u30D3\u30FC\u30B9\u30C8"
@@ -11682,7 +11682,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103608
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u7FA4\u308C\u306A\u3059\u98E2\u9913"
@@ -11692,7 +11692,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103609
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30DE\u30B9\u30C6\u30DE"
@@ -11702,7 +11702,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103610
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u6C37\u5263\u306E\u6226\u9B3C"
@@ -11712,7 +11712,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103611
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 1
       Name: "\u30B5\u30C7\u30A3\u30B9\u30C6\u30A3\u30C3\u30AF\u30CA\u30A4\u30C8"
@@ -11722,7 +11722,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103612
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u8840\u9913\u306E\u5973\u5E1D"
@@ -11732,7 +11732,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30D5\u30ED\u30C3\u30B0\u30AF\u30EC\u30EA\u30C3\u30AF"
@@ -11742,7 +11742,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30B9\u30BF\u30FC\u30EC\u30C7\u30A3\u30BB\u30FC\u30B8"
@@ -11752,7 +11752,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u719F\u9054\u306E\u8ABF\u6559\u5E2B"
@@ -11762,7 +11762,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30B3\u30EC\u30AF\u30BF\u30FC"
@@ -11772,7 +11772,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103704
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 1
       Name: "\u4FE1\u4EF0\u306E\u5177\u73FE\u5316"
@@ -11782,7 +11782,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103705
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u714C\u7FFC\u306E\u6226\u58EB\u30FB\u30EA\u30CE"
@@ -11792,7 +11792,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103706
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u90AA\u60AA\u306A\u308B\u4E88\u8A00\u8005\u30FB\u30C0\u30E0\u30B9"
@@ -11802,7 +11802,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103707
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30A8\u30F3\u30B7\u30A7\u30F3\u30C8\u30EC\u30AA\u30B9\u30D4\u30EA\u30C3\u30C8"
@@ -11812,7 +11812,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103708
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u30DA\u30AC\u30B5\u30B9\u306E\u7D50\u6676\u50CF"
@@ -11822,7 +11822,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103709
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u30F4\u30A1\u30EB\u30CF\u30E9\u30B8\u30A7\u30CD\u30E9\u30EB"
@@ -11832,7 +11832,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103710
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u714C\u89D2\u306E\u6226\u58EB\u30FB\u30B5\u30EA\u30C3\u30B5"
@@ -11842,7 +11842,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103711
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u795E\u9B54\u88C1\u5224\u6240"
@@ -11852,7 +11852,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 103712
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u72C2\u4FE1\u306E\u5076\u50CF"
@@ -12544,7 +12544,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u6B7B\u6708\u306E\u4F7F\u5F92"
@@ -12554,7 +12554,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B4\u30D6\u30EA\u30F3\u30BE\u30F3\u30D3"
@@ -12564,7 +12564,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u6F06\u9ED2\u306E\u938C\u4F7F\u3044"
@@ -12574,7 +12574,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u30BE\u30F3\u30D3\u30D1\u30FC\u30C6\u30A3"
@@ -12584,7 +12584,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104504
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u9AA8\u306E\u8CB4\u516C\u5B50"
@@ -12594,7 +12594,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104505
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30AA\u30EB\u30C8\u30ED\u30B9"
@@ -12604,7 +12604,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104506
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u5FCC\u5203\u306E\u6226\u58EB"
@@ -12614,7 +12614,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104507
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 2
       Name: "\u5192\u6D9C\u306E\u5893\u5834"
@@ -12624,7 +12624,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104508
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u7834\u9B42\u306E\u5C11\u5973"
@@ -12634,7 +12634,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104509
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u4E0D\u6B7B\u306E\u5927\u738B"
@@ -12644,7 +12644,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104510
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 2
       Name: "\u6B7B\u795E\u306E\u624B\u5E33"
@@ -12654,7 +12654,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104511
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u9B42\u306E\u756A\u4EBA\u30FB\u30DF\u30F3\u30C8"
@@ -12664,7 +12664,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104512
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u9B54\u5C06\u8ECD\u30FB\u30D8\u30AF\u30BF\u30FC"
@@ -12674,7 +12674,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u7CF8\u8718\u86DB\u306E\u60AA\u9B54"
@@ -12684,7 +12684,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30D5\u30ED\u30C3\u30B0\u30D0\u30C3\u30C8"
@@ -12694,7 +12694,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u4EBA\u72FC\u306E\u7A81\u6483\u5175"
@@ -12704,7 +12704,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u751F\u547D\u596A\u53D6"
@@ -12714,7 +12714,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104604
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30D0\u30D5\u30A9\u30E1\u30C3\u30C8"
@@ -12724,7 +12724,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104605
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30F4\u30E9\u30C9\u30FB\u30C9\u30E9\u30AD\u30E5\u30E9"
@@ -12734,7 +12734,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104606
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30AB\u30AA\u30B9\u30B7\u30C3\u30D7"
@@ -12744,7 +12744,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104607
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 2
       Name: "\u9ED2\u6B7B\u306E\u4EEE\u9762"
@@ -12754,7 +12754,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104608
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u611B\u306E\u60AA\u9B54\u30FB\u30AC\u30EC\u30C3\u30C8"
@@ -12764,7 +12764,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104609
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30BD\u30A6\u30EB\u30C9\u30DF\u30CD\u30FC\u30BF\u30FC"
@@ -12774,7 +12774,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104610
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 2
       Name: "\u30D6\u30E9\u30C3\u30C9\u30E0\u30FC\u30F3"
@@ -12784,7 +12784,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104611
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30D9\u30EB\u30D5\u30A7\u30B4\u30FC\u30EB"
@@ -12794,7 +12794,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104612
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u30E1\u30A4\u30EB\u30B9\u30C8\u30ED\u30FC\u30E0\u30B5\u30FC\u30DA\u30F3\u30C8"
@@ -12804,7 +12804,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DF\u30B9\u30C8\u30B7\u30E3\u30FC\u30DE\u30F3"
@@ -12814,7 +12814,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6E05\u6D44\u306E\u6CBB\u7642\u5E2B"
@@ -12824,7 +12824,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30AA\u30AF\u30C8\u30D1\u30B9\u30D3\u30B7\u30E7\u30C3\u30D7"
@@ -12834,7 +12834,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u7948\u308A\u306E\u71ED\u53F0"
@@ -12844,7 +12844,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104704
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u8056\u306A\u308B\u5F13\u4F7F\u3044\u30FB\u30AF\u30EB\u30C8"
@@ -12854,7 +12854,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104705
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u9EC4\u91D1\u90FD\u5E02\u306E\u5893\u5B88\u30FB\u30BD\u30CB\u30A2"
@@ -12864,7 +12864,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104706
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30AB\u30EA\u30E5\u30C9\u30FC\u30F3"
@@ -12874,7 +12874,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104707
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u30A2\u30A4\u30A2\u30F3\u30E1\u30A4\u30C7\u30F3"
@@ -12884,7 +12884,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104708
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u9EC4\u91D1\u90FD\u5E02\u306E\u59EB\u30FB\u30EA\u30C6\u30E5\u30A8\u30EB"
@@ -12894,7 +12894,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104709
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u82E6\u7F70\u306E\u5BE9\u5224\u8005"
@@ -12904,7 +12904,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104710
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u7A62\u308C\u305F\u8056\u676F"
@@ -12914,7 +12914,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104711
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30B8\u30E3\u30F3\u30CC"
@@ -12924,7 +12924,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 104712
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30D8\u30F4\u30F3\u30EA\u30FC\u30A4\u30FC\u30B8\u30B9"
@@ -13626,7 +13626,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30C7\u30FC\u30E2\u30F3\u30A4\u30FC\u30BF\u30FC"
@@ -13636,7 +13636,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30B9\u30B1\u30EB\u30C8\u30F3\u30AA\u30FC\u30AC"
@@ -13646,7 +13646,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30DE\u30C3\u30C9\u30CF\u30C3\u30BF\u30FC"
@@ -13656,7 +13656,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 2
       Name: "\u5E7D\u970A\u5C4B\u6577"
@@ -13666,7 +13666,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105504
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u51A5\u6CB3\u306E\u5C0E\u304D\u624B"
@@ -13676,7 +13676,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105505
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u60AA\u5922\u306E\u51E6\u5211\u4EBA"
@@ -13686,7 +13686,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105506
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u8B0E\u304B\u3051\u306E\u828B\u866B"
@@ -13696,7 +13696,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105507
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 2
       Name: "\u30BB\u30A4\u30EC\u30FC\u30F3\u306E\u6D99"
@@ -13706,7 +13706,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105508
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30B8\u30A7\u30C9\u30FB\u30DE\u30ED\u30FC\u30B9"
@@ -13716,7 +13716,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105509
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30D6\u30E9\u30C3\u30AF\u30B9\u30EF\u30F3\u30FB\u30AA\u30C7\u30A3\u30FC\u30EB"
@@ -13726,7 +13726,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105510
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u518D\u751F\u306E\u6BD2\u6797\u6A8E"
@@ -13736,7 +13736,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105511
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u707D\u5384\u306E\u5C4D\u738B"
@@ -13746,7 +13746,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105512
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u30C0\u30FC\u30AF\u30A2\u30EA\u30B9"
@@ -13756,7 +13756,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30C8\u30FC\u30F4"
@@ -13766,7 +13766,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u3072\u306D\u304F\u308C\u8005\u306E\u60AA\u9B54"
@@ -13776,7 +13776,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u8C6A\u62F3\u306E\u7528\u5FC3\u68D2"
@@ -13786,7 +13786,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 2
       Name: "\u60AA\u9B54\u306E\u9375"
@@ -13796,7 +13796,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105604
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u72FC\u5C11\u5E74"
@@ -13806,7 +13806,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105605
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u7DCB\u8272\u306E\u5263\u58EB"
@@ -13816,7 +13816,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105606
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: "\u30D0\u30F3\u30C0\u30FC\u30B9\u30CA\u30C3\u30C1"
@@ -13826,7 +13826,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105607
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: "\u5909\u88C5\u306E\u7259"
@@ -13836,7 +13836,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105608
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30D5\u30A1\u30F3\u30C8\u30E0\u30AD\u30E3\u30C3\u30C8"
@@ -13846,7 +13846,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105609
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 0
       Name: "\u30C7\u30E2\u30F3\u30AA\u30D5\u30A3\u30B5\u30FC\u30FB\u30A8\u30E1\u30E9\u30C0"
@@ -13856,7 +13856,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105610
-      Class: 9
+      Class: 6
       Rarity: 2
       Type: 1
       Name: "\u81F4\u547D\u306E\u5203"
@@ -13866,7 +13866,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105611
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u90AA\u60AA\u306A\u308B\u5996\u7CBE\u30FB\u30AB\u30E9\u30DC\u30B9"
@@ -13876,7 +13876,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105612
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: "\u660F\u304D\u5E95\u3088\u308A\u51FA\u3067\u308B\u8005"
@@ -13886,7 +13886,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105700
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u30DB\u30EF\u30A4\u30C8\u30BF\u30A4\u30AC\u30FC"
@@ -13896,7 +13896,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105701
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u9CE5\u98FC\u3044\u306E\u4F7F\u5F92"
@@ -13906,7 +13906,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105702
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 0
       Name: "\u6E05\u6D44\u306E\u50E7\u4FB6"
@@ -13916,7 +13916,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105703
-      Class: 6
+      Class: 7
       Rarity: 0
       Type: 2
       Name: "\u7C9B\u6E05\u306E\u8056\u5802"
@@ -13926,7 +13926,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105704
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u5929\u72D0"
@@ -13936,7 +13936,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105705
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30A4\u30FC\u30B0\u30EB\u30DE\u30F3"
@@ -13946,7 +13946,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105706
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 0
       Name: "\u30CF\u30C6\u30A3"
@@ -13956,7 +13956,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105707
-      Class: 6
+      Class: 7
       Rarity: 1
       Type: 2
       Name: "\u4E09\u6708\u30A6\u30B5\u30AE\u306E\u304A\u8336\u4F1A"
@@ -13966,7 +13966,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105708
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u8D64\u679D\u306E\u8056\u9A0E\u58EB\u30FB\u30CE\u30A4\u30B7\u30E5"
@@ -13976,7 +13976,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105709
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 0
       Name: "\u30DB\u30EF\u30A4\u30C8\u30B9\u30EF\u30F3\u30FB\u30AA\u30C7\u30C3\u30C8"
@@ -13986,7 +13986,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105710
-      Class: 6
+      Class: 7
       Rarity: 2
       Type: 2
       Name: "\u30A2\u30EA\u30B9\u306E\u5192\u967A"
@@ -13996,7 +13996,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105711
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u30B9\u30CE\u30FC\u30DB\u30EF\u30A4\u30C8\u30D7\u30EA\u30F3\u30BB\u30B9"
@@ -14006,7 +14006,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 105712
-      Class: 6
+      Class: 7
       Rarity: 3
       Type: 0
       Name: "\u9EC4\u91D1\u90F7\u306E\u7345\u5B50"
@@ -14838,7 +14838,7 @@ MonoBehaviour:
       Token: 1
       Trait: 00000000
     - ID: 130500
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u5C4D\u306E\u8A0E\u6EC5\u8005"
@@ -14848,7 +14848,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130501
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30CD\u30E1\u30A2\u306E\u7345\u5B50"
@@ -14858,7 +14858,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130502
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 0
       Name: "\u30DA\u30A4\u30F3\u30D5\u30EB\u30BD\u30A6\u30EB"
@@ -14868,7 +14868,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130503
-      Class: 8
+      Class: 5
       Rarity: 0
       Type: 1
       Name: "\u9B42\u306E\u5177\u73FE\u5316"
@@ -14878,7 +14878,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130504
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u8607\u308A\u3057\u90AA\u60AA"
@@ -14888,7 +14888,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130505
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 0
       Name: "\u30AB\u30FC\u30B9\u30C9\u30AD\u30F3\u30B0"
@@ -14898,7 +14898,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130506
-      Class: 8
+      Class: 5
       Rarity: 1
       Type: 1
       Name: "\u6B7B\u9580\u306E\u958B\u901A"
@@ -14908,7 +14908,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130507
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u60AA\u8FA3\u306E\u6B8B\u6ED3"
@@ -14918,7 +14918,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130508
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 0
       Name: "\u30A2\u30F3\u30C7\u30C3\u30C9\u30B9\u30EC\u30A4\u30E4\u30FC"
@@ -14928,7 +14928,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130509
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u30BD\u30A6\u30EB\u30E9\u30A4\u30C8"
@@ -14938,7 +14938,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130510
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u4E07\u6B7B\u306E\u5426\u5B9A\u8005"
@@ -14948,7 +14948,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130511
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u30A2\u30D3\u30B9\u30A2\u30D9\u30F3\u30B8\u30E3\u30FC\u30FB\u30F4\u30A3\u30B9\u30AB\u30EA\u30A2"
@@ -14958,7 +14958,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130512
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u72C2\u604B\u306E\u30CD\u30AF\u30ED\u30DE\u30F3\u30B5\u30FC"
@@ -14968,7 +14968,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130513
-      Class: 8
+      Class: 5
       Rarity: 2
       Type: 1
       Name: "\u30CF\u30FC\u30C8\u30D6\u30E9\u30A4\u30C8"
@@ -14978,7 +14978,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130514
-      Class: 8
+      Class: 5
       Rarity: 3
       Type: 0
       Name: "\u5168\u6B7B\u306E\u88C1\u5B9A\u8005"
@@ -14988,7 +14988,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130600
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u9375\u76E4\u306E\u60AA\u9B3C"
@@ -14998,7 +14998,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130601
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u30A4\u30D3\u30EB\u30B3\u30EC\u30AF\u30BF\u30FC"
@@ -15008,7 +15008,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130602
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 0
       Name: "\u958B\u773C\u306E\u9B54\u4EBA"
@@ -15018,7 +15018,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: 130603
-      Class: 9
+      Class: 6
       Rarity: 0
       Type: 1
       Name: "\u672C\u80FD\u306E\u4E71\u6483"
@@ -15028,7 +15028,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: 
@@ -15038,7 +15038,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 0
       Name: 
@@ -15048,7 +15048,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 1
       Type: 1
       Name: 
@@ -15058,7 +15058,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15068,7 +15068,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15078,7 +15078,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15088,7 +15088,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15098,7 +15098,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15108,7 +15108,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15118,7 +15118,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 
@@ -15128,7 +15128,7 @@ MonoBehaviour:
       Token: 0
       Trait: 00000000
     - ID: -1
-      Class: 9
+      Class: 6
       Rarity: 3
       Type: 0
       Name: 

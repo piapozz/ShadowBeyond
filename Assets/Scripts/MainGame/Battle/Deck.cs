@@ -64,6 +64,16 @@ public class Deck
         ShuffleDeck();
     }
 
+    public void SetDeckData(List<int> idList)
+    {
+        deckCardList = new List<CardData>();
+
+        foreach (int id in idList)
+        {
+            deckCardList.Add(CardMasterUtility.GetCardData(id));
+        }
+    }
+
     /// <summary>
     /// デッキをシャッフルする
     /// </summary>
