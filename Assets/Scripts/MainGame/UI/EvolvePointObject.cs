@@ -6,6 +6,8 @@ public class EvolvePointObject : MonoBehaviour
 {
     [SerializeField]
     private LineRenderer lineRenderer = null;
+    [SerializeField]
+    private GameObject evolvePointObject = null;
 
     private bool isSuperEvolve = false;
     private bool isLocal = false;
@@ -14,6 +16,7 @@ public class EvolvePointObject : MonoBehaviour
     {
         isSuperEvolve = setIsSuperEvolve;
         isLocal = setIsLocal;
+        // 進化ポイントオブジェクトの表示設定
     }
 
     private void OnMouseDown()
