@@ -191,8 +191,8 @@ public class BattleManager : SystemObject
         player[0].deck.SetDeckData(DeckRecorder.Instance.GetCurrentDeck());
         player[1].deck.SetDeckData(opponentDeck);
 
-        player[0].deck.ShuffleDeck();
-        player[1].deck.ShuffleDeck();
+        player[currentPlayerIndex].deck.ShuffleDeck();
+        player[(currentPlayerIndex + 1) % 2].deck.ShuffleDeck();
 
         Debug.Log($"[Battle] 🥊 バトル開始 先攻: {currentPlayerIndex}");
 
