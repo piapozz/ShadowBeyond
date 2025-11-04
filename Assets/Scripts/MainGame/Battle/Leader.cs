@@ -61,7 +61,9 @@ public class Leader
     public int maxDefense { get; private set; }
     public int currentDefense { get; private set; }
     public int cemetery { get; private set; }
+    public int maxEvolutionPoint { get; private set; }
     public int evolutionPoint { get; private set; }
+    public int maxSuperEvolvePoint { get; private set; }
     public int superEvolutionPoint { get; private set; }
     public int maxPlayPoint { get; private set; }
     public int currentPlayPoint { get; private set; }
@@ -114,7 +116,7 @@ public class Leader
 
     public void SetMaxPlayPoint(int value)
     {
-        maxPlayPoint = value;
+        maxPlayPoint = Mathf.Clamp(value, 0, GameConst.PP_MAX);
         if (currentPlayPoint > maxPlayPoint)
             currentPlayPoint = maxPlayPoint;
         UIManager.instance.UpdatePPUI(playerID, maxPlayPoint, currentPlayPoint);
@@ -126,6 +128,33 @@ public class Leader
         UIManager.instance.UpdatePPUI(playerID, maxPlayPoint, currentPlayPoint);
     }
 
+    public void SetMaxEvolvePoint(int value)
+    {
+        maxEvolutionPoint = value;
+        if (evolutionPoint > maxEvolutionPoint)
+            evolutionPoint = maxEvolutionPoint;
+
+    }
+
+    public void SetEvolvePoint(int value)
+    {
+        evolutionPoint = Mathf.Clamp(value, 0, maxEvolutionPoint);
+
+    }
+
+    public void SetMaxSuperEvolvePoint(int value)
+    {
+        maxSuperEvolvePoint = value;
+        if (superEvolutionPoint > maxSuperEvolvePoint)
+            superEvolutionPoint = maxSuperEvolvePoint;
+
+    }
+
+    public void SetSuperEvolvePoint(int value)
+    {
+        superEvolutionPoint = Mathf.Clamp(value, 0, maxSuperEvolvePoint);
+
+    }
 
     private BattleStatValue GetOrCreate(BattleStatType type)
     {

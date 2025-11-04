@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 1311712833248639685}
+  evolvePointObject: {fileID: 0}
 --- !u!120 &1311712833248639685
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -683,6 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 3690064519659766735}
+  evolvePointObject: {fileID: 0}
 --- !u!120 &3690064519659766735
 LineRenderer:
   m_ObjectHideFlags: 0
