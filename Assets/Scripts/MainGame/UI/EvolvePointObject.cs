@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardObject;
 
 public class EvolvePointObject : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class EvolvePointObject : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        // 攻撃の線を出す
+        // 線を出す
         UIManager.instance.SetLineRenderer(lineRenderer, transform);
     }
 
@@ -40,6 +41,17 @@ public class EvolvePointObject : MonoBehaviour
         lineRenderer.enabled = false;
 
         // 進化処理
+        // マウスの座標からオブジェクトを取得
+        BaseFieldObject target = UIManager.instance.GetFieldObject(Input.mousePosition);
+        if (target == null) return;
+        if (!target.isLocal) return;
+        CardObject targetCard = target as CardObject;
+        if (targetCard == null || targetCard.currentState != CardState.FIELD || targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return;
+
         // 自分のフィールドの未進化のフォロワーなら進化可能
+        if (isSuperEvolve)
+            targetCard.SuperEvolveFollower();
+        else
+            targetCard.EvolveFollower();
     }
 }

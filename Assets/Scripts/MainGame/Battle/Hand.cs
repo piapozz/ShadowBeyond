@@ -52,6 +52,7 @@ public class Hand
         Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
         leader.SetCurrentPlayPoint(leader.currentPlayPoint - card.cost);
         // 手札のプレイ可否更新
+        card.SetCanPlay(false);
         UpdatePlayableCards();
         // スペルならここで能力発動
         if (card.type == GameEnum.CardType.SPELL)
