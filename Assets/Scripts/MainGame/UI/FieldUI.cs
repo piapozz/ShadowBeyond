@@ -81,12 +81,12 @@ public class FieldUI : MonoBehaviour
         if (isOwn)
         {
             ownCards.Add(playCard);
-            playSequence.Add(playCard.PlayFieldCard(isOwn, fieldCardSlotList[0], ownFieldRoot));
+            playSequence.Add(playCard.PlayFieldSequence(isOwn, fieldCardSlotList[0], ownFieldRoot));
         }
         else
         {
             opponentCards.Add(playCard);
-            playSequence.Add(playCard.PlayFieldCard(isOwn, fieldCardSlotList[0], opponentFieldRoot));
+            playSequence.Add(playCard.PlayFieldSequence(isOwn, fieldCardSlotList[0], opponentFieldRoot));
         }
         // ƒvƒŒƒC‚Ì‹““®‚Æ®—ñ‚Ì‹““®‚ğ“o˜^
         UIManager.instance.AddSequence(playSequence);

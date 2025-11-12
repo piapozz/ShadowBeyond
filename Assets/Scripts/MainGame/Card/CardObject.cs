@@ -378,7 +378,14 @@ public class CardObject : BaseFieldObject
         return drawSeq;
     }
 
-    public Sequence PlayFieldCard(bool isOwn, Transform playCardSlot, Transform fieldRoot)
+    /// <summary>
+    /// プレイ時のシークエンス取得
+    /// </summary>
+    /// <param name="isOwn"></param>
+    /// <param name="playCardSlot"></param>
+    /// <param name="fieldRoot"></param>
+    /// <returns></returns>
+    public Sequence PlayFieldSequence(bool isOwn, Transform playCardSlot, Transform fieldRoot)
     {
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
@@ -442,20 +449,13 @@ public class CardObject : BaseFieldObject
 
     public void EvolveFollower()
     {
-        // 進化前挙動
-
-
-        // 進化後挙動
-
+        cardData.AddStatus(2, 2);
+        
     }
 
     public void SuperEvolveFollower()
     {
-        // 進化前挙動
-
-
-        // 進化後挙動
-
+        cardData.AddStatus(3, 3);
     }
 
     public void CheckDestroyCard()
