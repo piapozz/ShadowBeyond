@@ -198,7 +198,9 @@ public class BattleManager : SystemObject
 
         // ターンエンドのコールバック
         UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
-        UIManager.instance.StartBattle();
+
+        // UIの演出
+        await UIManager.instance.PlayStartBattleSequence(currentPlayerIndex);
 
         currentState = BattleState.START_TURN;
     }

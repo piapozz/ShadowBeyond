@@ -3,39 +3,7 @@
         {
             "cards": [
                 {
-                    "cardId": 105600,
-                    "count": 3
-                },
-                {
-                    "cardId": 1507,
-                    "count": 3
-                },
-                {
-                    "cardId": 4203,
-                    "count": 3
-                },
-                {
-                    "cardId": 105211,
-                    "count": 3
-                },
-                {
-                    "cardId": 105311,
-                    "count": 3
-                },
-                {
-                    "cardId": 105408,
-                    "count": 2
-                },
-                {
-                    "cardId": 101620,
-                    "count": 2
-                },
-                {
-                    "cardId": 4608,
-                    "count": 3
-                },
-                {
-                    "cardId": 101422,
+                    "cardId": 100000,
                     "count": 3
                 }
             ]
