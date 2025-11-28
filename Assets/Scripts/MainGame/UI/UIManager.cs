@@ -22,6 +22,7 @@ using static CommonModule;
 public class UIManager : SystemObject
 {
     [SerializeField] private Transform UICanvas;
+    [SerializeField] private Transform worldCanvas;
 
     [SerializeField] private CardObject cardObject;
     [SerializeField] private HandUI handUI;
@@ -30,14 +31,15 @@ public class UIManager : SystemObject
     [SerializeField] private TurnEndUI turnUI;
     [SerializeField] private PPUI ownPPUI;
     [SerializeField] private PPUI opponentPPUI;
-    [SerializeField] private OptionUI optionUI;
-    [SerializeField] private HistoryUI historyUI;
-    [SerializeField] private InfoUI infoUI;
+    //[SerializeField] private OptionUI optionUI;
+    //[SerializeField] private HistoryUI historyUI;
+    //[SerializeField] private InfoUI infoUI;
     [SerializeField] private LeaderUI leaderUI;
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
     [SerializeField] private Transform playCardRoot;
     [SerializeField] private CardDetailUI cardDetailUI;
+    [SerializeField] private ReadyUI readyUI;
 
     public enum UIState
     {
@@ -69,6 +71,10 @@ public class UIManager : SystemObject
         // DOTween初期化
         DOTween.Init();
         DOTween.defaultAutoPlay = AutoPlay.None;
+
+        // UIキャンバス取得
+        var worldCanvasObj = worldCanvas.gameObject.GetComponent<Canvas>();
+        worldCanvasObj.worldCamera = Camera.main;
 
         instance = this;
         mainCamera = Camera.main;
@@ -107,6 +113,7 @@ public class UIManager : SystemObject
         // シーケンスがたまっていて、現在のシーケンスが終了していたら次のシーケンスを再生
         if (IsCompleteCurrentSequence())
         {
+            if (uiSequence.Count == 0) return;
             currentSequenceList = uiSequence.Dequeue();
             for (int i = 0, max = currentSequenceList.Count; i < max; i++)
             {
@@ -153,6 +160,7 @@ public class UIManager : SystemObject
 
             if (currentSequenceList[i].IsActive() && !currentSequenceList[i].IsComplete()) return false;
         }
+        currentSequenceList.Clear();
         return true;
     }
 
@@ -172,18 +180,12 @@ public class UIManager : SystemObject
 
     public bool IsCompleteAllSequence()
     {
-        return uiSequence.Count == 0;
+        return uiSequence.Count == 0 && currentSequenceList.Count == 0;
     }
 
     public void SetUIState(UIState setState)
     {
         state = setState;
-    }
-
-    public void StartBattle()
-    {
-        // 各UI表示
-
     }
 
     // ターン開始
@@ -465,4 +467,70 @@ public class UIManager : SystemObject
     {
         return CommonModule.GetMouseWorldPosition(transform, mainCamera);
     }
+
+    // バトル開始時演出
+    public async UniTask PlayStartBattleSequence(int currntPlayer)
+    {
+        // TODO: バトル開始時演出
+        HideUI();
+        readyUI.gameObject.SetActive(true);
+
+        // キャラだし
+        readyUI.Initialize("Player1", "ニュートラル", "Player2", "ニュートラル");
+
+        // 順番決め演出
+        await readyUI.MoveOrderCard(currntPlayer);
+
+        // UI破棄
+        Destroy(readyUI.gameObject);
+
+        // マリガン
+
+
+        // UI各種表示
+        ShowUI();
+        readyUI.gameObject.SetActive(false);
+
+
+        return;
+    }
+
+    public void OnGUI()
+    {
+        // デバッグ用UI
+        // シーケンス数
+        GUI.Label(new Rect(10, 10, 1000, 100), "UI Sequence Count: " + uiSequence.Count);
+    }
+
+    public void HideUI()
+    {
+        handUI.gameObject.SetActive(false);
+        fieldUI.gameObject.SetActive(false);
+        turnUI.gameObject.SetActive(false);
+        ownPPUI.gameObject.SetActive(false);
+        opponentPPUI.gameObject.SetActive(false);
+        //optionUI.gameObject.SetActive(false);
+        //historyUI.gameObject.SetActive(false);
+        //infoUI.gameObject.SetActive(false);
+        leaderUI.gameObject.SetActive(false);
+        cardDetailUI.gameObject.SetActive(false);
+        readyUI.gameObject.SetActive(false);
+    }
+
+    public void ShowUI()
+    {
+        handUI.gameObject.SetActive(true);
+        fieldUI.gameObject.SetActive(true);
+        turnUI.gameObject.SetActive(true);
+        ownPPUI.gameObject.SetActive(true);
+        opponentPPUI.gameObject.SetActive(true);
+        //optionUI.gameObject.SetActive(true);
+        //historyUI.gameObject.SetActive(true);
+        //infoUI.gameObject.SetActive(true);
+        leaderUI.gameObject.SetActive(true);
+        cardDetailUI.gameObject.SetActive(true);
+        readyUI.gameObject.SetActive(true);
+    }
+
 }
+

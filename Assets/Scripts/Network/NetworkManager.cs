@@ -23,6 +23,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     private NetworkRunner runner;
     private const int MaxBufferCount = 5;
     private const int MaxPlayers = 2;
+    private const float TimeoutSeconds = 30.0f;
 
     private readonly Dictionary<int, byte[]> sendHistory = new();
     private readonly SortedDictionary<int, byte[]> recvBuffer = new();
@@ -206,6 +207,17 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         }
     }
 
+    private void MatchingTimeout()
+    {
+        MatchingMessage.Instance.ShowMessage("タイムアウトしました");
+
+        WaitTask.Instance.AddTask(() =>
+        {
+            MatchingMessage.Instance.HideMessage();
+            StopMatchmaking();
+        }, 2.0f);
+    }
+
     private IEnumerator WaitForPlayers()
     {
         if (runner == null)
@@ -214,6 +226,10 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         }
 
         Debug.Log($"[Network] ⏳ プレイヤー待機中... (現在 {runner.SessionInfo.PlayerCount}/{MaxPlayers})");
+
+        System.Action action = () => { MatchingTimeout(); };
+
+        WaitTask.Instance.AddTask(action, TimeoutSeconds); // 30秒でタイムアウト
 
         // MaxPlayers が揃うまでループ
         while (runner != null && runner.SessionInfo != null && runner.SessionInfo.PlayerCount < MaxPlayers)
@@ -234,8 +250,16 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             yield break;
         }
 
-        Debug.Log("[Network] 🎮 全プレイヤーが揃いました！シーンをロードします...");
-        SceneManager.LoadScene("MainScene");
+        Debug.Log("[Network] 🎮 全プレイヤーが揃いました！");
+
+        MatchingMessage.Instance.ShowMessage("対戦相手が見つかりました！");
+        WaitTask.Instance.CancelTask(action);
+
+        WaitTask.Instance.AddTask(() =>
+        {
+            MatchingMessage.Instance.HideMessage();
+            SceneManager.LoadScene("MainScene");
+        }, 1.0f);
     }
 
     public bool IsConnected()
