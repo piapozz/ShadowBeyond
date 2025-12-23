@@ -44,7 +44,7 @@ using UnityEngine.TextCore.Text;
 /// </summary>
 public class Deck
 {
-    private List<CardData> deckCardList;
+    private List<CardData> deckCardList = null;
 
     int playerID = 0;
 
@@ -58,10 +58,9 @@ public class Deck
         hand = BattleManager.instance.GetPlayer(index).hand;
     }
 
-    public void Init(List<CardData> initialCards)
+    public void Init()
     {
-        deckCardList = new List<CardData>(initialCards);
-        ShuffleDeck();
+
     }
 
     public void SetDeckData(List<int> idList)

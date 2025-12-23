@@ -31,13 +31,18 @@ public class CardMasterUtility
     /// <returns></returns>
     public static CardData GetCardData(int ID)
     {
-        for (int i = 0, max = allCardList.Count; i < max; i++)
+        List<List<Param>> cardMasterList = MasterDataManager.cardData;
+        CardData cardData = null;
+        for (int i = 0, max = cardMasterList.Count; i < max; i++)
         {
-            if (allCardList[i].id != ID) continue;
-
-            return allCardList[i];
+            for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
+            {
+                if (cardMasterList[i][j].ID != ID) continue;
+                cardData = GetCardData(cardMasterList[i][j]);
+                cardData.SetPackType((PackType)i);
+            }
         }
-        return null;
+        return cardData;
     }
 
     /// <summary>
@@ -59,22 +64,6 @@ public class CardMasterUtility
             cardMaster.Token);
         // テキストデータ取得
         cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID));
-        return cardData;
-    }
-
-    /// <summary>
-    /// ランダムなCardDataを取得
-    /// </summary>
-    /// <returns></returns>
-    public static List<CardData> GetRandomCardData(int cardNum)
-    {
-        List<CardData> cardData = new List<CardData>();
-        int cardCount = allCardList.Count;
-        for (int i = 0; i < cardCount; i++)
-        {
-            int randomIndex = BattleManager.instance.rand.Next(0, cardCount);
-            cardData.Add(allCardList[randomIndex]);
-        }
         return cardData;
     }
 }

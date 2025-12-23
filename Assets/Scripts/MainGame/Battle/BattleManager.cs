@@ -46,7 +46,7 @@ public class BattleManager : SystemObject
             hand = new Hand();
             deck = new Deck();
 
-            deck.Init(CardMasterUtility.GetRandomCardData(40));
+            deck.Init();
             hand.Init(new List<CardData>());
         }
 

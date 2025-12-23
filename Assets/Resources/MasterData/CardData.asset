@@ -15027,183 +15027,483 @@ MonoBehaviour:
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130604
       Class: 6
       Rarity: 1
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u676F\u306E\u8A98\u60D1\u8005"
+      Cost: 2
       Attack: 0
-      Defence: 0
+      Defence: 1
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130605
       Class: 6
       Rarity: 1
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u30A2\u30A6\u30CA\u30B9"
+      Cost: 4
+      Attack: 1
+      Defence: 2
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130606
       Class: 6
       Rarity: 1
       Type: 1
-      Name: 
-      Cost: 0
+      Name: "\u30B7\u30EB\u30D0\u30FC\u30B9\u30CA\u30A4\u30D7"
+      Cost: 1
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130607
+      Class: 6
+      Rarity: 2
+      Type: 0
+      Name: "\u30D8\u30EB\u30F4\u30A9\u30FC\u30EB"
+      Cost: 5
+      Attack: 4
+      Defence: 4
+      Token: 0
+      Trait: 00000000
+    - ID: 130608
+      Class: 6
+      Rarity: 2
+      Type: 0
+      Name: "\u30CE\u30FC\u30C8\u30EA\u30A2\u30B9\u30B8\u30A7\u30CD\u30E9\u30EB"
+      Cost: 6
+      Attack: 4
+      Defence: 4
+      Token: 0
+      Trait: 00000000
+    - ID: 130609
+      Class: 6
+      Rarity: 2
+      Type: 1
+      Name: "\u7737\u5C5E\u306E\u98FC\u80B2"
+      Cost: 2
+      Attack: 0
+      Defence: 0
+      Token: 0
+      Trait: 00000000
+    - ID: 130610
       Class: 6
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u5BB5\u95C7\u306E\u72E9\u4EBA\u30FB\u30EA\u30A2\u30F3\uFF06\u30A2\u30EB\u30D5\u30A3"
+      Cost: 2
+      Attack: 2
+      Defence: 2
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130611
       Class: 6
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u30C7\u30A3\u30A2\u30DC\u30ED\u30B9\u30FB\u30D8\u30C9\u30CD"
+      Cost: 3
+      Attack: 3
+      Defence: 3
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130612
       Class: 6
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u5915\u95C7\u306E\u4EBA\u72FC\u30FB\u30EB\u30FC\u30B8\u30E5\uFF06\u30F4\u30A7\u30FC\u30EB"
+      Cost: 6
+      Attack: 2
+      Defence: 4
       Token: 0
       Trait: 00000000
-    - ID: -1
+    - ID: 130613
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u6BD2\u86C7"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Token: 1
+      Trait: 00000000
+    - ID: 130614
+      Class: 6
+      Rarity: 0
+      Type: 0
+      Name: "\u30C7\u30FC\u30E2\u30F3"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Token: 1
+      Trait: 00000000
+    - ID: 130615
+      Class: 6
+      Rarity: 2
+      Type: 1
+      Name: "\u8840\u65CF\u306E\u990A\u80B2"
+      Cost: 1
+      Attack: 0
+      Defence: 0
+      Token: 1
+      Trait: 00000000
+    - ID: 130616
       Class: 6
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u5E7D\u95C7\u306E\u72E9\u731F\u8005\u30FB\u30EA\u30A2\u30F3\uFF06\u30A2\u30EB\u30D5\u30A3"
+      Cost: 1
+      Attack: 5
+      Defence: 5
+      Token: 1
+      Trait: 00000000
+    - ID: 130700
+      Class: 7
+      Rarity: 0
+      Type: 0
+      Name: "\u30B0\u30EB\u30E1\u30A2\u30EB\u30DF\u30E9\u30FC\u30B8"
+      Cost: 2
+      Attack: 1
+      Defence: 3
+      Token: 0
+      Trait: 00000000
+    - ID: 130701
+      Class: 7
+      Rarity: 0
+      Type: 0
+      Name: "\u914D\u9054\u306E\u7FFC\u4EBA"
+      Cost: 4
+      Attack: 2
+      Defence: 4
+      Token: 0
+      Trait: 00000000
+    - ID: 130702
+      Class: 7
+      Rarity: 0
+      Type: 2
+      Name: "\u679C\u5B9F\u306E\u9078\u5225"
+      Cost: 3
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 6
-      Rarity: 3
-      Type: 0
-      Name: 
-      Cost: 0
+    - ID: 130703
+      Class: 7
+      Rarity: 0
+      Type: 2
+      Name: "\u5BC2\u3057\u304D\u6708\u5149"
+      Cost: 4
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 6
-      Rarity: 3
+    - ID: 130704
+      Class: 7
+      Rarity: 1
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u30B7\u30C8\u30EA\u30F3\u30E9\u30D3\u30C3\u30C8"
+      Cost: 3
+      Attack: 1
+      Defence: 3
+      Token: 0
+      Trait: 00000000
+    - ID: 130705
+      Class: 7
+      Rarity: 1
+      Type: 0
+      Name: "\u30A6\u30A7\u30DD\u30F3\u30A2\u30EB\u30DF\u30E9\u30FC\u30B8"
+      Cost: 5
+      Attack: 3
+      Defence: 5
+      Token: 0
+      Trait: 00000000
+    - ID: 130706
+      Class: 7
+      Rarity: 1
+      Type: 1
+      Name: "\u65AD\u7F6A\u306E\u7948\u308A"
+      Cost: 2
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 6
-      Rarity: 3
+    - ID: 130707
+      Class: 7
+      Rarity: 2
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u30DF\u30E5\u30FC\u30B9\u306E\u6599\u7406\u4EBA"
+      Cost: 2
+      Attack: 1
+      Defence: 2
+      Token: 0
+      Trait: 00000000
+    - ID: 130708
+      Class: 7
+      Rarity: 2
+      Type: 2
+      Name: "\u6709\u7FFC\u306E\u5149\u660E"
+      Cost: 2
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 6
-      Rarity: 3
-      Type: 0
-      Name: 
-      Cost: 0
+    - ID: 130709
+      Class: 7
+      Rarity: 2
+      Type: 2
+      Name: "\u7FBD\u640F\u304F\u7948\u308A"
+      Cost: 6
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
+    - ID: 130710
+      Class: 7
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u5951\u7D04\u306E\u53CC\u5929\u4F7F"
+      Cost: 1
+      Attack: 1
+      Defence: 1
+      Token: 0
+      Trait: 00000000
+    - ID: 130711
+      Class: 7
+      Rarity: 3
+      Type: 0
+      Name: "\u30BF\u30F3\u30B6\u30CA\u30A4\u30C8\u30B3\u30F3\u30F4\u30A3\u30AF\u30BF\u30FC"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Token: 0
+      Trait: 00000000
+    - ID: 130712
+      Class: 7
+      Rarity: 3
+      Type: 2
+      Name: "\u8A60\u5531\uFF1A\u8056\u86C7\u306E\u52A0\u8B77"
+      Cost: 3
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
+    - ID: 130713
+      Class: 7
+      Rarity: 0
+      Type: 0
+      Name: "\u767D\u86C7"
+      Cost: 3
+      Attack: 2
+      Defence: 2
+      Token: 1
+      Trait: 00000000
+    - ID: 130714
+      Class: 7
+      Rarity: 2
+      Type: 2
+      Name: "\u5927\u7FFC\u306E\u706F\u706B"
+      Cost: 4
+      Attack: 0
+      Defence: 0
+      Token: 1
+      Trait: 00000000
+    - ID: 130715
+      Class: 7
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u76DF\u7D04\u306E\u71BE\u5929\u4F7F"
+      Cost: 3
+      Attack: 10
+      Defence: 10
+      Token: 1
+      Trait: 00000000
+    - ID: 130800
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u5922\u60F3\u306E\u4EBA\u5F62"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Token: 0
+      Trait: 00000000
+    - ID: 130801
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u30A8\u30A4\u30DF\u30F3\u30B0\u30AC\u30F3\u30CA\u30FC"
+      Cost: 3
+      Attack: 1
+      Defence: 2
+      Token: 0
+      Trait: 00000000
+    - ID: 130802
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u611B\u73A9\u306E\u64CD\u8005"
+      Cost: 4
+      Attack: 4
+      Defence: 4
+      Token: 0
+      Trait: 00000000
+    - ID: 130803
+      Class: 8
+      Rarity: 0
+      Type: 1
+      Name: "\u5080\u5121\u306E\u304A\u8336\u4F1A"
+      Cost: 2
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
-      Rarity: 3
+    - ID: 130804
+      Class: 8
+      Rarity: 1
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u30DF\u30B9\u30EA\u30EB\u30E1\u30C3\u30BB\u30F3\u30B8\u30E3\u30FC"
+      Cost: 2
+      Attack: 2
+      Defence: 2
+      Token: 0
+      Trait: 00000000
+    - ID: 130805
+      Class: 8
+      Rarity: 1
+      Type: 0
+      Name: "\u6A29\u8B00\u306E\u30D5\u30A3\u30AF\u30B5\u30FC"
+      Cost: 5
+      Attack: 4
+      Defence: 4
+      Token: 0
+      Trait: 00000000
+    - ID: 130806
+      Class: 8
+      Rarity: 1
+      Type: 1
+      Name: "\u30DB\u30E0\u30F3\u30AF\u30EB\u30B9\u306E\u8A95\u751F"
+      Cost: 1
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
-      Rarity: 3
+    - ID: 130807
+      Class: 8
+      Rarity: 2
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u30C7\u30A3\u30C6\u30B9\u30BF\u30D6\u30EB\u30B9\u30BF\u30C1\u30E5\u30FC"
+      Cost: 3
+      Attack: 7
+      Defence: 7
+      Token: 0
+      Trait: 00000000
+    - ID: 130808
+      Class: 8
+      Rarity: 2
+      Type: 0
+      Name: "\u30A4\u30F3\u30C6\u30EC\u30AF\u30C8\u30B5\u30D7\u30E9\u30A4\u30E4\u30FC"
+      Cost: 6
+      Attack: 6
+      Defence: 6
+      Token: 0
+      Trait: 00000000
+    - ID: 130809
+      Class: 8
+      Rarity: 2
+      Type: 1
+      Name: "\u30D5\u30A1\u30A4\u30A2\u30D0\u30E9\u30FC\u30B8"
+      Cost: 1
       Attack: 0
       Defence: 0
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
+    - ID: 130810
+      Class: 8
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u81F3\u7D14\u306E\u539F\u578B\u30FB\u30A2\u30AE\u30EB"
+      Cost: 2
+      Attack: 2
+      Defence: 2
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
+    - ID: 130811
+      Class: 8
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
-      Attack: 0
-      Defence: 0
+      Name: "\u30DF\u30EA\u30AA\u30F3\u30AC\u30F3\u30BA\u30FB\u30A2\u30F3\u30BF\u30CB\u30BF"
+      Cost: 2
+      Attack: 2
+      Defence: 2
       Token: 0
       Trait: 00000000
-    - ID: -1
-      Class: 0
+    - ID: 130812
+      Class: 8
       Rarity: 3
       Type: 0
-      Name: 
-      Cost: 0
+      Name: "\u30A2\u30FC\u30C6\u30A3\u30D5\u30A3\u30B7\u30E3\u30EB\u30A8\u30C7\u30F3"
+      Cost: 7
+      Attack: 0
+      Defence: 10
+      Token: 0
+      Trait: 00000000
+    - ID: 130813
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u6539\u826F\u578B\u30FB\u64CD\u308A\u4EBA\u5F62"
+      Cost: 1
+      Attack: 3
+      Defence: 3
+      Token: 1
+      Trait: 00000000
+    - ID: 130814
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u30C8\u30EC\u30FC\u30B9\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
+      Cost: 3
+      Attack: 2
+      Defence: 2
+      Token: 1
+      Trait: 00000000
+    - ID: 130815
+      Class: 8
+      Rarity: 0
+      Type: 0
+      Name: "\u30D6\u30EA\u30C3\u30C4\u30A2\u30FC\u30C6\u30A3\u30D5\u30A1\u30AF\u30C8"
+      Cost: 5
+      Attack: 2
+      Defence: 2
+      Token: 1
+      Trait: 00000000
+    - ID: 130816
+      Class: 8
+      Rarity: 2
+      Type: 1
+      Name: "\u30D6\u30EC\u30A4\u30BA\u30D0\u30E9\u30FC\u30B8"
+      Cost: 1
       Attack: 0
       Defence: 0
-      Token: 0
+      Token: 1
+      Trait: 00000000
+    - ID: 130817
+      Class: 8
+      Rarity: 2
+      Type: 1
+      Name: "\u30A4\u30F3\u30C6\u30EC\u30AF\u30C8\u30B5\u30D7\u30E9\u30A4\u30E4\u30FC"
+      Cost: 1
+      Attack: 0
+      Defence: 0
+      Token: 1
+      Trait: 00000000
+    - ID: 130818
+      Class: 8
+      Rarity: 3
+      Type: 0
+      Name: "\u7D14\u771F\u306E\u6A21\u7BC4\u30FB\u30A2\u30AE\u30EB"
+      Cost: 1
+      Attack: 3
+      Defence: 2
+      Token: 1
       Trait: 00000000
