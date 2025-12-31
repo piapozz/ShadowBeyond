@@ -54,7 +54,11 @@ public class CardData
     public List<CardAbility> ability { get; private set; }
     // ”j‰ó‚³‚ê‚½
     public bool isDestroyed { get; private set; }
-
+    // i‰»‚µ‚Ä‚¢‚é‚©
+    public bool isEvolved { get; private set; } = false;
+    // ’´i‰»‚µ‚Ä‚¢‚é‚©
+    public bool isSuperEvolved { get; private set; } = false;
+    public bool isAnyEvolved => isEvolved || isSuperEvolved;
     public Func<CardObject> GetObject;
 
     public void SetGetObjectAction(Func<CardObject> action)
@@ -184,6 +188,7 @@ public class CardData
     {
         damage -= heal;
         if (damage < 0) damage = 0;
+        GetObject().UpdateText();
     }
 
     public void AddStatus(int attack, int defance)
@@ -192,11 +197,13 @@ public class CardData
         status.m_attack = attack;
         status.m_defance = defance;
         addStatus.Add(status);
+        GetObject().UpdateText();
     }
 
     public void ClearAddStatus()
     {
         addStatus.Clear();
+        GetObject().UpdateText();
     }
 
     public void SetCanPlay(bool canPlay)
@@ -213,6 +220,16 @@ public class CardData
     public void SetCanAct(bool canAct)
     {
         this.canAct = canAct;
+    }
+
+    public void SetEvolve()
+    {
+        isEvolved = true;
+    }
+
+    public void SetSuperEvolve()
+    {
+        isSuperEvolved = true;
     }
 
     /// <summary>

@@ -68,6 +68,7 @@ public class Leader
     public int maxPlayPoint { get; private set; }
     public int currentPlayPoint { get; private set; }
     public int comboCount { get; private set; }
+    public bool canEvolve { get; private set; }
 
     // ƒoƒgƒ‹î•ñ
     private Dictionary<BattleStatType, BattleStatValue> battleStats = new Dictionary<BattleStatType, BattleStatValue>();
@@ -86,7 +87,13 @@ public class Leader
         SetCurrentDefense(maxDefense);
         SetMaxPlayPoint(maxPP);
         SetCurrentPlayPoint(0);
+        canEvolve = true;
         battleStats.Clear();
+    }
+
+    public void StartTurn()
+    {
+        canEvolve = true;
     }
 
     public void SetPlayerID(int index)
@@ -156,13 +163,18 @@ public class Leader
 
     }
 
+    public void SetCanEvolve(bool setCanEvolve)
+    {
+        canEvolve = setCanEvolve;
+    }
+
     private BattleStatValue GetOrCreate(BattleStatType type)
     {
         if (!battleStats.ContainsKey(type))
             battleStats[type] = new BattleStatValue();
         return battleStats[type];
     }
-
+    
     public void DealDamage(int damage)
     {
         SetCurrentDefense(currentDefense - damage);

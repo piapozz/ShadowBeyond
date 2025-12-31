@@ -62,6 +62,7 @@ public class BattleManager : SystemObject
             if (playPoint < PLAYPOINT_MAX) playPoint++;
             leader.SetMaxPlayPoint(playPoint);
             leader.SetCurrentPlayPoint(playPoint);
+            leader.SetCanEvolve(true);
             deck.DrawDeck(1);
         }
 
@@ -274,11 +275,15 @@ public class BattleManager : SystemObject
             case GameEnum.InputType.EVOLVE:
                 // 進化
                 int evolveIndex = data.param[0];
+                CardObject evolveCard = UIManager.instance.GetOpponentCard(evolveIndex);
+                evolveCard.EvolveFollower();
                 break;
 
             case GameEnum.InputType.SUPER_EVOLVE:
                 // 超進化
                 int superEvolveIndex = data.param[0];
+                CardObject superEvolveCard = UIManager.instance.GetOpponentCard(superEvolveIndex);
+                superEvolveCard.SuperEvolveFollower();
                 break;
 
             case GameEnum.InputType.ACT:
