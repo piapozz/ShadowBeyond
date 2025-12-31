@@ -9,6 +9,8 @@ public class EvolvePointObject : MonoBehaviour
     private LineRenderer lineRenderer = null;
     [SerializeField]
     private GameObject evolvePointObject = null;
+    [SerializeField]
+    private MeshRenderer[] countUI = null;
 
     private bool isSuperEvolve = false;
     private bool isLocal = false;
@@ -25,7 +27,7 @@ public class EvolvePointObject : MonoBehaviour
         // 自分のターンか自分の進化権か判定
         if (!BattleManager.instance.IsOwnTurn() || !isLocal) return;
         // 進化権があるか判定
-        if (!BattleManager.instance.GetCurrentPlayer().leader.canEvolve) return;
+        if (!BattleManager.instance.GetCurrentPlayer().leader.GetCanEvolve(isSuperEvolve)) return;
         // 線を出す
         UIManager.instance.SetLineRenderer(lineRenderer, transform);
         lineRenderer.enabled = true;
@@ -40,8 +42,9 @@ public class EvolvePointObject : MonoBehaviour
     private void OnMouseUp()
     {
         lineRenderer.enabled = false;
-        // 進化権があるか判定
-        if (!BattleManager.instance.GetCurrentPlayer().leader.canEvolve) return;
+        Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
+        // 進化可能か
+        if (!leader.GetCanEvolve(isSuperEvolve)) return;
         // 進化処理
         // マウスの座標からオブジェクトを取得
         BaseFieldObject target = UIManager.instance.GetFieldObject(Input.mousePosition);
@@ -58,11 +61,15 @@ public class EvolvePointObject : MonoBehaviour
         {
             targetCard.SuperEvolveFollower();
             evolveType = GameEnum.InputType.SUPER_EVOLVE;
+            countUI[leader.superEvolutionPoint - 1].material = null;
+            leader.ConsumeSuperEvolvePoint();
         }
         else
         {
             targetCard.EvolveFollower();
             evolveType = GameEnum.InputType.EVOLVE;
+            countUI[leader.evolutionPoint - 1].material = null;
+            leader.ConsumeEvolvePoint();
         }
         // 送信
         int fieldIndex = UIManager.instance.GetOwnFieldIndex(targetCard);
