@@ -449,12 +449,14 @@ public class CardObject : BaseFieldObject
 
     public void EvolveFollower()
     {
+        cardData.SetEvolve();
         cardData.AddStatus(2, 2);
         
     }
 
     public void SuperEvolveFollower()
     {
+        cardData.SetSuperEvolve();
         cardData.AddStatus(3, 3);
     }
 

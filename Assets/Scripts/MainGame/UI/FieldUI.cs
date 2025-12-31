@@ -51,6 +51,9 @@ public class FieldUI : MonoBehaviour
         {
             // ¶’[Šî€‚ÌX
             float xPosition = -totalWidth / 2 + actualWidth * i + actualWidth / 2;
+            // ‘Šè‚Ìê‚È‚ç‹t‡
+            if (!isOwn)
+                xPosition = -xPosition;
 
             if (i < beforeCardNum)
             {
@@ -61,11 +64,7 @@ public class FieldUI : MonoBehaviour
             else
             {
                 Transform slotTransform = fieldCardSlotList[i - beforeCardNum];
-                Transform targetParent;
-                if (isOwn)
-                    targetParent = ownFieldRoot;
-                else
-                    targetParent = opponentFieldRoot;
+                Transform targetParent = isOwn ? ownFieldRoot : opponentFieldRoot;
                 slotTransform.SetParent(targetParent);
                 slotTransform.localPosition = new Vector3(xPosition, 0, 0);
             }

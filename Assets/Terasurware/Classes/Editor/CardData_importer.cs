@@ -10,7 +10,7 @@ using NPOI.SS.UserModel;
 public class CardData_importer : AssetPostprocessor {
 	private static readonly string filePath = "Assets/Resources/MasterData/CardData.xlsx";
 	private static readonly string exportPath = "Assets/Resources/MasterData/CardData.asset";
-	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","Basic","CLC","DRK","ROB","TOG","WLD","ORS", };
+	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","BlossomingFate","Basic","CLC","DRK","ROB","TOG","WLD","ORS", };
 	
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 	{

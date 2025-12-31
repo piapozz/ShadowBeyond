@@ -230,6 +230,11 @@ public class UIManager : SystemObject
         return fieldUI.GetOpponentFieldIndex(card);
     }
 
+    public CardObject GetOpponentCard(int index)
+    {
+        return fieldUI.GetOpponentCard(index);
+    }
+
     /// <summary>
     /// カードがドロップされたときの処理
     /// </summary>

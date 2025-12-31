@@ -30,8 +30,8 @@ public class CombatProcessor
         // 攻撃時能力タイミング
         // 交戦時能力タイミング
 
-        int attackerDamage = attackerCard.status.m_attack;
-        int defenderDamage = defenderCard.status.m_attack;
+        int attackerDamage = attackerCard.GetCurrentStatus().m_attack;
+        int defenderDamage = defenderCard.GetCurrentStatus().m_attack;
 
         // 受けるダメージ軽減能力タイミング
 
@@ -69,8 +69,8 @@ public class CombatProcessor
         // 攻撃時能力タイミング
         // 交戦時能力タイミング
 
-        int attackerDamage = attackerCard.status.m_attack;
-        int defenderDamage = defenderCard.status.m_attack;
+        int attackerDamage = attackerCard.GetCurrentStatus().m_attack;
+        int defenderDamage = defenderCard.GetCurrentStatus().m_attack;
 
         // 受けるダメージ軽減能力タイミング
 
@@ -104,7 +104,7 @@ public class CombatProcessor
     public void LeaderCombat()
     {
         // 攻撃時能力タイミング
-        int attackerDamage = attackerCard.status.m_attack;
+        int attackerDamage = attackerCard.GetCurrentStatus().m_attack;
 
         // リーダーへの攻撃時能力タイミング
 
