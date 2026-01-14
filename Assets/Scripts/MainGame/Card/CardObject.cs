@@ -67,7 +67,7 @@ public class CardObject : BaseFieldObject
                 // フォロワー以外は攻撃できない
                 if (cardData.type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.canAttack) return;
+                if (!cardData.CanAttack(false)) return;
                 UIManager.instance.SetUIState(UIManager.UIState.ATTACK);
                 // カードを持ち上げる
                 GetPickupSequence(true).Play();
@@ -96,7 +96,7 @@ public class CardObject : BaseFieldObject
                 // フォロワー以外は攻撃できない
                 if (cardData.type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.canAttack) return;
+                if (!cardData.CanAttack(false)) return;
                 // 攻撃の線を出す
                 UIManager.instance.SetLineRenderer(lineRenderer, transform);
                 break;
@@ -119,7 +119,7 @@ public class CardObject : BaseFieldObject
                 // フォロワー以外は攻撃できない
                 if (cardData.type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.canAttack) return;
+                if (!cardData.CanAttack(false)) return;
                 lineRenderer.enabled = false;
                 // 攻撃処理
                 bool attackResult = Attack();
@@ -168,11 +168,14 @@ public class CardObject : BaseFieldObject
         if (target == null) return false;
         // 自分自身は攻撃できない
         if (target.isLocal) return false;
-        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
         CardObject targetCard = target as CardObject;
         if (targetCard != null)
         {
+            // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
             if (targetCard.currentState != CardState.FIELD || targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return false;
+            // 攻撃可否判定
+            if (!cardData.CanAttack(false)) return false;
+            cardData.OnAttack();
             AttackFollower(targetCard);
             return true;
         }
@@ -180,6 +183,9 @@ public class CardObject : BaseFieldObject
         LeaderObject targetLeader = target as LeaderObject;
         if (targetLeader != null)
         {
+            // 攻撃可否判定
+            if (!cardData.CanAttack(true)) return false;
+            cardData.OnAttack();
             AttackLeader(targetLeader);
             return true;
         }

@@ -5,8 +5,8 @@ using static GameEnum;
 
 public class Field
 {
-    public List<CardData> _fieldCardList = new();
-    public List<CardData> _otherFieldCardList = new();
+    public List<CardData> _ownFieldCardList = new();
+    public List<CardData> _opponentFieldCardList = new();
 
     const int MAX_FIELD = 5;
 
@@ -14,9 +14,25 @@ public class Field
     private List<CardData> GetAllFieldCards()
     {
         var result = new List<CardData>();
-        result.AddRange(_fieldCardList);
-        result.AddRange(_otherFieldCardList);
+        result.AddRange(_ownFieldCardList);
+        result.AddRange(_opponentFieldCardList);
         return result;
+    }
+
+    public void OnStartTurn()
+    {
+        foreach (var card in _ownFieldCardList)
+        {
+            card.OnStartTurn();
+        }
+    }
+
+    public void OnEndTurn()
+    {
+        foreach (var card in _ownFieldCardList)
+        {
+            card.OnEndTurn();
+        }
     }
 
     // ===== フィールド操作 =====
@@ -24,7 +40,7 @@ public class Field
     public void PlayCard(CardData card, int currentIndex)
     {
         if (card == null) return;
-        var targetList = currentIndex == 0 ? _fieldCardList : _otherFieldCardList;
+        var targetList = currentIndex == 0 ? _ownFieldCardList : _opponentFieldCardList;
         if (targetList.Count >= MAX_FIELD) return; 
         targetList.Add(card);
     }
@@ -33,8 +49,8 @@ public class Field
     public void RemoveCard(CardData card)
     {
         if (card == null) return;
-        _fieldCardList.Remove(card);
-        _otherFieldCardList.Remove(card);
+        _ownFieldCardList.Remove(card);
+        _opponentFieldCardList.Remove(card);
     }
 
     // ===== 条件検索 =====
@@ -42,7 +58,7 @@ public class Field
     // 指定番目のカード
     public CardData GetFieldCard(int index, bool includeOpponent = false)
     {
-        var list = includeOpponent ? GetAllFieldCards() : _fieldCardList;
+        var list = includeOpponent ? GetAllFieldCards() : _ownFieldCardList;
         Debug.Log
             ($"[Field] GetFieldCard index:{index} listCount:{list.Count}");
         if (index < 0 || index >= list.Count) return null;
@@ -52,17 +68,9 @@ public class Field
     // 相手の指定番目のカード
     public CardData GetOpponentFieldCard(int index)
     {
-        Debug.Log($"[Field] GetOpponentFieldCard index:{index} otherFieldCount:{_otherFieldCardList.Count}");
-        if (index < 0 || index >= _otherFieldCardList.Count) return null;
-        return _otherFieldCardList[index];
-    }
-
-    // 攻撃可能カード
-    public List<CardData> GetAttackableCards(bool includeOpponent = false)
-    {
-        return includeOpponent
-            ? GetAllFieldCards().FindAll(c => c.canAttack)
-            : _fieldCardList.FindAll(c => c.canAttack);
+        Debug.Log($"[Field] GetOpponentFieldCard index:{index} otherFieldCount:{_opponentFieldCardList.Count}");
+        if (index < 0 || index >= _opponentFieldCardList.Count) return null;
+        return _opponentFieldCardList[index];
     }
 
     // 選択可能カード
@@ -70,7 +78,7 @@ public class Field
     {
         return includeOpponent
             ? GetAllFieldCards().FindAll(c => c.CanBeSelected())
-            : _fieldCardList.FindAll(c => c.CanBeSelected());
+            : _ownFieldCardList.FindAll(c => c.CanBeSelected());
     }
 
     // アクト可能カード
@@ -78,7 +86,7 @@ public class Field
     {
         return includeOpponent
             ? GetAllFieldCards().FindAll(c => c.canAct)
-            : _fieldCardList.FindAll(c => c.canAct);
+            : _ownFieldCardList.FindAll(c => c.canAct);
     }
 
     // 任意条件カードを取得（複数）
@@ -86,7 +94,7 @@ public class Field
     {
         return includeOpponent
             ? GetAllFieldCards().FindAll(new System.Predicate<CardData>(condition))
-            : _fieldCardList.FindAll(new System.Predicate<CardData>(condition));
+            : _ownFieldCardList.FindAll(new System.Predicate<CardData>(condition));
     }
 
     // 任意条件カードを1枚（ランダム）
@@ -148,22 +156,5 @@ public class Field
     public void HealCard(CardData card, int heal)
     {
         card.HealDamage(heal);
-    }
-
-    /// <summary>
-    /// 攻撃可能な自身のカードを取得
-    /// </summary>
-    /// <returns></returns>
-    public List<CardData> GetAttackableCards()
-    {
-        return _fieldCardList.Where(c => c.canAttack).ToList();
-    }
-
-    public void SetFieldCardAttackable(bool atackable)
-    {
-        for (int i = 0, max = _fieldCardList.Count; i < max; i++)
-        {
-            _fieldCardList[i].SetCanAttack(atackable);
-        }
     }
 }

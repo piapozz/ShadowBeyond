@@ -20,16 +20,26 @@ public class CardData
             m_defance = defance;
         }
     }
+    // 攻撃権限
+    public enum AttackPermission
+    {
+        NONE = 0,
+        CanAttackFollower,
+        CanAttackLeader
+    }
+    public AttackPermission attackPermission { get; private set; } = AttackPermission.NONE;
+    // このターンの攻撃可能回数
+    public int remainAttackCount { get; private set; } = 1;
+    // 攻撃可能回数
+    public int maxAttackCount { get; private set; } = 1;
     // ダメージの蓄積
     public int damage { get; private set; } = 0;
     // ステータスのバフ/デバフ
     public List<FollowerStatus> addStatus { get; private set; }
     // 基本ステータス
     public FollowerStatus status { get; private set; }
-    // 攻撃可能かどうか
+    // プレイ可能かどうか
     public bool canPlay { get; private set; }
-    // 攻撃可能かどうか
-    public bool canAttack { get; private set; }
     // アクト可能かどうか
     public bool canAct { get; private set; }
     // カードの種類
@@ -50,6 +60,8 @@ public class CardData
     public string text { get; private set; }
     public bool isToken { get; private set; }
     public PackType packType { get; private set; }
+    // キーワード能力
+    public HashSet<KeywordAbility> keywordTags = new();
     // カードアビリティ
     public List<CardAbility> ability { get; private set; }
     // 破壊された
@@ -83,6 +95,25 @@ public class CardData
     public void Init()
     {
         addStatus = new List<FollowerStatus>();
+    }
+
+    // ターン開始時処理
+    public void OnStartTurn()
+    {
+        remainAttackCount = maxAttackCount;
+        SetAttackPermission(AttackPermission.CanAttackLeader);
+    }
+
+    // 攻撃時処理
+    public void OnAttack()
+    {
+        remainAttackCount--;
+    }
+
+    // ターン終了時処理
+    public void OnEndTurn()
+    {
+        remainAttackCount = 0;
     }
 
     public void SetType(CardType setType)
@@ -212,9 +243,11 @@ public class CardData
     }
 
 
-    public void SetCanAttack(bool canAttack)
+    public void SetAttackPermission(AttackPermission setAttackPermission)
     {
-        this.canAttack = canAttack;
+        // 下位に下がらないようにする
+        if (setAttackPermission < attackPermission) return;
+        attackPermission = setAttackPermission;
     }
 
     public void SetCanAct(bool canAct)
@@ -224,12 +257,29 @@ public class CardData
 
     public void SetEvolve()
     {
+        SetAttackPermission(AttackPermission.CanAttackFollower);
         isEvolved = true;
     }
 
     public void SetSuperEvolve()
     {
+        SetAttackPermission(AttackPermission.CanAttackFollower);
         isSuperEvolved = true;
+    }
+
+    /// <summary>
+    /// 攻撃可能か否か
+    /// </summary>
+    /// <param name="attackLeader"></param>
+    /// <returns></returns>
+    public bool CanAttack(bool attackLeader)
+    {
+        if (remainAttackCount <= 0) return false;
+
+        if (attackLeader)
+            return attackPermission == AttackPermission.CanAttackLeader;
+        else
+            return (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower);
     }
 
     /// <summary>

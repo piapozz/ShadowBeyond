@@ -174,4 +174,19 @@ public class GameEnum
         HOS,
         MAX
     }
+
+    public enum KeywordAbility
+    {
+        Rush,       // 疾走
+        Storm,      // 突進
+        Ward,       // 守護
+        Bane,       // 必殺
+        Ambush,     // 潜伏
+        Drane,      // ドレイン
+        Countdown,  // カウントダウン
+        Intimidate, // 威圧
+        Aura,       // オーラ
+        Barrier,    // バリア
+        Invoke,     // 直接召喚
+    }
 }

@@ -216,7 +216,7 @@ public class BattleManager : SystemObject
         if (!IsOwnTurn()) return;
         player[currentPlayerIndex].hand.SetOwnHandCardPlayable(true);
         player[currentPlayerIndex].hand.UpdatePlayableCards();
-        field.SetFieldCardAttackable(true);
+        field.OnStartTurn();
     }
 
     public async UniTask MainTurn()
@@ -313,7 +313,10 @@ public class BattleManager : SystemObject
         if (!UIManager.instance.IsCompleteAllSequence()) return;
         // 自分の手札をプレイ不能にする
         if (IsOwnTurn())
+        {
             player[currentPlayerIndex].hand.SetOwnHandCardPlayable(false);
+            field.OnEndTurn();
+        }
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
 
