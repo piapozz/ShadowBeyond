@@ -12,14 +12,9 @@ using UnityEngine;
 // ê‚Éo‚½‚Æ‚« /
 // ”j‰ó‚³‚ê‚½‚Æ‚«
 // Á–Å‚µ‚½‚Æ‚« /
-// 
-
 
 public class EffectManager : MonoBehaviour
 {
-
-    [SerializeField] 
-
     // Start is called before the first frame update
     void Start()
     {
