@@ -101,11 +101,17 @@ public class DeckRecorder : MonoBehaviour
             Directory.CreateDirectory(directory);
         }
 
-        // JSONファイルが存在しない場合は空データで作成
+        // JSONファイルが存在しない場合は初期データで作成
         if (!File.Exists(jsonFilePath))
         {
-            var emptySaveData = new DeckSaveData();
-            string json = JsonUtility.ToJson(emptySaveData, true);
+            var initSaveData = new DeckSaveData();
+            initSaveData.decks = new List<DeckSaveEntry>();
+            initSaveData.decks.Add(new DeckSaveEntry());
+            initSaveData.decks[0].cards = new List<CardCountEntry>();
+            // カードID 2 を40枚
+            initSaveData.decks[0].cards.Add(new CardCountEntry(2, 40)); 
+
+            string json = JsonUtility.ToJson(initSaveData, true);
             File.WriteAllText(jsonFilePath, json);
         }
 
