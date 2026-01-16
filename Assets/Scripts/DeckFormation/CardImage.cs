@@ -2,9 +2,6 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using static CardObject;
-using static Fusion.Sockets.NetBitBuffer;
 using static GameEnum;
 
 // ドラックアンドドロップでデッキにカードを追加する

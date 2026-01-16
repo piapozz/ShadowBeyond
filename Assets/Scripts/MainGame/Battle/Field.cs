@@ -105,6 +105,17 @@ public class Field
         return list[BattleManager.instance.rand.Next(0, list.Count)];
     }
 
+    // 相手の場に守護持ちがいるか
+    public bool IsWardOpponentField()
+    {
+        foreach (var card in _opponentFieldCardList)
+        {
+            if (card.HaveKeyword(GameEnum.KeywordAbility.Ward))
+                return true;
+        }
+        return false;
+    }
+
     // ===== 効果系 =====
     // 攻撃力をバフ/デバフ
     public void ModifyAttack(int value, System.Func<CardData, bool> condition = null)
@@ -134,9 +145,9 @@ public class Field
     }
 
     // 能力を付与
-    public void AddAbility(CardData card, CardAbility ability)
+    public void AddAbility(CardData card, ActiveAbility ability)
     {
-        if (!card.ability.Contains(ability))
+        if (!card.activeAbilities.Contains(ability))
             card.AddAbility(ability);
     }
 

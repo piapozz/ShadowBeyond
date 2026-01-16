@@ -177,16 +177,34 @@ public class GameEnum
 
     public enum KeywordAbility
     {
-        Rush,       // 疾走
-        Storm,      // 突進
-        Ward,       // 守護
-        Bane,       // 必殺
-        Ambush,     // 潜伏
-        Drane,      // ドレイン
-        Countdown,  // カウントダウン
-        Intimidate, // 威圧
-        Aura,       // オーラ
-        Barrier,    // バリア
-        Invoke,     // 直接召喚
+        Rush,           // 疾走
+        Storm,          // 突進
+        Ward,           // 守護
+        Bane,           // 必殺
+        Ambush,         // 潜伏
+        Drane,          // ドレイン
+        SpellBoost,     // スペルブースト
+        Countdown,      // カウントダウン
+        Intimidate,     // 威圧
+        Aura,           // オーラ
+        Barrier,        // バリア
+        Enhance,        // エンハンス
+        Invoke,         // 直接召喚
+        Fuse,           // 融合
+        EarthSigle,     // 土の印
+        Engage,         // アクト
+        SkyboundArt,    // 奥義
+        SuperSkyboundArt,// 解放奥義
+        NoDestroy,      // 破壊されない
+        ClampDamage,    // 固定ダメージ
+        MultipulAttack, // 複数回攻撃
+        NoAttack,       // 攻撃できない
+        NoDamageAbility,// 能力によるダメージを受けない
+        NoDamage,       // ダメージを受けない
+        NoReciveAbility,// 能力の効果を受けない
+        Reducedamege,   // ダメージ軽減
+        FreeEvolve,     // 無料進化
+        NoEvolve,       // 進化できない
+        NoAttackLeader, // リーダーを攻撃できない
     }
 }

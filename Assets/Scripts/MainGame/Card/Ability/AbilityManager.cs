@@ -4,39 +4,46 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class AbilityManager : SystemObject
+public class AbilityManager
 {
     public enum TriggerTiming
     {
-        None,
-
-    }
-
-    public struct EffectData
-    {
-        public TriggerTiming timing;
-        public bool isSelf;
-        public int param;
+        Play,               //自分がカードをプレイしたとき
+        OwnEnterField,      //自分の場にフォロワーが出たとき
+        OpponentEnterField, //相手の場にフォロワーが出たとき
+        Evolve,             //自分のフォロワーが進化したとき
+        OwnSuperEvolve,     //自分のフォロワーが超進化したとき
+        OpponentSuperEvolve,//相手のフォロワーが超進化したとき
+        Destory,            //自分のフォロワーが破壊されたとき
+        LeaveField,         //自分のフォロワーが場を離れたとき
+        OwnAttack,          //自分のフォロワーが攻撃した時
+        OpponentAttack,     //相手のフォロワーが攻撃した時
+        HealLeader,         //自分のリーダーが回復した時
+        Engage,             //自分のアミュレットをアクトしたとき
+        Draw,               //自分がカードを引いたとき
+        Mode,               //自分がモードを選んだとき
+        Fuse,               //自分が融合したとき
+        DamageFollower,     //自分のフォロワーがダメージを受けたとき
     }
 
     public static AbilityManager instance { get; private set; }
 
-    private Queue<EffectData> _triggerQueue = null;
+    // 実行待機キュー
+    private Queue<BaseCardAbility> _abilityQueue = null;
 
-    public override async UniTask Initialize()
+    public void Initialize()
     {
         instance = this;
-        _triggerQueue = new Queue<EffectData>();
-        await UniTask.CompletedTask;
+        _abilityQueue = new Queue<BaseCardAbility>();
     }
 
     /// <summary>
     /// トリガーの追加
     /// </summary>
     /// <param name="timing"></param>
-    public void AddTrigger(EffectData data)
+    public void AddTrigger(BaseCardAbility data)
     {
-        _triggerQueue.Enqueue(data);
+        _abilityQueue.Enqueue(data);
     }
 
     /// <summary>
@@ -45,11 +52,11 @@ public class AbilityManager : SystemObject
     public void ExecuteEffect()
     {
         // キューが空になるまで実行
-        while (_triggerQueue.Count > 0)
+        while (_abilityQueue.Count > 0)
         {
-            EffectData trigger = _triggerQueue.Dequeue();
+            BaseCardAbility ability = _abilityQueue.Dequeue();
             // トリガーの種類を探し一時保存
-
+            ability.ExecuteAbility();
         }
     }
 
@@ -58,9 +65,9 @@ public class AbilityManager : SystemObject
     /// </summary>
     /// <param name="trigger"></param>
     /// <returns></returns>
-    public Queue<IAbility> SearchEffectByTrigger(EffectData trigger)
+    public Queue<ActiveAbility> SearchEffectByTrigger(BaseCardAbility trigger)
     {
-        Queue<IAbility> executeEffects = new Queue<IAbility>();
+        Queue<ActiveAbility> executeEffects = new Queue<ActiveAbility>();
 
         
 

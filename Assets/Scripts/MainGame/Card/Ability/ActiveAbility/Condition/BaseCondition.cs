@@ -2,9 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IAbility
+public abstract class BaseCondition
 {
-    void Execute();
-
-    bool IsTriggered();
+    public abstract bool IsAchievement();
 }
