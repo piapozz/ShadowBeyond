@@ -18,6 +18,7 @@ public class CardObject : BaseFieldObject
     public enum CardObjectType
     {
         INVALID = -1,
+        DEFAULT_FOLLOWER,
         HAND_FOLLOWER,
         HAND_SPELL,
         HAND_AMULET,
@@ -34,6 +35,7 @@ public class CardObject : BaseFieldObject
         UNUSE,
         HAND,
         FIELD,
+        REDRAW,
         MAX
     }
 
@@ -75,6 +77,8 @@ public class CardObject : BaseFieldObject
                 UIManager.instance.SetLineRenderer(lineRenderer, transform);
                 lineRenderer.enabled = true;
                 break;
+            case CardState.REDRAW:
+                break;
             default: break;
         }
     }
@@ -99,6 +103,12 @@ public class CardObject : BaseFieldObject
                 if (!cardData.CanAttack(false)) return;
                 // 攻撃の線を出す
                 UIManager.instance.SetLineRenderer(lineRenderer, transform);
+                break;
+            case CardState.REDRAW:
+                // カードの位置更新
+                position = UIManager.instance.GetMouseWorldPosition(transform);
+                position.y = OFFSET_Y;
+                transform.position = position;
                 break;
             default: break;
         }
@@ -126,6 +136,10 @@ public class CardObject : BaseFieldObject
                 UIManager.instance.SetUIState(UIManager.UIState.DEFAULT);
                 if (!attackResult)
                     GetPickupSequence(false).Play();
+                break;
+            case CardState.REDRAW:
+                // オブジェクトをUIにセット
+
                 break;
             default: break;
         }
@@ -262,16 +276,26 @@ public class CardObject : BaseFieldObject
             case CardState.HAND:
                 gameObject.SetActive(true);
                 cardObject[(int)CardState.HAND].SetActive(true);
+                cardObject[(int)CardState.FIELD].SetActive(false);
+                cardObject[(int)CardState.REDRAW].SetActive(false);
                 break;
             case CardState.FIELD:
                 gameObject.SetActive(true);
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(true);
+                cardObject[(int)CardState.REDRAW].SetActive(false);
                 break;
             case CardState.UNUSE:
                 gameObject.SetActive(false);
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(false);
+                cardObject[(int)CardState.REDRAW].SetActive(false);
+                break;
+            case CardState.REDRAW:
+                gameObject.SetActive(true);
+                cardObject[(int)CardState.HAND].SetActive(false);
+                cardObject[(int)CardState.FIELD].SetActive(false);
+                cardObject[(int)CardState.REDRAW].SetActive(true);
                 break;
             default: break;
         }
@@ -288,14 +312,17 @@ public class CardObject : BaseFieldObject
             case GameEnum.CardType.FOLLOWER:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_FOLLOWER];
                 cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.FIELD_FOLLOWER];
+                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.DEFAULT_FOLLOWER];
                 break;
             case GameEnum.CardType.SPELL:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_SPELL];
                 cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.HAND_SPELL];
+                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.HAND_SPELL];
                 break;
             case GameEnum.CardType.AMULET:
                 cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_AMULET];
                 cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.FIELD_AMULET];
+                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.HAND_AMULET];
                 break;
             default: break;
         }
@@ -314,6 +341,12 @@ public class CardObject : BaseFieldObject
         fieldLook.SetCardText(cardData);
         // マテリアル設定
         fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+
+        CardLook redrawLook = cardObject[(int)CardState.REDRAW].GetComponent<CardLook>();
+        if (redrawLook == null) return;
+        redrawLook.SetCardText(cardData);
+        // マテリアル設定
+        redrawLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
     }
 
     public void UpdateText()
@@ -329,6 +362,10 @@ public class CardObject : BaseFieldObject
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (handLook == null) return;
         fieldLook.SetCardText(cardData);
+
+        CardLook redrawLook = cardObject[(int)CardState.REDRAW].GetComponent<CardLook>();
+        if (redrawLook == null) return;
+        redrawLook.SetCardText(cardData);
     }
 
     public Sequence GetFlipCard(float flipSpeed)
