@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
@@ -371,6 +372,15 @@ public class BattleManager : SystemObject
         CombatProcessor processor = new CombatProcessor(attackCard, defanceLeader);
 
         processor.LeaderCombat();
+    }
+
+    /// <summary>
+    /// 相手の場に守護持ちがいるか
+    /// </summary>
+    /// <returns></returns>
+    public bool IsWardOpponentField()
+    {
+        return field.IsWardOpponentField();
     }
 
     public bool IsOwnTurn()

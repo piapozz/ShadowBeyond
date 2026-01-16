@@ -56,14 +56,16 @@ public class CardData
     public string name { get; private set; }
     // カードコスト
     public int cost { get; private set; }
+    // デフォルトのコスト
+    public int defaultCost { get; private set; }
     // カードテキスト
     public string text { get; private set; }
     public bool isToken { get; private set; }
     public PackType packType { get; private set; }
     // キーワード能力
-    public HashSet<KeywordAbility> keywordTags = new();
+    public List<KeywordAbilityInstance> keywordAbilities = new();
     // カードアビリティ
-    public List<CardAbility> ability { get; private set; }
+    public List<ActiveAbility> activeAbilities { get; private set; }
     // 破壊された
     public bool isDestroyed { get; private set; }
     // 進化しているか
@@ -86,6 +88,7 @@ public class CardData
         type = setType;
         name = setName;
         cost = setCost;
+        defaultCost = setCost;
         status = new FollowerStatus(setAttack, setDefence);
         isToken = setToken;
 
@@ -95,6 +98,13 @@ public class CardData
     public void Init()
     {
         addStatus = new List<FollowerStatus>();
+        activeAbilities = new List<ActiveAbility>();
+        keywordAbilities = new List<KeywordAbilityInstance>();
+        BaseCardAbility ability = AbilityFactory.GetAbility(id);
+        if (ability == null) return;
+        ability.Initialize();
+        activeAbilities.AddRange(ability.activeAbilities);
+        keywordAbilities.AddRange(ability.keywordAbilities);
     }
 
     // ターン開始時処理
@@ -144,36 +154,36 @@ public class CardData
         text = setText;
     }
 
-    public void SetAbility(List<CardAbility> newAbility)
+    public void SetAbility(List<ActiveAbility> newAbility)
     {
-        ability = newAbility;
+        activeAbilities = newAbility;
     }
 
-    public void AddAbility(CardAbility newAbility)
+    public void AddAbility(ActiveAbility newAbility)
     {
-        if (ability == null)
+        if (activeAbilities == null)
         {
-            ability = new List<CardAbility>();
+            activeAbilities = new List<ActiveAbility>();
         }
-        ability.Add(newAbility);
+        activeAbilities.Add(newAbility);
     }
 
-    public void RemoveAbility(CardAbility removeAbility)
+    public void RemoveAbility(ActiveAbility removeAbility)
     {
-        if (ability == null)
+        if (activeAbilities == null)
         {
             return;
         }
-        ability.Remove(removeAbility);
+        activeAbilities.Remove(removeAbility);
     }
 
     public void ClearAbility()
     {
-        if (ability == null)
+        if (activeAbilities == null)
         {
             return;
         }
-        ability.Clear();
+        activeAbilities.Clear();
     }
 
     public bool CanBeSelected() { return false; }
@@ -276,10 +286,12 @@ public class CardData
     {
         if (remainAttackCount <= 0) return false;
 
+        // リーダーを攻撃する場合
         if (attackLeader)
-            return attackPermission == AttackPermission.CanAttackLeader;
+            return attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Rush);
+        // フォロワーを攻撃する場合
         else
-            return (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower);
+            return (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower) || HaveKeyword(KeywordAbility.Storm);
     }
 
     /// <summary>
@@ -297,5 +309,14 @@ public class CardData
         currentStatus.m_defance -= damage;
 
         return currentStatus;
+    }
+
+    public bool HaveKeyword(KeywordAbility keyword)
+    {
+        foreach (var keywordInstance in keywordAbilities)
+        {
+            if (keywordInstance.type == keyword) return true;
+        }
+        return false;
     }
 }

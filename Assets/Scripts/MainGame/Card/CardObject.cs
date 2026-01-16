@@ -185,23 +185,13 @@ public class CardObject : BaseFieldObject
         CardObject targetCard = target as CardObject;
         if (targetCard != null)
         {
-            // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
-            if (targetCard.currentState != CardState.FIELD || targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return false;
-            // 攻撃可否判定
-            if (!cardData.CanAttack(false)) return false;
-            cardData.OnAttack();
-            AttackFollower(targetCard);
-            return true;
+            return AttackFollower(targetCard);
         }
 
         LeaderObject targetLeader = target as LeaderObject;
         if (targetLeader != null)
         {
-            // 攻撃可否判定
-            if (!cardData.CanAttack(true)) return false;
-            cardData.OnAttack();
-            AttackLeader(targetLeader);
-            return true;
+            return AttackLeader(targetLeader);
         }
 
         return false;
@@ -211,8 +201,23 @@ public class CardObject : BaseFieldObject
     /// フォロワーへの攻撃
     /// </summary>
     /// <param name="targetCard"></param>
-    private void AttackFollower(CardObject targetCard)
+    private bool AttackFollower(CardObject targetCard)
     {
+        CardData defenceCard = targetCard.cardData;
+        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
+        if (targetCard.currentState != CardState.FIELD || defenceCard.type != GameEnum.CardType.FOLLOWER) return false;
+        // 攻撃可否判定
+        if (!cardData.CanAttack(false)) return false;
+        // 潜伏か威圧持ちなら攻撃できない
+        if (defenceCard.HaveKeyword(GameEnum.KeywordAbility.Ambush) ||
+            defenceCard.HaveKeyword(GameEnum.KeywordAbility.Intimidate))
+            return false;
+        // 守護を持っていなく、守護持ちフォロワーがいるなら攻撃できない
+        if (!defenceCard.HaveKeyword(GameEnum.KeywordAbility.Ward) && BattleManager.instance.IsWardOpponentField())
+            return false;
+        cardData.OnAttack();
+        AttackFollower(targetCard);
+
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
         int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
@@ -221,14 +226,21 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.CardCombat(cardData, targetCard.cardData);
         // 挙動
         UIManager.instance.SetAttackFollowerSequence(this, targetCard);
+        return true;
     }
 
     /// <summary>
     /// リーダーへの攻撃
     /// </summary>
     /// <param name="leaderCard"></param>
-    private void AttackLeader(LeaderObject leaderCard)
+    private bool AttackLeader(LeaderObject leaderCard)
     {
+        // 攻撃可否判定
+        if (!cardData.CanAttack(true)) return false;
+        // 守護を持っているフォロワーがいるなら攻撃できない
+        if (BattleManager.instance.IsWardOpponentField()) return false;
+        cardData.OnAttack();
+
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_LEADER, new int[1] { sourceIndex });
@@ -236,6 +248,7 @@ public class CardObject : BaseFieldObject
         BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
         // 挙動
         UIManager.instance.SetAttackLeaderSequence(this);
+        return true;
     }
 
     public Sequence GetAttackSequence()
