@@ -49,7 +49,6 @@ public class DeckFormationManager : MonoBehaviour
         SceneManager.LoadScene("Select");
     }
 
-
     public void AddCardToDeck(int cardId)
     {
         // ƒfƒbƒL‚ÌÅ‘å–‡”‚ğ’´‚¦‚È‚¢‚æ‚¤‚É‚·‚é
