@@ -291,7 +291,12 @@ public class CardData
             return attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Rush);
         // ƒtƒHƒƒ[‚ğUŒ‚‚·‚éê‡
         else
-            return (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower) || HaveKeyword(KeywordAbility.Storm);
+        {
+            bool result = (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower);
+            if (result) return true;
+            result = HaveKeyword(KeywordAbility.Rush) || HaveKeyword(KeywordAbility.Storm);
+            return result;
+        }
     }
 
     /// <summary>

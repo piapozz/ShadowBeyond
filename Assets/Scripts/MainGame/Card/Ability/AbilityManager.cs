@@ -29,21 +29,25 @@ public class AbilityManager
     public static AbilityManager instance { get; private set; }
 
     // 実行待機キュー
-    private Queue<BaseCardAbility> _abilityQueue = null;
+    private Queue<BaseCardAbility> _timingQueue = null;
 
     public void Initialize()
     {
         instance = this;
-        _abilityQueue = new Queue<BaseCardAbility>();
+        _timingQueue = new Queue<BaseCardAbility>();
     }
 
     /// <summary>
-    /// トリガーの追加
+    /// トリガーの通知
     /// </summary>
     /// <param name="timing"></param>
-    public void AddTrigger(BaseCardAbility data)
+    public void AddTrigger(TriggerTiming addTrigger)
     {
-        _abilityQueue.Enqueue(data);
+        // 誘発する能力の検索
+        // キューに追加
+        //_timingQueue.Enqueue();
+        // 誘発能力発動
+
     }
 
     /// <summary>
@@ -52,11 +56,10 @@ public class AbilityManager
     public void ExecuteEffect()
     {
         // キューが空になるまで実行
-        while (_abilityQueue.Count > 0)
+        while (_timingQueue.Count > 0)
         {
-            BaseCardAbility ability = _abilityQueue.Dequeue();
-            // トリガーの種類を探し一時保存
-            ability.ExecuteAbility();
+            BaseCardAbility ability = _timingQueue.Dequeue();
+
         }
     }
 
