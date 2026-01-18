@@ -7,5 +7,6 @@ public class CardAbility_Test : BaseCardAbility
     public override void Initialize()
     {
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward));
+        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush));
     }
 }
