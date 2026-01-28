@@ -4,5 +4,12 @@ using UnityEngine;
 
 public abstract class BaseEffect
 {
-    public abstract void ExecuteEffect();
+    protected List<int> param = null;
+
+    public BaseEffect(List<int> setParam = null)
+    {
+        param = setParam;
+    }
+
+    public abstract void ExecuteEffect(List<BaseComponent> targetCard);
 }

@@ -6,7 +6,7 @@ using static GameEnum;
 /// <summary>
 /// カードの基底クラス
 /// </summary>
-public class CardData
+public class CardData : BaseComponent
 {
     // フォロワーのステータス構造体
     public struct FollowerStatus
@@ -26,6 +26,14 @@ public class CardData
         NONE = 0,
         CanAttackFollower,
         CanAttackLeader
+    }
+    // 進化状態
+    public enum EvolveState
+    {
+        None = 0,
+        Unevolved,
+        Evolved,
+        SuperEvolved
     }
     public AttackPermission attackPermission { get; private set; } = AttackPermission.NONE;
     // このターンの攻撃可能回数
@@ -68,11 +76,9 @@ public class CardData
     public List<ActiveAbility> activeAbilities { get; private set; }
     // 破壊された
     public bool isDestroyed { get; private set; }
-    // 進化しているか
-    public bool isEvolved { get; private set; } = false;
-    // 超進化しているか
-    public bool isSuperEvolved { get; private set; } = false;
-    public bool isAnyEvolved => isEvolved || isSuperEvolved;
+    // 進化状態
+    public EvolveState evolveState { get; private set; } = EvolveState.Unevolved;
+    public bool isAnyEvolved => evolveState == EvolveState.Evolved || evolveState == EvolveState.SuperEvolved;
     public Func<CardObject> GetObject;
 
     public void SetGetObjectAction(Func<CardObject> action)
@@ -102,7 +108,7 @@ public class CardData
         keywordAbilities = new List<KeywordAbilityInstance>();
         BaseCardAbility ability = AbilityFactory.GetAbility(id);
         if (ability == null) return;
-        ability.Initialize();
+        ability.Initialize(this);
         activeAbilities.AddRange(ability.activeAbilities);
         keywordAbilities.AddRange(ability.keywordAbilities);
     }
@@ -192,7 +198,7 @@ public class CardData
     /// ダメージを与える
     /// </summary>
     /// <param name="damage"></param>
-    public void DealDamage(int damage)
+    public override void DealDamage(int damage)
     {
         this.damage += damage;
 
@@ -225,7 +231,7 @@ public class CardData
     /// 回復する
     /// </summary>
     /// <param name="heal"></param>
-    public void HealDamage(int heal)
+    public override void HealDamage(int heal)
     {
         damage -= heal;
         if (damage < 0) damage = 0;
@@ -268,13 +274,13 @@ public class CardData
     public void SetEvolve()
     {
         SetAttackPermission(AttackPermission.CanAttackFollower);
-        isEvolved = true;
+        evolveState = EvolveState.Evolved;
     }
 
     public void SetSuperEvolve()
     {
         SetAttackPermission(AttackPermission.CanAttackFollower);
-        isSuperEvolved = true;
+        evolveState = EvolveState.SuperEvolved;
     }
 
     /// <summary>
@@ -321,6 +327,15 @@ public class CardData
         foreach (var keywordInstance in keywordAbilities)
         {
             if (keywordInstance.type == keyword) return true;
+        }
+        return false;
+    }
+
+    public bool HaveDetailType(CardTypeDetail cardTypeDetail)
+    {
+        foreach (var type in typeDetail)
+        {
+            if (type == cardTypeDetail) return true;
         }
         return false;
     }

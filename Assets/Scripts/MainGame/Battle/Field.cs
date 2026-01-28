@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static GameEnum;
+using static UnityEngine.GraphicsBuffer;
 
 public class Field
 {
@@ -167,5 +168,25 @@ public class Field
     public void HealCard(CardData card, int heal)
     {
         card.HealDamage(heal);
+    }
+
+    public List<CardData> GetCards(Target.TargetSide targetSide, TargetCondition condition)
+    {
+        if (targetSide == Target.TargetSide.Own)
+        {
+            return BattleManager.instance.GetCards(_ownFieldCardList, condition);
+        }
+        else if (targetSide == Target.TargetSide.Opponent)
+        {
+            return BattleManager.instance.GetCards(_opponentFieldCardList, condition);
+        }
+        else if (targetSide == Target.TargetSide.Both)
+        {
+            List<CardData> cards = new();
+            cards.AddRange(_ownFieldCardList);
+            cards.AddRange(_opponentFieldCardList);
+            return BattleManager.instance.GetCards(cards, condition);
+        }
+        return null;
     }
 }

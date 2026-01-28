@@ -3,55 +3,44 @@ using System.Collections.Generic;
 
 public abstract class BaseCardAbility
 {
-    protected CardData cardData;
+    public CardData cardData { get; protected set; }
     public List<KeywordAbilityInstance> keywordAbilities = new List<KeywordAbilityInstance>();
     public List<ActiveAbility> activeAbilities = new List<ActiveAbility>();
 
-    public virtual void Initialize() { }
-
-    /// <summary>
-    /// アビリティの実行
-    /// </summary>
-    public void ExecuteAbility()
-    {
-        for (int i = 0, max = activeAbilities.Count; i < max; i++)
-        {
-            activeAbilities[i].effect.ExecuteEffect();
-        }
-    }
+    public virtual void Initialize(CardData setCard) { }
 
     // ファンファーレ
-    public virtual ActiveAbility Fanfare() { return null; }
+    public virtual void Fanfare() { }
     // エンハンス
-    public virtual ActiveAbility Enhance() { return null; }
+    public virtual void Enhance() { }
     // 場に出たとき
-    public virtual ActiveAbility EnterField() { return null; }
+    public virtual void EnterField() { }
     // 進化時
-    public virtual ActiveAbility Evolve() { return null; }
+    public virtual void Evolve() { }
     // 進化した時
-    public virtual ActiveAbility AutoEvolve() { return null; }
+    public virtual void AutoEvolve() { }
     // 超進化時
-    public virtual ActiveAbility SuperEvolve() { return null; }
+    public virtual void SuperEvolve() { }
     // 超進化した時
-    public virtual ActiveAbility AutoSuperEvolve() { return null; }
+    public virtual void AutoSuperEvolve() { }
     // ラストワード
-    public virtual ActiveAbility LastWord() { return null; }
+    public virtual void LastWord() { }
     // 場を離れたとき
-    public virtual ActiveAbility LeaveField() { return null; }
+    public virtual void LeaveField() { }
     // 攻撃時
-    public virtual ActiveAbility Attack() { return null; }
+    public virtual void Attack() { }
     // 交戦時
-    public virtual ActiveAbility Combat() { return null; }
+    public virtual void Combat() { }
     // ダメージを受けて破壊されなかったとき
-    public virtual ActiveAbility Damage() { return null; }
+    public virtual void Damage() { }
     // 捨てられたとき
-    public virtual ActiveAbility Discard() { return null; }
+    public virtual void Discard() { }
     // 攻撃力か体力が場で＋されたとき
-    public virtual ActiveAbility Buff() { return null; }
+    public virtual void Buff() { }
     // 直接召喚されたとき
-    public virtual ActiveAbility Invoke() { return null; }
+    public virtual void Invoke() {  }
     // 融合したとき
-    public virtual ActiveAbility Fuse() { return null; }
+    public virtual void Fuse() {  }
     // 引いたとき
-    public virtual ActiveAbility Draw() { return null; }
+    public virtual void Draw() {  }
 }
