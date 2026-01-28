@@ -18,6 +18,7 @@ public class BattleManager : SystemObject
     public int localPlayerIndex = -1;
     private int seed = 0;
     private bool isProcessingState = false;
+    public bool IsGame = false;
 
     public System.Random rand { get; private set; } // シード保持用
 
@@ -132,6 +133,8 @@ public class BattleManager : SystemObject
         if (NetworkManager.Instance.GetActivePlayerCount() < 2)
             return;
 
+        IsGame = true;
+
         // ① シード値同期
         if (localPlayerIndex == 1)
         {
@@ -239,9 +242,6 @@ public class BattleManager : SystemObject
 
     public async UniTask MainTurn()
     {
-        // 自分と相手のデッキを表示
-
-
         // メインフェイズ処理
 
         // 相手のターンなら受信
@@ -349,6 +349,10 @@ public class BattleManager : SystemObject
         // バトル終了処理
         Debug.Log("[Battle] 🏁 バトル終了");
 
+        // 通信切断
+        NetworkManager.Instance.Disconnect();
+        IsGame = false;
+
         // リザルト画面へ
         SceneManager.LoadScene("Result");
     }
@@ -415,5 +419,14 @@ public class BattleManager : SystemObject
     public bool IsWardOpponentField()
     {
         return field.IsWardOpponentField();
+    }
+
+    // ゲームを終了
+    public void ExitGame()
+    {
+        Debug.Log("[Battle] ❌ 相手が切断されました。ゲームを終了します。");
+        NetworkManager.Instance.Disconnect();
+        IsGame = false;
+        SceneManager.LoadScene("Title");
     }
 }
