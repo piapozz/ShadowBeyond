@@ -291,6 +291,7 @@ public class BattleManager : SystemObject
 
                 Leader defanceLeader = player[(currentPlayerIndex + 1) % 2].leader;
                 LeaderCombat(attackLeaderCard, defanceLeader);
+                UIManager.instance.SetAttackLeaderSequence(attackLeaderCard.GetObject());
                 break;
 
             case GameEnum.InputType.EVOLVE:
@@ -426,9 +427,24 @@ public class BattleManager : SystemObject
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<BaseComponent> GetTargetCard(Target target)
+    public List<BaseComponent> GetTargetCard(Target target, bool isOwn)
     {
         List<BaseComponent> result = new List<BaseComponent>();
+        // TargetSideの反転
+        if (!isOwn)
+        {
+            switch (target.targetSide)
+            {
+                case Target.TargetSide.Own:
+                    target.targetSide = Target.TargetSide.Opponent;
+                    break;
+                case Target.TargetSide.Opponent:
+                    target.targetSide = Target.TargetSide.Own;
+                    break;
+                default: break;
+            }
+        }
+            
         // 選択が必要か
         if (target.isSelect)
         {
@@ -515,34 +531,43 @@ public class BattleManager : SystemObject
                 continue;
             }
             // タイプチェック
-            for (int j = 0, max = condition.type.Count; j < max; j++)
+            if (condition.type != null)
             {
-                if (condition.type != null || condition.type[j] == cardList[i].type)
+                for (int j = 0, max = condition.type.Count; j < max; j++)
                 {
-                    cardList.Remove(cardList[i]);
-                    continue;
+                    if (condition.type[j] == cardList[i].type)
+                    {
+                        cardList.Remove(cardList[i]);
+                        continue;
+                    }
                 }
             }
             // リーダークラスチェック
-            for (int j = 0, max = condition.leaderClass.Count; j < max; j++)
+            if (condition.leaderClass != null)
             {
-                if (condition.leaderClass != null || condition.leaderClass[j] != cardList[i].leaderClass)
+                for (int j = 0, max = condition.leaderClass.Count; j < max; j++)
                 {
-                    cardList.Remove(cardList[i]);
-                    continue;
+                    if (condition.leaderClass[j] != cardList[i].leaderClass)
+                    {
+                        cardList.Remove(cardList[i]);
+                        continue;
+                    }
                 }
             }
             // カード詳細タイプチェック
-            for (int j = 0, max = condition.cardTypeDetail.Count; j < max; j++)
+            if (condition.cardTypeDetail != null)
             {
-                if (condition.cardTypeDetail != null || !cardList[i].HaveDetailType(condition.cardTypeDetail[j]))
+                for (int j = 0, max = condition.cardTypeDetail.Count; j < max; j++)
                 {
-                    cardList.Remove(cardList[i]);
-                    continue;
+                    if (!cardList[i].HaveDetailType(condition.cardTypeDetail[j]))
+                    {
+                        cardList.Remove(cardList[i]);
+                        continue;
+                    }
                 }
             }
             // 進化状態チェック
-            if (condition.evolveState != CardData.EvolveState.None || cardList[i].evolveState != condition.evolveState)
+            if (condition.evolveState != CardData.EvolveState.None || cardList[i].evolveState == condition.evolveState)
             {
                 cardList.Remove(cardList[i]);
                 continue;

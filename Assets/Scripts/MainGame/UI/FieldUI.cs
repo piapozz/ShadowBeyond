@@ -74,6 +74,7 @@ public class FieldUI : MonoBehaviour
 
     public void PlayFieldCard(bool isOwn, CardObject playCard)
     {
+        
         // æ‚Éê‚ğ®—ñ‚³‚¹‚é
         List<Sequence> playSequence = new List<Sequence>();
         playSequence.AddRange(ArrangeFieldCard(isOwn, 1));

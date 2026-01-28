@@ -211,13 +211,13 @@ public class CommonModule
     /// <summary>
     /// リスト内のキャストできるものを抽出して返す
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    /// <typeparam name="T1"></typeparam>
+    /// <typeparam name="TFrom"></typeparam>
+    /// <typeparam name="TTo"></typeparam>
     /// <param name="sourceList"></param>
     /// <returns></returns>
-    public static List<T1> CastList<T, T1>(List<T> sourceList)
+    public static List<TTo> CastList<TFrom, TTo>(List<TFrom> sourceList) where TTo : class
     {
-        List<T1> afterList = sourceList.OfType<T1>().ToList();
+        List<TTo> afterList = sourceList.OfType<TTo>().ToList();
         return afterList;
     }
 
