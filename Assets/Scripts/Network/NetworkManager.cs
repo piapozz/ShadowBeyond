@@ -138,6 +138,11 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         redrawReceived = false;
         receivedRedrawList.Clear();
 
+        localSequence = 0;
+        lastDeliveredSeq = -1;
+        sendHistory.Clear();
+        recvBuffer.Clear();
+
         Debug.Log("[Network] 🔍 マッチング開始...");
 
         // NetworkRunner生成

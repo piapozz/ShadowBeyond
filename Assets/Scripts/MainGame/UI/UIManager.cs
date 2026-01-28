@@ -557,7 +557,7 @@ public class UIManager : SystemObject
         redrawUI.gameObject.SetActive(false);
         readyUI.gameObject.SetActive(true);
         // キャラだし
-        readyUI.Initialize("Player1", "ニュートラル", "Player2", "ニュートラル");
+        readyUI.Initialize("あなた", " ", "あいて", "　");
         // 順番決め演出
         await readyUI.MoveOrderCard(currntPlayer);
         // UI非表示
