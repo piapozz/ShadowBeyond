@@ -8,6 +8,11 @@ public class AbilityManager
 {
     public enum TriggerTiming
     {
+        None = 0,
+        OwnTurnStart,       //自分のターン開始時
+        OwnTurnEnd,         //自分のターン終了時
+        OpponentTurnStart,  //相手のターン開始時
+        OpponentTurnEnd,    //相手のターン終了時
         Play,               //自分がカードをプレイしたとき
         OwnEnterField,      //自分の場にフォロワーが出たとき
         OpponentEnterField, //相手の場にフォロワーが出たとき
@@ -29,51 +34,68 @@ public class AbilityManager
     public static AbilityManager instance { get; private set; }
 
     // 実行待機キュー
-    private Queue<BaseCardAbility> _timingQueue = null;
+    private Queue<ActiveAbility> _timingQueue = null;
+
+    private Dictionary<TriggerTiming, List<ActiveAbility>> subscribeAbility;
 
     public void Initialize()
     {
         instance = this;
-        _timingQueue = new Queue<BaseCardAbility>();
+        _timingQueue = new Queue<ActiveAbility>();
+        subscribeAbility = new Dictionary<TriggerTiming, List<ActiveAbility>>();
     }
 
     /// <summary>
     /// トリガーの通知
     /// </summary>
     /// <param name="timing"></param>
-    public void AddTrigger(TriggerTiming addTrigger)
+    public void Trigger(TriggerTiming addTrigger)
     {
-        // 誘発する能力の検索
-        // キューに追加
-        //_timingQueue.Enqueue();
+        // 誘発する能力の検索、ソートして実行キューに追加
+        List<ActiveAbility> activeAbilities = SortActiveAbility(addTrigger);
+        for (int i = 0, max = activeAbilities.Count; i < max; i++)
+        {
+            _timingQueue.Enqueue(activeAbilities[i]);
+        }
         // 誘発能力発動
+        ExecuteEffect();
+    }
 
+    public List<ActiveAbility> SortActiveAbility(TriggerTiming sortTiming)
+    {
+        List<ActiveAbility> sortList = subscribeAbility[sortTiming];
+        sortList.Sort((a, b) =>
+        {
+            return a.zone.CompareTo(b.zone);
+        });
+        return sortList;
     }
 
     /// <summary>
-    /// キューに追加されているトリガーの効果を探し実行
+    /// キューに登録されている能力の実行
     /// </summary>
     public void ExecuteEffect()
     {
         // キューが空になるまで実行
         while (_timingQueue.Count > 0)
         {
-            BaseCardAbility ability = _timingQueue.Dequeue();
-
+            ActiveAbility ability = _timingQueue.Dequeue();
+            List<BaseComponent> components = BattleManager.instance.GetTargetCard(ability.target);
+            ability.effect.ExecuteEffect(components);
         }
     }
 
     /// <summary>
-    /// トリガーで誘発する効果の検索
+    /// 能力の登録
     /// </summary>
-    /// <param name="trigger"></param>
-    /// <returns></returns>
-    public Queue<ActiveAbility> SearchEffectByTrigger(BaseCardAbility trigger)
+    /// <param name="timing"></param>
+    /// <param name="ability"></param>
+    public void SubscribeAbility(TriggerTiming timing, ActiveAbility ability)
     {
-        Queue<ActiveAbility> executeEffects = new Queue<ActiveAbility>();
-
-        
-
-        return executeEffects;
+        if (!subscribeAbility.ContainsKey(timing))
+        {
+            subscribeAbility[timing] = new List<ActiveAbility>();
+        }
+        subscribeAbility[timing].Add(ability);
     }
 }

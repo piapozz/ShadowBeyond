@@ -207,4 +207,9 @@ public class Hand
             handCardList[i].SetCanPlay(playable);
         }
     }
+
+    public List<CardData> GetCards(TargetCondition condition)
+    {
+        return BattleManager.instance.GetCards(handCardList, condition);
+    }
 }

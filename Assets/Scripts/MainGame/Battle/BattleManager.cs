@@ -421,6 +421,154 @@ public class BattleManager : SystemObject
         return field.IsWardOpponentField();
     }
 
+    /// <summary>
+    /// ターゲットを受け取り、該当するコンポーネントを返す
+    /// </summary>
+    /// <param name="target"></param>
+    /// <returns></returns>
+    public List<BaseComponent> GetTargetCard(Target target)
+    {
+        List<BaseComponent> result = new List<BaseComponent>();
+        // 選択が必要か
+        if (target.isSelect)
+        {
+
+        }
+        // 選択不要
+        else
+        {
+            // 領域ごとに取得
+            switch (target.targetZone)
+            {
+                case Target.TargetZone.Hand:
+                    if (target.targetSide == Target.TargetSide.Own)
+                    {
+                        result.AddRange(player[0].hand.GetCards(target.condition));
+                    }
+                    else
+                    {
+                        result.AddRange(player[1].hand.GetCards(target.condition));
+                    }
+                    break;
+                case Target.TargetZone.Field:
+                    result.AddRange(field.GetCards(target.targetSide, target.condition));
+                    break;
+                case Target.TargetZone.Leader:
+                    if (target.targetSide == Target.TargetSide.Own)
+                    {
+                        result.Add(player[0].leader);
+                    }
+                    else if (target.targetSide == Target.TargetSide.Opponent)
+                    {
+                        result.Add(player[1].leader);
+                    }
+                    else if (target.targetSide == Target.TargetSide.Both)
+                    {
+                        result.Add(player[0].leader);
+                        result.Add(player[1].leader);
+                    }
+                    break;
+                case Target.TargetZone.FieldAndLeader:
+                    result.AddRange(field.GetCards(target.targetSide, target.condition));
+                    if (target.targetSide == Target.TargetSide.Own)
+                    {
+                        result.Add(player[0].leader);
+                    }
+                    else if (target.targetSide == Target.TargetSide.Opponent)
+                    {
+                        result.Add(player[1].leader);
+                    }
+                    else if (target.targetSide == Target.TargetSide.Both)
+                    {
+                        result.Add(player[0].leader);
+                        result.Add(player[1].leader);
+                    }
+                    break;
+                default: break;
+            }
+            // ランダムに除外
+            if (target.isRandom)
+            {
+                int takeCount = result.Count - target.count;
+                for (int i = 0, max = takeCount; i < max; i++)
+                {
+                    result.RemoveAt(rand.Next(0, result.Count));
+                }
+            }
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// 条件からカードを検索
+    /// </summary>
+    /// <param name="condition"></param>
+    /// <returns></returns>
+    public List<CardData> GetCards(List<CardData> cardList, TargetCondition condition)
+    {
+        for (int i = 0, cardMax = cardList.Count; i < cardMax; i++)
+        {
+            // IDチェック
+            if (condition.ID != null && condition.ID == cardList[i].id)
+            {
+                cardList.Remove(cardList[i]);
+                continue;
+            }
+            // タイプチェック
+            for (int j = 0, max = condition.type.Count; j < max; j++)
+            {
+                if (condition.type != null || condition.type[j] == cardList[i].type)
+                {
+                    cardList.Remove(cardList[i]);
+                    continue;
+                }
+            }
+            // リーダークラスチェック
+            for (int j = 0, max = condition.leaderClass.Count; j < max; j++)
+            {
+                if (condition.leaderClass != null || condition.leaderClass[j] != cardList[i].leaderClass)
+                {
+                    cardList.Remove(cardList[i]);
+                    continue;
+                }
+            }
+            // カード詳細タイプチェック
+            for (int j = 0, max = condition.cardTypeDetail.Count; j < max; j++)
+            {
+                if (condition.cardTypeDetail != null || !cardList[i].HaveDetailType(condition.cardTypeDetail[j]))
+                {
+                    cardList.Remove(cardList[i]);
+                    continue;
+                }
+            }
+            // 進化状態チェック
+            if (condition.evolveState != CardData.EvolveState.None || cardList[i].evolveState != condition.evolveState)
+            {
+                cardList.Remove(cardList[i]);
+                continue;
+            }
+            // 攻撃力範囲チェック
+            if (!condition.attack.Match(cardList[i].status.m_attack))
+            {
+                cardList.Remove(cardList[i]);
+                continue;
+            }
+            // 体力範囲チェック
+            if (!condition.defence.Match(cardList[i].status.m_defance))
+            {
+                cardList.Remove(cardList[i]);
+                continue;
+            }
+            // ダメージ状態チェック
+            if (condition.isHurt != null && condition.isHurt == cardList[i].damage < 1)
+            {
+                cardList.Remove(cardList[i]);
+                continue;
+            }
+        }
+        return cardList;
+    }
+
     // ゲームを終了
     public void ExitGame()
     {

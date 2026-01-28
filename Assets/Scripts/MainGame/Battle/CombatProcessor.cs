@@ -36,7 +36,7 @@ public class CombatProcessor
         // 受けるダメージ軽減能力タイミング
 
         defenderCard.DealDamage(attackerDamage);
-        if (!attackerCard.isSuperEvolved)
+        if (attackerCard.evolveState != CardData.EvolveState.SuperEvolved)
             attackerCard.DealDamage(defenderDamage);
 
         // ドレイン能力タイミング
@@ -54,7 +54,7 @@ public class CombatProcessor
             // 破壊時能力タイミング
 
             // 相手リーダーに1ダメージ
-            if (attackerCard.isSuperEvolved)
+            if (attackerCard.evolveState == CardData.EvolveState.SuperEvolved)
             {
                 // FIX:リーダーが取得できない
                 //defenderLeader.DealDamage(1);

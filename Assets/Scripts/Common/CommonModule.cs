@@ -1,67 +1,14 @@
 using Cysharp.Threading.Tasks;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using System.Linq;
+using UnityEngine.UIElements;
 
 public class CommonModule
 {
-    /// <summary>
-    /// ステージ上の位置情報を表す構造体
-    /// </summary>
-    public struct StagePosition
-    {
-        public int m_route;
-        public int m_road;
-        public int m_square;
-
-        // コンストラクタ
-        public StagePosition(int route, int road, int square)
-        {
-            m_route = route;
-            m_road = road;
-            m_square = square;
-        }
-
-        /// <summary>
-        /// オブジェクトが等しいかを比較
-        /// </summary>
-        public override bool Equals(object obj)
-        {
-            if (!(obj is StagePosition)) return false;
-
-            StagePosition other = (StagePosition)obj;
-
-            return m_route == other.m_route &&
-                   m_road == other.m_road &&
-                   m_square == other.m_square;
-        }
-
-        /// <summary>
-        /// ハッシュコードを取得
-        /// </summary>
-        public override int GetHashCode()
-        {
-            return (m_route, m_road, m_square).GetHashCode();
-        }
-
-        /// <summary>
-        /// 等価演算子
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public static bool operator ==(StagePosition a, StagePosition b) => a.Equals(b);
-
-        /// <summary>
-        /// 非等価演算子
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="b"></param>
-        /// <returns></returns>
-        public static bool operator !=(StagePosition a, StagePosition b) => !a.Equals(b);
-    }
-
     /// <summary>
 	/// リストの初期化
 	/// </summary>
@@ -231,6 +178,47 @@ public class CommonModule
         Vector3 P1 = Vector3.Lerp(start, control, t);
         Vector3 P2 = Vector3.Lerp(control, end, t);
         return Vector3.Lerp(P1, P2, t);
+    }
+
+    /// <summary>
+    /// int型の範囲指定
+    /// </summary>
+    public struct IntRange
+    {
+        public int? Min;
+        public int? Max;
+
+        public static IntRange Any =>
+            new IntRange { Min = null, Max = null };
+
+        public static IntRange AtLeast(int min) =>
+            new IntRange { Min = min, Max = null };
+
+        public static IntRange AtMost(int max) =>
+            new IntRange { Min = null, Max = max };
+
+        public static IntRange Between(int min, int max) =>
+            new IntRange { Min = min, Max = max };
+
+        public bool Match(int value)
+        {
+            if (Min.HasValue && value < Min.Value) return false;
+            if (Max.HasValue && value > Max.Value) return false;
+            return true;
+        }
+    }
+
+    /// <summary>
+    /// リスト内のキャストできるものを抽出して返す
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T1"></typeparam>
+    /// <param name="sourceList"></param>
+    /// <returns></returns>
+    public static List<T1> CastList<T, T1>(List<T> sourceList)
+    {
+        List<T1> afterList = sourceList.OfType<T1>().ToList();
+        return afterList;
     }
 
     #region WaitAction(sec)

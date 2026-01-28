@@ -199,6 +199,7 @@ public class GameEnum
         ClampDamage,    // 固定ダメージ
         MultipulAttack, // 複数回攻撃
         NoAttack,       // 攻撃できない
+        OnlySelect,     // これしか選択できない
         NoDamageAbility,// 能力によるダメージを受けない
         NoDamage,       // ダメージを受けない
         NoReciveAbility,// 能力の効果を受けない

@@ -54,7 +54,7 @@ public class BattleStatValue
 /// <summary>
 /// リーダー情報
 /// </summary>
-public class Leader
+public class Leader : BaseComponent
 {
     // 基本情報
     public int playerID { get; private set; }
@@ -195,10 +195,15 @@ public class Leader
         return battleStats[type];
     }
     
-    public void DealDamage(int damage)
+    public override void DealDamage(int damage)
     {
         SetCurrentDefense(currentDefense - damage);
         // ダメージを受けた時の処理
+    }
+
+    public override void HealDamage(int heal)
+    {
+        SetCurrentDefense(currentDefense + heal);
     }
 
     // --- 数値操作 ---
