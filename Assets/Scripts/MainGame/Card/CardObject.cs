@@ -490,6 +490,7 @@ public class CardObject : BaseFieldObject
     /// <returns></returns>
     public Sequence PlayFieldSequence(bool isOwn, Transform playCardSlot, Transform fieldRoot)
     {
+        cardData.OnPlay(isOwn);
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
@@ -513,6 +514,7 @@ public class CardObject : BaseFieldObject
 
     public void PlaySpellCard(bool isOwn)
     {
+        cardData.OnPlay(isOwn);
         // データを設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);

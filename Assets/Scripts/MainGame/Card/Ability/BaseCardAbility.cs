@@ -1,16 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public abstract class BaseCardAbility
 {
-    public CardData cardData { get; protected set; }
     public List<KeywordAbilityInstance> keywordAbilities = new List<KeywordAbilityInstance>();
     public List<ActiveAbility> activeAbilities = new List<ActiveAbility>();
 
     public virtual void Initialize(CardData setCard) { }
 
     // ファンファーレ
-    public virtual void Fanfare() { }
+    public virtual void Fanfare(bool isOwn) { }
     // エンハンス
     public virtual void Enhance() { }
     // 場に出たとき

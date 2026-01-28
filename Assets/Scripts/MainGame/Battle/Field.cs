@@ -148,7 +148,7 @@ public class Field
     // ”\—Í‚ð•t—^
     public void AddAbility(CardData card, ActiveAbility ability)
     {
-        if (!card.activeAbilities.Contains(ability))
+        if (!card.ability.activeAbilities.Contains(ability))
             card.AddAbility(ability);
     }
 

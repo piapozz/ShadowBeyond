@@ -70,10 +70,8 @@ public class CardData : BaseComponent
     public string text { get; private set; }
     public bool isToken { get; private set; }
     public PackType packType { get; private set; }
-    // キーワード能力
-    public List<KeywordAbilityInstance> keywordAbilities = new();
-    // カードアビリティ
-    public List<ActiveAbility> activeAbilities { get; private set; }
+    // 能力クラス
+    public BaseCardAbility ability { get; private set; }
     // 破壊された
     public bool isDestroyed { get; private set; }
     // 進化状態
@@ -104,14 +102,17 @@ public class CardData : BaseComponent
     public void Init()
     {
         addStatus = new List<FollowerStatus>();
-        activeAbilities = new List<ActiveAbility>();
-        keywordAbilities = new List<KeywordAbilityInstance>();
-        BaseCardAbility ability = AbilityFactory.GetAbility(id);
+        ability = AbilityFactory.GetAbility(id);
         if (ability == null) return;
         ability.Initialize(this);
-        activeAbilities.AddRange(ability.activeAbilities);
-        keywordAbilities.AddRange(ability.keywordAbilities);
     }
+
+    public void OnPlay(bool isOpponent)
+    {
+        if (ability == null) return;
+        ability.Fanfare(isOpponent);
+    }
+
 
     // ターン開始時処理
     public void OnStartTurn()
@@ -162,35 +163,34 @@ public class CardData : BaseComponent
 
     public void SetAbility(List<ActiveAbility> newAbility)
     {
-        activeAbilities = newAbility;
+        ability.activeAbilities = newAbility;
     }
 
     public void AddAbility(ActiveAbility newAbility)
     {
-        if (activeAbilities == null)
+        if (ability.activeAbilities == null)
         {
-            activeAbilities = new List<ActiveAbility>();
+            ability.activeAbilities = new List<ActiveAbility>();
         }
-        activeAbilities.Add(newAbility);
-        GetObject().PlayEffect(EffectManager.EffectType.AbilityAdd, 1.0f);
+        ability.activeAbilities.Add(newAbility);
     }
 
     public void RemoveAbility(ActiveAbility removeAbility)
     {
-        if (activeAbilities == null)
+        if (ability.activeAbilities == null)
         {
             return;
         }
-        activeAbilities.Remove(removeAbility);
+        ability.activeAbilities.Remove(removeAbility);
     }
 
     public void ClearAbility()
     {
-        if (activeAbilities == null)
+        if (ability.activeAbilities == null)
         {
             return;
         }
-        activeAbilities.Clear();
+        ability.activeAbilities.Clear();
     }
 
     public bool CanBeSelected() { return false; }
@@ -328,7 +328,8 @@ public class CardData : BaseComponent
 
     public bool HaveKeyword(KeywordAbility keyword)
     {
-        foreach (var keywordInstance in keywordAbilities)
+        if (ability == null) return false;
+        foreach (var keywordInstance in ability.keywordAbilities)
         {
             if (keywordInstance.type == keyword) return true;
         }

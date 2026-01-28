@@ -11,6 +11,8 @@ public class AbilityFactory
     public static void Initialize()
     {
         Register(0, () => new CardAbility_Test());
+        Register(1, () => new CardAbility_Test());
+        Register(2, () => new CardAbility_Test());
     }
 
     private static void Register(int id, Func<BaseCardAbility> ability)
