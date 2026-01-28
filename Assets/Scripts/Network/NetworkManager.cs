@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using static GameEnum;
@@ -203,6 +204,18 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         StartCoroutine(WaitForPlayers());
     }
 
+    // 通信の切断
+    public void Disconnect()
+    {
+        if (runner != null)
+        {
+            runner.Shutdown();
+            Destroy(runner);
+            runner = null;
+        }
+        isConnecting = false;
+    }
+
     // ==========================================================
     // INetworkRunnerCallbacks
     // ==========================================================
@@ -296,6 +309,11 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         Debug.Log($"[Network] Player left: {player.PlayerId}");
+        // 規定人数以下なら終了する
+        if (runner.ActivePlayers.Count() < 2 && BattleManager.instance.IsGame)
+        {
+            BattleManager.instance.ExitGame();
+        }
     }
 
     // -----------------------------------
