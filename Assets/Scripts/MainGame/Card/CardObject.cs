@@ -505,7 +505,8 @@ public class CardObject : BaseFieldObject
         Sequence toFieldSequence = DOTween.Sequence();
         toFieldSequence.Append(transform.DOMove(playCardSlot.position, 0.3f))
             .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
-            .JoinCallback(() => transform.SetParent(fieldRoot));
+            .JoinCallback(() => transform.SetParent(fieldRoot))
+            .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f));
 
         return toFieldSequence;
     }
@@ -583,11 +584,17 @@ public class CardObject : BaseFieldObject
         if (!cardData.isDestroyed) return;
 
         // 破壊エフェクト
+        PlayEffect(EffectManager.EffectType.OnDestroy, 1.0f);
 
         // オブジェクト非表示
         SetCardState(CardState.UNUSE);
 
         // フィールドから除外
         UIManager.instance.RemoveFieldCard(this);
+    }
+
+    public void PlayEffect(EffectManager.EffectType type, float sec)
+    {
+        EffectManager.Instance.PlayEffect(type, transform.position + new Vector3(0, 1.0f, 0), sec);
     }
 }
