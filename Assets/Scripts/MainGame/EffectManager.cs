@@ -1,6 +1,8 @@
+using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static BattleManager;
 
 // 攻撃のダメージエフェクト /
 // 能力のダメージエフェクト /
@@ -13,17 +15,43 @@ using UnityEngine;
 // 破壊されたとき
 // 消滅したとき /
 
-public class EffectManager : MonoBehaviour
+public class EffectManager : SystemObject
 {
-    // Start is called before the first frame update
-    void Start()
+    public static EffectManager Instance { get; private set; }
+
+    [SerializeField]
+    private List<GameObject> effectPrefab = null;
+
+    public enum EffectType
     {
-        
+        AttackDamage,
+        AbilityDamage,
+        Heal,
+        StatusUp,
+        StatusDown,
+        AbilityAdd,
+        OnField,
+        OnDestroy,
+        OnBanish
     }
 
-    // Update is called once per frame
-    void Update()
+    public override async UniTask Initialize()
     {
-        
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        await UniTask.CompletedTask;
+    }
+
+    // エフェクト再生
+    public void PlayEffect(EffectType type, Vector3 position, float sec)
+    {
+        GameObject prefab = effectPrefab[(int)type];
+        Instantiate(prefab, position, Quaternion.identity);
     }
 }

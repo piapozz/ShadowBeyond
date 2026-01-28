@@ -131,6 +131,12 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     {
         if (isConnecting) return;
         isConnecting = true;
+        receivedDeck.Clear();
+        receivedRedrawList.Clear();
+        seedReceived = false;
+        deckReceived = false;
+        redrawReceived = false;
+        receivedRedrawList.Clear();
 
         Debug.Log("[Network] 🔍 マッチング開始...");
 

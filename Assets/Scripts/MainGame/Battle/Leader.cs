@@ -199,11 +199,14 @@ public class Leader : BaseComponent
     {
         SetCurrentDefense(currentDefense - damage);
         // ダメージを受けた時の処理
+        GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
     }
 
     public override void HealDamage(int heal)
     {
         SetCurrentDefense(currentDefense + heal);
+
+        GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
     }
 
     // --- 数値操作 ---

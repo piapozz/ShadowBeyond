@@ -32,4 +32,9 @@ public class LeaderObject : BaseFieldObject
     {
         defence.text = setDefence.ToString();
     }
+
+    public void PlayEffect(EffectManager.EffectType type, float sec)
+    {
+        EffectManager.Instance.PlayEffect(type, transform.position, sec);
+    }
 }

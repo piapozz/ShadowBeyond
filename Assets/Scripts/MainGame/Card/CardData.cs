@@ -172,6 +172,7 @@ public class CardData : BaseComponent
             activeAbilities = new List<ActiveAbility>();
         }
         activeAbilities.Add(newAbility);
+        GetObject().PlayEffect(EffectManager.EffectType.AbilityAdd, 1.0f);
     }
 
     public void RemoveAbility(ActiveAbility removeAbility)
@@ -204,6 +205,7 @@ public class CardData : BaseComponent
 
         CheckDestroyed();
         GetObject().UpdateText();
+        GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
     }
 
     // ”j‰ó‚³‚ê‚½‚©
@@ -236,6 +238,7 @@ public class CardData : BaseComponent
         damage -= heal;
         if (damage < 0) damage = 0;
         GetObject().UpdateText();
+        GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
     }
 
     public void AddStatus(int attack, int defance)
@@ -245,6 +248,7 @@ public class CardData : BaseComponent
         status.m_defance = defance;
         addStatus.Add(status);
         GetObject().UpdateText();
+        GetObject().PlayEffect(EffectManager.EffectType.StatusUp, 1.0f);
     }
 
     public void ClearAddStatus()

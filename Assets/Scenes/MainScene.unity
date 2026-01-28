@@ -501,6 +501,7 @@ MonoBehaviour:
   _systemObjectList:
   - {fileID: 7809748204510224045, guid: 93d11dae72c92f54dbe34a246c76ade4, type: 3}
   - {fileID: 7007462017798607201, guid: 66a102331e80fc34c969f29d38f3db66, type: 3}
+  - {fileID: 3172777956423562170, guid: 84ea2bb52e53fd442986167b1d16ba04, type: 3}
 --- !u!4 &1901443813
 Transform:
   m_ObjectHideFlags: 0
