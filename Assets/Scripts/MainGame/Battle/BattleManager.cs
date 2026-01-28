@@ -1,9 +1,9 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Unity.IO.LowLevel.Unsafe;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -47,7 +47,6 @@ public class BattleManager : SystemObject
             hand = new Hand();
             deck = new Deck();
 
-            deck.Init();
             hand.Init(new List<CardData>());
         }
 
@@ -85,7 +84,7 @@ public class BattleManager : SystemObject
     public override async UniTask Initialize()
     {
         instance = this;
-       
+
         currentState = BattleState.START_BATTLE;
         localPlayerIndex = NetworkManager.Instance.localPlayerId;
         await UniTask.CompletedTask;
@@ -169,7 +168,6 @@ public class BattleManager : SystemObject
 
         var opponentDeck = NetworkManager.Instance.GetReceivedDeck();
         Debug.Log($"[Battle] ✅ 相手デッキ受信完了（カード数: {opponentDeck.Count}）");
-        
 
         rand = new System.Random(seed);
         player = new Player[(int)GameEnum.PlayerType.MAX];
@@ -199,10 +197,29 @@ public class BattleManager : SystemObject
         Debug.Log($"[Battle] 🥊 バトル開始 先攻: {currentPlayerIndex}");
 
         // ターンエンドのコールバック
-        UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });  
+        UIManager.instance.SetEndTurnButton(() => { SetCurrentState(BattleState.END_TURN); SendInputData(GameEnum.InputType.TURN_END); });
 
         // UIの演出
         await UIManager.instance.PlayStartBattleSequence(currentPlayerIndex);
+
+        // マリガン後のデッキ通信同期
+        // 自分のデッキ情報を送信
+        var deckData = player[(int)GameEnum.PlayerType.OWN].deck.GetDeckCardList();
+        List<int> playerDeck = new List<int>();
+        foreach (var card in deckData)
+        {
+            playerDeck.Add(card.id);
+        }
+        NetworkManager.Instance.SendDeckData(playerDeck);
+        Debug.Log("[Battle] 📤 デッキ送信完了");
+
+        // ③ 相手デッキ受信待機
+        Debug.Log("[Battle] 📥 相手のデッキ受信待機中...");
+        await WaitUntil(() => NetworkManager.Instance.deckReceived);
+
+        opponentDeck = NetworkManager.Instance.GetReceivedDeck();
+        Debug.Log($"[Battle] ✅ 相手デッキ受信完了（カード数: {opponentDeck.Count}）");
+        player[(int)GameEnum.PlayerType.OPPONENT].deck.SetDeckData(opponentDeck);
 
         currentState = BattleState.START_TURN;
     }
@@ -222,12 +239,15 @@ public class BattleManager : SystemObject
 
     public async UniTask MainTurn()
     {
+        // 自分と相手のデッキを表示
+
+
         // メインフェイズ処理
 
         // 相手のターンなら受信
         NetworkManager.SendBattleData data = NetworkManager.Instance.GetNextReceivedData();
 
-        if(data.type == GameEnum.InputType.INVALID) return;
+        if (data.type == GameEnum.InputType.INVALID) return;
 
         switch (data.type)
         {
@@ -297,7 +317,7 @@ public class BattleManager : SystemObject
                 break;
 
             case GameEnum.InputType.EXTRA_PP:
-            // エクストラPP
+                // エクストラPP
                 break;
 
             case GameEnum.InputType.TURN_END:
@@ -374,15 +394,6 @@ public class BattleManager : SystemObject
         processor.LeaderCombat();
     }
 
-    /// <summary>
-    /// 相手の場に守護持ちがいるか
-    /// </summary>
-    /// <returns></returns>
-    public bool IsWardOpponentField()
-    {
-        return field.IsWardOpponentField();
-    }
-
     public bool IsOwnTurn()
     {
         return currentPlayerIndex == (int)GameEnum.PlayerType.OWN;
@@ -394,9 +405,15 @@ public class BattleManager : SystemObject
         currentState = BattleState.END_BATTLE;
     }
 
-    private async UniTask WaitUntil(Func<bool> condition)
+    public async UniTask WaitUntil(Func<bool> condition)
     {
         while (!condition())
             await UniTask.Delay(50);
+    }
+
+    // 相手の場に守護持ちがいるか
+    public bool IsWardOpponentField()
+    {
+        return field.IsWardOpponentField();
     }
 }

@@ -37,6 +37,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         SYNC_BATTLE = 1,   // バトルデータ（既存）
         SYNC_SEED = 2,     // シード値
         SYNC_DECK = 3,     // デッキ
+        SYNC_REDRAW = 4,   // マリガン
     }
 
     public bool seedReceived { get; private set; } = false;
@@ -45,8 +46,24 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
     public bool deckReceived { get; private set; } = false;
     private List<int> receivedDeck = new List<int>();
 
-    public int GetReceivedSeed() => receivedSeed;
-    public List<int> GetReceivedDeck() => receivedDeck;
+    public bool redrawReceived { get; private set; } = false;
+    private List<bool> receivedRedrawList = new List<bool>();
+
+    public int GetReceivedSeed()
+    {
+        seedReceived = false; 
+        return receivedSeed;
+    }
+    public List<int> GetReceivedDeck()
+    {
+        deckReceived = false; 
+        return receivedDeck;
+    }
+    public List<bool> GetReceivedRedrawList()
+    {
+        redrawReceived = false;
+        return receivedRedrawList;
+    }
 
     public struct SendBattleData
     {
@@ -417,6 +434,52 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
         return 0;
     }
 
+    public int SendRedrawData(List<bool> isRedrawList)
+    {
+        if (runner == null)
+        {
+            Debug.LogError("[Network] ❌ runner が存在しません");
+            return -1;
+        }
+
+        if (isRedrawList == null || isRedrawList.Count == 0)
+        {
+            Debug.LogWarning("[Network] ⚠️ リストが空です");
+            return -1;
+        }
+
+        using MemoryStream ms = new MemoryStream();
+        using BinaryWriter bw = new BinaryWriter(ms);
+
+        // 通信タイプ
+        bw.Write((byte)SyncTypeEnum.SYNC_REDRAW);
+
+        // 各カードIDを書き込む
+        foreach (bool isRedraw in isRedrawList)
+        {
+            bw.Write(isRedraw);
+        }
+
+        byte[] sendData = ms.ToArray();
+
+        // 相手がいない場合
+        if (runner.ActivePlayers.Count() < 2)
+        {
+            Debug.Log("[Network] ⚠️ まだ相手がいないため送信できません");
+            return -1;
+        }
+
+        foreach (var player in runner.ActivePlayers)
+        {
+            if (player == runner.LocalPlayer) continue;
+
+            ReliableKey reliable = default;
+            runner.SendReliableDataToPlayer(player, reliable, sendData);
+            Debug.Log($"[Network] ✅ マリガンデータ送信完了 → Player {player.PlayerId}");
+        }
+
+        return 0;
+    }
 
     // -----------------------------------
     // データ受信
@@ -469,6 +532,7 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
             case SyncTypeEnum.SYNC_DECK:
             {
                 deckReceived = true;
+                receivedDeck.Clear();
                 // デッキ枚数を取得
                 int cardCount = br.ReadInt32();
 
@@ -480,6 +544,21 @@ public class NetworkManager : MonoBehaviour, INetworkRunnerCallbacks
                 }
 
                 Debug.Log($"[Network] 🃏 デッキ受信: {cardCount}枚 ({string.Join(",", receivedDeck.Take(Mathf.Min(5, receivedDeck.Count)))}...)");
+                break;
+            }
+
+            // 🔄 マリガンデータ受信
+            case SyncTypeEnum.SYNC_REDRAW:
+            {
+                redrawReceived = true;
+                while (ms.Position < ms.Length)
+                {
+                    // 各マリガンフラグを読み取る
+                    bool isRedraw = br.ReadBoolean();
+                    receivedRedrawList.Add(isRedraw);
+                }
+                Debug.Log($"[Network] 🔄 マリガンデータ受信: {receivedRedrawList.Count}枚 ({string.Join(",", receivedRedrawList.Take(Mathf.Min(5, receivedRedrawList.Count)))}...)");
+
                 break;
             }
 

@@ -3,6 +3,7 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using static CardObject;
 using static CommonModule;
@@ -40,6 +41,7 @@ public class UIManager : SystemObject
     [SerializeField] private Transform playCardRoot;
     [SerializeField] private CardDetailUI cardDetailUI;
     [SerializeField] private ReadyUI readyUI;
+    [SerializeField] private RedrawUI redrawUI;
 
     public enum UIState
     {
@@ -64,7 +66,6 @@ public class UIManager : SystemObject
     private const float LINE_HEIGHT = 5.0f;
     // 攻撃線のずらし幅
     private const float LINE_OFFSET = 2.0f;
-
 
     public override async UniTask Initialize()
     {
@@ -183,6 +184,14 @@ public class UIManager : SystemObject
         return uiSequence.Count == 0 && currentSequenceList.Count == 0;
     }
 
+    public async UniTask IsCompleteAllSequenceTask()
+    {
+        while (!IsCompleteAllSequence())
+        {
+            await UniTask.Yield();
+        }
+    }
+
     public void SetUIState(UIState setState)
     {
         state = setState;
@@ -199,7 +208,7 @@ public class UIManager : SystemObject
     /// 未使用のカードオブジェクトを取得
     /// </summary>
     /// <returns></returns>
-    private CardObject GetUnuseCardObject()
+    public CardObject GetUnuseCardObject()
     {
         for (int i = 0, max = poolCardObject.Count; i < max; i++)
         {
@@ -255,6 +264,15 @@ public class UIManager : SystemObject
         {
             AddSequence(handUI.ArrangeHandCard(true));
         }
+    }
+
+    /// <summary>
+    /// カードがマリガン中にドロップされたときの処理
+    /// </summary>
+    /// <param name="setCard"></param>
+    public async UniTask RedrawDropCard(CardObject setCard)
+    {
+       await redrawUI.IsInRedrawArea(setCard);
     }
 
     /// <summary>
@@ -340,6 +358,64 @@ public class UIManager : SystemObject
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
         Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
         handUI.DrawCard(isMine, drawCardObjects, deckTransform);
+    }
+
+    /// <summary>
+    /// デッキからカードをドローする
+    /// </summary>
+    /// <param name="isMine"></param>
+    /// <param name="drawCard"></param>
+    public void InsertDrawCards(int playerID, CardData drawCard, int index)
+    {
+        CardObject drawCardObject;
+        CardObject cardObject = GetUnuseCardObject();
+        // カードデータセット
+        cardObject.SetCardData(drawCard);
+        cardObject.SetCardState(CardObject.CardState.HAND);
+        drawCardObject = cardObject;
+
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
+        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
+        handUI.InsertDrawCard(isMine, drawCardObject, deckTransform, index);
+    }
+
+    /// <summary>
+    /// デッキにカードを戻す
+    /// </summary>
+    /// <param name="isMine"></param>
+    /// <param name="drawCard"></param>
+    public void ReturnCards(int playerID, List<CardData> returnCard)
+    {
+        int returnCardNum = returnCard.Count;
+        List<CardObject> drawCardObjects = new List<CardObject>(returnCardNum);
+        for (int i = 0; i < returnCardNum; i++)
+        {
+            CardObject cardObject = returnCard[i].GetObject();
+            // カードデータセット
+            cardObject.SetCardData(returnCard[i]);
+            drawCardObjects.Add(cardObject);
+        }
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
+        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
+        handUI.ReturnCard(isMine, drawCardObjects, deckTransform);
+    }
+
+    // 手札にカードを加える
+    public void AddHandCard(int playerID, List<CardData> addCard)
+    {
+        int addCardNum = addCard.Count;
+        List<CardObject> drawCardObjects = new List<CardObject>(addCardNum);
+        for (int i = 0; i < addCardNum; i++)
+        {
+            CardObject cardObject = addCard[i].GetObject();
+            // カードデータセット
+            cardObject.SetCardData(addCard[i]);
+            cardObject.SetCardState(CardObject.CardState.HAND);
+            drawCardObjects.Add(cardObject);
+        }
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
+        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
+        handUI.AddHandCard(isMine, drawCardObjects);
     }
 
     public void ShuffleDeck(int playerID)
@@ -476,26 +552,41 @@ public class UIManager : SystemObject
     // バトル開始時演出
     public async UniTask PlayStartBattleSequence(int currntPlayer)
     {
-        // TODO: バトル開始時演出
+        // バトル開始時演出
         HideUI();
+        redrawUI.gameObject.SetActive(false);
         readyUI.gameObject.SetActive(true);
-
         // キャラだし
         readyUI.Initialize("Player1", "ニュートラル", "Player2", "ニュートラル");
-
         // 順番決め演出
         await readyUI.MoveOrderCard(currntPlayer);
-
-        // UI破棄
-        Destroy(readyUI.gameObject);
+        // UI非表示
+        readyUI.gameObject.SetActive(false);
 
         // マリガン
+        // カードを四枚取得マリガンに渡す
+        redrawUI.gameObject.SetActive(true);
+        List<CardData> drawCards;
+        var player = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN);
 
+        drawCards = player.deck.PeekDeck(4);
+        for (int i = 0; i < drawCards.Count; i++)
+        {
+            CardObject cardObject = GetUnuseCardObject();
+            // カードデータセット
+            cardObject.SetCardData(drawCards[i]);
+            cardObject.SetCardState(CardObject.CardState.REDRAW);
+        }
+        redrawUI.StartRedraw(drawCards, ownDeckObject.transform);
+
+        while (redrawUI.IsRedraw())
+        {
+            await UniTask.Yield();
+        }
+        redrawUI.gameObject.SetActive(false);
 
         // UI各種表示
         ShowUI();
-        readyUI.gameObject.SetActive(false);
-
 
         return;
     }
@@ -509,7 +600,7 @@ public class UIManager : SystemObject
 
     public void HideUI()
     {
-        handUI.gameObject.SetActive(false);
+        //handUI.gameObject.SetActive(false);
         fieldUI.gameObject.SetActive(false);
         turnUI.gameObject.SetActive(false);
         ownPPUI.gameObject.SetActive(false);
@@ -519,12 +610,11 @@ public class UIManager : SystemObject
         //infoUI.gameObject.SetActive(false);
         leaderUI.gameObject.SetActive(false);
         cardDetailUI.gameObject.SetActive(false);
-        readyUI.gameObject.SetActive(false);
     }
 
     public void ShowUI()
     {
-        handUI.gameObject.SetActive(true);
+        //handUI.gameObject.SetActive(true);
         fieldUI.gameObject.SetActive(true);
         turnUI.gameObject.SetActive(true);
         ownPPUI.gameObject.SetActive(true);
@@ -534,7 +624,6 @@ public class UIManager : SystemObject
         //infoUI.gameObject.SetActive(true);
         leaderUI.gameObject.SetActive(true);
         cardDetailUI.gameObject.SetActive(true);
-        readyUI.gameObject.SetActive(true);
     }
 
 }

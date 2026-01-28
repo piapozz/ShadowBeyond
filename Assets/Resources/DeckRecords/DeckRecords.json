@@ -5,6 +5,14 @@
                 {
                     "cardId": 100000,
                     "count": 3
+                },
+                {
+                    "cardId": 104000,
+                    "count": 3
+                },
+                {
+                    "cardId": 5000,
+                    "count": 3
                 }
             ]
         }
