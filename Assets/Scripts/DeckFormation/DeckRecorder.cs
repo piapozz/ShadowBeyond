@@ -129,6 +129,16 @@ public class DeckRecorder : MonoBehaviour
 
         deckCollection.decks.Clear();
 
+        // データなかったらエラー
+        foreach (var deck in saveData.decks)
+        {
+            if (deck.cards == null)
+            {
+                Debug.LogError("[DeckRecorder] Deck entry has null cards list.");
+                return;
+            }
+        }
+
         if (saveData != null && saveData.decks != null)
         {
             foreach (var entry in saveData.decks)

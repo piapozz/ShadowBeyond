@@ -33,12 +33,87 @@ public class HandUI : MonoBehaviour
             if (isMine)
             {
                 ownHandCards.Add(card);
-                drawSequence.Add(card.DrawOwnCard(deckRoot, ownDrawRoot, cardSlotList[i], ownHandRoot));
+                drawSequence.Add(card.DrawOwnCard(deckRoot, ownDrawRoot, cardSlotList[i], ownHandRoot, 0.5f));
             }
             else
             {
                 opponentHandCards.Add(card);
                 drawSequence.Add(card.DrawOpponentCard(deckRoot, cardSlotList[i], opponentHandRoot));
+            }
+        }
+        // ドローの挙動と整列の挙動を登録
+        UIManager.instance.AddSequence(drawSequence);
+    }
+
+    // カードをドローする
+    public void InsertDrawCard(bool isMine, CardObject drawCard, Transform deckRoot, int index)
+    {
+        List<Sequence> drawSequence = new List<Sequence>();
+        // カードの諸設定をし、ドローするアニメーションを登録
+        drawCard.SetCardState(CardObject.CardState.HAND);
+        drawCard.SetIsLocal(isMine);
+        if (isMine)
+        {
+            ownHandCards.Insert(index, drawCard);
+            drawSequence.Add(drawCard.DrawOwnCard(deckRoot, ownDrawRoot, cardSlotList[index], ownHandRoot, 0.5f));
+        }
+        else
+        {
+            opponentHandCards.Insert(index, drawCard);
+            drawSequence.Add(drawCard.DrawOpponentCard(deckRoot, cardSlotList[index], opponentHandRoot));
+        }
+
+        drawSequence.AddRange(ArrangeHandCard(isMine, 1));
+        // ドローの挙動と整列の挙動を登録
+        UIManager.instance.AddSequence(drawSequence);
+    }
+
+    // カードを戻す
+    public void ReturnCard(bool isMine, List<CardObject> returnCards, Transform deckRoot)
+    {
+        // カードの諸設定をし、戻すアニメーションを登録
+        List<Sequence> returnSequence = new List<Sequence>();
+        int returnCardNum = returnCards.Count;
+        for (int i = 0; i < returnCardNum; i++)
+        {
+            CardObject card = returnCards[i];
+            if (isMine)
+            {
+                ownHandCards.Remove(card);
+                returnSequence.Add(card.ReturnOwnCard(deckRoot, ownDrawRoot, deckRoot));
+            }
+            else
+            {
+                opponentHandCards.Remove(card);
+                returnSequence.Add(card.ReturnOpponentCard(deckRoot,opponentHandRoot));
+            }
+        }
+        // 戻した後に手札を整列させる
+        returnSequence.AddRange(ArrangeHandCard(isMine));
+        // 戻す挙動と整列の挙動を登録
+        UIManager.instance.AddSequence(returnSequence);
+    }
+
+    // 手札エリアにカードを追加する
+    public void AddHandCard(bool isMine, List<CardObject> cardList)
+    {
+        List<Sequence> drawSequence = new List<Sequence>();
+        int drawCardNum = cardList.Count;
+        drawSequence.AddRange(ArrangeHandCard(isMine, drawCardNum));
+        // カードの諸設定をし、ドローするアニメーションを登録
+        for (int i = 0; i < drawCardNum; i++)
+        {
+            CardObject card = cardList[i];
+            card.SetIsLocal(isMine);
+            if (isMine)
+            {
+                ownHandCards.Add(card);
+                drawSequence.Add(card.DrawOwnCard(card.transform, card.transform, cardSlotList[i], ownHandRoot, 0.5f));
+            }
+            else
+            {
+                opponentHandCards.Add(card);
+                drawSequence.Add(card.DrawOpponentCard(card.transform, cardSlotList[i], opponentHandRoot));
             }
         }
         // ドローの挙動と整列の挙動を登録

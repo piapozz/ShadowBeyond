@@ -1,7 +1,8 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
+using static GameEnum;
 
 /// <summary>
 /// カードオブジェクトにアタッチするクラス
@@ -44,6 +45,7 @@ public class CardObject : BaseFieldObject
     // カードクラスの参照
     public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
+    public List<GameObject> GetCardObject() { return new List<GameObject>(cardObject); }
 
     // カードをドラッグした時の高さオフセット
     private const float OFFSET_Y = 1.0f;
@@ -114,7 +116,7 @@ public class CardObject : BaseFieldObject
         }
     }
 
-    private void OnMouseUp()
+    private async void OnMouseUp()
     {
         if (!isLocal) return;
         switch (currentState)
@@ -139,7 +141,7 @@ public class CardObject : BaseFieldObject
                 break;
             case CardState.REDRAW:
                 // オブジェクトをUIにセット
-
+                await UIManager.instance.RedrawDropCard(this);
                 break;
             default: break;
         }
@@ -319,23 +321,29 @@ public class CardObject : BaseFieldObject
     /// </summary>
     public void SetCardLook()
     {
+        foreach (GameObject obj in cardObject)
+        {
+            if (obj != null)
+                Destroy(obj);
+        }
+
         // オブジェクト設定
         switch (cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:
-                cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_FOLLOWER];
-                cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.FIELD_FOLLOWER];
-                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.DEFAULT_FOLLOWER];
+                cardObject[(int)CardState.HAND] = Instantiate(cardPrefab[(int)CardObjectType.HAND_FOLLOWER], this.transform);
+                cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.FIELD_FOLLOWER], this.transform);
+                cardObject[(int)CardState.REDRAW] = Instantiate(cardPrefab[(int)CardObjectType.DEFAULT_FOLLOWER], this.transform);
                 break;
             case GameEnum.CardType.SPELL:
-                cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_SPELL];
-                cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.HAND_SPELL];
-                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.HAND_SPELL];
+                cardObject[(int)CardState.HAND] = Instantiate(cardPrefab[(int)CardObjectType.HAND_SPELL], this.transform);
+                cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.HAND_SPELL], this.transform);
+                cardObject[(int)CardState.REDRAW] = Instantiate(cardPrefab[(int)CardObjectType.HAND_SPELL], this.transform);
                 break;
             case GameEnum.CardType.AMULET:
-                cardObject[(int)CardState.HAND] = cardPrefab[(int)CardObjectType.HAND_AMULET];
-                cardObject[(int)CardState.FIELD] = cardPrefab[(int)CardObjectType.FIELD_AMULET];
-                cardObject[(int)CardState.REDRAW] = cardPrefab[(int)CardObjectType.HAND_AMULET];
+                cardObject[(int)CardState.HAND] = Instantiate(cardPrefab[(int)CardObjectType.HAND_AMULET], this.transform);
+                cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.FIELD_AMULET], this.transform);
+                cardObject[(int)CardState.REDRAW] = Instantiate(cardPrefab[(int)CardObjectType.HAND_AMULET], this.transform);
                 break;
             default: break;
         }
@@ -360,6 +368,8 @@ public class CardObject : BaseFieldObject
         redrawLook.SetCardText(cardData);
         // マテリアル設定
         redrawLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+
+        SetCardState(CardState.UNUSE);
     }
 
     public void UpdateText()
@@ -395,18 +405,18 @@ public class CardObject : BaseFieldObject
     /// <param name="drawRoot"></param>
     /// <param name="cardRoot"></param>
     /// <returns></returns>
-    public Sequence DrawOwnCard(Transform deckRoot, Transform drawRoot, Transform cardRoot, Transform handRoot)
+    public Sequence DrawOwnCard(Transform deckRoot, Transform drawRoot, Transform cardRoot, Transform handRoot, float sec)
     {
         // ドロールートまでの挙動
         Sequence drawSeq = DOTween.Sequence();
         drawSeq.AppendCallback(() => transform.position = deckRoot.position)
             .JoinCallback(() => transform.rotation = deckRoot.rotation)
             .JoinCallback(() => gameObject.SetActive(true))
-            .Join(transform.DOMove(drawRoot.position, 0.5f))
-            .Join(transform.DORotate(drawRoot.localEulerAngles, 0.5f));
+            .Join(transform.DOMove(drawRoot.position, sec))
+            .Join(transform.DORotate(drawRoot.localEulerAngles, sec));
         // 手札ルートまでの挙動
-        drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, 0.5f))
-            .Join(transform.DOMove(cardRoot.position, 0.5f))
+        drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, sec))
+            .Join(transform.DOMove(cardRoot.position, sec))
             .JoinCallback(() => transform.SetParent(handRoot));
         return drawSeq;
     }
@@ -432,6 +442,43 @@ public class CardObject : BaseFieldObject
             .Join(transform.DOMove(cardRoot.position, 0.5f))
             .JoinCallback(() => transform.SetParent(handRoot));
         return drawSeq;
+    }
+
+    /// <summary>
+    /// 自分のデッキ戻し
+    /// </summary>
+    public Sequence ReturnOwnCard(Transform deckRoot, Transform returnRoot, Transform handRoot)
+    {
+        // 戻しルートまでの挙動
+        Sequence returnSeq = DOTween.Sequence();
+        returnSeq.AppendCallback(() => transform.DORotate(deckRoot.localEulerAngles, 0.5f))
+            .JoinCallback(() => transform.SetParent(null))
+            .Join(transform.DOMove(returnRoot.position, 0.5f));
+        // デッキルートまでの挙動
+        returnSeq.Append(transform.DOMove(deckRoot.position, 0.5f))
+            .Join(transform.DORotate(deckRoot.localEulerAngles, 0.5f))
+            .AppendCallback(() => SetCardState(CardState.UNUSE));
+        return returnSeq;
+    }
+
+    /// <summary>
+    /// 相手のデッキ戻し
+    /// </summary>
+    public Sequence ReturnOpponentCard(Transform deckRoot, Transform handRoot)
+    {
+        // 表を非表示
+        CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
+        if (handLook == null) return null;
+        handLook.SetCardFrontActive(false);
+        Sequence returnSeq = DOTween.Sequence();
+        // デッキルートまでの挙動
+        returnSeq.AppendCallback(() => transform.rotation = deckRoot.rotation)
+            .JoinCallback(() => gameObject.SetActive(true))
+            .Join(transform.DORotate(deckRoot.localEulerAngles, 0.5f))
+            .Join(transform.DOMove(deckRoot.position, 0.5f))
+            .JoinCallback(() => transform.SetParent(null))
+            .AppendCallback(() => SetCardState(CardState.UNUSE));
+        return returnSeq;
     }
 
     /// <summary>
@@ -507,7 +554,7 @@ public class CardObject : BaseFieldObject
     {
         cardData.SetEvolve();
         cardData.AddStatus(2, 2);
-        
+
     }
 
     public void SuperEvolveFollower()

@@ -73,6 +73,12 @@ public class Deck
         }
     }
 
+    // リストを取得
+    public List<CardData> GetDeckCardList()
+    {
+        return deckCardList;
+    }
+
     /// <summary>
     /// デッキをシャッフルする
     /// </summary>
@@ -107,6 +113,30 @@ public class Deck
         }
 
         UIManager.instance.DrawCards(playerID, drawCards);
+    }
+
+    /// <summary>
+    /// デッキから指定枚数引いて手札に加えない
+    /// </summary>
+    /// <param name="count"></param>
+    /// <returns></returns>
+    public List<CardData> PeekDeck(int count)
+    {
+        List<CardData> peekedCards = new List<CardData>();
+        for (int i = 0; i < count; i++)
+        {
+            if (deckCardList.Count == 0) break;
+            CardData card = deckCardList[0];
+            deckCardList.RemoveAt(0);
+            peekedCards.Add(card);
+
+            CardObject cardObject = UIManager.instance.GetUnuseCardObject();
+            // カードデータセット
+            //cardObject.SetCardData(card);
+            //cardObject.SetCardState(CardObject.CardState.UNUSE);
+        }
+
+        return peekedCards;
     }
 
     /// <summary>

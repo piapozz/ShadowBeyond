@@ -41,6 +41,28 @@ public class Hand
     }
 
     /// <summary>
+    /// 指定カードを指定番目に挿入
+    /// </summary>
+    /// <param name="card"></param>
+    /// <param name="index"></param>
+    public void InsertCardAt(CardData card, int index)
+    {
+        if (card == null) return;
+        if (handCardList.Count >= MAX_HAND) return;
+        if (index < 0 || index > handCardList.Count)
+        {
+            handCardList.Add(card);
+        }
+        else
+        {
+            handCardList.Insert(index, card);
+        }
+
+        // 手札に加えるアニメーション
+        UIManager.instance.InsertDrawCards(playerID, card, index);
+    }
+
+    /// <summary>
     /// 指定カードを場に出す
     /// </summary>
     /// <param name="card"></param>
@@ -61,6 +83,31 @@ public class Hand
         }
 
         field.PlayCard(card, playerID);
+    }
+
+    /// <summary>
+    /// 指定カードをデッキに戻す
+    /// </summary>
+    /// <param name="card"></param>
+    public void ReturnCardToDeck(CardData card)
+    {
+        if (card == null) return;
+        handCardList.Remove(card);
+        deck.AddCard(card);
+
+        // デッキに戻すアニメーション
+        UIManager.instance.ReturnCards(playerID, new List<CardData> { card });
+    }
+
+    /// <summary>
+    /// 指定番目のカードを取得
+    /// </summary>
+    /// <param name="index"></param>
+    /// <returns></returns>
+    public CardData GetCardAt(int index)
+    {
+        if (index < 0 || index >= handCardList.Count) return null;
+        return handCardList[index];
     }
 
     /// <summary>
