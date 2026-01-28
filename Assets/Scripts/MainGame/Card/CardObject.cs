@@ -554,13 +554,28 @@ public class CardObject : BaseFieldObject
     {
         cardData.SetEvolve();
         cardData.AddStatus(2, 2);
-
+        // モデルを切り替える
+        cardObject[(int)CardState.FIELD].SetActive(false);
+        cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.EVOLVE_FOLLOWER], this.transform);
+        // テキスト設定
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
+        if (fieldLook == null) return;
+        fieldLook.SetCardText(cardData);
+        cardObject[(int)CardState.FIELD].SetActive(true);
     }
 
     public void SuperEvolveFollower()
     {
         cardData.SetSuperEvolve();
         cardData.AddStatus(3, 3);
+        // モデルを切り替える
+        cardObject[(int)CardState.FIELD].SetActive(false);
+        cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.SUPWER_EVOLVE_FOLLOWER], this.transform);
+        // テキスト設定
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
+        if (fieldLook == null) return;
+        fieldLook.SetCardText(cardData);
+        cardObject[(int)CardState.FIELD].SetActive(true);
     }
 
     public void CheckDestroyCard()
