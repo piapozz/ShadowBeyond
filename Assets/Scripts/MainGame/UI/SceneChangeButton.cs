@@ -9,6 +9,7 @@ public class SceneChangeButton : MonoBehaviour
 
     public void OnClickChangeScene()
     {
+        AudioManager.instance.PlaySE(AudioManager.SEType.BUTTON);
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }

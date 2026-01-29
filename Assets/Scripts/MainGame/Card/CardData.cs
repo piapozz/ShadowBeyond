@@ -206,6 +206,7 @@ public class CardData : BaseComponent
         CheckDestroyed();
         GetObject().UpdateText();
         GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
+        AudioManager.instance.PlaySE(AudioManager.SEType.DAMAGE);
     }
 
     // ”j‰ó‚³‚ê‚½‚©
@@ -239,6 +240,7 @@ public class CardData : BaseComponent
         if (damage < 0) damage = 0;
         GetObject().UpdateText();
         GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
+        AudioManager.instance.PlaySE(AudioManager.SEType.HEAL);
     }
 
     public void AddStatus(int attack, int defance)

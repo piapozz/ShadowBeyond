@@ -41,6 +41,7 @@ public class HandUI : MonoBehaviour
                 drawSequence.Add(card.DrawOpponentCard(deckRoot, cardSlotList[i], opponentHandRoot));
             }
         }
+        drawSequence.Add(AudioManager.instance.PlaySESequence(AudioManager.SEType.CARD_DRAW));
         // ƒhƒ[‚Ì‹““®‚Æ®—ñ‚Ì‹““®‚ğ“o˜^
         UIManager.instance.AddSequence(drawSequence);
     }
@@ -64,6 +65,7 @@ public class HandUI : MonoBehaviour
         }
 
         drawSequence.AddRange(ArrangeHandCard(isMine, 1));
+        drawSequence.Add(AudioManager.instance.PlaySESequence(AudioManager.SEType.CARD_DRAW));
         // ƒhƒ[‚Ì‹““®‚Æ®—ñ‚Ì‹““®‚ğ“o˜^
         UIManager.instance.AddSequence(drawSequence);
     }

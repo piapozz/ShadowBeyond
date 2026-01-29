@@ -17,6 +17,7 @@ public class TitleStartButton : MonoBehaviour
     void Start()
     {
         buttonText.text = "Tap To Start";
+        AudioManager.instance.PlayBGM(AudioManager.BGMType.OUTGAME);
     }
 
     // Update is called once per frame
@@ -24,6 +25,7 @@ public class TitleStartButton : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            AudioManager.instance.PlaySE(AudioManager.SEType.BUTTON);
             SceneManager.LoadScene(sceneName);
         }
         // テキストを点滅させる

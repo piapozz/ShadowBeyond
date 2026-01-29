@@ -19,6 +19,7 @@ public class MatchingButton : MonoBehaviour
         // ボタンイベント設定
         matchingButton.onClick.AddListener(() =>
         {
+            AudioManager.instance.PlaySE(AudioManager.SEType.BUTTON);
             if (NetworkManager.Instance.IsConnected())
             {
                 // マッチング中止
