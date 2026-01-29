@@ -15,6 +15,8 @@ public class CardObject : BaseFieldObject
     private LineRenderer lineRenderer = null;
     [SerializeField]
     private List<Material> cardMaterial = null;
+    [SerializeField]
+    private List<GameObject> effectObject = null;
 
     public enum CardObjectType
     {
@@ -293,6 +295,7 @@ public class CardObject : BaseFieldObject
                 cardObject[(int)CardState.HAND].SetActive(true);
                 cardObject[(int)CardState.FIELD].SetActive(false);
                 cardObject[(int)CardState.REDRAW].SetActive(false);
+                DisableAllCardEffect();
                 break;
             case CardState.FIELD:
                 gameObject.SetActive(true);
@@ -305,12 +308,14 @@ public class CardObject : BaseFieldObject
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(false);
                 cardObject[(int)CardState.REDRAW].SetActive(false);
+                DisableAllCardEffect();
                 break;
             case CardState.REDRAW:
                 gameObject.SetActive(true);
                 cardObject[(int)CardState.HAND].SetActive(false);
                 cardObject[(int)CardState.FIELD].SetActive(false);
                 cardObject[(int)CardState.REDRAW].SetActive(true);
+                DisableAllCardEffect();
                 break;
             default: break;
         }
@@ -503,11 +508,23 @@ public class CardObject : BaseFieldObject
             handLook.SetCardFrontActive(true);
         }
 
+        // 表示するべきエフェクトを取得
+        List<GameObject> activeEffect = GetCardEffectList();
+        DisableAllCardEffect();
+
         Sequence toFieldSequence = DOTween.Sequence();
         toFieldSequence.Append(transform.DOMove(playCardSlot.position, 0.3f))
             .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
             .JoinCallback(() => transform.SetParent(fieldRoot))
-            .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f));
+            .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f))
+            .AppendCallback(() => 
+            {
+                // エフェクトを有効化
+                foreach (GameObject effect in activeEffect)
+                {
+                    effect.SetActive(true);
+                }
+            });
 
         return toFieldSequence;
     }
@@ -536,6 +553,7 @@ public class CardObject : BaseFieldObject
             .Join(transform.DOMove(playCardRoot.position, 0.3f))
             .Join(transform.DORotate(new Vector3(0, 0, 180), 0.3f, RotateMode.LocalAxisAdd))
             .Join(transform.DOScale(playCardRoot.localScale, 0.3f))
+            .AppendCallback(() => AudioManager.instance.PlaySE(AudioManager.SEType.CARD_PLAY))
             .AppendInterval(0.3f);
         // カードタイプによって挙動を分ける
         switch (cardData.type)
@@ -598,5 +616,29 @@ public class CardObject : BaseFieldObject
     public void PlayEffect(EffectManager.EffectType type, float sec)
     {
         EffectManager.Instance.PlayEffect(type, transform.position + new Vector3(0, 1.0f, 0), sec);
+    }
+
+    public List<GameObject> GetCardEffectList()
+    {
+        List<GameObject> activeEffect = new List<GameObject>();
+        // ついている能力から表示するべきエフェクトを判定
+        for (int i = 0; i < (int)GameEnum.KeywordAbility.MAX; i++)
+        {
+            if(cardData.HaveKeyword((GameEnum.KeywordAbility)i))
+            {
+                activeEffect.Add(effectObject[i]);
+            }
+        }
+
+        return activeEffect;
+    }
+
+    // カードエフェクトを全て非表示にする
+    public void DisableAllCardEffect()
+    {
+        foreach (GameObject effect in effectObject)
+        {
+            effect.SetActive(false);
+        }
     }
 }

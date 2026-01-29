@@ -44,7 +44,7 @@ public class DeckFormationManager : MonoBehaviour
             deckCardIds.Add(card.cardId);
         }
         DeckRecorder.Instance.SaveNewDeck(deckCardIds);
-
+        AudioManager.instance.PlaySE(AudioManager.SEType.BUTTON);
         // シーンのロード
         SceneManager.LoadScene("Select");
     }

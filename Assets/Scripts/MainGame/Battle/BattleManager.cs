@@ -134,6 +134,7 @@ public class BattleManager : SystemObject
             return;
 
         IsGame = true;
+        AudioManager.instance.PlayBGM(AudioManager.BGMType.BATTLE);
 
         // ① シード値同期
         if (localPlayerIndex == 1)
@@ -353,6 +354,7 @@ public class BattleManager : SystemObject
         // 通信切断
         NetworkManager.Instance.Disconnect();
         IsGame = false;
+        AudioManager.instance.PlayBGM(AudioManager.BGMType.OUTGAME);
 
         // リザルト画面へ
         SceneManager.LoadScene("Result");
@@ -600,6 +602,7 @@ public class BattleManager : SystemObject
         Debug.Log("[Battle] ❌ 相手が切断されました。ゲームを終了します。");
         NetworkManager.Instance.Disconnect();
         IsGame = false;
+        AudioManager.instance.PlayBGM(AudioManager.BGMType.OUTGAME);
         SceneManager.LoadScene("Title");
     }
 }

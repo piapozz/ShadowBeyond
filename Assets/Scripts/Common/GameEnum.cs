@@ -207,5 +207,6 @@ public class GameEnum
         FreeEvolve,     // 無料進化
         NoEvolve,       // 進化できない
         NoAttackLeader, // リーダーを攻撃できない
+        MAX
     }
 }

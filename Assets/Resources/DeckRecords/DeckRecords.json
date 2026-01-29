@@ -3,15 +3,23 @@
         {
             "cards": [
                 {
-                    "cardId": 100000,
+                    "cardId": 4000,
                     "count": 3
                 },
                 {
-                    "cardId": 104000,
+                    "cardId": 0,
                     "count": 3
                 },
                 {
-                    "cardId": 5000,
+                    "cardId": 101007,
+                    "count": 3
+                },
+                {
+                    "cardId": 2002,
+                    "count": 3
+                },
+                {
+                    "cardId": 102004,
                     "count": 3
                 }
             ]
