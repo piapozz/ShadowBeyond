@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,4 +16,5 @@ public abstract class BaseEffect
     public virtual void ExecuteEffect(List<CardData> targetCards) { }
     public virtual void ExecuteEffect(BaseComponent targetComponent) { }
     public virtual void ExecuteEffect(List<BaseComponent> targetComponents) { }
+    public virtual void ExecuteEffect(Deck targetDeck, Func<CardData, bool> condition = null) { }
 }

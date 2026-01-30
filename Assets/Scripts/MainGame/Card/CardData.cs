@@ -175,22 +175,63 @@ public class CardData : BaseComponent
         ability.activeAbilities.Add(newAbility);
     }
 
-    public void RemoveAbility(ActiveAbility removeAbility)
+    public void RemoveAbility(ActiveAbility removeAbility, CardData sourceCard = null)
     {
         if (ability.activeAbilities == null)
         {
             return;
         }
-        ability.activeAbilities.Remove(removeAbility);
+        // ソースカードがないなら指定キーワード全削除
+        if (sourceCard == null)
+        {
+            ability.activeAbilities.RemoveAll(activeAbility => activeAbility == removeAbility);
+        }
+        // ソースがあるならソースカード由来のキーワードのみ削除
+        else
+        {
+            ability.activeAbilities.RemoveAll(activeAbility => activeAbility == removeAbility && activeAbility.sourceCard == sourceCard);
+        }
     }
 
-    public void ClearAbility()
+    public void ClearAllAbility()
     {
         if (ability.activeAbilities == null)
         {
             return;
         }
         ability.activeAbilities.Clear();
+        if (ability.keywordAbilities == null)
+        {
+            return;
+        }
+        ability.keywordAbilities.Clear();
+    }
+
+    public void AddKeyword(KeywordAbilityInstance addKeyword)
+    {
+        if (ability.keywordAbilities == null)
+        {
+            ability.keywordAbilities = new List<KeywordAbilityInstance>();
+        }
+        ability.keywordAbilities.Add(addKeyword);
+    }
+
+    public void RemoveKeyword(KeywordAbility removeKeyword, CardData sourceCard = null)
+    {
+        if (ability.keywordAbilities == null)
+        {
+            return;
+        }
+        // ソースカードがないなら指定キーワード全削除
+        if (sourceCard == null)
+        {
+            ability.keywordAbilities.RemoveAll(keyword => keyword.type == removeKeyword);
+        }
+        // ソースがあるならソースカード由来のキーワードのみ削除
+        else
+        {
+            ability.keywordAbilities.RemoveAll(keyword => keyword.type == removeKeyword && keyword.source == sourceCard);
+        }
     }
 
     public bool CanBeSelected() { return false; }
@@ -224,10 +265,13 @@ public class CardData : BaseComponent
     public void Destroy()
     {
         isDestroyed = true;
-        // ラストワード発動タイミング
-
+        // 破壊体制があるなら処理しない
+        if (HaveKeyword(KeywordAbility.NoDestroy)) return;
         // フィールドから除去
         BattleManager.instance.field.RemoveCard(this);
+        // ラストワード発動タイミング
+        if (ability == null) return;
+        ability.LastWord();
     }
 
     /// <summary>
