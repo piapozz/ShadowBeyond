@@ -48,6 +48,7 @@ public class UIManager : SystemObject
         INVALID = -1,
         DEFAULT,
         ATTACK,
+        SELECT,
         MAX
     }
 

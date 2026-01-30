@@ -107,12 +107,12 @@ public class CardData : BaseComponent
         ability.Initialize(this);
     }
 
-    public void OnPlay(bool isOpponent)
+    public void OnPlay(bool isOwn, bool isEnhance)
     {
         if (ability == null) return;
-        ability.Fanfare(isOpponent);
+        if (isEnhance) ability.Enhance(isOwn);
+        else ability.Fanfare(isOwn);
     }
-
 
     // ターン開始時処理
     public void OnStartTurn()
@@ -345,5 +345,28 @@ public class CardData : BaseComponent
             if (type == cardTypeDetail) return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// エンハンスを含むプレイ可能コストを取得
+    /// </summary>
+    /// <param name="currentPP"></param>
+    /// <returns></returns>
+    public int GetPlayableCost(int currentPP)
+    {
+        if (currentPP < cost) return -1;
+        // エンハンス
+        if (!HaveKeyword(GameEnum.KeywordAbility.Enhance)) return cost;
+        KeywordAbilityInstance enhance = null;
+        ability.keywordAbilities.ForEach(keywordAbility =>
+        {
+            if (keywordAbility.type == GameEnum.KeywordAbility.Enhance)
+            {
+                enhance = keywordAbility;
+            }
+        });
+        int enhanceCost = enhance.param;
+        if (enhanceCost > currentPP) return cost;
+        return enhanceCost;
     }
 }

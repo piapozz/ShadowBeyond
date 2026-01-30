@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 
 public abstract class BaseCardAbility
 {
+    public CardData sourceData;
     public List<KeywordAbilityInstance> keywordAbilities = new List<KeywordAbilityInstance>();
     public List<ActiveAbility> activeAbilities = new List<ActiveAbility>();
 
@@ -12,7 +13,7 @@ public abstract class BaseCardAbility
     // ファンファーレ
     public virtual void Fanfare(bool isOwn) { }
     // エンハンス
-    public virtual void Enhance() { }
+    public virtual void Enhance(bool isOwn) { }
     // 場に出たとき
     public virtual void EnterField() { }
     // 進化時
