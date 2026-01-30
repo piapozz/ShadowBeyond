@@ -605,6 +605,8 @@ public class CardObject : BaseFieldObject
 
         // 破壊エフェクト
         PlayEffect(EffectManager.EffectType.OnDestroy, 1.0f);
+        // 音再生
+        AudioManager.instance.PlaySE(AudioManager.SEType.CARD_DESTROY);
 
         // オブジェクト非表示
         SetCardState(CardState.UNUSE);

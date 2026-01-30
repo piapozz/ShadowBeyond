@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
         CARD_PLAY,
         DAMAGE,
         HEAL,
+        CARD_DESTROY,
         MAX
     }
 
