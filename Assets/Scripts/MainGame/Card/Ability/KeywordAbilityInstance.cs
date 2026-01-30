@@ -6,10 +6,10 @@ using static GameEnum;
 public class KeywordAbilityInstance
 {
     public KeywordAbility type;
-    public ActiveAbility source; // null = Œ³‚©‚ç
+    public CardData source; // null = Œ³‚©‚ç
     public int param;
 
-    public KeywordAbilityInstance(KeywordAbility setKeyword, ActiveAbility setSource = null, int setParam = 0)
+    public KeywordAbilityInstance(KeywordAbility setKeyword, CardData setSource = null, int setParam = 0)
     {
         type = setKeyword;
         source = setSource;

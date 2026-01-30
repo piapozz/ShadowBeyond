@@ -495,11 +495,6 @@ public class CardObject : BaseFieldObject
     /// <returns></returns>
     public Sequence PlayFieldSequence(bool isOwn, Transform playCardSlot, Transform fieldRoot)
     {
-        cardData.OnPlay(isOwn);
-        // データを設定
-        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCardToField(cardData);
-
         // 相手のカードなら表を表示
         if (!isOwn)
         {
@@ -511,31 +506,29 @@ public class CardObject : BaseFieldObject
         // 表示するべきエフェクトを取得
         List<GameObject> activeEffect = GetCardEffectList();
         DisableAllCardEffect();
-
         Sequence toFieldSequence = DOTween.Sequence();
         toFieldSequence.Append(transform.DOMove(playCardSlot.position, 0.3f))
             .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
             .JoinCallback(() => transform.SetParent(fieldRoot))
             .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f))
-            .AppendCallback(() => 
+            .AppendCallback(() => PlayCard(isOwn))
+            .AppendCallback(() =>
             {
-                // エフェクトを有効化
-                foreach (GameObject effect in activeEffect)
-                {
-                    effect.SetActive(true);
-                }
+                 // エフェクトを有効化
+                 foreach (GameObject effect in activeEffect)
+                 {
+                     effect.SetActive(true);
+                 }
             });
 
+        // 手札のプレイ可否を設定
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCardToField(cardData);
         return toFieldSequence;
     }
 
     public void PlaySpellCard(bool isOwn)
     {
-        cardData.OnPlay(isOwn);
-        // データを設定
-        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCardToField(cardData);
-
         // 相手のカードなら表を表示
         if (!isOwn)
         {
@@ -543,6 +536,25 @@ public class CardObject : BaseFieldObject
             if (handLook == null) return;
             handLook.SetCardFrontActive(true);
         }
+        // プレイ
+        PlayCard(isOwn);
+        // 手札のプレイ可否を設定
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCardToField(cardData);
+    }
+
+    public void PlayCard(bool isOwn)
+    {
+        if (cardData == null) return;
+        Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
+        // スペル、ファンファーレ、エンハンスはここで発動
+        int cardCost = cardData.GetPlayableCost(leader.currentPlayPoint);
+        if (cardCost < 0) return;
+        bool isEnhance = false;
+        if (cardCost != cardData.cost) isEnhance = true;
+        cardData.OnPlay(isOwn, isEnhance);
+        // PP消費
+        leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardCost);
     }
 
     public Sequence GetPlaySequence(Transform playCardRoot)

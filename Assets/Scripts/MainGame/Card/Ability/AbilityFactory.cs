@@ -10,7 +10,7 @@ public class AbilityFactory
 
     public static void Initialize()
     {
-        Register(0, () => new CardAbility_Test());
+        Register(0, () => new CardAbility_0());
         Register(1, () => new CardAbility_Test());
         Register(2, () => new CardAbility_Test());
     }

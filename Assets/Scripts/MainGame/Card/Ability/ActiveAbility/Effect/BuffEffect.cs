@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class BuffEffect : BaseEffect
 {
@@ -10,12 +9,16 @@ public class BuffEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(List<BaseComponent> targetCard)
+    public override void ExecuteEffect(CardData targetCard)
     {
-        List<CardData> cardDatas = CommonModule.CastList<BaseComponent, CardData>(targetCard);
-        for (int i = 0, max = cardDatas.Count; i < max; i++)
+        targetCard.AddStatus(param[0], param[1]);
+    }
+
+    public override void ExecuteEffect(List<CardData> targetCard)
+    {
+        for (int i = 0, max = targetCard.Count; i < max; i++)
         {
-            cardDatas[i].AddStatus(param[0], param[1]);
+            targetCard[i].AddStatus(param[0], param[1]);
         }
     }
 }

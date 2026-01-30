@@ -11,5 +11,8 @@ public abstract class BaseEffect
         param = setParam;
     }
 
-    public abstract void ExecuteEffect(List<BaseComponent> targetCard);
+    public virtual void ExecuteEffect(CardData targetCard) { }
+    public virtual void ExecuteEffect(List<CardData> targetCards) { }
+    public virtual void ExecuteEffect(BaseComponent targetComponent) { }
+    public virtual void ExecuteEffect(List<BaseComponent> targetComponents) { }
 }
