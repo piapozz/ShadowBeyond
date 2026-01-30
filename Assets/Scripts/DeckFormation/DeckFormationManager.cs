@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static CardObject;
 
 public class DeckFormationManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class DeckFormationManager : MonoBehaviour
 
     [SerializeField]
     private Scrollbar Scrollbar;
+
+    [SerializeField]
+    private CardDetailUI cardDetailUI;
 
     public static DeckFormationManager Instance;
 
@@ -33,6 +37,11 @@ public class DeckFormationManager : MonoBehaviour
         }
 
         cardDataList = new List<CardImage>();
+    }
+
+    public void Update()
+    {
+        CardClick();
     }
 
     // デッキ保存
@@ -157,5 +166,41 @@ public class DeckFormationManager : MonoBehaviour
             if (rarityComparison != 0) return rarityComparison;
             return a.name.CompareTo(b.name);
         });
+    }
+
+    private void CardClick()
+    {
+        if (!Input.GetMouseButtonDown(0)) return;
+
+        CardImage target = GetFieldObject(Input.mousePosition);
+        if (target != null && target as CardImage)
+        {
+            CardData cardData = null;
+            CardImage card = target as CardImage;
+            // idからカードデータを取得
+            if (card != null) 
+            {
+                cardData = CardMasterUtility.GetCardData(card.cardId);
+            }
+
+
+            cardDetailUI.EnableUI(true, cardData.name, cardData.text);
+            return;
+        }
+        cardDetailUI.EnableUI(false);
+    }
+
+    public CardImage GetFieldObject(Vector2 screenPos)
+    {
+        // カードの詳細画面表示
+        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        GameObject hitObject = null;
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        {
+            hitObject = hit.collider.gameObject;
+        }
+        if (hitObject == null) return null;
+        CardImage target = hitObject.GetComponent<CardImage>();
+        return target;
     }
 }

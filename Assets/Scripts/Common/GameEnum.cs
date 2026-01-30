@@ -139,6 +139,7 @@ public class GameEnum
         INFINITY_EVOLVED,
         HEIRS_OF_THE_OMEN,
         SKYBOUND_DRAGONS,
+        BLOSSOMING_FATE,
         BASIC,
         CLC,
         DRK,
