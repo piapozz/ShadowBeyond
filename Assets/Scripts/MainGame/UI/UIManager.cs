@@ -258,6 +258,9 @@ public class UIManager : SystemObject
         // カードをプレイ
         if (isField)
         {
+            // 選択があるなら選択フェーズ
+
+            // プレイ
             PlayOwnCard(setCard);
         }
         // 手札に戻す

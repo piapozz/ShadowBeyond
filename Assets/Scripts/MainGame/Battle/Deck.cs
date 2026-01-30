@@ -165,6 +165,34 @@ public class Deck
     }
 
     /// <summary>
+    /// 指定カードを引く
+    /// </summary>
+    /// <param name="drawCards"></param>
+    public void DrawDeck(List<CardData> drawCards, int drawCount = -1)
+    {
+        if (drawCount == -1)
+            drawCount = drawCards.Count;
+        for (int i = 0; i < drawCount; i++)
+        {
+            if (deckCardList.Count == 0) break;
+            deckCardList.Remove(drawCards[i]);
+            drawCards.Add(drawCards[i]);
+            hand.AddCard(drawCards[i]);
+        }
+
+        UIManager.instance.DrawCards(playerID, drawCards);
+    }
+
+    /// <summary>
+    /// 指定カードを引く
+    /// </summary>
+    /// <param name="condition"></param>
+    public void DrawDeck(Func<CardData, bool> condition, int drawCount = -1)
+    {
+        DrawDeck(GetCards(condition), drawCount);
+    }
+
+    /// <summary>
     /// 条件に合うカードをすべて取得
     /// </summary>
     public List<CardData> GetCards(Func<CardData, bool> condition)
