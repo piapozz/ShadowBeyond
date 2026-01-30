@@ -1,0 +1,17 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class CardAbility_105 : BaseCardAbility
+{
+    public override void Initialize(CardData setCard)
+    {
+        sourceData = setCard;
+        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush));
+    }
+
+    public override void SuperEvolve(bool isOwn)
+    {
+        // 相手の場のフォロワー1枚を選ぶ。それを手札に戻す。
+    }
+}

@@ -15,33 +15,35 @@ public abstract class BaseCardAbility
     // エンハンス
     public virtual void Enhance(bool isOwn) { }
     // 場に出たとき
-    public virtual void EnterField() { }
+    public virtual void EnterField(bool isOwn) { }
     // 進化時
-    public virtual void Evolve() { }
+    public virtual void Evolve(bool isOwn) { }
     // 進化した時
-    public virtual void AutoEvolve() { }
+    public virtual void AutoEvolve(bool isOwn) { }
     // 超進化時
-    public virtual void SuperEvolve() { }
+    public virtual void SuperEvolve(bool isOwn) { }
     // 超進化した時
-    public virtual void AutoSuperEvolve() { }
+    public virtual void AutoSuperEvolve(bool isOwn) { }
     // ラストワード
-    public virtual void LastWord() { }
+    public virtual void LastWord(bool isOwn) { }
     // 場を離れたとき
-    public virtual void LeaveField() { }
+    public virtual void LeaveField(bool isOwn) { }
     // 攻撃時
-    public virtual void Attack() { }
+    public virtual void Attack(bool isOwn) { }
     // 交戦時
-    public virtual void Combat() { }
+    public virtual void Combat(bool isOwn) { }
     // ダメージを受けて破壊されなかったとき
-    public virtual void Damage() { }
+    public virtual void Damage(bool isOwn) { }
     // 捨てられたとき
-    public virtual void Discard() { }
+    public virtual void Discard(bool isOwn) { }
     // 攻撃力か体力が場で＋されたとき
-    public virtual void Buff() { }
+    public virtual void Buff(bool isOwn) { }
     // 直接召喚されたとき
-    public virtual void Invoke() {  }
+    public virtual void Invoke(bool isOwn) {  }
     // 融合したとき
-    public virtual void Fuse() {  }
+    public virtual void Fuse(bool isOwn) {  }
     // 引いたとき
-    public virtual void Draw() {  }
+    public virtual void Draw(bool isOwn) {  }
+    // アクト
+    public virtual void Engage(bool isOwn) { }
 }
