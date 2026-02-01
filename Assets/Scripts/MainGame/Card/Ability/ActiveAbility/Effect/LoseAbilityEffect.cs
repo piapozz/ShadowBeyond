@@ -9,7 +9,7 @@ public class LoseAbilityEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(CardData targetCard)
+    public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         if (param == null)
         {

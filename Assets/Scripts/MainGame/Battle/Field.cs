@@ -155,7 +155,7 @@ public class Field
     // 能力を無効化
     public void DisableAllAbilities(CardData card)
     {
-        card.ClearAbility();
+        card.ClearAllAbility();
     }
 
     // ダメージを与える

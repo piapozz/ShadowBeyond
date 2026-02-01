@@ -9,12 +9,12 @@ public class DestroyEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(CardData targetCard)
+    public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         targetCard.Destroy();
     }
 
-    public override void ExecuteEffect(List<CardData> targetCards)
+    public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
         targetCards.ForEach(card => card.Destroy());
     }
