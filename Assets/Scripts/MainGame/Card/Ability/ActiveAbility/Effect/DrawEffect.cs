@@ -18,6 +18,11 @@ public class DrawEffect : BaseEffect
             return targetDeck.DrawDeck(param[0]);
         // 条件があるなら条件に合うカードをドロー
         else
-            return targetDeck.DrawDeck(condition);
+        {
+            if (param == null)
+                return targetDeck.DrawDeck(condition);
+            else
+                return targetDeck.DrawDeck(condition, param[0]);
+        }
     }
 }

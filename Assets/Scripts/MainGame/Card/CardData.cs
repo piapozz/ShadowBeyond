@@ -323,12 +323,14 @@ public class CardData : BaseComponent
 
     public void SetEvolve()
     {
+        AddStatus(2, 2);
         SetAttackPermission(AttackPermission.CanAttackFollower);
         evolveState = EvolveState.Evolved;
     }
 
     public void SetSuperEvolve()
     {
+        AddStatus(3, 3);
         SetAttackPermission(AttackPermission.CanAttackFollower);
         evolveState = EvolveState.SuperEvolved;
     }
@@ -412,5 +414,15 @@ public class CardData : BaseComponent
         int enhanceCost = enhance.param;
         if (enhanceCost > currentPP) return cost;
         return enhanceCost;
+    }
+
+    public KeywordAbilityInstance GetKeywordAbility(KeywordAbility keyword)
+    {
+        if (ability == null) return null;
+        foreach (var keywordInstance in ability.keywordAbilities)
+        {
+            if (keywordInstance.type == keyword) return keywordInstance;
+        }
+        return null;
     }
 }
