@@ -271,7 +271,7 @@ public class CardData : BaseComponent
         BattleManager.instance.field.RemoveCard(this);
         // ラストワード発動タイミング
         if (ability == null) return;
-        ability.LastWord();
+        ability.LastWord(GetObject().isLocal);
     }
 
     /// <summary>

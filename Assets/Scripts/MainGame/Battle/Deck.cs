@@ -99,7 +99,7 @@ public class Deck
     /// <summary>
     /// デッキから指定枚数ドロー
     /// </summary>
-    public void DrawDeck(int drawCount)
+    public List<CardData> DrawDeck(int drawCount)
     {
         List<CardData> drawCards = new List<CardData>(drawCount);
 
@@ -113,6 +113,7 @@ public class Deck
         }
 
         UIManager.instance.DrawCards(playerID, drawCards);
+        return drawCards;
     }
 
     /// <summary>
@@ -168,7 +169,7 @@ public class Deck
     /// 指定カードを引く
     /// </summary>
     /// <param name="drawCards"></param>
-    public void DrawDeck(List<CardData> drawCards, int drawCount = -1)
+    public List<CardData> DrawDeck(List<CardData> drawCards, int drawCount = -1)
     {
         if (drawCount == -1)
             drawCount = drawCards.Count;
@@ -181,15 +182,16 @@ public class Deck
         }
 
         UIManager.instance.DrawCards(playerID, drawCards);
+        return drawCards;
     }
 
     /// <summary>
     /// 指定カードを引く
     /// </summary>
     /// <param name="condition"></param>
-    public void DrawDeck(Func<CardData, bool> condition, int drawCount = -1)
+    public List<CardData> DrawDeck(Func<CardData, bool> condition, int drawCount = -1)
     {
-        DrawDeck(GetCards(condition), drawCount);
+        return DrawDeck(GetCards(condition), drawCount);
     }
 
     /// <summary>
