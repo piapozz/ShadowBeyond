@@ -583,10 +583,14 @@ public class CardObject : BaseFieldObject
         return playSequence;
     }
 
+    public void BounceHand(Hand targetHand)
+    {
+
+    }
+
     public void EvolveFollower()
     {
         cardData.SetEvolve();
-        cardData.AddStatus(2, 2);
         // ƒ‚ƒfƒ‹‚ğØ‚è‘Ö‚¦‚é
         cardObject[(int)CardState.FIELD].SetActive(false);
         cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.EVOLVE_FOLLOWER], this.transform);
@@ -600,7 +604,6 @@ public class CardObject : BaseFieldObject
     public void SuperEvolveFollower()
     {
         cardData.SetSuperEvolve();
-        cardData.AddStatus(3, 3);
         // ƒ‚ƒfƒ‹‚ğØ‚è‘Ö‚¦‚é
         cardObject[(int)CardState.FIELD].SetActive(false);
         cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.SUPWER_EVOLVE_FOLLOWER], this.transform);

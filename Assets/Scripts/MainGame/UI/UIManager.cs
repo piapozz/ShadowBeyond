@@ -221,6 +221,18 @@ public class UIManager : SystemObject
     }
 
     /// <summary>
+    /// ID指定で新しいカードオブジェクトを取得
+    /// </summary>
+    /// <param name="cardId"></param>
+    /// <returns></returns>
+    public CardObject GetNewCardObject(int cardId)
+    {
+        CardObject newCard = GetUnuseCardObject();
+        newCard.SetCardData(CardMasterUtility.GetCardData(cardId));
+        return newCard;
+    }
+
+    /// <summary>
     /// オブジェクト参照の自身の手札のインデックス取得
     /// </summary>
     /// <param name="card"></param>
@@ -401,7 +413,7 @@ public class UIManager : SystemObject
         }
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
         Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
-        handUI.ReturnCard(isMine, drawCardObjects, deckTransform);
+        handUI.ReturnCardDeck(isMine, drawCardObjects, deckTransform);
     }
 
     // 手札にカードを加える
@@ -420,6 +432,16 @@ public class UIManager : SystemObject
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
         Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
         handUI.AddHandCard(isMine, drawCardObjects);
+    }
+
+    public void SetBounceSequence(List<CardObject> bounceCards, bool isOwn)
+    {
+        fieldUI.BounceCard(isOwn, bounceCards);
+    }
+
+    public void SetReturnDeckSequence(List<CardObject> bounceCards, bool isOwn)
+    {
+        handUI.ReturnCardDeck(isOwn, bounceCards, playCardRoot);
     }
 
     public void ShuffleDeck(int playerID)

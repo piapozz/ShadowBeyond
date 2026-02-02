@@ -71,7 +71,7 @@ public class HandUI : MonoBehaviour
     }
 
     // カードを戻す
-    public void ReturnCard(bool isMine, List<CardObject> returnCards, Transform deckRoot)
+    public void ReturnCardDeck(bool isMine, List<CardObject> returnCards, Transform deckRoot)
     {
         // カードの諸設定をし、戻すアニメーションを登録
         List<Sequence> returnSequence = new List<Sequence>();

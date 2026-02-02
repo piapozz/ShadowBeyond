@@ -209,6 +209,16 @@ public class Leader : BaseComponent
         GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
     }
 
+    public void AddCombo(int addCount = 1)
+    {
+        comboCount += addCount;
+    }
+
+    public void ResetCombo()
+    {
+        comboCount = 0;
+    }
+
     // --- ”’l‘€ì ---
     public int GetCount(BattleStatType type) => GetOrCreate(type).Count;
     public void AddCount(BattleStatType type, int value = 1) => GetOrCreate(type).Add(value);

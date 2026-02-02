@@ -96,6 +96,22 @@ public class FieldUI : MonoBehaviour
         playCard.PlaySpellCard(isOwn);
     }
 
+    public void BounceCard(bool isOwn, List<CardObject> bounceCards)
+    {
+        for (int i = 0, max = bounceCards.Count; i < max; i++)
+        {
+            if (isOwn)
+            {
+                ownCards.Remove(bounceCards[i]);
+            }
+            else
+            {
+                opponentCards.Remove(bounceCards[i]);
+            }
+        }
+        UIManager.instance.AddSequence(ArrangeFieldCard(isOwn));
+    }
+
     public int GetOwnFieldIndex(CardObject cardObject)
     {
         if (cardObject == null) return -1;

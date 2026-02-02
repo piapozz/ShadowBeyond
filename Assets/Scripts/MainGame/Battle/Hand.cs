@@ -126,6 +126,19 @@ public class Hand
         handCardList.RemoveAll(c => condition(c));
     }
 
+    public void RemoveCard(CardData removeCard)
+    {
+        handCardList.Remove(removeCard);
+    }
+
+    public void RemoveCards(List<CardData> removeCards)
+    {
+        for (int i = 0, max = removeCards.Count; i < max; i++)
+        {
+            handCardList.Remove(removeCards[i]);
+        }
+    }
+
     /// <summary>
     /// èD–‡”‚ğæ“¾
     /// </summary>
