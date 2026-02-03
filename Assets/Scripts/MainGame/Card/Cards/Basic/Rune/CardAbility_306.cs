@@ -19,7 +19,8 @@ public class CardAbility_306 : BaseCardAbility
             List<BaseComponent> components = null;
             foreach(var card in targetCard)
             {
-                components.Add(card);
+                BaseComponent component = card;
+                components.Add(component);
             }
             damageEffect.ExecuteEffect(components);
         }  

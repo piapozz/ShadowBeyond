@@ -17,6 +17,8 @@ public class CardAbility_604 : BaseCardAbility
         }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard == null) return;
         // è¡ñ≈
+        BanishEffect banishEffect = new BanishEffect(null);
+        banishEffect.ExecuteEffect(targetCard);
     }
 
     public override void SuperEvolve(bool isOwn)
@@ -26,5 +28,7 @@ public class CardAbility_604 : BaseCardAbility
             return card.GetCurrentStatus().m_defance <= 3;
         }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard == null) return;
+        BanishEffect banishEffect = new BanishEffect(null);
+        banishEffect.ExecuteEffect(targetCard);
     }
 }

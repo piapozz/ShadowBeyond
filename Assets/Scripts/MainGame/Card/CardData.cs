@@ -270,6 +270,15 @@ public class CardData : BaseComponent
         // ラストワード発動タイミング
         if (ability == null) return;
         ability.LastWord(GetObject().isLocal);
+        // リーダーに記録
+    }
+
+    // 消滅
+    public void Banish()
+    {
+        isDestroyed = true;
+        // フィールドから除去
+        BattleManager.instance.field.RemoveCard(this);
     }
 
     /// <summary>

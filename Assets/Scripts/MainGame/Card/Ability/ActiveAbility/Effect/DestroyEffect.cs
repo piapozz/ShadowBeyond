@@ -13,6 +13,7 @@ public class DestroyEffect : BaseEffect
     {
         if (targetCard.HaveKeyword(GameEnum.KeywordAbility.NoDestroy)) return;
         targetCard.Destroy();
+        UIManager.instance.RemoveFieldCard(targetCard.GetObject());
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
@@ -20,6 +21,7 @@ public class DestroyEffect : BaseEffect
         for (int i = 0, max = targetCards.Count; i < max; i++)
         {
             ExecuteEffect(targetCards[i]);
+            UIManager.instance.RemoveFieldCard(targetCards[i].GetObject());
         }
     }
 }
