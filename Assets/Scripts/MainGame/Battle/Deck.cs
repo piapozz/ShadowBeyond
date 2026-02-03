@@ -171,17 +171,18 @@ public class Deck
     /// <param name="drawCards"></param>
     public List<CardData> DrawDeck(List<CardData> drawCards, int drawCount = -1)
     {
+        List<CardData> cardList = new List<CardData>();
         if (drawCount == -1)
             drawCount = drawCards.Count;
         for (int i = 0; i < drawCount; i++)
         {
             if (deckCardList.Count == 0) break;
             deckCardList.Remove(drawCards[i]);
-            drawCards.Add(drawCards[i]);
+            cardList.Add(drawCards[i]);
             hand.AddCard(drawCards[i]);
         }
 
-        UIManager.instance.DrawCards(playerID, drawCards);
+        UIManager.instance.DrawCards(playerID, cardList);
         return drawCards;
     }
 

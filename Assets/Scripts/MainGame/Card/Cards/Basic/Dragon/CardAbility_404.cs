@@ -23,7 +23,7 @@ public class CardAbility_404 : BaseCardAbility
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard.Count <= 0) return;
         DamageEffect damageEffect = new DamageEffect(new List<int> { 4 });
-        List<BaseComponent> components = null;
+        List<BaseComponent> components = new List<BaseComponent>();
         foreach (var card in targetCard)
         {
             BaseComponent component = card;
