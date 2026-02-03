@@ -13,13 +13,13 @@ public class LeaderUI : MonoBehaviour
     {
         if (index == 0)
         {
-            ownLeaderObject.Initialize(setLeader);
             ownLeaderObject.SetIsLocal(true);
+            ownLeaderObject.Initialize(setLeader);
         }
         else if(index == 1)
         {
-            opponentLeaderObject.Initialize(setLeader);
             opponentLeaderObject.SetIsLocal(false);
+            opponentLeaderObject.Initialize(setLeader);
         }
     }
 }

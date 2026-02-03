@@ -11,11 +11,15 @@ public class DestroyEffect : BaseEffect
 
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
+        if (targetCard.HaveKeyword(GameEnum.KeywordAbility.NoDestroy)) return;
         targetCard.Destroy();
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
-        targetCards.ForEach(card => card.Destroy());
+        for (int i = 0, max = targetCards.Count; i < max; i++)
+        {
+            ExecuteEffect(targetCards[i]);
+        }
     }
 }

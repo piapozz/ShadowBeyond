@@ -17,6 +17,8 @@ public class CardObject : BaseFieldObject
     private List<Material> cardMaterial = null;
     [SerializeField]
     private List<GameObject> effectObject = null;
+    [SerializeField]
+    private List<Material> attackMaterial = null;
 
     public enum CardObjectType
     {
@@ -187,18 +189,19 @@ public class CardObject : BaseFieldObject
         // 自分自身は攻撃できない
         if (target.isLocal) return false;
         CardObject targetCard = target as CardObject;
+        bool result = false;
         if (targetCard != null)
         {
-            return AttackFollower(targetCard);
+            result = AttackFollower(targetCard);
         }
 
         LeaderObject targetLeader = target as LeaderObject;
         if (targetLeader != null)
         {
-            return AttackLeader(targetLeader);
+            result = AttackLeader(targetLeader);
         }
 
-        return false;
+        return result;
     }
 
     /// <summary>
@@ -212,24 +215,16 @@ public class CardObject : BaseFieldObject
         if (targetCard.currentState != CardState.FIELD || defenceCard.type != GameEnum.CardType.FOLLOWER) return false;
         // 攻撃可否判定
         if (!cardData.CanAttack(false)) return false;
-        // 潜伏か威圧持ちなら攻撃できない
-        if (defenceCard.HaveKeyword(GameEnum.KeywordAbility.Ambush) ||
-            defenceCard.HaveKeyword(GameEnum.KeywordAbility.Intimidate))
-            return false;
-        // 守護を持っていなく、守護持ちフォロワーがいるなら攻撃できない
-        if (!defenceCard.HaveKeyword(GameEnum.KeywordAbility.Ward) && BattleManager.instance.IsWardOpponentField())
-            return false;
-        cardData.OnAttack();
-        AttackFollower(targetCard);
+        if (!BattleManager.instance.IsAttackable(defenceCard)) return false;
 
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
         int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
-        // 攻撃処理を依頼
-        BattleManager.instance.CardCombat(cardData, targetCard.cardData);
         // 挙動
         UIManager.instance.SetAttackFollowerSequence(this, targetCard);
+        // 攻撃処理を依頼
+        BattleManager.instance.CardCombat(cardData, targetCard.cardData);
         return true;
     }
 
@@ -243,7 +238,6 @@ public class CardObject : BaseFieldObject
         if (!cardData.CanAttack(true)) return false;
         // 守護を持っているフォロワーがいるなら攻撃できない
         if (BattleManager.instance.IsWardOpponentField()) return false;
-        cardData.OnAttack();
 
         // 情報を送信
         int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
@@ -554,9 +548,10 @@ public class CardObject : BaseFieldObject
         if (cardCost < 0) return;
         bool isEnhance = false;
         if (cardCost != cardData.cost) isEnhance = true;
-        cardData.OnPlay(isOwn, isEnhance);
         // PP消費
         leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardCost);
+        // プレイ時の能力
+        cardData.OnPlay(isOwn, isEnhance);
     }
 
     public Sequence GetPlaySequence(Transform playCardRoot)
@@ -601,6 +596,7 @@ public class CardObject : BaseFieldObject
         if (fieldLook == null) return;
         fieldLook.SetCardText(cardData);
         cardObject[(int)CardState.FIELD].SetActive(true);
+        SetAttackPermissionLook();
     }
 
     public void SuperEvolveFollower()
@@ -614,6 +610,7 @@ public class CardObject : BaseFieldObject
         if (fieldLook == null) return;
         fieldLook.SetCardText(cardData);
         cardObject[(int)CardState.FIELD].SetActive(true);
+        SetAttackPermissionLook();
     }
 
     public void CheckDestroyCard()
@@ -658,6 +655,29 @@ public class CardObject : BaseFieldObject
         foreach (GameObject effect in effectObject)
         {
             effect.SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// 現在の攻撃状態の見た目を適用
+    /// </summary>
+    public void SetAttackPermissionLook()
+    {
+        // 現状はマテリアルで見た目変更
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
+        CardData.AttackPermission currentAttackPermission = cardData.GetAttackPermission();
+        switch (currentAttackPermission)
+        {
+            case CardData.AttackPermission.NONE:
+                fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+                break;
+            case CardData.AttackPermission.CanAttackFollower:
+                fieldLook.SetCardMaterial(attackMaterial[0]);
+                break;
+            case CardData.AttackPermission.CanAttackLeader:
+                fieldLook.SetCardMaterial(attackMaterial[1]);
+                break;
+            default: break;
         }
     }
 }

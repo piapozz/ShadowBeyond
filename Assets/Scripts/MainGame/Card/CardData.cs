@@ -112,6 +112,7 @@ public class CardData : BaseComponent
         if (ability == null) return;
         if (isEnhance) ability.Enhance(isOwn);
         else ability.Fanfare(isOwn);
+        GetObject().SetAttackPermissionLook();
     }
 
     // ターン開始時処理
@@ -119,6 +120,7 @@ public class CardData : BaseComponent
     {
         remainAttackCount = maxAttackCount;
         SetAttackPermission(AttackPermission.CanAttackLeader);
+        GetObject().SetAttackPermissionLook();
     }
 
     // 攻撃時処理
@@ -131,6 +133,7 @@ public class CardData : BaseComponent
     public void OnEndTurn()
     {
         remainAttackCount = 0;
+        GetObject().SetAttackPermissionLook();
     }
 
     public void SetType(CardType setType)
@@ -244,29 +247,24 @@ public class CardData : BaseComponent
     {
         this.damage += damage;
 
-        CheckDestroyed();
         GetObject().UpdateText();
         GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
         AudioManager.instance.PlaySE(AudioManager.SEType.DAMAGE);
+        CheckDestroyed();
     }
 
     // 破壊されたか
-    public bool CheckDestroyed()
+    public void CheckDestroyed()
     {
         int defance = GetCurrentStatus().m_defance;
         if (defance <= 0)
-        {
             Destroy();
-        }
-        return isDestroyed;
     }
 
     // 破壊する
     public void Destroy()
     {
         isDestroyed = true;
-        // 破壊体制があるなら処理しない
-        if (HaveKeyword(KeywordAbility.NoDestroy)) return;
         // フィールドから除去
         BattleManager.instance.field.RemoveCard(this);
         // ラストワード発動タイミング
@@ -342,19 +340,25 @@ public class CardData : BaseComponent
     /// <returns></returns>
     public bool CanAttack(bool attackLeader)
     {
-        if (remainAttackCount <= 0) return false;
-
+        AttackPermission currentAttacPermission = GetAttackPermission();
+        if (currentAttacPermission == AttackPermission.NONE) return false;
         // リーダーを攻撃する場合
         if (attackLeader)
-            return attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Storm);
+            return currentAttacPermission == AttackPermission.CanAttackLeader;
         // フォロワーを攻撃する場合
         else
-        {
-            bool result = (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower);
-            if (result) return true;
-            result = HaveKeyword(KeywordAbility.Storm) || HaveKeyword(KeywordAbility.Rush);
-            return result;
-        }
+            return currentAttacPermission == AttackPermission.CanAttackLeader || currentAttacPermission == AttackPermission.CanAttackFollower;
+    }
+
+    public AttackPermission GetAttackPermission()
+    {
+        if (remainAttackCount <= 0) return AttackPermission.NONE;
+
+        if (attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Storm)) return AttackPermission.CanAttackLeader;
+
+        if ((attackPermission == AttackPermission.CanAttackFollower) || HaveKeyword(KeywordAbility.Rush)) return AttackPermission.CanAttackFollower;
+
+        return AttackPermission.NONE;
     }
 
     /// <summary>

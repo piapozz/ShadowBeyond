@@ -28,17 +28,19 @@ public class Field
         return result;
     }
 
-    public void OnStartTurn()
+    public void OnStartTurn(bool isOwn)
     {
-        foreach (var card in _ownFieldCardList)
+        List<CardData> fieldCards = isOwn ? _ownFieldCardList : _opponentFieldCardList;
+        foreach (var card in fieldCards)
         {
             card.OnStartTurn();
         }
     }
 
-    public void OnEndTurn()
+    public void OnEndTurn(bool isOwn)
     {
-        foreach (var card in _ownFieldCardList)
+        List<CardData> fieldCards = isOwn ? _ownFieldCardList : _opponentFieldCardList;
+        foreach (var card in fieldCards)
         {
             card.OnEndTurn();
         }

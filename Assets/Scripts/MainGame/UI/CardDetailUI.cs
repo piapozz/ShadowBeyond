@@ -19,6 +19,7 @@ public class CardDetailUI : MonoBehaviour
     {
         gameObject.SetActive(enable);
         SetCardText(name, detail);
+        SetButton();
         LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 
@@ -26,5 +27,10 @@ public class CardDetailUI : MonoBehaviour
     {
         cardNameText.text = name;
         cardDetailText.text = detail;
+    }
+
+    private void SetButton()
+    {
+
     }
 }
