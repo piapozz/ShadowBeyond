@@ -102,14 +102,13 @@ public class FieldUI : MonoBehaviour
         {
             if (isOwn)
             {
-                ownCards.Remove(bounceCards[i]);
+                RemoveOwnFieldCard(bounceCards[i]);
             }
             else
             {
-                opponentCards.Remove(bounceCards[i]);
+                RemoveOpponentFieldCard(bounceCards[i]);
             }
-        }
-        UIManager.instance.AddSequence(ArrangeFieldCard(isOwn));
+        };
     }
 
     public int GetOwnFieldIndex(CardObject cardObject)

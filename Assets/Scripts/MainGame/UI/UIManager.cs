@@ -441,7 +441,7 @@ public class UIManager : SystemObject
 
     public void SetReturnDeckSequence(List<CardObject> bounceCards, bool isOwn)
     {
-        handUI.ReturnCardDeck(isOwn, bounceCards, playCardRoot);
+        handUI.ReturnCardDeck(isOwn, bounceCards, isOwn ? ownDeckObject.transform : opponentDeckObject.transform);
     }
 
     public void ShuffleDeck(int playerID)
