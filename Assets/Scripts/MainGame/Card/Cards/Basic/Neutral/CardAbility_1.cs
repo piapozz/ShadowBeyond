@@ -20,11 +20,16 @@ public class CardAbility_1 : BaseCardAbility
     public override void LastWord(bool isOwn)
     {
         // ˆê–‡ˆø‚­
-        
+        DrawEffect effect = new DrawEffect(new List<int>{ 1 });
+        var targetDeck = GetPlayer(isOwn).deck;
+        effect.ExecuteEffect(targetDeck);
     }
 
     public override void Evolve(bool isOwn)
     {
         // ˆê–‡ˆø‚­
+        DrawEffect effect = new DrawEffect(new List<int>{ 1 });
+        var targetDeck = GetPlayer(isOwn).deck;
+        effect.ExecuteEffect(targetDeck);
     }
 }

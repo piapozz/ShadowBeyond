@@ -16,8 +16,15 @@ public class SpellBoostEffect : BaseEffect
         for (int i = 0, max = boostCards.Count; i < max; i++)
         {
             KeywordAbilityInstance keyword = boostCards[i].GetKeywordAbility(GameEnum.KeywordAbility.SpellBoost);
-            if (keyword != null) return;
+            if (keyword == null) return;
             keyword.AddParam(param[0]);
         }
+    }
+
+    public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
+    {
+        // 手札のスペルブーストするカードを取得
+        KeywordAbilityInstance keyword = targetCard.GetKeywordAbility(GameEnum.KeywordAbility.SpellBoost);
+        if (keyword == null) return;
     }
 }

@@ -8,6 +8,11 @@ public abstract class BaseCardAbility
     public List<KeywordAbilityInstance> keywordAbilities = new List<KeywordAbilityInstance>();
     public List<ActiveAbility> activeAbilities = new List<ActiveAbility>();
 
+    protected BattleManager.Player GetPlayer(bool isOwn)
+    {
+        return isOwn ? BattleManager.instance.GetPlayer(0) : BattleManager.instance.GetPlayer(1);
+    }
+
     public virtual void Initialize(CardData setCard) { }
 
     // ファンファーレ
@@ -46,4 +51,6 @@ public abstract class BaseCardAbility
     public virtual void Draw(bool isOwn) {  }
     // アクト
     public virtual void Engage(bool isOwn) { }
+    // スペルブースト
+    public virtual void SpellBoost(bool isOwn) { }
 }

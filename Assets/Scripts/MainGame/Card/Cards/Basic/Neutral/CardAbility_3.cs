@@ -14,6 +14,15 @@ public class CardAbility_3 : BaseCardAbility
     public override void Engage(bool isOwn)
     {
         // これを破壊
-        // 相手の場のをフォロワーを1体選ぶ。守護を失う
+        DestroyEffect destroyEffect = new DestroyEffect(null);
+        destroyEffect.ExecuteEffect();
+        // 相手の場のをフォロワーを1体選ぶ。守護を失う 
+        var targetCard = BattleManager.instance.field.GetRandomCard((card) => 
+        {
+            return (null != card.GetKeywordAbility(GameEnum.KeywordAbility.Ward));
+        }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
+        if (targetCard == null) return;
+        LoseAbilityEffect loseAbilityEffect = new LoseAbilityEffect(new List<int>{ (int)GameEnum.KeywordAbility.Ward });
+        loseAbilityEffect.ExecuteEffect(targetCard);
     }
 }

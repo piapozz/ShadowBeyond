@@ -9,11 +9,11 @@ public class EarthSigleEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect()
+    public override void ExecuteEffect(bool isOwn)
     {
         // フィールドから土の印を取得
         List<CardData> earthSigleCard = 
-            BattleManager.instance.field.GetCards((condition) => condition.HaveKeyword(GameEnum.KeywordAbility.EarthSigle), false);
+            BattleManager.instance.field.GetCards((condition) => condition.HaveKeyword(GameEnum.KeywordAbility.EarthSigle), !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         // 土の印をプラスする
         if (param[0] > 0)
         {

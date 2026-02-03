@@ -20,6 +20,11 @@ public class BattleManager : SystemObject
     private bool isProcessingState = false;
     public bool IsGame = false;
 
+    private Vector2 handScrollPosOwn = Vector2.zero;
+    private Vector2 handScrollPosOpp = Vector2.zero;
+    private Vector2 deckScrollPosOwn = Vector2.zero;
+    private Vector2 deckScrollPosOpp = Vector2.zero;
+
     public System.Random rand { get; private set; } // シード保持用
 
     public enum BattleState
@@ -263,7 +268,7 @@ public class BattleManager : SystemObject
                 Debug.Log($"[Battle] 🗡️ 攻撃: {attackIndex} -> {defanceIndex}");
 
                 CardData attackCard = field.GetOpponentFieldCard(attackIndex);
-                CardData defanceCard = field.GetFieldCard(defanceIndex);
+                CardData defanceCard = field.GetFieldCard(defanceIndex, Field.FieldType.ALL);
 
                 if (attackCard == null || defanceCard == null)
                 {
@@ -444,7 +449,7 @@ public class BattleManager : SystemObject
                 default: break;
             }
         }
-            
+
         // 選択が必要か
         if (target.isSelect)
         {
@@ -602,5 +607,111 @@ public class BattleManager : SystemObject
         IsGame = false;
         AudioManager.instance.PlayBGM(AudioManager.BGMType.OUTGAME);
         SceneManager.LoadScene("Title");
+    }
+
+    // 手札を表示
+    public void OnGUI()
+    {
+        if (!IsGame || player == null) return;
+
+        const int width = 380;
+        const int height = 1100;
+
+        GUILayout.BeginArea(new Rect(10, 10, width, height), GUI.skin.box);
+        GUILayout.Label("=== Battle Debug GUI ===");
+
+        GUILayout.Space(5);
+        GUILayout.Label($"State : {currentState}");
+        GUILayout.Label($"Turn Player : {currentPlayerIndex}");
+        GUILayout.Label($"Is Own Turn : {IsOwnTurn()}");
+
+        GUILayout.Space(10);
+
+        // ===== プレイヤー情報 =====
+        for (int i = 0; i < player.Length; i++)
+        {
+            var p = player[i];
+            if (p.leader == null) continue;
+
+            // ===== 手札の中身 =====
+            GUILayout.Label("Hand Cards:");
+            // ===== スクロールビュー開始 =====
+            Vector2 scrollPos = (i == (int)GameEnum.PlayerType.OWN)
+            ? handScrollPosOwn
+            : handScrollPosOpp;
+
+            scrollPos = GUILayout.BeginScrollView(
+                scrollPos,
+                GUILayout.Height(200)
+            );
+
+            var cards = p.hand.GetCards((card) => { return card != null; });
+            for (int j = 0; j < cards.Count; j++)
+            {
+                var card = cards[j];
+
+                GUILayout.BeginHorizontal(GUI.skin.box);
+
+                GUILayout.Label(
+                    $"[{j}] ID:{card.id}  {card.name}",
+                    GUILayout.Width(250)
+                );
+
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
+            GUILayout.Space(10);
+
+            // デッキの中身
+            GUILayout.Label("Deck Cards:");
+            Vector2 deckScrollPos = (i == (int)GameEnum.PlayerType.OWN)
+            ? deckScrollPosOwn
+            : deckScrollPosOpp;
+
+            deckScrollPos = GUILayout.BeginScrollView(
+                deckScrollPos,
+                GUILayout.Height(200)
+            );
+
+            var deckCards = p.deck.GetCards((card) => { return card != null; });
+            for (int j = 0; j < deckCards.Count; j++)
+            {
+                var card = deckCards[j];
+
+                GUILayout.BeginHorizontal(GUI.skin.box);
+
+                GUILayout.Label(
+                    $"[{j}] ID:{card.id}  {card.name}",
+                    GUILayout.Width(250)
+                );
+
+                GUILayout.EndHorizontal();
+            }
+
+            GUILayout.EndScrollView();
+
+            // スクロール位置保存
+            if (i == (int)GameEnum.PlayerType.OWN)
+                handScrollPosOwn = scrollPos;
+            else
+                handScrollPosOpp = scrollPos;
+
+            if (i == (int)GameEnum.PlayerType.OWN)
+                deckScrollPosOwn = deckScrollPos;
+            else
+                deckScrollPosOpp = deckScrollPos;
+
+            GUILayout.Space(10);
+        }
+
+        GUI.enabled = IsOwnTurn() && currentState == BattleState.MAIN_TURN;
+        if (GUILayout.Button("End Turn"))
+        {
+            SendInputData(GameEnum.InputType.TURN_END);
+            SetCurrentState(BattleState.END_TURN);
+        }
+        GUI.enabled = true;
+
+        GUILayout.EndArea();
     }
 }

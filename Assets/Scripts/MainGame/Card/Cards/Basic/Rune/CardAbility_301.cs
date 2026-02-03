@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_101 : BaseCardAbility
+public class CardAbility_301 : BaseCardAbility
 {
     public override void Initialize(CardData setCard)
     {
@@ -11,9 +11,8 @@ public class CardAbility_101 : BaseCardAbility
 
     public override void Fanfare(bool isOwn)
     {
-        // Ž©•ª‚ÌƒRƒ“ƒ{‚ð+1‚·‚é
-        AddComboEffect effect = new AddComboEffect(new List<int> { 1 });
         var targetPlayer = GetPlayer(isOwn);
-        effect.ExecuteEffect(targetPlayer.leader);
+        DrawEffect drawEffect = new DrawEffect(new List<int>{1 });
+        drawEffect.ExecuteEffect(targetPlayer.hand);
     }
 }

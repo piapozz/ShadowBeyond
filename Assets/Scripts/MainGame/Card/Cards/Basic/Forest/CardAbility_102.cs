@@ -13,10 +13,18 @@ public class CardAbility_102 : BaseCardAbility
     public　override void Fanfare(bool isOwn)
     {
         // コンボ3 進化
+        var targetPlayer = GetPlayer(isOwn);
+        if(targetPlayer.leader.comboCount < COMBO_COST) return;
+        EvolveEffect evolveEffect = new EvolveEffect(null);
+        evolveEffect.ExecuteEffect(sourceData);
     }
 
     public override void Attack(bool isOwn)
     {
-        // 自分のリーダー2回復
+        // 進化後なら自分のリーダー2回復
+        if(sourceData.evolveState == CardData.EvolveState.None) return;
+        HealEffect healEffect = new HealEffect(new List<int>{2});
+        var targetPlayer = GetPlayer(isOwn);
+        healEffect.ExecuteEffect(targetPlayer.leader);
     }
 }

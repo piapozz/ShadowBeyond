@@ -27,7 +27,7 @@ public class GameEnum
         NEUTRAL,
         FOREST,
         SWORD,
-        RUNA,
+        RUNE,
         DRAGON,
         SHADOW,
         BLOOD,
@@ -54,24 +54,31 @@ public class GameEnum
     public enum CardTypeDetail
     {
         INVALID = -1,
+        OFFICER,    // 兵士
+        LUMINOUS,   // ルミナス
+        LEVIN,      // レヴィオン
+        PIXIE,      // 妖精
+        DEPARTED,   // 死者
+        EARTH_SIGIL,// 土の印
+        MYSTERIA,   // マナリア
+        GOLEM,      // ゴーレム
+        SHIKIGAMI,  // 式神
+        ARTIFACT,   // アーティファクト
+        PUPPETRY,   // 人形
+        MARINE,     // 海洋
+        LOOT,       // 財宝
+        ENCROACHER, // アサイラント
+        ANATHEMA,   // アナテマ
+        COMMANDER,  // 指揮官
         MACHINA,    // 機械
         NATURA,     // 自然
         FESTIVE,    // 宴楽
-        CONDEMNED,  // 八獄
-        ACADEMIC,   // 学園
-        COMMANDER,  // 指揮官
-        OFFICER,    // 兵士
-        LOOT,       // 財宝
-        LEVIN,      // レヴィオン
         HEROIC,     // ヒーロー
-        EARTH_SIGIL,// 土の印
-        MYSTERIA,   // マナリア
         CHESS,      // チェス
         ARMED,      // 武装
-        ARTIFACT,   // アーティファクト
+        CONDEMNED,  // 八獄
         ALL,        // すべて
-        DEPARTED,   // 死者
-        PIXIE       // 妖精
+        ACADEMIC,   // 学園
     }
 
     public enum BGM
