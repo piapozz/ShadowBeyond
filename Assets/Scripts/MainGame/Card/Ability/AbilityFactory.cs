@@ -2,31 +2,57 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System.Reflection;
 
 public class AbilityFactory
 {
-    private static readonly Dictionary<int, Func<BaseCardAbility>> abilityTable
-         = new Dictionary<int, Func<BaseCardAbility>>();
+    private static readonly Dictionary<int, Func<BaseCardAbility>> _map
+        = new Dictionary<int, Func<BaseCardAbility>>();
 
-    public static void Initialize()
+    public static void AutoRegister()
     {
-        Register(0, () => new CardAbility_0());
-        Register(1, () => new CardAbility_Test());
-        Register(2, () => new CardAbility_Test());
+        var abilityTypes = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t =>
+                t.IsClass &&
+                !t.IsAbstract &&
+                t.IsSubclassOf(typeof(BaseCardAbility)) &&
+                t.Name.StartsWith("CardAbility_"))
+            .Select(t => new
+            {
+                Type = t,
+                Id = int.Parse(t.Name.Replace("CardAbility_", ""))
+            })
+            .OrderBy(x => x.Id);
+
+        foreach (var a in abilityTypes)
+        {
+            Register(a.Id, () => (BaseCardAbility)Activator.CreateInstance(a.Type));
+        }
     }
 
-    private static void Register(int id, Func<BaseCardAbility> ability)
+    private static void Register(int id, Func<BaseCardAbility> creator)
     {
-        abilityTable[id] = ability;
+        _map[id] = creator;
+    }
+
+    public static BaseCardAbility Create(int id)
+    {
+        return _map[id]();
+    }
+    public static void Initialize()
+    {
+        AutoRegister();
     }
 
     public static BaseCardAbility GetAbility(int id)
     {
-        if (!abilityTable.TryGetValue(id, out var ability))
+        if(!_map.TryGetValue(id, out var ablity))
         {
             return null;
         }
 
-        return ability();
+        return ablity();
     }
 }

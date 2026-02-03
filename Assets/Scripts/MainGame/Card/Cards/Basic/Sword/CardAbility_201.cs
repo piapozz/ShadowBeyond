@@ -13,5 +13,9 @@ public class CardAbility_201 : BaseCardAbility
     public override void LastWord(bool isOwn)
     {
         // Ž©•ª‚ÌƒfƒbƒL‚©‚ç1–‡‚ðˆø‚­
+        var targetPlayer = GetPlayer(isOwn);
+        DrawEffect drawEffect = new DrawEffect(new List<int> { 1 });
+        drawEffect.ExecuteEffect(targetPlayer.deck);
+
     }
 }

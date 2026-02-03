@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Field;
 using static GameEnum;
 using static UnityEngine.GraphicsBuffer;
 
@@ -8,6 +9,13 @@ public class Field
 {
     public List<CardData> _ownFieldCardList = new();
     public List<CardData> _opponentFieldCardList = new();
+
+    public enum FieldType
+    {
+        OWN,
+        OPPONENT,
+        ALL
+    }
 
     const int MAX_FIELD = 5;
 
@@ -57,9 +65,23 @@ public class Field
     // ===== 条件検索 =====
 
     // 指定番目のカード
-    public CardData GetFieldCard(int index, bool includeOpponent = false)
+    public CardData GetFieldCard(int index, FieldType fieldType)
     {
-        var list = includeOpponent ? GetAllFieldCards() : _ownFieldCardList;
+        List<CardData> list = null;
+        switch (fieldType)
+        {
+            case FieldType.OWN:
+                list = _ownFieldCardList;
+                break;
+            case FieldType.OPPONENT:
+                list = _opponentFieldCardList;
+                break;
+            case FieldType.ALL:
+                list = GetAllFieldCards();
+                break;
+        }
+        if (list == null) return null;
+
         Debug.Log
             ($"[Field] GetFieldCard index:{index} listCount:{list.Count}");
         if (index < 0 || index >= list.Count) return null;
@@ -75,33 +97,84 @@ public class Field
     }
 
     // 選択可能カード
-    public List<CardData> GetSelectableCards(bool includeOpponent = false)
+    public List<CardData> GetSelectableCards(FieldType fieldType)
     {
-        return includeOpponent
-            ? GetAllFieldCards().FindAll(c => c.CanBeSelected())
-            : _ownFieldCardList.FindAll(c => c.CanBeSelected());
+        List<CardData> list = null;
+        switch (fieldType)
+        {
+            case FieldType.OWN:
+                list = _ownFieldCardList;
+                break;
+            case FieldType.OPPONENT:
+                list = _opponentFieldCardList;
+                break;
+            case FieldType.ALL:
+                list = GetAllFieldCards();
+                break;
+        }
+        if (list == null) return null;
+        return list.FindAll(c => c.CanBeSelected());
     }
 
     // アクト可能カード
-    public List<CardData> GetActableCards(bool includeOpponent = false)
+    public List<CardData> GetActableCards(FieldType fieldType)
     {
-        return includeOpponent
-            ? GetAllFieldCards().FindAll(c => c.canAct)
-            : _ownFieldCardList.FindAll(c => c.canAct);
+        List<CardData> list = null;
+        switch (fieldType)
+        {
+            case FieldType.OWN:
+                list = _ownFieldCardList;
+                break;
+            case FieldType.OPPONENT:
+                list = _opponentFieldCardList;
+                break;
+            case FieldType.ALL:
+                list = GetAllFieldCards();
+                break;
+        }
+        if (list == null) return null;
+        return list.FindAll(c => c.canAct);
     }
 
     // 任意条件カードを取得（複数）
-    public List<CardData> GetCards(System.Func<CardData, bool> condition, bool includeOpponent = true)
+    public List<CardData> GetCards(System.Func<CardData, bool> condition, FieldType fieldType)
     {
-        return includeOpponent
-            ? GetAllFieldCards().FindAll(new System.Predicate<CardData>(condition))
-            : _ownFieldCardList.FindAll(new System.Predicate<CardData>(condition));
+        List<CardData> list = null;
+        switch (fieldType)
+        {
+            case FieldType.OWN:
+                list = _ownFieldCardList;
+                break;
+            case FieldType.OPPONENT:
+                list = _opponentFieldCardList;
+                break;
+            case FieldType.ALL:
+                list = GetAllFieldCards();
+                break;
+        }
+        if (list == null) return null;
+
+        return list.FindAll(new System.Predicate<CardData>(condition));
     }
 
     // 任意条件カードを1枚（ランダム）
-    public CardData GetRandomCard(System.Func<CardData, bool> condition, bool includeOpponent = true)
+    public CardData GetRandomCard(System.Func<CardData, bool> condition, FieldType fieldType)
     {
-        var list = GetCards(condition, includeOpponent);
+        List<CardData> list = null;
+        switch (fieldType)
+        {
+            case FieldType.OWN:
+                list = _ownFieldCardList;
+                break;
+            case FieldType.OPPONENT:
+                list = _opponentFieldCardList;
+                break;
+            case FieldType.ALL:
+                list = GetAllFieldCards();
+                break;
+        }
+        if (list == null) return null;
+        list = list.FindAll(new System.Predicate<CardData>(condition));
         if (list.Count == 0) return null;
         return list[BattleManager.instance.rand.Next(0, list.Count)];
     }
