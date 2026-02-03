@@ -68,9 +68,8 @@ public class Hand
     /// <param name="card"></param>
     public void PlayCardToField(CardData card)
     {
-        // 手札のプレイ可否更新
+        // プレイ可否更新
         card.SetCanPlay(false);
-        UpdatePlayableCards();
         handCardList.Remove(card);
         field.PlayCard(card, playerID);
     }
@@ -164,39 +163,25 @@ public class Hand
     }
 
     /// <summary>
-    /// プレイ可能なカードをすべて取得
-    /// </summary>
-    public List<CardData> GetPlayableCards()
-    {
-        // 自分のターンでなければ空リストを返す
-        if (BattleManager.instance.currentPlayerIndex != (int)GameEnum.PlayerType.OWN) return new List<CardData>();
-
-        var leader = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN).leader;
-        return GetCards(c => c.cost <= leader.currentPlayPoint);
-    }
-
-    /// <summary>
     /// 手札のプレイ可否更新
     /// </summary>
     public void UpdatePlayableCards()
     {
-        List<CardData> nonPlayableCard = GetNonPlayableCards();
-        for (int i = 0, max = nonPlayableCard.Count; i < max; i++)
-        {
-            nonPlayableCard[i].SetCanPlay(false);
-        }
-    }
-
-    /// <summary>
-    /// プレイ不可なカードをすべて取得
-    /// </summary>
-    public List<CardData> GetNonPlayableCards()
-    {
-        // 自分のターンでなければ空リストを返す
-        if (BattleManager.instance.currentPlayerIndex != (int)GameEnum.PlayerType.OWN) return new List<CardData>();
-
+        // 自分のターンであればコストを参照し更新
+        if (BattleManager.instance.currentPlayerIndex != (int)GameEnum.PlayerType.OWN) return;
         var leader = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN).leader;
-        return GetCards(c => c.cost > leader.currentPlayPoint);
+        for (int i = 0, max = handCardList.Count; i < max; i++)
+        {
+            int playableCost = handCardList[i].GetPlayableCost(leader.currentPlayPoint);
+            if (playableCost < 0)
+            {
+                handCardList[i].SetCanPlay(false);
+            }
+            else
+            {
+                handCardList[i].SetCanPlay(true);
+            }
+        }
     }
 
     /// <summary>

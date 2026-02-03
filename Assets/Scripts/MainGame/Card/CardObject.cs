@@ -511,7 +511,6 @@ public class CardObject : BaseFieldObject
             .Join(transform.DOScale(playCardSlot.localScale, 0.3f))
             .JoinCallback(() => transform.SetParent(fieldRoot))
             .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f))
-            .AppendCallback(() => PlayCard(isOwn))
             .AppendCallback(() =>
             {
                  // エフェクトを有効化
@@ -520,7 +519,7 @@ public class CardObject : BaseFieldObject
                      effect.SetActive(true);
                  }
             });
-
+        PlayCard(isOwn);
         // 手札のプレイ可否を設定
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
@@ -538,9 +537,12 @@ public class CardObject : BaseFieldObject
         }
         // プレイ
         PlayCard(isOwn);
-        // 手札のプレイ可否を設定
-        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCardToField(cardData);
+        if (isOwn)
+        {
+            // 手札からプレイ
+            Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+            currentHand.PlayCardToField(cardData);
+        }
     }
 
     public void PlayCard(bool isOwn)

@@ -11,8 +11,6 @@ public class LeaderObject : BaseFieldObject
     private EvolvePointObject evolvePointObject = null;
     [SerializeField]
     private EvolvePointObject superEvolvePointObject = null;
-    [SerializeField]
-    private bool isLocal = false;
 
     public Leader leader { get; private set; } = null;
 

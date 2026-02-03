@@ -236,8 +236,6 @@ public class BattleManager : SystemObject
 
         // 自分のターンなら手札とフィールドのカードの選択可能状態を更新
         if (!IsOwnTurn()) return;
-        player[currentPlayerIndex].hand.SetOwnHandCardPlayable(true);
-        player[currentPlayerIndex].hand.UpdatePlayableCards();
         field.OnStartTurn();
     }
 
