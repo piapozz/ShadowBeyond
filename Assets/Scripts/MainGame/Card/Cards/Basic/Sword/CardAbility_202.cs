@@ -7,6 +7,6 @@ public class CardAbility_202 : BaseCardAbility
     public override void Initialize(CardData setCard)
     {
         base.Initialize(setCard);
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush, null));
+        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Storm, null));
     }
 }

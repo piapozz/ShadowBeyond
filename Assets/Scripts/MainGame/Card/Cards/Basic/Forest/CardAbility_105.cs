@@ -7,7 +7,7 @@ public class CardAbility_105 : BaseCardAbility
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush));
+        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Storm));
     }
 
     public override void SuperEvolve(bool isOwn)

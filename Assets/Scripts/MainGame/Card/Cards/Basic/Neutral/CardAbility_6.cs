@@ -28,7 +28,7 @@ public class CardAbility_6 : BaseCardAbility
         var field = BattleManager.instance.field;
         var targetCard = field.GetRandomCard((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, ! isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard == null) return;
-        GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int>{(int)GameEnum.KeywordAbility.Storm });
+        GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int>{(int)GameEnum.KeywordAbility.Rush });
         giveKeywordAbilityEffect.ExecuteEffect(targetCard);
     }
 }
