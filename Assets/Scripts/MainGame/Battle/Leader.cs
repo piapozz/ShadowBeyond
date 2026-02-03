@@ -137,6 +137,12 @@ public class Leader : BaseComponent
     {
         currentPlayPoint = Mathf.Clamp(value, 0, maxPlayPoint);
         UIManager.instance.UpdatePPUI(playerID, maxPlayPoint, currentPlayPoint);
+        // 自分なら手札のプレイ可否を更新
+        if (playerID == 0)
+        {
+            Hand hand = BattleManager.instance.GetCurrentPlayer().hand;
+            hand.UpdatePlayableCards();
+        }
     }
 
     public void SetMaxEvolvePoint(int value)

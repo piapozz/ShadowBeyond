@@ -279,6 +279,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 4226818833094318410}
+  evolvePointObject: {fileID: 0}
+  countUI: []
 --- !u!120 &4226818833094318410
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -659,6 +661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lineRenderer: {fileID: 5840736364479876949}
+  evolvePointObject: {fileID: 0}
+  countUI: []
 --- !u!120 &5840736364479876949
 LineRenderer:
   m_ObjectHideFlags: 0

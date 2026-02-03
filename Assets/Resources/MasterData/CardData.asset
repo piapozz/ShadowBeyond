@@ -91,8 +91,8 @@ MonoBehaviour:
       Type: 0
       Name: "\u30D5\u30A7\u30A2\u30EA\u30FC\u30C6\u30A4\u30DE\u30FC"
       Cost: 2
-      Attack: 2
-      Defence: 2
+      Attack: 1
+      Defence: 1
       Token: 0
       Trait: 00000000
     - ID: 101
