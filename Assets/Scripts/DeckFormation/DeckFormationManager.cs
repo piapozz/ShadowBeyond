@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -20,6 +21,9 @@ public class DeckFormationManager : MonoBehaviour
     [SerializeField]
     private CardDetailUI cardDetailUI;
 
+    [SerializeField]
+    private TextMeshProUGUI deckCoutText;
+
     public static DeckFormationManager Instance;
 
     private List<CardImage> cardDataList = null; 
@@ -37,6 +41,21 @@ public class DeckFormationManager : MonoBehaviour
         }
 
         cardDataList = new List<CardImage>();
+        deckCoutText.text = "0 / " + GameConst.DECK_SIZE_MAX.ToString() ;
+
+        List<int> deckList = DeckRecorder.Instance.GetCurrentDeck();
+        foreach (int cardID in deckList)
+        {
+            if (cardID < 0) continue;
+            var cardData = CardMasterUtility.GetCardData(cardID);
+
+            var cardObj = Instantiate(CardImage.gameObject, DeckArea);
+            var cardImage = cardObj.GetComponent<CardImage>();
+            cardImage.SetCardImage(cardID);
+            cardDataList.Add(cardImage);
+        }
+
+        UpdateCardList();
     }
 
     public void Update()
@@ -47,6 +66,8 @@ public class DeckFormationManager : MonoBehaviour
     // デッキ保存
     public void RecordDeck()
     {
+        if(cardDataList.Count != GameConst.DECK_SIZE_MAX) return;
+
         List<int> deckCardIds = new List<int>();
         foreach (var card in cardDataList)
         {
@@ -146,6 +167,8 @@ public class DeckFormationManager : MonoBehaviour
         // スクロールバーの最大値を更新
         float maxScrollbarValue = Mathf.Max(0, cardDataList.Count - visibleCardCount);
         Scrollbar.size = visibleCardCount / (float)cardDataList.Count;
+
+        deckCoutText.text = cardDataList.Count.ToString() + " / " + GameConst.DECK_SIZE_MAX.ToString();
     }
 
     // 現在の検索設定に基づいてデータを更新
