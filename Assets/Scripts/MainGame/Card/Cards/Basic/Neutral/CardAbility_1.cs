@@ -32,4 +32,12 @@ public class CardAbility_1 : BaseCardAbility
         var targetDeck = GetPlayer(isOwn).deck;
         effect.ExecuteEffect(targetDeck);
     }
+
+    public override void SuperEvolve(bool isOwn)
+    {
+        // ˆê–‡ˆø‚­
+        DrawEffect effect = new DrawEffect(new List<int> { 1 });
+        var targetDeck = GetPlayer(isOwn).deck;
+        effect.ExecuteEffect(targetDeck);
+    }
 }

@@ -303,6 +303,7 @@ public class BattleManager : SystemObject
                 int evolveIndex = data.param[0];
                 CardObject evolveCard = UIManager.instance.GetOpponentCard(evolveIndex);
                 evolveCard.EvolveFollower();
+                evolveCard.cardData.ability.Evolve(false);
                 break;
 
             case GameEnum.InputType.SUPER_EVOLVE:
@@ -310,11 +311,14 @@ public class BattleManager : SystemObject
                 int superEvolveIndex = data.param[0];
                 CardObject superEvolveCard = UIManager.instance.GetOpponentCard(superEvolveIndex);
                 superEvolveCard.SuperEvolveFollower();
+                superEvolveCard.cardData.ability.SuperEvolve(false);
                 break;
 
             case GameEnum.InputType.ACT:
                 // 能力使用
                 int actIndex = data.param[0];
+                CardObject actCard = UIManager.instance.GetOpponentCard(actIndex);
+                actCard.cardData.ability.Engage(false);
                 break;
 
             case GameEnum.InputType.FUSION:
@@ -614,7 +618,7 @@ public class BattleManager : SystemObject
     {
         if (!IsGame || player == null) return;
 
-        const int width = 380;
+        const int width = 300;
         const int height = 1100;
 
         GUILayout.BeginArea(new Rect(10, 10, width, height), GUI.skin.box);
