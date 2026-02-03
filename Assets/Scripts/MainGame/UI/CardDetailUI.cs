@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardDetailUI : MonoBehaviour
 {
@@ -9,11 +10,16 @@ public class CardDetailUI : MonoBehaviour
     private TextMeshProUGUI cardNameText = null;
     [SerializeField]
     private TextMeshProUGUI cardDetailText = null;
+    [SerializeField]
+    private RectTransform rectTransform = null;
+    [SerializeField]
+    private GameObject button = null;
 
     public void EnableUI(bool enable, string name = "", string detail = "")
     {
         gameObject.SetActive(enable);
         SetCardText(name, detail);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(rectTransform);
     }
 
     private void SetCardText(string name, string detail)

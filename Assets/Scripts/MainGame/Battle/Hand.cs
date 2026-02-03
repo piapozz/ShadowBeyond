@@ -38,6 +38,8 @@ public class Hand
         if (card == null) return;
         if (handCardList.Count >= MAX_HAND) return;
         handCardList.Add(card);
+        // 手札のプレイ可否更新
+        UpdatePlayableCards();
     }
 
     /// <summary>
