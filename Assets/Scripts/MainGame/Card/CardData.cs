@@ -346,13 +346,13 @@ public class CardData : BaseComponent
 
         // リーダーを攻撃する場合
         if (attackLeader)
-            return attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Rush);
+            return attackPermission == AttackPermission.CanAttackLeader || HaveKeyword(KeywordAbility.Storm);
         // フォロワーを攻撃する場合
         else
         {
             bool result = (attackPermission == AttackPermission.CanAttackLeader) || (attackPermission == AttackPermission.CanAttackFollower);
             if (result) return true;
-            result = HaveKeyword(KeywordAbility.Rush) || HaveKeyword(KeywordAbility.Storm);
+            result = HaveKeyword(KeywordAbility.Storm) || HaveKeyword(KeywordAbility.Rush);
             return result;
         }
     }

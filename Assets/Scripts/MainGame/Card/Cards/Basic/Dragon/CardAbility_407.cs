@@ -9,5 +9,4 @@ public class CardAbility_407 : BaseCardAbility
         sourceData = setCard;
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Intimidate));
     }
-
 }

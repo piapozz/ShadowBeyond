@@ -185,8 +185,8 @@ public class GameEnum
 
     public enum KeywordAbility
     {
-        Rush,           // ¾‘–
-        Storm,          // “Ëi
+        Storm,          // ¾‘–
+        Rush,           // “Ëi
         Ward,           // çŒì
         Bane,           // •KE
         Ambush,         // ö•š

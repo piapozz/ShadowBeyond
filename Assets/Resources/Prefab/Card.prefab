@@ -1190,7 +1190,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4682216123813088659, guid: 1647977762eefc3438fdaf54dbdf7d88, type: 3}
       propertyPath: m_Name
-      value: Rush
+      value: Storm
       objectReference: {fileID: 0}
     - target: {fileID: 4682216123813088659, guid: 1647977762eefc3438fdaf54dbdf7d88, type: 3}
       propertyPath: m_IsActive
@@ -1376,7 +1376,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8263154027590590752, guid: 6e6e96483d16a934b8d8a86a3bab7ff4, type: 3}
       propertyPath: m_Name
-      value: Storm
+      value: Rush
       objectReference: {fileID: 0}
     - target: {fileID: 8263154027590590752, guid: 6e6e96483d16a934b8d8a86a3bab7ff4, type: 3}
       propertyPath: m_IsActive

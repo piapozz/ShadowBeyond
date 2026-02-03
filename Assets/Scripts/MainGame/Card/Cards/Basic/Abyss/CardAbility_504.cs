@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_107 : BaseCardAbility
+public class CardAbility_504 : BaseCardAbility
 {
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush));
     }
+
 }
