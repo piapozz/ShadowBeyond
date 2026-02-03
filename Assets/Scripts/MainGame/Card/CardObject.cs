@@ -514,7 +514,6 @@ public class CardObject : BaseFieldObject
                  }
             });
         PlayCard(isOwn);
-        // èD‚ÌƒvƒŒƒC‰Â”Û‚ğİ’è
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
         currentHand.PlayCardToField(cardData);
         return toFieldSequence;
