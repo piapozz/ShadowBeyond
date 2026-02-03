@@ -57,12 +57,14 @@ public class EvolvePointObject : MonoBehaviour
         if (targetCard.cardData.isAnyEvolved) return;
         BattleManager.instance.GetCurrentPlayer().leader.SetCanEvolve(false);
         GameEnum.InputType evolveType;
+        var ablity = targetCard.cardData.ability;
         if (isSuperEvolve)
         {
             targetCard.SuperEvolveFollower();
             evolveType = GameEnum.InputType.SUPER_EVOLVE;
             countUI[leader.superEvolutionPoint - 1].material = null;
             leader.ConsumeSuperEvolvePoint();
+            if(ablity != null) ablity.SuperEvolve(true);
         }
         else
         {
@@ -70,6 +72,7 @@ public class EvolvePointObject : MonoBehaviour
             evolveType = GameEnum.InputType.EVOLVE;
             countUI[leader.evolutionPoint - 1].material = null;
             leader.ConsumeEvolvePoint();
+            if (ablity != null) ablity.Evolve(true);
         }
         // ëóêM
         int fieldIndex = UIManager.instance.GetOwnFieldIndex(targetCard);
