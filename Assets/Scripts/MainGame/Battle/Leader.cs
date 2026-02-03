@@ -70,6 +70,8 @@ public class Leader : BaseComponent
     public int comboCount { get; private set; }
     public bool canEvolve { get; private set; }
 
+    public bool IsOverflow() { return maxPlayPoint > 6; }
+
     // ƒoƒgƒ‹î•ñ
     private Dictionary<BattleStatType, BattleStatValue> battleStats = new Dictionary<BattleStatType, BattleStatValue>();
 
