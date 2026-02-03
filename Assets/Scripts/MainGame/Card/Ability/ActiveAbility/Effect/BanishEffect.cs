@@ -12,15 +12,15 @@ public class BanishEffect : BaseEffect
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         targetCard.Banish();
+        targetCard.GetObject().SetCardState(CardObject.CardState.UNUSE);
         UIManager.instance.RemoveFieldCard(targetCard.GetObject());
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
-        targetCards.ForEach((card) =>
+        for (int i = 0, max = targetCards.Count; i < max; i++)
         {
-            card.Banish();
-            UIManager.instance.RemoveFieldCard(card.GetObject());
-        });
+            ExecuteEffect(targetCards[i]);
+        }
     }
 }

@@ -16,7 +16,7 @@ public class CardAbility_306 : BaseCardAbility
         if (targetCard.Count > 0)
         {
             DamageEffect damageEffect = new DamageEffect(new List<int>{ 2 });
-            List<BaseComponent> components = null;
+            List<BaseComponent> components = new List<BaseComponent>();
             foreach(var card in targetCard)
             {
                 BaseComponent component = card;
