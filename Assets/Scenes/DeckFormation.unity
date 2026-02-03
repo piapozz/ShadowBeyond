@@ -4203,6 +4203,7 @@ MonoBehaviour:
   DeckArea: {fileID: 442955134}
   Scrollbar: {fileID: 2034705029}
   cardDetailUI: {fileID: 1885646605}
+  deckCoutText: {fileID: 1946703578}
 --- !u!1 &445028230
 GameObject:
   m_ObjectHideFlags: 0
@@ -19225,6 +19226,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardNameText: {fileID: 1412668765}
   cardDetailText: {fileID: 1659157705}
+  rectTransform: {fileID: 0}
+  button: {fileID: 0}
 --- !u!114 &1885646606
 MonoBehaviour:
   m_ObjectHideFlags: 0
