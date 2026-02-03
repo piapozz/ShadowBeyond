@@ -13,10 +13,15 @@ public class CardAbility_306 : BaseCardAbility
     {
         // 場のフォロワーすべてに2ダメージ。【土の秘術_1】自分のデッキから1枚を引く。
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, Field.FieldType.ALL);
-        if (targetCard != null)
+        if (targetCard.Count > 0)
         {
             DamageEffect damageEffect = new DamageEffect(new List<int>{ 2 });
-            damageEffect.ExecuteEffect(targetCard);
+            List<BaseComponent> components = null;
+            foreach(var card in targetCard)
+            {
+                components.Add(card);
+            }
+            damageEffect.ExecuteEffect(components);
         }  
         //if
         DrawEffect drawEffect = new DrawEffect(new List<int>{1});

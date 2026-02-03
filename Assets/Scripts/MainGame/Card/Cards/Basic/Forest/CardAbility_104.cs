@@ -19,6 +19,7 @@ public class CardAbility_104 : BaseCardAbility
         var targetCard = BattleManager.instance.field.GetRandomCard((card) => {return card.type == GameEnum.CardType.FOLLOWER; } , isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard == null) return;
         DamageEffect damageEffect = new DamageEffect(new List<int> { 3 });
-        damageEffect.ExecuteEffect(targetCard);
+        BaseComponent component = targetCard;
+        damageEffect.ExecuteEffect(component);
     }
 }

@@ -43,6 +43,7 @@ public class DeckFormationManager : MonoBehaviour
         cardDataList = new List<CardImage>();
         deckCoutText.text = "0 / " + GameConst.DECK_SIZE_MAX.ToString() ;
 
+        MasterDataManager.LoadAllData();
         List<int> deckList = DeckRecorder.Instance.GetCurrentDeck();
         foreach (int cardID in deckList)
         {
