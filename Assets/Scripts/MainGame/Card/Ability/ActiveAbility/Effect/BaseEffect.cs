@@ -13,7 +13,7 @@ public abstract class BaseEffect
     }
 
     public virtual void ExecuteEffect() { }
-    public virtual void ExecuteEffect(bool isOwn) { }
+    public virtual List<CardData> ExecuteEffect(bool isOwn) { return null; }
     public virtual void ExecuteEffect(CardData targetCard, CardData sourceCard = null) { }
     public virtual void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null) { }
     public virtual void ExecuteEffect(BaseComponent targetComponent) { }

@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_506 : BaseCardAbility
+public class CardAbility_703 : BaseCardAbility
 {
+    private const int GEAR_OF_AMBITION_ID = 716;
+    private const int GEAR_OF_REMEMBRANCE_ID = 716;
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
@@ -15,7 +17,9 @@ public class CardAbility_506 : BaseCardAbility
         if (targetCard == null) return;
         DestroyEffect destroyEffect = new DestroyEffect(null);
         destroyEffect.ExecuteEffect(targetCard);
-        DrawEffect drawEffect = new DrawEffect(new List<int> { 2 });
-        drawEffect.ExecuteEffect(GetPlayer(isOwn).deck);
+        AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int> { GEAR_OF_AMBITION_ID, 1 });
+        addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);
+        addCardHandEffect = new AddCardHandEffect(new List<int> { GEAR_OF_REMEMBRANCE_ID, 1 });
+        addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);
     }
 }
