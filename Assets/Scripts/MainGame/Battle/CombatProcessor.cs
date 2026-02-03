@@ -27,6 +27,7 @@ public class CombatProcessor
     // 通常戦闘
     public void Combat()
     {
+        attackerCard.OnAttack();
         // 攻撃時能力タイミング
         // 交戦時能力タイミング
 
@@ -71,6 +72,7 @@ public class CombatProcessor
     // リーダーへの攻撃
     public void LeaderCombat()
     {
+        attackerCard.OnAttack();
         // 攻撃時能力タイミング
         int attackerDamage = attackerCard.GetCurrentStatus().m_attack;
 

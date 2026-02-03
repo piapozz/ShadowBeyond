@@ -135,6 +135,9 @@ MonoBehaviour:
   - {fileID: 2129774352927723751}
   - {fileID: 2781575597165034049}
   - {fileID: 8270435755125885475}
+  attackMaterial:
+  - {fileID: 2100000, guid: 74eb641b303943042bf1ec54407d6abe, type: 2}
+  - {fileID: 2100000, guid: 6f55a69bb01432e4bb7e6317ce6702a0, type: 2}
 --- !u!120 &1735497269602815245
 LineRenderer:
   m_ObjectHideFlags: 0

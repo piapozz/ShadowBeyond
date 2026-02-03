@@ -240,8 +240,7 @@ public class BattleManager : SystemObject
         UIManager.instance.StartTurn(IsOwnTurn());
 
         // 自分のターンなら手札とフィールドのカードの選択可能状態を更新
-        if (!IsOwnTurn()) return;
-        field.OnStartTurn();
+        field.OnStartTurn(IsOwnTurn());
     }
 
     public async UniTask MainTurn()
@@ -342,11 +341,10 @@ public class BattleManager : SystemObject
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
         // 自分の手札をプレイ不能にする
-        if (IsOwnTurn())
-        {
+        bool isOwn = IsOwnTurn();
+        field.OnEndTurn(isOwn);
+        if (isOwn)
             player[currentPlayerIndex].hand.SetOwnHandCardPlayable(false);
-            field.OnEndTurn();
-        }
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
 
@@ -392,20 +390,23 @@ public class BattleManager : SystemObject
         return player[index];
     }
 
-    public void CardCombat(CardData attackCard, CardData defanceCard)
+    public void CardCombat(CardData attackCard, CardData defenceCard)
     {
         // 戦闘カードの登録
-        CombatProcessor processor = new CombatProcessor(attackCard, defanceCard);
+        CombatProcessor processor = new CombatProcessor(attackCard, defenceCard);
 
         processor.Combat();
+        attackCard.GetObject().SetAttackPermissionLook();
+        defenceCard.GetObject().SetAttackPermissionLook();
     }
 
-    public void LeaderCombat(CardData attackCard, Leader defanceLeader)
+    public void LeaderCombat(CardData attackCard, Leader defenceLeader)
     {
         // 戦闘カードの登録
-        CombatProcessor processor = new CombatProcessor(attackCard, defanceLeader);
+        CombatProcessor processor = new CombatProcessor(attackCard, defenceLeader);
 
         processor.LeaderCombat();
+        attackCard.GetObject().SetAttackPermissionLook();
     }
 
     public bool IsOwnTurn()
@@ -429,6 +430,18 @@ public class BattleManager : SystemObject
     public bool IsWardOpponentField()
     {
         return field.IsWardOpponentField();
+    }
+
+    public bool IsAttackable(CardData targetCard)
+    {
+        // 潜伏か威圧持ちなら攻撃できない
+        if (targetCard.HaveKeyword(GameEnum.KeywordAbility.Ambush) ||
+            targetCard.HaveKeyword(GameEnum.KeywordAbility.Intimidate))
+            return false;
+        // 守護を持っていなく、守護持ちフォロワーがいるなら攻撃できない
+        if (!targetCard.HaveKeyword(GameEnum.KeywordAbility.Ward) && IsWardOpponentField())
+            return false;
+        return true;
     }
 
     /// <summary>
