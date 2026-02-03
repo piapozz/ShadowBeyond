@@ -29,5 +29,4 @@ public class CardAbility_306 : BaseCardAbility
         EarthSigleEffect earthSigleEffect = new EarthSigleEffect(new List<int>{-1});
         earthSigleEffect.ExecuteEffect();
     }
-
 }

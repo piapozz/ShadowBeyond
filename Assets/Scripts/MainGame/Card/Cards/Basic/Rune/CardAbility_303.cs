@@ -10,6 +10,7 @@ public class CardAbility_303 : BaseCardAbility
         sourceData = setCard;
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.EarthSigle));
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Aura));
+        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.NoDestroy));
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Engage, null, ENGAGE_COST));
     }
 

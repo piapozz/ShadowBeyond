@@ -12,7 +12,7 @@ public class CardAbility_106 : BaseCardAbility
     public override void Fanfare(bool isOwn)
     {
         // 自分の場のカード1枚を選ぶ。それを手札に戻す。相手の場のフォロワーからランダム1枚に2ダメージ。
-        var targetOwnCard  = BattleManager.instance.field.GetRandomCard(null, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
+        var targetOwnCard  = BattleManager.instance.field.GetRandomCard((card) => { return card != null; }, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetOwnCard == null ) return;
         BounceEffect bounceEffect = new BounceEffect(null);
         bounceEffect.ExecuteEffect(targetOwnCard);

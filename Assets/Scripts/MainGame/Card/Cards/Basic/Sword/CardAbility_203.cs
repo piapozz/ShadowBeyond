@@ -13,7 +13,7 @@ public class CardAbility_203 : BaseCardAbility
     {
         // 自分の手札1枚を選ぶ。それをデッキに戻す。自分のデッキからロイヤル・フォロワー2枚を引く。
         var targetPlayer = GetPlayer(isOwn);
-        var targetCard = targetPlayer.hand.GetRandomCard(null);
+        var targetCard = targetPlayer.hand.GetRandomCard((card) => { return card != null; });
         if (targetCard == null) return;
         ReturnDeckEffect returnDeckEffect = new ReturnDeckEffect(null);
         returnDeckEffect.ExecuteEffect(targetCard);
