@@ -12,23 +12,17 @@ public class EnterCardFieldEffect : BaseEffect
     public override List<CardData> ExecuteEffect(bool isOwn)
     {
         List<CardData> enterCardList = new List<CardData>();
+        List<CardObject> enterCardObjectList = new List<CardObject>();
 
         for (int i = 0; i < param[1]; ++i) 
         { 
             // カードを生成
             CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
-            if (isOwn)
-            {
-                // 自分の場に出す
-            }
-            else
-            {
-                // 相手の場に出す
-                
-            }
-
+            enterCardObjectList.Add(enterCard);
             enterCardList.Add(enterCard.cardData);
         }
+        BattleManager.instance.field.PlayCards(enterCardList, isOwn);
+        UIManager.instance.EnterFieldSequence(enterCardObjectList, isOwn);
 
         return enterCardList;
     }

@@ -434,6 +434,11 @@ public class UIManager : SystemObject
         handUI.AddHandCard(isMine, drawCardObjects);
     }
 
+    public void EnterFieldSequence(List<CardObject> enterCards, bool isOwn)
+    {
+        fieldUI.EnterFieldCard(isOwn, enterCards);
+    }
+
     public void SetBounceSequence(List<CardObject> bounceCards, bool isOwn)
     {
         fieldUI.BounceCard(isOwn, bounceCards);

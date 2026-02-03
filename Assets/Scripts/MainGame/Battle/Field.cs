@@ -52,8 +52,17 @@ public class Field
     {
         if (card == null) return;
         var targetList = currentIndex == 0 ? _ownFieldCardList : _opponentFieldCardList;
-        if (targetList.Count >= MAX_FIELD) return; 
+        // 手札上限なし
+        //if (targetList.Count >= MAX_FIELD) return; 
         targetList.Add(card);
+    }
+
+    public void PlayCards(List<CardData> cards, bool isOwn)
+    {
+        for (int i = 0, max = cards.Count; i < max; i++)
+        {
+            PlayCard(cards[i], isOwn ? 0 : 1);
+        }
     }
 
     // カードを除外する

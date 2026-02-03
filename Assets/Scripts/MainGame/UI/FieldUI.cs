@@ -96,6 +96,22 @@ public class FieldUI : MonoBehaviour
         playCard.PlaySpellCard(isOwn);
     }
 
+    public void EnterFieldCard(bool isOwn, List<CardObject> enterCards)
+    {
+        UIManager.instance.AddSequence(ArrangeFieldCard(isOwn, enterCards.Count));
+        for (int i = 0, max = enterCards.Count; i < max; i++)
+        {
+            if (isOwn)
+                ownCards.Add(enterCards[i]);
+            else
+                opponentCards.Add(enterCards[i]);
+            // 出したカードの座標設定
+            enterCards[i].SetCardState(CardObject.CardState.FIELD);
+            enterCards[i].transform.position = fieldCardSlotList[i].position;
+            enterCards[i].SetIsLocal(isOwn);
+        }
+    }
+
     public void BounceCard(bool isOwn, List<CardObject> bounceCards)
     {
         for (int i = 0, max = bounceCards.Count; i < max; i++)
