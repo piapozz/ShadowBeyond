@@ -14,7 +14,8 @@ public class CardAbility_4 : BaseCardAbility
         // 自分のリーダーを2回復
         HealEffect effect = new HealEffect(new List<int> { 2 });
         var targetPlayer = GetPlayer(isOwn);
-        effect.ExecuteEffect(targetPlayer.leader);
+        BaseComponent component = targetPlayer.leader;
+        effect.ExecuteEffect(component);
     }
 
     public override void SuperEvolve(bool isOwn)
@@ -22,6 +23,7 @@ public class CardAbility_4 : BaseCardAbility
         // 自分のリーダーを2ではなく4回復
         HealEffect effect = new HealEffect(new List<int> { 4 });
         var targetPlayer = GetPlayer(isOwn);
-        effect.ExecuteEffect(targetPlayer.leader);
+        BaseComponent component = targetPlayer.leader;
+        effect.ExecuteEffect(component);
     }
 }

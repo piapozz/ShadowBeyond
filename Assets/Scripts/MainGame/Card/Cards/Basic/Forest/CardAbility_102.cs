@@ -25,6 +25,7 @@ public class CardAbility_102 : BaseCardAbility
         if(sourceData.evolveState == CardData.EvolveState.None) return;
         HealEffect healEffect = new HealEffect(new List<int>{2});
         var targetPlayer = GetPlayer(isOwn);
-        healEffect.ExecuteEffect(targetPlayer.leader);
+        BaseComponent component = targetPlayer.leader;
+        healEffect.ExecuteEffect(component);
     }
 }
