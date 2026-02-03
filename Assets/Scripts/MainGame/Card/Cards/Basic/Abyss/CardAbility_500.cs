@@ -13,5 +13,7 @@ public class CardAbility_500 : BaseCardAbility
     public override void Fanfare(bool isOwn)
     {
         // 【ファンファーレ】【ネクロマンス_4】これは【疾走】を持つ。
+        GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int> { (int)GameEnum.KeywordAbility.Storm });
+        giveKeywordAbilityEffect.ExecuteEffect(sourceData);
     }
 }

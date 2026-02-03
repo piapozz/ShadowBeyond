@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_507 : BaseCardAbility
+public class CardAbility_714 : BaseCardAbility
 {
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Drane));
+        // 自分のターン終了時、相手のリーダーに3ダメージ。
     }
-
 }

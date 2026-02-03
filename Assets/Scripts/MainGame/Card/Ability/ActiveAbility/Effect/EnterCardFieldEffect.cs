@@ -9,17 +9,27 @@ public class EnterCardFieldEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(bool isOwn)
+    public override List<CardData> ExecuteEffect(bool isOwn)
     {
-        // カードを生成
-        CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
-        if (isOwn)
-        {
-            // 自分の場に出す
+        List<CardData> enterCardList = new List<CardData>();
+
+        for (int i = 0; i < param[1]; ++i) 
+        { 
+            // カードを生成
+            CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
+            if (isOwn)
+            {
+                // 自分の場に出す
+            }
+            else
+            {
+                // 相手の場に出す
+                
+            }
+
+            enterCardList.Add(enterCard.cardData);
         }
-        else
-        {
-            // 相手の場に出す
-        }
+
+        return enterCardList;
     }
 }

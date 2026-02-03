@@ -9,7 +9,7 @@ public class EarthSigleEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(bool isOwn)
+    public override List<CardData> ExecuteEffect(bool isOwn)
     {
         // フィールドから土の印を取得
         List<CardData> earthSigleCard = 
@@ -37,5 +37,7 @@ public class EarthSigleEffect : BaseEffect
             if (keyword.IsNoCount())
                 earthSigleCard[0].Destroy();
         }
+
+        return null;
     }
 }

@@ -5,7 +5,7 @@ using static GameEnum;
 
 public class CardAbility_304 : BaseCardAbility
 {
-    private const int GUARDIANGOLEM_ID = 308;
+    private const int GUARDIAN_GOLEM_ID = 308;
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
@@ -14,7 +14,7 @@ public class CardAbility_304 : BaseCardAbility
     public override void Fanfare(bool isOwn)
     {
         //if (BattleManager.instance.field.Get)
-        EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int>{ GUARDIANGOLEM_ID, 1 });
+        EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int>{ GUARDIAN_GOLEM_ID, 1 });
         enterCardFieldEffect.ExecuteEffect(isOwn);
         EarthSigleEffect earthSigleEffect = new EarthSigleEffect(new List<int>(-1));
         earthSigleEffect.ExecuteEffect();

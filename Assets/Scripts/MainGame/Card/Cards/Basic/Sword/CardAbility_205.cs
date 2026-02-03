@@ -15,6 +15,8 @@ public class CardAbility_205 : BaseCardAbility
         var targetPlayer = GetPlayer(isOwn);
         var drawCount = targetPlayer.deck.GetCards((card) => { return card.id == RUSTY_ID; }).Count;
         DrawEffect drawEffect = new DrawEffect(new List<int>{drawCount});
-        drawEffect.ExecuteEffect(targetPlayer.deck, (card) => { return card.id == RUSTY_ID; });
+        var drawList = drawEffect.ExecuteEffect(targetPlayer.deck, (card) => { return card.id == RUSTY_ID; });
+        GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int> { (int)GameEnum.KeywordAbility.Storm });
+        giveKeywordAbilityEffect.ExecuteEffect(drawList);
     }
 }
