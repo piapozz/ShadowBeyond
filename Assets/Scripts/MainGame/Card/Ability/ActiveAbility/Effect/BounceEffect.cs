@@ -18,6 +18,7 @@ public class BounceEffect : BaseEffect
         BattleManager.instance.field.RemoveCard(targetCard);
         // 手札に戻す
         targetHand.AddCard(targetCard);
+        UIManager.instance.AddHandCard(playerIndex, new List<CardData> { targetCard });
         // バウンスアニメーション
         List<CardObject> bounceCards = new List<CardObject> { targetCard.GetObject() };
         UIManager.instance.SetBounceSequence(bounceCards, isOwn);
@@ -35,6 +36,7 @@ public class BounceEffect : BaseEffect
             BattleManager.instance.field.RemoveCard(targetCards[i]);
             // 手札に戻す
             targetHand.AddCard(targetCards[i]);
+            UIManager.instance.AddHandCard(playerIndex, new List<CardData> { targetCards[i] });
             bounceCards.Add(targetCards[i].GetObject());
         }
         // バウンスアニメーション
