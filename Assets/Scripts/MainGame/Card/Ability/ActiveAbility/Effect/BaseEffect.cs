@@ -19,6 +19,6 @@ public abstract class BaseEffect
     public virtual void ExecuteEffect(BaseComponent targetComponent) { }
     public virtual void ExecuteEffect(List<BaseComponent> targetComponents) { }
     public virtual List<CardData> ExecuteEffect(Deck targetDeck, Func<CardData, bool> condition = null) { return null; }
-    public virtual void ExecuteEffect(Hand targetHand) { }
+    public virtual List<CardData> ExecuteEffect(Hand targetHand) {  return null; }
     public virtual void ExecuteEffect(Leader targetLeader) { }
 }

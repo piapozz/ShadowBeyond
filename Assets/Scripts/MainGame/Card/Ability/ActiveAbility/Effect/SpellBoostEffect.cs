@@ -9,16 +9,17 @@ public class SpellBoostEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(Hand targetHand)
+    public override List<CardData> ExecuteEffect(Hand targetHand)
     {
         // 手札のスペルブーストするカードを取得
         List<CardData> boostCards = targetHand.GetCards((card) => card.HaveKeyword(GameEnum.KeywordAbility.SpellBoost));
         for (int i = 0, max = boostCards.Count; i < max; i++)
         {
             KeywordAbilityInstance keyword = boostCards[i].GetKeywordAbility(GameEnum.KeywordAbility.SpellBoost);
-            if (keyword == null) return;
+            if (keyword == null) return null;
             keyword.AddParam(param[0]);
         }
+        return null;
     }
 
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)

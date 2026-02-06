@@ -134,7 +134,23 @@ public class UIManager : SystemObject
             CardObject card = target as CardObject;
             // 相手の手札はクリックできない
             if (!card.isLocal && card.currentState == CardState.HAND) return;
-            cardDetailUI.EnableUI(true, card.cardData.name, card.cardData.text);
+
+            CardData cardData = card.cardData;
+            // アクトを持っていて、場にあるならボタンを登録
+            Action actAction = null;
+            if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) && 
+                card.currentState == CardState.FIELD)
+            {
+                cardData.ability.Engage(card.isLocal);
+            }
+            // 融合を持っていて、手札にあるなら、ボタンを登録
+            Action fusionAction = null;
+            if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) &&
+                card.currentState == CardState.HAND)
+            {
+
+            }
+            cardDetailUI.EnableUI(true, cardData.name, cardData.text, actAction, fusionAction);
             return;
         }
         cardDetailUI.EnableUI(false);
@@ -214,7 +230,7 @@ public class UIManager : SystemObject
         for (int i = 0, max = poolCardObject.Count; i < max; i++)
         {
             cardObject = poolCardObject[i];
-            if (cardObject.gameObject.activeSelf) continue;
+            if (cardObject.currentState != CardState.UNUSE) continue;
             return cardObject;
         }
         return Instantiate(cardObject);
@@ -368,7 +384,6 @@ public class UIManager : SystemObject
             CardObject cardObject = GetUnuseCardObject();
             // カードデータセット
             cardObject.SetCardData(drawCard[i]);
-            cardObject.SetCardState(CardObject.CardState.HAND);
             drawCardObjects.Add(cardObject);
         }
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
@@ -430,7 +445,6 @@ public class UIManager : SystemObject
             drawCardObjects.Add(cardObject);
         }
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
-        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
         handUI.AddHandCard(isMine, drawCardObjects);
     }
 
@@ -478,14 +492,7 @@ public class UIManager : SystemObject
 
     public void RemoveFieldCard(CardObject card)
     {
-        if (card.isLocal)
-        {
-            fieldUI.RemoveOwnFieldCard(card);
-        }
-        else
-        {
-            fieldUI.RemoveOpponentFieldCard(card);
-        }
+        fieldUI.RemoveFieldCard(card, card.isLocal);
     }
 
     public void SetLeader(Leader setLeader, int index)

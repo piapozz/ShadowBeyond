@@ -9,12 +9,22 @@ public class AddCardHandEffect : BaseEffect
 
     }
 
-    public override void ExecuteEffect(Hand targetHand)
+    public override List<CardData> ExecuteEffect(Hand targetHand)
     {
-        for (int i = 0, max = param[1]; i < max; i++)
+        List<CardData> addCardList = new List<CardData>();
+        List<CardObject> addCardObjectList = new List<CardObject>();
+
+        for (int i = 0; i < param[1]; ++i)
         {
-            CardData addCard = CardMasterUtility.GetCardData(param[0]);
-            targetHand.AddCard(addCard);
+            // ƒJ[ƒh‚ð¶¬
+            CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
+            enterCard.SetCardState(CardObject.CardState.HAND);
+            addCardObjectList.Add(enterCard);
+            addCardList.Add(enterCard.cardData);
         }
+        targetHand.AddCards(addCardList);
+        UIManager.instance.AddHandCard(targetHand.playerID, addCardList);
+
+        return addCardList;
     }
 }
