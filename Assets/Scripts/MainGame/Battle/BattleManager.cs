@@ -417,12 +417,6 @@ public class BattleManager : SystemObject
         return currentPlayerIndex == (int)GameEnum.PlayerType.OWN;
     }
 
-    public void LeaderDefeated(int playerID)
-    {
-        Debug.Log($"[Battle] 🏳️ プレイヤー{playerID}のリーダーが敗北しました");
-        currentState = BattleState.END_BATTLE;
-    }
-
     public async UniTask WaitUntil(Func<bool> condition)
     {
         while (!condition())
@@ -627,6 +621,17 @@ public class BattleManager : SystemObject
         IsGame = false;
         AudioManager.instance.PlayBGM(AudioManager.BGMType.OUTGAME);
         SceneManager.LoadScene("Title");
+    }
+    public async Task NotifyDeckOutLose(int playerID)
+    {
+        await UIManager.instance.Message("ライブラリアウト", 3);
+        await LeaderDefeated(playerID);
+    }
+
+    public async UniTask LeaderDefeated(int playerID)
+    {
+        await UIManager.instance.Message($"[Battle] 🏳️ プレイヤー{playerID}のリーダーが敗北しました", 3);
+        currentState = BattleState.END_BATTLE;
     }
 
     // 手札を表示

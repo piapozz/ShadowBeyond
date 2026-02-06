@@ -79,6 +79,17 @@ public class Deck
         return deckCardList;
     }
 
+    private bool CheckDeckOut()
+    {
+        if (deckCardList.Count == 0)
+        {
+            BattleManager.instance.NotifyDeckOutLose(playerID);
+            return true;
+        }
+        return false;
+    }
+
+
     /// <summary>
     /// デッキをシャッフルする
     /// </summary>
@@ -105,14 +116,17 @@ public class Deck
 
         for (int i = 0; i < drawCount; i++)
         {
-            if (deckCardList.Count == 0) break;
+            if (CheckDeckOut()) break;
+
             CardData card = deckCardList[0];
             deckCardList.RemoveAt(0);
             drawCards.Add(card);
             hand.AddCard(card);
         }
 
-        UIManager.instance.DrawCards(playerID, drawCards);
+        if (drawCards.Count > 0)
+            UIManager.instance.DrawCards(playerID, drawCards);
+
         return drawCards;
     }
 
@@ -124,21 +138,21 @@ public class Deck
     public List<CardData> PeekDeck(int count)
     {
         List<CardData> peekedCards = new List<CardData>();
+
         for (int i = 0; i < count; i++)
         {
-            if (deckCardList.Count == 0) break;
+            if (CheckDeckOut()) break;
+
             CardData card = deckCardList[0];
             deckCardList.RemoveAt(0);
             peekedCards.Add(card);
 
             CardObject cardObject = UIManager.instance.GetUnuseCardObject();
-            // カードデータセット
-            //cardObject.SetCardData(card);
-            //cardObject.SetCardState(CardObject.CardState.UNUSE);
         }
 
         return peekedCards;
     }
+
 
     /// <summary>
     /// 指定カードを手札に加える
@@ -172,19 +186,29 @@ public class Deck
     public List<CardData> DrawDeck(List<CardData> drawCards, int drawCount = -1)
     {
         List<CardData> cardList = new List<CardData>();
+
         if (drawCount == -1)
             drawCount = drawCards.Count;
+
         for (int i = 0; i < drawCount; i++)
         {
-            if (deckCardList.Count == 0) break;
-            deckCardList.Remove(drawCards[i]);
-            cardList.Add(drawCards[i]);
-            hand.AddCard(drawCards[i]);
+            if (CheckDeckOut()) break;
+
+            CardData card = drawCards[i];
+            if (!deckCardList.Contains(card))
+                continue;
+
+            deckCardList.Remove(card);
+            cardList.Add(card);
+            hand.AddCard(card);
         }
 
-        UIManager.instance.DrawCards(playerID, cardList);
-        return drawCards;
+        if (cardList.Count > 0)
+            UIManager.instance.DrawCards(playerID, cardList);
+
+        return cardList;
     }
+
 
     /// <summary>
     /// 指定カードを引く
@@ -192,8 +216,13 @@ public class Deck
     /// <param name="condition"></param>
     public List<CardData> DrawDeck(Func<CardData, bool> condition, int drawCount = -1)
     {
-        return DrawDeck(GetCards(condition), drawCount);
+        var targets = GetCards(condition);
+        if (targets.Count == 0 && CheckDeckOut())
+            return new List<CardData>();
+
+        return DrawDeck(targets, drawCount);
     }
+
 
     /// <summary>
     /// 条件に合うカードをすべて取得
