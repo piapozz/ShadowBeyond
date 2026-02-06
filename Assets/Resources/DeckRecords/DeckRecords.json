@@ -3,22 +3,6 @@
         {
             "cards": [
                 {
-                    "cardId": 104,
-                    "count": 3
-                },
-                {
-                    "cardId": 200,
-                    "count": 3
-                },
-                {
-                    "cardId": 301,
-                    "count": 3
-                },
-                {
-                    "cardId": 303,
-                    "count": 3
-                },
-                {
                     "cardId": 0,
                     "count": 3
                 },
@@ -31,11 +15,11 @@
                     "count": 3
                 },
                 {
-                    "cardId": 100,
+                    "cardId": 101,
                     "count": 3
                 },
                 {
-                    "cardId": 101,
+                    "cardId": 100,
                     "count": 3
                 },
                 {
@@ -53,6 +37,22 @@
                 {
                     "cardId": 302,
                     "count": 1
+                },
+                {
+                    "cardId": 700,
+                    "count": 3
+                },
+                {
+                    "cardId": 704,
+                    "count": 3
+                },
+                {
+                    "cardId": 706,
+                    "count": 3
+                },
+                {
+                    "cardId": 701,
+                    "count": 3
                 },
                 {
                     "cardId": 306,

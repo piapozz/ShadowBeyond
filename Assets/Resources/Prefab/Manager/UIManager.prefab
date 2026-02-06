@@ -64,6 +64,7 @@ MonoBehaviour:
   cardDetailUI: {fileID: 5592048841143681345}
   readyUI: {fileID: 7888317361824992914}
   redrawUI: {fileID: 7752065460387767591}
+  messageUI: {fileID: 3957156660171472343, guid: 97268baa3466a5043b7c7a490c86a050, type: 3}
 --- !u!1 &4786471829861349753
 GameObject:
   m_ObjectHideFlags: 0

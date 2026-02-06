@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using static CardObject;
 using static CommonModule;
@@ -42,6 +43,7 @@ public class UIManager : SystemObject
     [SerializeField] private CardDetailUI cardDetailUI;
     [SerializeField] private ReadyUI readyUI;
     [SerializeField] private RedrawUI redrawUI;
+    [SerializeField] private MessageUI messageUI;
 
     public enum UIState
     {
@@ -88,6 +90,7 @@ public class UIManager : SystemObject
         ownDeckObject = Instantiate(ownDeckObject);
         opponentDeckObject = Instantiate(opponentDeckObject);
         leaderUI = Instantiate(leaderUI);
+        messageUI = Instantiate(messageUI);
 
         // カードオブジェクトをプール
         poolCardObject = new List<CardObject>(POOL_CARD_NUM);
@@ -106,6 +109,11 @@ public class UIManager : SystemObject
         UISequence();
 
         CardClick();
+    }
+
+    public async UniTask Message(string message, float sec)
+    {
+        await messageUI.MessageText(message, sec);
     }
 
     private void UISequence()
