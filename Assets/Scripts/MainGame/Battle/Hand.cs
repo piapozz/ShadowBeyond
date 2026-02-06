@@ -12,7 +12,7 @@ public class Hand
 
     public const int MAX_HAND = 9;
 
-    private int playerID = 0;
+    public int playerID { get; private set; } = -1;
 
     private Field field;
     private Deck deck;
@@ -36,8 +36,20 @@ public class Hand
     public void AddCard(CardData card)
     {
         if (card == null) return;
-        if (handCardList.Count >= MAX_HAND) return;
+        // 今は制限なし
+        //if (handCardList.Count >= MAX_HAND) return;
         handCardList.Add(card);
+        // 手札のプレイ可否更新
+        UpdatePlayableCards();
+    }
+
+    public void AddCards(List<CardData> cards)
+    {
+        for (int i = 0, max = cards.Count; i < max; i++)
+        {
+            if (cards[i] == null) return;
+            handCardList.Add(cards[i]);
+        }
         // 手札のプレイ可否更新
         UpdatePlayableCards();
     }
@@ -65,15 +77,16 @@ public class Hand
     }
 
     /// <summary>
-    /// 指定カードを場に出す
+    /// 指定カードを出す
     /// </summary>
     /// <param name="card"></param>
-    public void PlayCardToField(CardData card)
+    public void PlayCard(CardData card, bool toField)
     {
         // プレイ可否更新
         card.SetCanPlay(false);
         handCardList.Remove(card);
-        field.PlayCard(card, playerID);
+        if (toField)
+            field.PlayCard(card, playerID);
     }
 
     /// <summary>

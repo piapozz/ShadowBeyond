@@ -6,6 +6,7 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.XR;
 
 // ターン進行
 // バトル全体の管理
@@ -24,6 +25,8 @@ public class BattleManager : SystemObject
     private Vector2 handScrollPosOpp = Vector2.zero;
     private Vector2 deckScrollPosOwn = Vector2.zero;
     private Vector2 deckScrollPosOpp = Vector2.zero;
+    private Vector2 fieldScrollPosOwn = Vector2.zero;
+    private Vector2 fieldScrollPosOpp = Vector2.zero;
 
     public System.Random rand { get; private set; } // シード保持用
 
@@ -659,7 +662,7 @@ public class BattleManager : SystemObject
 
             scrollPos = GUILayout.BeginScrollView(
                 scrollPos,
-                GUILayout.Height(200)
+                GUILayout.Height(100)
             );
 
             var cards = p.hand.GetCards((card) => { return card != null; });
@@ -687,7 +690,7 @@ public class BattleManager : SystemObject
 
             deckScrollPos = GUILayout.BeginScrollView(
                 deckScrollPos,
-                GUILayout.Height(200)
+                GUILayout.Height(100)
             );
 
             var deckCards = p.deck.GetCards((card) => { return card != null; });
@@ -704,8 +707,45 @@ public class BattleManager : SystemObject
 
                 GUILayout.EndHorizontal();
             }
-
             GUILayout.EndScrollView();
+            GUILayout.Space(10);
+
+            // ===== 場の中身 =====
+            GUILayout.Label("Field Cards:");
+            // ===== スクロールビュー開始 =====
+            Vector2 fieldscrollPos = (i == (int)GameEnum.PlayerType.OWN)
+            ? fieldScrollPosOwn
+            : fieldScrollPosOpp;
+
+            fieldscrollPos = GUILayout.BeginScrollView(
+                fieldscrollPos,
+                GUILayout.Height(100)
+            );
+
+            List<CardData> fieldCards;
+            if (i == 0)
+            {
+                fieldCards = field._ownFieldCardList;
+            }
+            else
+            {
+                fieldCards = field._opponentFieldCardList;
+            }
+            for (int j = 0; j < fieldCards.Count; j++)
+            {
+                var card = fieldCards[j];
+
+                GUILayout.BeginHorizontal(GUI.skin.box);
+
+                GUILayout.Label(
+                    $"[{j}] ID:{card.id}  {card.name}",
+                    GUILayout.Width(250)
+                );
+
+                GUILayout.EndHorizontal();
+            }
+            GUILayout.EndScrollView();
+            GUILayout.Space(10);
 
             // スクロール位置保存
             if (i == (int)GameEnum.PlayerType.OWN)
@@ -718,7 +758,10 @@ public class BattleManager : SystemObject
             else
                 deckScrollPosOpp = deckScrollPos;
 
-            GUILayout.Space(10);
+            if (i == (int)GameEnum.PlayerType.OWN)
+                fieldScrollPosOwn = fieldscrollPos;
+            else
+                fieldScrollPosOpp = fieldscrollPos;
         }
 
         GUI.enabled = IsOwnTurn() && currentState == BattleState.MAIN_TURN;

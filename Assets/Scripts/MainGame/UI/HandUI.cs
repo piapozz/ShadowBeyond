@@ -28,7 +28,6 @@ public class HandUI : MonoBehaviour
         for (int i = 0; i < drawCardNum; i++)
         {
             CardObject card = drawCards[i];
-            card.SetCardState(CardObject.CardState.HAND);
             card.SetIsLocal(isMine);
             if (isMine)
             {
@@ -51,7 +50,6 @@ public class HandUI : MonoBehaviour
     {
         List<Sequence> drawSequence = new List<Sequence>();
         // カードの諸設定をし、ドローするアニメーションを登録
-        drawCard.SetCardState(CardObject.CardState.HAND);
         drawCard.SetIsLocal(isMine);
         if (isMine)
         {

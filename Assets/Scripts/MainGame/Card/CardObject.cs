@@ -412,7 +412,8 @@ public class CardObject : BaseFieldObject
             .JoinCallback(() => transform.rotation = deckRoot.rotation)
             .JoinCallback(() => gameObject.SetActive(true))
             .Join(transform.DOMove(drawRoot.position, sec))
-            .Join(transform.DORotate(drawRoot.localEulerAngles, sec));
+            .Join(transform.DORotate(drawRoot.localEulerAngles, sec))
+            .JoinCallback(() => SetCardState(CardState.HAND));
         // 手札ルートまでの挙動
         drawSeq.Append(transform.DORotate(handRoot.localEulerAngles, sec))
             .Join(transform.DOMove(cardRoot.position, sec))
@@ -439,7 +440,8 @@ public class CardObject : BaseFieldObject
             .JoinCallback(() => gameObject.SetActive(true))
             .Join(transform.DORotate(handRoot.localEulerAngles, 0.5f))
             .Join(transform.DOMove(cardRoot.position, 0.5f))
-            .JoinCallback(() => transform.SetParent(handRoot));
+            .JoinCallback(() => transform.SetParent(handRoot))
+            .JoinCallback(() => SetCardState(CardState.HAND));
         return drawSeq;
     }
 
@@ -515,7 +517,7 @@ public class CardObject : BaseFieldObject
             });
         PlayCard(isOwn);
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCardToField(cardData);
+        currentHand.PlayCard(cardData, true);
         return toFieldSequence;
     }
 
@@ -534,7 +536,7 @@ public class CardObject : BaseFieldObject
         {
             // 手札からプレイ
             Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-            currentHand.PlayCardToField(cardData);
+            currentHand.PlayCard(cardData, false);
         }
     }
 
@@ -551,6 +553,28 @@ public class CardObject : BaseFieldObject
         leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardCost);
         // プレイ時の能力
         cardData.OnPlay(isOwn, isEnhance);
+    }
+
+    public Sequence GetEnterSequence(Transform enterTransform, Transform parent)
+    {
+        // 表示するべきエフェクトを取得
+        List<GameObject> activeEffect = GetCardEffectList();
+        DisableAllCardEffect();
+        Sequence enterSequence = DOTween.Sequence();
+        enterSequence.Append(transform.DOMove(enterTransform.position, 0.3f))
+        .Join(transform.DOScale(enterTransform.localScale, 0))
+        .JoinCallback(() => transform.SetParent(parent))
+        .JoinCallback(() => SetCardState(CardState.FIELD))
+        .AppendCallback(() => PlayEffect(EffectManager.EffectType.OnField, 1.0f))
+        .AppendCallback(() =>
+        {
+            // エフェクトを有効化
+            foreach (GameObject effect in activeEffect)
+            {
+                effect.SetActive(true);
+            }
+        });
+        return enterSequence;
     }
 
     public Sequence GetPlaySequence(Transform playCardRoot)
@@ -577,6 +601,21 @@ public class CardObject : BaseFieldObject
             default: break;
         }
         return playSequence;
+    }
+
+    public Sequence GetRemoveCardSequence()
+    {
+        Sequence sequence = DOTween.Sequence();
+        sequence.AppendCallback(() =>
+        {
+            // 破壊エフェクト
+            PlayEffect(EffectManager.EffectType.OnDestroy, 1.0f);
+            // 音再生
+            AudioManager.instance.PlaySE(AudioManager.SEType.CARD_DESTROY);
+            // オブジェクト非表示
+            SetCardState(CardState.UNUSE);
+        });
+        return sequence;
     }
 
     public void BounceHand(Hand targetHand)
@@ -615,14 +654,6 @@ public class CardObject : BaseFieldObject
     public void CheckDestroyCard()
     {
         if (!cardData.isDestroyed) return;
-
-        // 破壊エフェクト
-        PlayEffect(EffectManager.EffectType.OnDestroy, 1.0f);
-        // 音再生
-        AudioManager.instance.PlaySE(AudioManager.SEType.CARD_DESTROY);
-
-        // オブジェクト非表示
-        SetCardState(CardState.UNUSE);
 
         // フィールドから除外
         UIManager.instance.RemoveFieldCard(this);

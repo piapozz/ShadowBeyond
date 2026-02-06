@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Playables;
+using static CardObject;
 
 public class FieldUI : MonoBehaviour
 {
@@ -17,16 +18,12 @@ public class FieldUI : MonoBehaviour
     private const float FIELD_SCALE_X = 10.0f;
     private const float FIELD_CARD_SPACE = 2.0f;
 
-    public void RemoveOwnFieldCard(CardObject removeCard)
+    public void RemoveFieldCard(CardObject removeCard, bool isOwn)
     {
-        ownCards.Remove(removeCard);
-        UIManager.instance.AddSequence(ArrangeFieldCard(true));
-    }
-
-    public void RemoveOpponentFieldCard(CardObject removeCard)
-    {
-        opponentCards.Remove(removeCard);
-        UIManager.instance.AddSequence(ArrangeFieldCard(false));
+        if (isOwn) ownCards.Remove(removeCard);
+        else opponentCards.Remove(removeCard);
+        UIManager.instance.AddSequence(removeCard.GetRemoveCardSequence());
+        UIManager.instance.AddSequence(ArrangeFieldCard(isOwn));
     }
 
     private List<Sequence> ArrangeFieldCard(bool isOwn, int addCardNum = 0)
@@ -98,32 +95,29 @@ public class FieldUI : MonoBehaviour
 
     public void EnterFieldCard(bool isOwn, List<CardObject> enterCards)
     {
-        UIManager.instance.AddSequence(ArrangeFieldCard(isOwn, enterCards.Count));
-        for (int i = 0, max = enterCards.Count; i < max; i++)
+        // 先に場を整列させる
+        int enterCardCount = enterCards.Count;
+        List<Sequence> enterSequence = new List<Sequence>();
+        enterSequence.AddRange(ArrangeFieldCard(isOwn, enterCardCount));
+        for (int i = 0; i < enterCardCount; i++)
         {
+            CardObject card = enterCards[i];
             if (isOwn)
-                ownCards.Add(enterCards[i]);
+                ownCards.Add(card);
             else
-                opponentCards.Add(enterCards[i]);
-            // 出したカードの座標設定
-            enterCards[i].SetCardState(CardObject.CardState.FIELD);
-            enterCards[i].transform.position = fieldCardSlotList[i].position;
-            enterCards[i].SetIsLocal(isOwn);
+                opponentCards.Add(card);
+            // 出したカードの設定
+            card.SetIsLocal(isOwn);
+            enterSequence.Add(card.GetEnterSequence(fieldCardSlotList[i], this.transform));
         }
+        UIManager.instance.AddSequence(enterSequence);
     }
 
     public void BounceCard(bool isOwn, List<CardObject> bounceCards)
     {
         for (int i = 0, max = bounceCards.Count; i < max; i++)
         {
-            if (isOwn)
-            {
-                RemoveOwnFieldCard(bounceCards[i]);
-            }
-            else
-            {
-                RemoveOpponentFieldCard(bounceCards[i]);
-            }
+            RemoveFieldCard(bounceCards[i], isOwn);
         };
     }
 

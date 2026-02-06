@@ -14,7 +14,7 @@ public class CardAbility_100 : BaseCardAbility
     public override void Fanfare(bool isOwn)
     {
         // フェアリーを二枚手札に加える
-        AddCardHandEffect effect = new AddCardHandEffect(new List<int> { FAIRY_ID, FAIRY_ID, 2 });
+        AddCardHandEffect effect = new AddCardHandEffect(new List<int> { FAIRY_ID, 2 });
         var hand = GetPlayer(isOwn).hand;
         effect.ExecuteEffect(hand);
     }
