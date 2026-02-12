@@ -49,7 +49,9 @@ public class CardData : BaseComponent
     // プレイ可能かどうか
     public bool canPlay { get; private set; }
     // アクト可能かどうか
-    public bool canAct { get; private set; }
+    public bool canAct { get; private set; } = true;
+    // 融合可能かどうか
+    public bool canFusion { get; private set; } = true;
     // カードの種類
     public CardType type { get; private set; }
     // 持っているカードタイプ
@@ -84,7 +86,7 @@ public class CardData : BaseComponent
         GetObject = action;
     }
 
-    public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence, bool setToken)
+    public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence, bool setToken, int[] setTrait)
     {
         id = setID;
         leaderClass = setClass;
@@ -95,6 +97,7 @@ public class CardData : BaseComponent
         defaultCost = setCost;
         status = new FollowerStatus(setAttack, setDefence);
         isToken = setToken;
+        SetTrait(setTrait);
 
         Init();
     }
@@ -105,6 +108,15 @@ public class CardData : BaseComponent
         ability = AbilityFactory.GetAbility(id);
         if (ability == null) return;
         ability.Initialize(this);
+    }
+
+    private void SetTrait(int[] setTrait)
+    {
+        for (int i = 0, max = setTrait.Length; i < max; i++)
+        {
+            CardTypeDetail trait = (CardTypeDetail)setTrait[i];
+            AddTypeDetail(trait);
+        }
     }
 
     public void OnPlay(bool isOwn, bool isEnhance)
@@ -119,6 +131,8 @@ public class CardData : BaseComponent
     public void OnStartTurn()
     {
         remainAttackCount = maxAttackCount;
+        canAct = true;
+        canFusion = true;
         SetAttackPermission(AttackPermission.CanAttackLeader);
         GetObject().SetAttackPermissionLook();
     }
@@ -134,6 +148,16 @@ public class CardData : BaseComponent
     {
         remainAttackCount = 0;
         GetObject().SetAttackPermissionLook();
+    }
+
+    public void OnAct()
+    {
+        canAct = false;
+    }
+
+    public void OnFusion()
+    {
+        canFusion = false;
     }
 
     public void SetType(CardType setType)

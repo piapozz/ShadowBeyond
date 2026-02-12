@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class BaseCondition
 {
-    public abstract bool IsAchievement();
+    public abstract bool IsConditionClear();
 }

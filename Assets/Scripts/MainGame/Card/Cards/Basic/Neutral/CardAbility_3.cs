@@ -9,13 +9,16 @@ public class CardAbility_3 : BaseCardAbility
     {
         sourceData = setCard;
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Engage, null, ENGAGE_COST));
+        TargetCondition condition = TargetCondition.Any;
+        condition.type.Add(GameEnum.CardType.FOLLOWER);
+        selectTarget[(int)TargetTiming.Engage] = new Target(Target.TargetSide.Opponent, Target.TargetZone.Field, condition, 1);
     }
 
     public override void Engage(bool isOwn)
     {
         // これを破壊
         DestroyEffect destroyEffect = new DestroyEffect(null);
-        destroyEffect.ExecuteEffect();
+        destroyEffect.ExecuteEffect(sourceData);
         // 相手の場のをフォロワーを1体選ぶ。守護を失う 
         var targetCard = BattleManager.instance.field.GetRandomCard((card) => 
         {

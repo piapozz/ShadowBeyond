@@ -343,6 +343,7 @@ public class BattleManager : SystemObject
     public async UniTask EndTurn()
     {
         if (!UIManager.instance.IsCompleteAllSequence()) return;
+        UIManager.instance.EndTurn();
         // 自分の手札をプレイ不能にする
         bool isOwn = IsOwnTurn();
         field.OnEndTurn(isOwn);
