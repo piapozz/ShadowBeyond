@@ -61,7 +61,8 @@ public class CardMasterUtility
             cardMaster.Cost,
             cardMaster.Attack,
             cardMaster.Defence,
-            cardMaster.Token);
+            cardMaster.Token,
+            cardMaster.Trait);
         // テキストデータ取得
         cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID));
         return cardData;

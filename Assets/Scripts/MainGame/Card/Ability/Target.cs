@@ -54,8 +54,6 @@ public class Target
     public TargetZone targetZone;
     public TargetCondition condition;
     public int count;
-    public bool isRandom;
-    public bool isSelect;
 
     public Target()
     {
@@ -63,18 +61,13 @@ public class Target
         targetZone = TargetZone.Field;
         condition = TargetCondition.Any;
         count = 1;
-        isRandom = false;
-        isSelect = true;
     }
 
-    public Target(TargetSide setSide, TargetZone setZone, TargetCondition setCondition, 
-        bool setRandom, bool setSelect, int setCount = 0)
+    public Target(TargetSide setSide, TargetZone setZone, TargetCondition setCondition, int setCount = 0)
     {
         targetSide = setSide;
         targetZone = setZone;
         condition = setCondition;
-        isRandom = setRandom;
-        isSelect = setSelect;
         count = setCount;
     }
 }

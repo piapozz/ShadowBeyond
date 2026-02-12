@@ -3,11 +3,11 @@ using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using UnityEditor.VersionControl;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using static CardObject;
 using static CommonModule;
+using static UnityEngine.GraphicsBuffer;
 
 // UIを管理するマネージャー
 
@@ -108,7 +108,7 @@ public class UIManager : SystemObject
         // UIシーケンス処理
         UISequence();
 
-        CardClick();
+        CheckClick();
     }
 
     public async UniTask Message(string message, float sec)
@@ -132,36 +132,84 @@ public class UIManager : SystemObject
         }
     }
 
-    private void CardClick()
+    public void SetCardDetailUI(CardObject cardObject)
+    {
+        CardData cardData = cardObject.cardData;
+        // アクトを持っていて、場にあるならボタンを登録
+        Action actAction = null;
+        if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) && 
+            cardObject.currentState == CardState.FIELD)
+        {
+            actAction = () =>
+            {
+                cardData.ability.Engage(cardObject.isLocal);
+                cardDetailUI.EnableUI(false);
+            };
+        }
+        // 融合を持っていて、手札にあるなら、ボタンを登録
+        Action fusionAction = null;
+        if (cardData.HaveKeyword(GameEnum.KeywordAbility.Fuse) &&
+            cardObject.currentState == CardState.HAND)
+        {
+            fusionAction = () =>
+            {
+                cardData.ability.Fuse(cardObject.isLocal);
+                cardDetailUI.EnableUI(false);
+            };
+        }
+        bool isOwnTurn = BattleManager.instance.IsOwnTurn();
+        cardDetailUI.EnableUI(true, cardData, actAction, fusionAction, isOwnTurn);
+    }
+
+    /// <summary>
+    /// カード以外のクリックを検知
+    /// </summary>
+    private void CheckClick()
     {
         if (!Input.GetMouseButtonDown(0)) return;
 
+        // UIがクリックされているならスキップ
+        if (IsClickDetailUI()) return;
+
         BaseFieldObject target = GetFieldObject(Input.mousePosition);
-        if (target != null && target as CardObject)
+        switch (state)
         {
-            CardObject card = target as CardObject;
-            // 相手の手札はクリックできない
-            if (!card.isLocal && card.currentState == CardState.HAND) return;
+            case UIState.DEFAULT:
+                ClickDefaultState(target);
+                break;
+            case UIState.SELECT:
+                ClickSelectState(target);
+                break;
+            default: break;
+        }
+    }
 
-            CardData cardData = card.cardData;
-            // アクトを持っていて、場にあるならボタンを登録
-            Action actAction = null;
-            if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) && 
-                card.currentState == CardState.FIELD)
-            {
-                cardData.ability.Engage(card.isLocal);
-            }
-            // 融合を持っていて、手札にあるなら、ボタンを登録
-            Action fusionAction = null;
-            if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) &&
-                card.currentState == CardState.HAND)
-            {
-
-            }
-            cardDetailUI.EnableUI(true, cardData.name, cardData.text, actAction, fusionAction);
+    private void ClickDefaultState(BaseFieldObject clickObject)
+    {
+        CardObject cardObject = clickObject as CardObject;
+        // カードオブジェクトでないなら詳細画面を閉じる
+        if (clickObject == null || cardObject == null)
+        {
+            cardDetailUI.EnableUI(false);
             return;
         }
+        // 相手の手札は詳細画面を出さない
+        if (clickObject.isLocal || cardObject.currentState == CardState.FIELD) return;
         cardDetailUI.EnableUI(false);
+    }
+
+    private void ClickSelectState(BaseFieldObject clickObject)
+    {
+        // オブジェクト以外がクリックされたらキャンセル処理へ
+        if (clickObject == null)
+        {
+            CompleteSelection(false);
+        }
+        // オブジェクトがクリックされていたら選択処理へ
+        else
+        {
+            clickObject.OnPointerClick();
+        }
     }
 
     public BaseFieldObject GetFieldObject(Vector2 screenPos)
@@ -176,6 +224,30 @@ public class UIManager : SystemObject
         if (hitObject == null) return null;
         BaseFieldObject target = hitObject.GetComponent<BaseFieldObject>();
         return target;
+    }
+
+    private bool IsClickDetailUI()
+    {
+        if (EventSystem.current == null) return false;
+
+        PointerEventData eventData = new PointerEventData(EventSystem.current)
+        {
+            position = Input.mousePosition
+        };
+
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventData, results);
+
+        foreach (var result in results)
+        {
+            // CardDetailUI 自身、または子オブジェクトなら true
+            if (result.gameObject.GetComponentInParent<CardDetailUI>() == cardDetailUI)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private bool IsCompleteCurrentSequence()
@@ -227,6 +299,12 @@ public class UIManager : SystemObject
     {
         // ターン終了ボタンの設定
         turnUI.SetTurnEndButton(isOwnTurn);
+    }
+
+    // ターン終了
+    public void EndTurn()
+    {
+        cardDetailUI.EnableUI(false);
     }
 
     /// <summary>
@@ -410,7 +488,7 @@ public class UIManager : SystemObject
         CardObject cardObject = GetUnuseCardObject();
         // カードデータセット
         cardObject.SetCardData(drawCard);
-        cardObject.SetCardState(CardObject.CardState.HAND);
+        cardObject.SetCardState(CardState.HAND);
         drawCardObject = cardObject;
 
         bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
@@ -621,7 +699,7 @@ public class UIManager : SystemObject
             CardObject cardObject = GetUnuseCardObject();
             // カードデータセット
             cardObject.SetCardData(drawCards[i]);
-            cardObject.SetCardState(CardObject.CardState.REDRAW);
+            cardObject.SetCardState(CardState.REDRAW);
         }
         redrawUI.StartRedraw(drawCards, ownDeckObject.transform);
 
@@ -635,6 +713,112 @@ public class UIManager : SystemObject
         ShowUI();
 
         return;
+    }
+
+    /// <summary>
+    /// カードとリーダーの選択
+    /// </summary>
+    public void SelectTarget(List<BaseComponent> targets)
+    {
+        SetUIState(UIState.SELECT);
+        // 他のUIの選択無効
+        // 手札選択か、盤面選択かで並べ方変更
+        // ターゲットオブジェクトを持ち上げ、選択可能にする
+
+        // オブジェクトを任意数クリックしたら、選択したコンポーネントを呼び出し元に返す
+        
+    }
+
+    public class TargetSelectResult
+    {
+        public bool result;
+        public List<BaseFieldObject> selected;
+    }
+    private UniTaskCompletionSource<TargetSelectResult> _selectTcs;
+
+    private Target _currentTarget;
+    private List<BaseFieldObject> _candidates;
+    private List<BaseFieldObject> _selected = new();
+
+    public UniTask<TargetSelectResult> SelectTargetAsync(
+    Target target,
+    List<BaseFieldObject> candidates)
+    {
+        // 二重選択防止
+        if (_selectTcs != null)
+            throw new InvalidOperationException("Target selection already running");
+
+        _currentTarget = target;
+        _candidates = candidates;
+        _selected.Clear();
+
+        _selectTcs = new UniTaskCompletionSource<TargetSelectResult>();
+
+        // 入力状態を変更
+        SetUIState(UIState.SELECT);
+
+        // 対象を選択可能にする
+        foreach (var card in _candidates)
+        {
+            card.EnableSelectable(true);
+            card.OnClick += OnCardClicked;
+        }
+
+        return _selectTcs.Task;
+    }
+
+    private void OnCardClicked(BaseFieldObject fieldObject)
+    {
+        if (_selectTcs == null) return;
+
+        // 候補にない場合は無視
+        if (!_candidates.Contains(fieldObject)) return;
+
+        // 既に選択されている場合はトグル
+        if (_selected.Contains(fieldObject))
+        {
+            _selected.Remove(fieldObject);
+            fieldObject.SetSelected(false);
+            return;
+        }
+        // 新規選択
+        _selected.Add(fieldObject);
+        fieldObject.SetSelected(true);
+
+        // 必要枚数選ばれたら完了
+        if (_selected.Count >= _currentTarget.count)
+        {
+            CompleteSelection(true);
+        }
+    }
+
+    private void CompleteSelection(bool isComplete)
+    {
+        Cleanup();
+        List<BaseFieldObject> selected = isComplete ? _selected : null;
+        _selectTcs.TrySetResult(new TargetSelectResult
+        {
+            result = isComplete,
+            selected = new List<BaseFieldObject>(selected)
+        });
+
+        _selectTcs = null;
+    }
+
+    private void Cleanup()
+    {
+        foreach (var card in _candidates)
+        {
+            card.EnableSelectable(false);
+            card.SetSelected(false);
+            card.OnClick -= OnCardClicked;
+        }
+
+        _currentTarget = null;
+        _candidates = null;
+        _selected.Clear();
+
+        SetUIState(UIState.DEFAULT);
     }
 
     public void OnGUI()

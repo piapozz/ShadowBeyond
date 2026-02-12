@@ -7,6 +7,18 @@ public abstract class BaseCardAbility
     public CardData sourceData;
     public List<KeywordAbilityInstance> keywordAbilities = new List<KeywordAbilityInstance>();
     public List<ActiveAbility> activeAbilities = new List<ActiveAbility>();
+    public Target[] selectTarget = new Target[(int)TargetTiming.Max];
+
+    public enum TargetTiming
+    {
+        Fanfare = 0,
+        Enhance,
+        Evolve,
+        SuperEvolve,
+        Engage,
+        Fuse,
+        Max
+    }
 
     protected BattleManager.Player GetPlayer(bool isOwn)
     {
@@ -50,7 +62,10 @@ public abstract class BaseCardAbility
     // 引いたとき
     public virtual void Draw(bool isOwn) {  }
     // アクト
-    public virtual void Engage(bool isOwn) { }
+    public virtual void Engage(bool isOwn)
+    {
+        sourceData.OnAct();
+    }
     // スペルブースト
     public virtual void SpellBoost(bool isOwn) { }
 }

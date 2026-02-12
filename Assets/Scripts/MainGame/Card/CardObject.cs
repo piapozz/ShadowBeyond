@@ -66,6 +66,11 @@ public class CardObject : BaseFieldObject
 
     private void OnMouseDown()
     {
+        // 自分のカードもしくは場のカードをクリックした場合はUI表示
+        if (isLocal || currentState == CardState.FIELD)
+        {
+            UIManager.instance.SetCardDetailUI(this);
+        }
         if (!isLocal) return;
         switch (currentState)
         {
@@ -693,6 +698,8 @@ public class CardObject : BaseFieldObject
     /// </summary>
     public void SetAttackPermissionLook()
     {
+        // フォロワー以外は無視
+        if (cardData.type != CardType.FOLLOWER) return;
         // 現状はマテリアルで見た目変更
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         CardData.AttackPermission currentAttackPermission = cardData.GetAttackPermission();

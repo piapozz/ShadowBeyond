@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static CardObject;
 
 public class GameEnum
 {
@@ -54,6 +55,7 @@ public class GameEnum
     public enum CardTypeDetail
     {
         INVALID = -1,
+        NONE,
         OFFICER,    // 兵士
         LUMINOUS,   // ルミナス
         LEVIN,      // レヴィオン
@@ -79,6 +81,42 @@ public class GameEnum
         CONDEMNED,  // 八獄
         ALL,        // すべて
         ACADEMIC,   // 学園
+    }
+
+    static readonly Dictionary<CardTypeDetail, string> map =
+    new Dictionary<CardTypeDetail, string>
+    {
+        { CardTypeDetail.NONE, "" },
+        { CardTypeDetail.OFFICER, "兵士" },
+        { CardTypeDetail.LUMINOUS, "ルミナス" },
+        { CardTypeDetail.LEVIN, "レヴィオン" },
+        { CardTypeDetail.PIXIE, "妖精" },
+        { CardTypeDetail.DEPARTED, "死者" },
+        { CardTypeDetail.EARTH_SIGIL, "土の印" },
+        { CardTypeDetail.MYSTERIA, "マナリア" },
+        { CardTypeDetail.GOLEM, "ゴーレム" },
+        { CardTypeDetail.SHIKIGAMI, "式神" },
+        { CardTypeDetail.ARTIFACT, "アーティファクト" },
+        { CardTypeDetail.PUPPETRY, "人形" },
+        { CardTypeDetail.MARINE, "海洋" },
+        { CardTypeDetail.LOOT, "財宝" },
+        { CardTypeDetail.ENCROACHER, "アサイラント" },
+        { CardTypeDetail.ANATHEMA, "アナテマ" },
+        { CardTypeDetail.COMMANDER, "指揮官" },
+        { CardTypeDetail.MACHINA, "機械" },
+        { CardTypeDetail.NATURA, "自然" },
+        { CardTypeDetail.FESTIVE, "宴楽" },
+        { CardTypeDetail.HEROIC, "ヒーロー" },
+        { CardTypeDetail.CHESS, "チェス" },
+        { CardTypeDetail.ARMED, "武装" },
+        { CardTypeDetail.CONDEMNED, "八獄" },
+        { CardTypeDetail.ALL, "すべて" },
+        { CardTypeDetail.ACADEMIC, "学園" },
+    };
+
+    public static string ToText(CardTypeDetail state)
+    {
+        return map.TryGetValue(state, out var text) ? text : "";
     }
 
     public enum BGM
