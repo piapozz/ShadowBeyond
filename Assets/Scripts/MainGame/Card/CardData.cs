@@ -79,11 +79,10 @@ public class CardData : BaseComponent
     // 進化状態
     public EvolveState evolveState { get; private set; } = EvolveState.Unevolved;
     public bool isAnyEvolved => evolveState == EvolveState.Evolved || evolveState == EvolveState.SuperEvolved;
-    public Func<CardObject> GetObject;
 
-    public void SetGetObjectAction(Func<CardObject> action)
+    public CardObject GetCardObject()
     {
-        GetObject = action;
+        return GetObject() as CardObject;
     }
 
     public CardData(int setID, LeaderClass setClass, CardRarity setRarity, CardType setType, string setName, int setCost, int setAttack, int setDefence, bool setToken, int[] setTrait)
@@ -124,7 +123,7 @@ public class CardData : BaseComponent
         if (ability == null) return;
         if (isEnhance) ability.Enhance(isOwn);
         else ability.Fanfare(isOwn);
-        GetObject().SetAttackPermissionLook();
+        GetCardObject().SetAttackPermissionLook();
     }
 
     // ターン開始時処理
@@ -134,7 +133,7 @@ public class CardData : BaseComponent
         canAct = true;
         canFusion = true;
         SetAttackPermission(AttackPermission.CanAttackLeader);
-        GetObject().SetAttackPermissionLook();
+        GetCardObject().SetAttackPermissionLook();
     }
 
     // 攻撃時処理
@@ -147,7 +146,7 @@ public class CardData : BaseComponent
     public void OnEndTurn()
     {
         remainAttackCount = 0;
-        GetObject().SetAttackPermissionLook();
+        GetCardObject().SetAttackPermissionLook();
     }
 
     public void OnAct()
@@ -271,8 +270,8 @@ public class CardData : BaseComponent
     {
         this.damage += damage;
 
-        GetObject().UpdateText();
-        GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
+        GetCardObject().UpdateText();
+        GetCardObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
         AudioManager.instance.PlaySE(AudioManager.SEType.DAMAGE);
         CheckDestroyed();
     }
@@ -313,8 +312,8 @@ public class CardData : BaseComponent
     {
         damage -= heal;
         if (damage < 0) damage = 0;
-        GetObject().UpdateText();
-        GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
+        GetCardObject().UpdateText();
+        GetCardObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
         AudioManager.instance.PlaySE(AudioManager.SEType.HEAL);
     }
 
@@ -324,14 +323,14 @@ public class CardData : BaseComponent
         status.m_attack = attack;
         status.m_defance = defance;
         addStatus.Add(status);
-        GetObject().UpdateText();
-        GetObject().PlayEffect(EffectManager.EffectType.StatusUp, 1.0f);
+        GetCardObject().UpdateText();
+        GetCardObject().PlayEffect(EffectManager.EffectType.StatusUp, 1.0f);
     }
 
     public void ClearAddStatus()
     {
         addStatus.Clear();
-        GetObject().UpdateText();
+        GetCardObject().UpdateText();
     }
 
     public void SetCanPlay(bool canPlay)

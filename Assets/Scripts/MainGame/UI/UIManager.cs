@@ -142,8 +142,8 @@ public class UIManager : SystemObject
         {
             actAction = () =>
             {
-                cardData.ability.Engage(cardObject.isLocal);
                 cardDetailUI.EnableUI(false);
+                CardActionExecutor.TryAct(cardData, cardObject.isLocal);
             };
         }
         // 融合を持っていて、手札にあるなら、ボタンを登録
@@ -203,11 +203,14 @@ public class UIManager : SystemObject
         // オブジェクト以外がクリックされたらキャンセル処理へ
         if (clickObject == null)
         {
+            Debug.Log("Select cancel");
             CompleteSelection(false);
         }
         // オブジェクトがクリックされていたら選択処理へ
         else
         {
+            if (!clickObject.isSelectable) return;
+            Debug.Log("Select success");
             clickObject.OnPointerClick();
         }
     }
@@ -372,8 +375,6 @@ public class UIManager : SystemObject
         // カードをプレイ
         if (isField)
         {
-            // 選択があるなら選択フェーズ
-
             // プレイ
             PlayOwnCard(setCard);
         }
@@ -507,7 +508,7 @@ public class UIManager : SystemObject
         List<CardObject> drawCardObjects = new List<CardObject>(returnCardNum);
         for (int i = 0; i < returnCardNum; i++)
         {
-            CardObject cardObject = returnCard[i].GetObject();
+            CardObject cardObject = returnCard[i].GetCardObject();
             // カードデータセット
             cardObject.SetCardData(returnCard[i]);
             drawCardObjects.Add(cardObject);
@@ -524,7 +525,7 @@ public class UIManager : SystemObject
         List<CardObject> drawCardObjects = new List<CardObject>(addCardNum);
         for (int i = 0; i < addCardNum; i++)
         {
-            CardObject cardObject = addCard[i].GetObject();
+            CardObject cardObject = addCard[i].GetCardObject();
             // カードデータセット
             cardObject.SetCardData(addCard[i]);
             cardObject.SetCardState(CardObject.CardState.HAND);
@@ -715,20 +716,6 @@ public class UIManager : SystemObject
         return;
     }
 
-    /// <summary>
-    /// カードとリーダーの選択
-    /// </summary>
-    public void SelectTarget(List<BaseComponent> targets)
-    {
-        SetUIState(UIState.SELECT);
-        // 他のUIの選択無効
-        // 手札選択か、盤面選択かで並べ方変更
-        // ターゲットオブジェクトを持ち上げ、選択可能にする
-
-        // オブジェクトを任意数クリックしたら、選択したコンポーネントを呼び出し元に返す
-        
-    }
-
     public class TargetSelectResult
     {
         public bool result;
@@ -736,19 +723,20 @@ public class UIManager : SystemObject
     }
     private UniTaskCompletionSource<TargetSelectResult> _selectTcs;
 
-    private Target _currentTarget;
+    private int _selectCount;
     private List<BaseFieldObject> _candidates;
     private List<BaseFieldObject> _selected = new();
 
     public UniTask<TargetSelectResult> SelectTargetAsync(
-    Target target,
-    List<BaseFieldObject> candidates)
+    List<BaseFieldObject> candidates, int selectCount)
     {
         // 二重選択防止
         if (_selectTcs != null)
-            throw new InvalidOperationException("Target selection already running");
+        {
+            Debug.Log("二重選択");
+        }
 
-        _currentTarget = target;
+        _selectCount = selectCount;
         _candidates = candidates;
         _selected.Clear();
 
@@ -786,7 +774,7 @@ public class UIManager : SystemObject
         fieldObject.SetSelected(true);
 
         // 必要枚数選ばれたら完了
-        if (_selected.Count >= _currentTarget.count)
+        if (_selected.Count >= _selectCount)
         {
             CompleteSelection(true);
         }
@@ -799,7 +787,7 @@ public class UIManager : SystemObject
         _selectTcs.TrySetResult(new TargetSelectResult
         {
             result = isComplete,
-            selected = new List<BaseFieldObject>(selected)
+            selected = selected
         });
 
         _selectTcs = null;
@@ -814,7 +802,7 @@ public class UIManager : SystemObject
             card.OnClick -= OnCardClicked;
         }
 
-        _currentTarget = null;
+        _selectCount = 0;
         _candidates = null;
         _selected.Clear();
 

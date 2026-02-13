@@ -13,7 +13,7 @@ public class CardAbility_103 : BaseCardAbility
 
         // 自分の妖精・フォロワーが場に出たとき、相手の場のフォロワーからランダム1枚に1ダメージ。
         activeAbilities.Add(new ActiveAbility(AbilityManager.TriggerTiming.OwnEnterField,
-            new Target(Target.TargetSide.Opponent, Target.TargetZone.Field, new TargetCondition(), true, false, 1),
+            new Target(Target.TargetSide.Opponent, Target.TargetZone.Field, new TargetCondition(), 1),
             new DamageEffect(new List<int> { 1 }),
             null,
             ActiveAbility.Zone.Field));

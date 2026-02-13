@@ -13,7 +13,7 @@ public class DestroyEffect : BaseEffect
     {
         if (targetCard.HaveKeyword(GameEnum.KeywordAbility.NoDestroy)) return;
         targetCard.Destroy();
-        targetCard.GetObject().CheckDestroyCard();
+        targetCard.GetCardObject().CheckDestroyCard();
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)

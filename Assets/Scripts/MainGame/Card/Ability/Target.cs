@@ -23,9 +23,9 @@ public struct TargetCondition
     public static TargetCondition Any => new TargetCondition
     {
         ID = null,
-        type = null,
-        leaderClass = null,
-        cardTypeDetail = null,
+        type = new List<CardType>(),
+        leaderClass = new List<LeaderClass>(),
+        cardTypeDetail = new List<CardTypeDetail>(),
         evolveState = EvolveState.None,
         attack = IntRange.Any,
         defence = IntRange.Any,

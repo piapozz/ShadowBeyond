@@ -20,7 +20,7 @@ public class ReturnDeckEffect : BaseEffect
         Hand targetHand = BattleManager.instance.GetPlayer(playerIndex).hand;
         targetHand.RemoveCard(targetCard);
         // ‹““®
-        List<CardObject> cardObjects = new List<CardObject>() { targetCard.GetObject() };
+        List<CardObject> cardObjects = new List<CardObject>() { targetCard.GetCardObject() };
         UIManager.instance.SetReturnDeckSequence(cardObjects, isOwn);
     }
 
@@ -37,7 +37,7 @@ public class ReturnDeckEffect : BaseEffect
             // èD‚©‚çœŠO
             Hand targetHand = BattleManager.instance.GetPlayer(playerIndex).hand;
             targetHand.RemoveCard(targetCards[i]);
-            cardObjects.Add(targetCards[i].GetObject());
+            cardObjects.Add(targetCards[i].GetCardObject());
         }
         // ‹““®
         UIManager.instance.SetReturnDeckSequence(cardObjects, isOwn);

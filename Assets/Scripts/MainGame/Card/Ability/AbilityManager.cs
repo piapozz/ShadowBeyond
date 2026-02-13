@@ -81,7 +81,7 @@ public class AbilityManager
         {
             ActiveAbility ability = _timingQueue.Dequeue();
             bool isOwn = ability.sourceCard.GetObject().isLocal;
-            List<BaseComponent> components = BattleManager.instance.GetTargetCard(ability.target, isOwn);
+            List<BaseComponent> components = BattleManager.instance.GetTargetComponent(ability.target, isOwn);
             ability.effect.ExecuteEffect(components);
         }
     }
