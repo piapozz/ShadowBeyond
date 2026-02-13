@@ -44,7 +44,7 @@ public class RedrawUI : MonoBehaviour
         for (int i = 0; i < cards.Count; i++)
         {
             var card = cards[i];
-            var cardObj = card.GetObject();
+            var cardObj = card.GetCardObject();
             var root = keepRoot[i];
 
             // カード初期設定
@@ -107,7 +107,7 @@ public class RedrawUI : MonoBehaviour
             if (card == null) continue;
             var index = keepCard.IndexOf(null);
             keepCard[index] = card;
-            card.GetObject().SetCardState(CardObject.CardState.REDRAW);
+            card.GetCardObject().SetCardState(CardObject.CardState.REDRAW);
         }
 
         // キープカードを手札に追加
@@ -129,7 +129,7 @@ public class RedrawUI : MonoBehaviour
         foreach (var card in redrawCard)
         {
             if (card == null) continue;
-            var cardObj = card.GetObject();
+            var cardObj = card.GetCardObject();
             var root = deckRoot;
             Sequence drawSeq = DOTween.Sequence();
             drawSeq.Join(cardObj.transform.DOMove(root.position, 0.5f))
@@ -205,8 +205,8 @@ public class RedrawUI : MonoBehaviour
             var cardData = cardList[0];
             cardList.RemoveAt(0);
             opponent.hand.InsertCardAt(cardData, i);
-            cardData.GetObject().SetCardState(CardObject.CardState.HAND);
-            var cardObject = cardData.GetObject().GetCardObject()[(int)CardObject.CardState.HAND];
+            cardData.GetCardObject().SetCardState(CardObject.CardState.HAND);
+            var cardObject = cardData.GetCardObject().GetCardObject()[(int)CardObject.CardState.HAND];
             CardLook cardLook = cardObject.GetComponent<CardLook>();
             cardLook.SetCardFrontActive(false);
         }
@@ -218,8 +218,9 @@ public class RedrawUI : MonoBehaviour
         // 手札のステート切り替え
         foreach(var card in opponentHand.GetCards((card) => null != card))
         {
-            card.GetObject().SetCardState(CardObject.CardState.HAND);
-            var cardObject = card.GetObject().GetCardObject()[(int)CardObject.CardState.HAND];
+            CardObject cardObj = card.GetCardObject();
+            cardObj.SetCardState(CardObject.CardState.HAND);
+            var cardObject = cardObj.GetCardObject()[(int)CardObject.CardState.HAND];
             CardLook cardLook = cardObject.GetComponent<CardLook>();
             cardLook.SetCardFrontActive(false);
         }

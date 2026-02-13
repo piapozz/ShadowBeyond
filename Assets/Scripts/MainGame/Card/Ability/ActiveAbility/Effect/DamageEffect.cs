@@ -16,7 +16,7 @@ public class DamageEffect : BaseEffect
         if (targetCard != null)
         {
             // オブジェクトを除外
-            targetCard.GetObject().CheckDestroyCard();
+            targetCard.GetCardObject().CheckDestroyCard();
         }
     }
 

@@ -1,6 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
@@ -297,7 +298,7 @@ public class BattleManager : SystemObject
 
                 Leader defanceLeader = player[(currentPlayerIndex + 1) % 2].leader;
                 LeaderCombat(attackLeaderCard, defanceLeader);
-                UIManager.instance.SetAttackLeaderSequence(attackLeaderCard.GetObject());
+                UIManager.instance.SetAttackLeaderSequence(attackLeaderCard.GetCardObject());
                 break;
 
             case GameEnum.InputType.EVOLVE:
@@ -377,8 +378,6 @@ public class BattleManager : SystemObject
         NetworkManager.Instance.SendData(data);
     }
 
-    public BattleState GetCurrentState() { return currentState; }
-
     private void SetCurrentState(BattleState setState)
     {
         currentState = setState;
@@ -400,8 +399,8 @@ public class BattleManager : SystemObject
         CombatProcessor processor = new CombatProcessor(attackCard, defenceCard);
 
         processor.Combat();
-        attackCard.GetObject().SetAttackPermissionLook();
-        defenceCard.GetObject().SetAttackPermissionLook();
+        attackCard.GetCardObject().SetAttackPermissionLook();
+        defenceCard.GetCardObject().SetAttackPermissionLook();
     }
 
     public void LeaderCombat(CardData attackCard, Leader defenceLeader)
@@ -410,7 +409,7 @@ public class BattleManager : SystemObject
         CombatProcessor processor = new CombatProcessor(attackCard, defenceLeader);
 
         processor.LeaderCombat();
-        attackCard.GetObject().SetAttackPermissionLook();
+        attackCard.GetCardObject().SetAttackPermissionLook();
     }
 
     public bool IsOwnTurn()
@@ -447,7 +446,7 @@ public class BattleManager : SystemObject
     /// </summary>
     /// <param name="target"></param>
     /// <returns></returns>
-    public List<BaseComponent> GetTargetCard(Target target, bool isOwn)
+    public List<BaseComponent> GetTargetComponent(Target target, bool isOwn)
     {
         List<BaseComponent> result = new List<BaseComponent>();
         // TargetSideの反転
@@ -464,73 +463,60 @@ public class BattleManager : SystemObject
                 default: break;
             }
         }
-
-        // 選択が必要か
-        if (target.isSelect)
+        // 領域ごとに取得
+        switch (target.targetZone)
         {
-
-        }
-        // 選択不要
-        else
-        {
-            // 領域ごとに取得
-            switch (target.targetZone)
-            {
-                case Target.TargetZone.Hand:
-                    if (target.targetSide == Target.TargetSide.Own)
-                    {
-                        result.AddRange(player[0].hand.GetCards(target.condition));
-                    }
-                    else
-                    {
-                        result.AddRange(player[1].hand.GetCards(target.condition));
-                    }
-                    break;
-                case Target.TargetZone.Field:
-                    result.AddRange(field.GetCards(target.targetSide, target.condition));
-                    break;
-                case Target.TargetZone.Leader:
-                    if (target.targetSide == Target.TargetSide.Own)
-                    {
-                        result.Add(player[0].leader);
-                    }
-                    else if (target.targetSide == Target.TargetSide.Opponent)
-                    {
-                        result.Add(player[1].leader);
-                    }
-                    else if (target.targetSide == Target.TargetSide.Both)
-                    {
-                        result.Add(player[0].leader);
-                        result.Add(player[1].leader);
-                    }
-                    break;
-                case Target.TargetZone.FieldAndLeader:
-                    result.AddRange(field.GetCards(target.targetSide, target.condition));
-                    if (target.targetSide == Target.TargetSide.Own)
-                    {
-                        result.Add(player[0].leader);
-                    }
-                    else if (target.targetSide == Target.TargetSide.Opponent)
-                    {
-                        result.Add(player[1].leader);
-                    }
-                    else if (target.targetSide == Target.TargetSide.Both)
-                    {
-                        result.Add(player[0].leader);
-                        result.Add(player[1].leader);
-                    }
-                    break;
-                default: break;
-            }
-            // ランダムに除外
-            if (target.isRandom)
-            {
-                int takeCount = result.Count - target.count;
-                for (int i = 0, max = takeCount; i < max; i++)
+            case Target.TargetZone.Hand:
+                if (target.targetSide == Target.TargetSide.Own)
                 {
-                    result.RemoveAt(rand.Next(0, result.Count));
+                    result.AddRange(player[0].hand.GetCards(target.condition));
                 }
-            }
+                else
+                {
+                    result.AddRange(player[1].hand.GetCards(target.condition));
+                }
+                break;
+            case Target.TargetZone.Field:
+                result.AddRange(field.GetCards(target.targetSide, target.condition));
+                break;
+            case Target.TargetZone.Leader:
+                if (target.targetSide == Target.TargetSide.Own)
+                {
+                    result.Add(player[0].leader);
+                }
+                else if (target.targetSide == Target.TargetSide.Opponent)
+                {
+                    result.Add(player[1].leader);
+                }
+                else if (target.targetSide == Target.TargetSide.Both)
+                {
+                    result.Add(player[0].leader);
+                    result.Add(player[1].leader);
+                }
+                break;
+            case Target.TargetZone.FieldAndLeader:
+                result.AddRange(field.GetCards(target.targetSide, target.condition));
+                if (target.targetSide == Target.TargetSide.Own)
+                {
+                    result.Add(player[0].leader);
+                }
+                else if (target.targetSide == Target.TargetSide.Opponent)
+                {
+                    result.Add(player[1].leader);
+                }
+                else if (target.targetSide == Target.TargetSide.Both)
+                {
+                    result.Add(player[0].leader);
+                    result.Add(player[1].leader);
+                }
+                break;
+            default: break;
+        }
+        // ランダムに除外
+        int takeCount = result.Count - target.count;
+        for (int i = 0, max = takeCount; i < max; i++)
+        {
+            result.RemoveAt(rand.Next(0, result.Count));
         }
         return result;
     }
@@ -542,75 +528,38 @@ public class BattleManager : SystemObject
     /// <returns></returns>
     public List<CardData> GetCards(List<CardData> cardList, TargetCondition condition)
     {
-        for (int i = 0, cardMax = cardList.Count; i < cardMax; i++)
+        cardList.RemoveAll(card =>
         {
-            // IDチェック
-            if (condition.ID != null && condition.ID == cardList[i].id)
-            {
-                cardList.Remove(cardList[i]);
-                continue;
-            }
-            // タイプチェック
-            if (condition.type != null)
-            {
-                for (int j = 0, max = condition.type.Count; j < max; j++)
-                {
-                    if (condition.type[j] == cardList[i].type)
-                    {
-                        cardList.Remove(cardList[i]);
-                        continue;
-                    }
-                }
-            }
-            // リーダークラスチェック
-            if (condition.leaderClass != null)
-            {
-                for (int j = 0, max = condition.leaderClass.Count; j < max; j++)
-                {
-                    if (condition.leaderClass[j] != cardList[i].leaderClass)
-                    {
-                        cardList.Remove(cardList[i]);
-                        continue;
-                    }
-                }
-            }
-            // カード詳細タイプチェック
-            if (condition.cardTypeDetail != null)
-            {
-                for (int j = 0, max = condition.cardTypeDetail.Count; j < max; j++)
-                {
-                    if (!cardList[i].HaveDetailType(condition.cardTypeDetail[j]))
-                    {
-                        cardList.Remove(cardList[i]);
-                        continue;
-                    }
-                }
-            }
-            // 進化状態チェック
-            if (condition.evolveState != CardData.EvolveState.None || cardList[i].evolveState == condition.evolveState)
-            {
-                cardList.Remove(cardList[i]);
-                continue;
-            }
-            // 攻撃力範囲チェック
-            if (!condition.attack.Match(cardList[i].status.m_attack))
-            {
-                cardList.Remove(cardList[i]);
-                continue;
-            }
-            // 体力範囲チェック
-            if (!condition.defence.Match(cardList[i].status.m_defance))
-            {
-                cardList.Remove(cardList[i]);
-                continue;
-            }
-            // ダメージ状態チェック
-            if (condition.isHurt != null && condition.isHurt == cardList[i].damage < 1)
-            {
-                cardList.Remove(cardList[i]);
-                continue;
-            }
-        }
+            if (condition.ID != null && condition.ID != card.id)
+                return true;
+
+            if (condition.type != null && !condition.type.Contains(card.type))
+                return true;
+
+            if (condition.leaderClass != null && !condition.leaderClass.Contains(card.leaderClass))
+                return true;
+
+            if (condition.cardTypeDetail != null &&
+                condition.cardTypeDetail.Any(detail => !card.HaveDetailType(detail)))
+                return true;
+
+            if (condition.evolveState != CardData.EvolveState.None &&
+                card.evolveState != condition.evolveState)
+                return true;
+
+            if (!condition.attack.Match(card.status.m_attack))
+                return true;
+
+            if (!condition.defence.Match(card.status.m_defance))
+                return true;
+
+            if (condition.isHurt != null &&
+                condition.isHurt != (card.damage < 1))
+                return true;
+
+            return false;
+        });
+
         return cardList;
     }
 

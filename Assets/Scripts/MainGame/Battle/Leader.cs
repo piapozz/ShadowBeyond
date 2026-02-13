@@ -75,11 +75,9 @@ public class Leader : BaseComponent
     // バトル情報
     private Dictionary<BattleStatType, BattleStatValue> battleStats = new Dictionary<BattleStatType, BattleStatValue>();
 
-    public Func<LeaderObject> GetObject;
-
-    public void SetGetObjectAction(Func<LeaderObject> action)
+    public LeaderObject GetLeaderObject()
     {
-        GetObject = action;
+        return GetObject() as LeaderObject;
     }
 
     public void Initialize(int playerID, int maxDefense = 20, int maxPP = 0)
@@ -112,13 +110,13 @@ public class Leader : BaseComponent
         maxDefense = value;
         if (currentDefense > maxDefense)
             currentDefense = maxDefense;
-        GetObject().SetDefenceText(maxDefense);
+        GetLeaderObject().SetDefenceText(maxDefense);
     }
 
     public void SetCurrentDefense(int value)
     {
         currentDefense = Mathf.Clamp(value, 0, maxDefense);
-        GetObject().SetDefenceText(currentDefense);
+        GetLeaderObject().SetDefenceText(currentDefense);
 
         if (currentDefense <= 0)
         {
@@ -207,14 +205,13 @@ public class Leader : BaseComponent
     {
         SetCurrentDefense(currentDefense - damage);
         // ダメージを受けた時の処理
-        GetObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
+        GetLeaderObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
     }
 
     public override void HealDamage(int heal)
     {
         SetCurrentDefense(currentDefense + heal);
-
-        GetObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
+        GetLeaderObject().PlayEffect(EffectManager.EffectType.Heal, 1.0f);
     }
 
     public void AddCombo(int addCount = 1)

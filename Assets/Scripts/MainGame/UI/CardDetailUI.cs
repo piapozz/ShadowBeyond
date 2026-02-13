@@ -74,6 +74,7 @@ public class CardDetailUI : MonoBehaviour
         else
         {
             actArea.gameObject.SetActive(true);
+            actButton.onClick.RemoveAllListeners();
             actButton.onClick.AddListener(() => setActAction());
             actButton.interactable = isOwn && canAct;
         }
@@ -84,6 +85,7 @@ public class CardDetailUI : MonoBehaviour
         else
         {
             fusionArea.gameObject.SetActive(true);
+            fusionButton.onClick.RemoveAllListeners();
             fusionButton.onClick.AddListener(() => setFusionAction());
             fusionButton.interactable = isOwn && canFusion;
         }

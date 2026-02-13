@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static Field;
 using static GameEnum;
-using static UnityEngine.GraphicsBuffer;
 
 public class Field
 {

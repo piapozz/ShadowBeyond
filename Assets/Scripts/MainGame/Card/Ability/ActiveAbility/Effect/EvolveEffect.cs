@@ -11,7 +11,7 @@ public class EvolveEffect : BaseEffect
 
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
-        targetCard.GetObject().EvolveFollower();
+        targetCard.GetCardObject().EvolveFollower();
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
