@@ -12,20 +12,18 @@ public class CardActionExecutor
     /// <param name="selectTarget"></param>
     /// <param name="isOwn"></param>
     /// <returns></returns>
-    private static async UniTask<bool> SelectTarget(Target selectTarget, bool isOwn)
+    private static async UniTask<TargetSelectResult> SelectTarget(List<BaseComponent> selectTarget, int targetCount)
     {
-        // ターゲット候補を取得
-        List<BaseComponent> targets = BattleManager.instance.GetTargetComponent(selectTarget, isOwn);
         // オブジェクトのリストに変換
-        List<BaseFieldObject> targetObjects = new List<BaseFieldObject>(targets.Count);
-        for (int i = 0, max = targetObjects.Count; i < max; i++)
+        List<BaseFieldObject> targetObjects = new List<BaseFieldObject>(targetCount);
+        for (int i = 0, max = targetCount; i < max; i++)
         {
-            BaseFieldObject obj = targets[i].GetObject();
+            BaseFieldObject obj = selectTarget[i].GetObject();
             targetObjects.Add(obj);
         }
         TargetSelectResult selectResult = await UIManager.instance.SelectTargetAsync(
-            targetObjects, selectTarget.count);
-        return selectResult.result;
+            targetObjects, targetCount);
+        return selectResult;
     }
 
     /// <summary>
@@ -39,15 +37,19 @@ public class CardActionExecutor
         Debug.Log("TryAct called");
         var ability = card.ability;
         Target selectTarget = ability.selectTarget[(int)BaseCardAbility.TargetTiming.Engage];
-        // ターゲット選択が必要ないならスルー
-        if (selectTarget == null) return;
-
-        bool result = await SelectTarget(selectTarget, isOwn);
-
-        // 完了していたなら処理を実行
-        if (result)
+        // ターゲット候補を取得
+        List<BaseComponent> targets = BattleManager.instance.GetTargetComponent(selectTarget, isOwn);
+        // ターゲット選択が必要ないか対象がないなら普通に実行
+        if (selectTarget == null || targets.Count == 0)
         {
             ability.Engage(isOwn);
+            return;
+        };
+        TargetSelectResult selectResult = await SelectTarget(targets, selectTarget.count);
+        // 完了していたなら処理を実行
+        if (selectResult.result)
+        {
+            ability.Engage(isOwn, selectResult.selected);
         }
     }
 }

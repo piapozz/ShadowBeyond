@@ -5,9 +5,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using static CardObject;
 using static CommonModule;
-using static UnityEngine.GraphicsBuffer;
 
 // UIを管理するマネージャー
 
@@ -44,6 +44,7 @@ public class UIManager : SystemObject
     [SerializeField] private ReadyUI readyUI;
     [SerializeField] private RedrawUI redrawUI;
     [SerializeField] private MessageUI messageUI;
+    [SerializeField] private Canvas backCanvas;
 
     public enum UIState
     {
@@ -82,6 +83,9 @@ public class UIManager : SystemObject
 
         instance = this;
         mainCamera = Camera.main;
+        backCanvas.worldCamera = mainCamera;
+        backCanvas.planeDistance = 15;
+
         uiSequence = new Queue<List<Sequence>>();
         currentSequenceList = new List<Sequence>();
         // UIを生成
@@ -744,6 +748,8 @@ public class UIManager : SystemObject
 
         // 入力状態を変更
         SetUIState(UIState.SELECT);
+        // 背景を暗くする
+        backCanvas.enabled = true;
 
         // 対象を選択可能にする
         foreach (var card in _candidates)
@@ -807,6 +813,7 @@ public class UIManager : SystemObject
         _selected.Clear();
 
         SetUIState(UIState.DEFAULT);
+        backCanvas.enabled = false;
     }
 
     public void OnGUI()

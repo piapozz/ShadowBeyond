@@ -11,6 +11,10 @@ public class LeaderObject : BaseFieldObject
     private EvolvePointObject evolvePointObject = null;
     [SerializeField]
     private EvolvePointObject superEvolvePointObject = null;
+    [SerializeField]
+    private MeshRenderer leaderFrame = null;
+    [SerializeField]
+    private Material frameMaterial = null;
 
     public Leader leader { get; private set; } = null;
 
@@ -34,5 +38,23 @@ public class LeaderObject : BaseFieldObject
     public void PlayEffect(EffectManager.EffectType type, float sec)
     {
         EffectManager.Instance.PlayEffect(type, transform.position, sec);
+    }
+
+    public override void SetObjectOutLine(OutLineType type)
+    {
+        // 現状はマテリアルで見た目変更
+        switch (type)
+        {
+            case OutLineType.None:
+                leaderFrame.material = frameMaterial;
+                break;
+            case OutLineType.Selectable:
+                leaderFrame.material = outLineMaterials[((int)OutLineType.Selectable) - 1];
+                break;
+            case OutLineType.IsSelect:
+                leaderFrame.material = outLineMaterials[((int)OutLineType.Selectable) - 1];
+                break;
+            default: break;
+        }
     }
 }

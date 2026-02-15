@@ -21,7 +21,7 @@ public class CardAbility_303 : BaseCardAbility
         drawEffect.ExecuteEffect(targetPlayer.deck);
     }
 
-    public override void Engage(bool isOwn)
+    public override void Engage(bool isOwn, List<BaseFieldObject> selected = null)
     {
         EarthSigleEffect enterCardFieldEffect = new EarthSigleEffect(new List<int>{1});
         enterCardFieldEffect.ExecuteEffect();
