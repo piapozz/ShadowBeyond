@@ -19,7 +19,7 @@ public class CardAbility_6 : BaseCardAbility
         effect.ExecuteEffect(targetDeck, (card) => { return (card.type == GameEnum.CardType.FOLLOWER); });
     }
 
-    public override void Engage(bool isOwn)
+    public override void Engage(bool isOwn, List<BaseFieldObject> selected = null)
     {
         // ‚±‚ê‚ð”j‰ó
         DestroyEffect destroyEffect = new DestroyEffect(null);

@@ -17,9 +17,7 @@ public class CardObject : BaseFieldObject
     private List<Material> cardMaterial = null;
     [SerializeField]
     private List<GameObject> effectObject = null;
-    [SerializeField]
-    private List<Material> attackMaterial = null;
-
+    
     public enum CardObjectType
     {
         INVALID = -1,
@@ -706,15 +704,50 @@ public class CardObject : BaseFieldObject
         switch (currentAttackPermission)
         {
             case CardData.AttackPermission.NONE:
-                fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+                SetCardOutLine(OutLineType.None);
                 break;
             case CardData.AttackPermission.CanAttackFollower:
-                fieldLook.SetCardMaterial(attackMaterial[0]);
+                SetCardOutLine(OutLineType.CanAttackFollower);
                 break;
             case CardData.AttackPermission.CanAttackLeader:
-                fieldLook.SetCardMaterial(attackMaterial[1]);
+                SetCardOutLine(OutLineType.CanAttackLeader);
                 break;
             default: break;
         }
+    }
+
+    /// <summary>
+    /// カードのアウトライン変更
+    /// </summary>
+    /// <param name="type"></param>
+    private void SetCardOutLine(OutLineType type)
+    {
+        // 現状はマテリアルで見た目変更
+        CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
+        switch (type)
+        {
+            case OutLineType.None:
+                fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+                break;
+            case OutLineType.CanAttackFollower:
+                fieldLook.SetCardMaterial(outLineMaterials[((int)OutLineType.CanAttackFollower) - 1]);
+                break;
+            case OutLineType.CanAttackLeader:
+                fieldLook.SetCardMaterial(outLineMaterials[((int)OutLineType.CanAttackLeader) - 1]);
+                break;
+            case OutLineType.Selectable:
+                fieldLook.SetCardMaterial(outLineMaterials[((int)OutLineType.Selectable) - 1]);
+                break;
+            case OutLineType.IsSelect:
+                fieldLook.SetCardMaterial(outLineMaterials[((int)OutLineType.IsSelect) - 1]);
+                break;
+            default: break;
+        }
+    }
+
+    public override void SetObjectOutLine(OutLineType type)
+    {
+        SetCardOutLine(type);
+        SetAttackPermissionLook();
     }
 }

@@ -3,11 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Unity.IO.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.XR;
+using static CommonModule;
 
 // ターン進行
 // バトル全体の管理
@@ -528,39 +526,38 @@ public class BattleManager : SystemObject
     /// <returns></returns>
     public List<CardData> GetCards(List<CardData> cardList, TargetCondition condition)
     {
-        cardList.RemoveAll(card =>
+        return cardList.Where(card =>
         {
             if (condition.ID != null && condition.ID != card.id)
-                return true;
+                return false;
 
-            if (condition.type != null && !condition.type.Contains(card.type))
-                return true;
+            if (!IsEmpty(condition.type) && !condition.type.Contains(card.type))
+                return false;
 
-            if (condition.leaderClass != null && !condition.leaderClass.Contains(card.leaderClass))
-                return true;
+            if (!IsEmpty(condition.leaderClass) && !condition.leaderClass.Contains(card.leaderClass))
+                return false;
 
-            if (condition.cardTypeDetail != null &&
+            if (!IsEmpty(condition.cardTypeDetail) &&
                 condition.cardTypeDetail.Any(detail => !card.HaveDetailType(detail)))
-                return true;
+                return false;
 
             if (condition.evolveState != CardData.EvolveState.None &&
                 card.evolveState != condition.evolveState)
-                return true;
+                return false;
 
             if (!condition.attack.Match(card.status.m_attack))
-                return true;
+                return false;
 
             if (!condition.defence.Match(card.status.m_defance))
-                return true;
+                return false;
 
             if (condition.isHurt != null &&
                 condition.isHurt != (card.damage < 1))
-                return true;
+                return false;
 
-            return false;
-        });
+            return true;
 
-        return cardList;
+        }).ToList();
     }
 
     // ゲームを終了

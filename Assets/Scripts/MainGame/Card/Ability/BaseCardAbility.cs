@@ -62,7 +62,7 @@ public abstract class BaseCardAbility
     // ˆø‚¢‚½‚Æ‚«
     public virtual void Draw(bool isOwn) {  }
     // ƒAƒNƒg
-    public virtual void Engage(bool isOwn)
+    public virtual void Engage(bool isOwn, List<BaseFieldObject> selected = null)
     {
         sourceData.OnAct();
     }
