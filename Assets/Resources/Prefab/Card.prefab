@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardPrefab:
-  - {fileID: 4781723637216820724, guid: 1e64f4329c8b4db4194e117813972145, type: 3}
+  - {fileID: 3412913458284942731, guid: 532cb6f652aa66b4687b8a750533d5aa, type: 3}
   - {fileID: 3412913458284942731, guid: 8497f09556cc75142b5980af719d1f3d, type: 3}
   - {fileID: 7107404271440464957, guid: a52cabcfd0cfdf54dbb7be62c413ec9f, type: 3}
   - {fileID: 8565175436606807337, guid: 90b56fd4db0b34d40bc3f2338b59efa3, type: 3}
