@@ -360,7 +360,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &9096919163521845727
 Transform:
   m_ObjectHideFlags: 0
@@ -460,6 +460,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EvolveCard
       objectReference: {fileID: 0}
+    - target: {fileID: 2821004413179153054, guid: 4ef34c4870aec9c4d94226a2f890a4be, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 494a179eecae94e4cae29021b732e5b1, type: 2}
     - target: {fileID: 7364571452819842090, guid: 4ef34c4870aec9c4d94226a2f890a4be, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

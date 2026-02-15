@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleAmulet
       objectReference: {fileID: 0}
+    - target: {fileID: 8804980036375626190, guid: 55dd0c4fd55bf2b4bbe0425d39ecc436, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 494a179eecae94e4cae29021b732e5b1, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55dd0c4fd55bf2b4bbe0425d39ecc436, type: 3}
 --- !u!23 &908857507367798810 stripped

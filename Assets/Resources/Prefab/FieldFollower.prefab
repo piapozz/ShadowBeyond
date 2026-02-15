@@ -456,6 +456,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BattleCard
       objectReference: {fileID: 0}
+    - target: {fileID: 1183559758090340653, guid: 1785572e44e68b140ad7f9bdfa5f327d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 494a179eecae94e4cae29021b732e5b1, type: 2}
     - target: {fileID: 7552352536186366672, guid: 1785572e44e68b140ad7f9bdfa5f327d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
