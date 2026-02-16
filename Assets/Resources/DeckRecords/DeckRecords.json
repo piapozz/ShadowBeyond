@@ -51,16 +51,16 @@
                     "count": 3
                 },
                 {
-                    "cardId": 701,
+                    "cardId": 6,
                     "count": 3
+                },
+                {
+                    "cardId": 701,
+                    "count": 1
                 },
                 {
                     "cardId": 306,
                     "count": 3
-                },
-                {
-                    "cardId": 305,
-                    "count": 1
                 }
             ]
         }

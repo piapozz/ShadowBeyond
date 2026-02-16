@@ -532,9 +532,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6f2ececddc47e74e8eef9c1d900fe96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outLineMaterials:
+  - {fileID: 2100000, guid: 74eb641b303943042bf1ec54407d6abe, type: 2}
+  - {fileID: 2100000, guid: 6f55a69bb01432e4bb7e6317ce6702a0, type: 2}
+  - {fileID: 2100000, guid: 62b39f5fa5be20b4d88c4a9cb908357b, type: 2}
+  - {fileID: 2100000, guid: 81be8d50f54c66f4cbfb73109d1d57b6, type: 2}
   defence: {fileID: 7395934890683846535}
   evolvePointObject: {fileID: 8173457648121317162}
   superEvolvePointObject: {fileID: 3985111252397824133}
+  leaderFrame: {fileID: 4164313427055328249}
+  frameMaterial: {fileID: 2100000, guid: fc874b06d075056408983e93e72f5a03, type: 2}
 --- !u!65 &1791464834968191109
 BoxCollider:
   m_ObjectHideFlags: 0

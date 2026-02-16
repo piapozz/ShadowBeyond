@@ -89,6 +89,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82506418ea664b84496413ba613e4c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  outLineMaterials:
+  - {fileID: 2100000, guid: 74eb641b303943042bf1ec54407d6abe, type: 2}
+  - {fileID: 2100000, guid: 6f55a69bb01432e4bb7e6317ce6702a0, type: 2}
+  - {fileID: 2100000, guid: 62b39f5fa5be20b4d88c4a9cb908357b, type: 2}
+  - {fileID: 2100000, guid: 81be8d50f54c66f4cbfb73109d1d57b6, type: 2}
   cardPrefab:
   - {fileID: 3412913458284942731, guid: 532cb6f652aa66b4687b8a750533d5aa, type: 3}
   - {fileID: 3412913458284942731, guid: 8497f09556cc75142b5980af719d1f3d, type: 3}
@@ -135,9 +140,6 @@ MonoBehaviour:
   - {fileID: 2129774352927723751}
   - {fileID: 2781575597165034049}
   - {fileID: 8270435755125885475}
-  attackMaterial:
-  - {fileID: 2100000, guid: 74eb641b303943042bf1ec54407d6abe, type: 2}
-  - {fileID: 2100000, guid: 6f55a69bb01432e4bb7e6317ce6702a0, type: 2}
 --- !u!120 &1735497269602815245
 LineRenderer:
   m_ObjectHideFlags: 0

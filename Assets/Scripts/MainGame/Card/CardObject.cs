@@ -748,6 +748,7 @@ public class CardObject : BaseFieldObject
     public override void SetObjectOutLine(OutLineType type)
     {
         SetCardOutLine(type);
-        SetAttackPermissionLook();
+        if (type == OutLineType.None)
+            SetAttackPermissionLook();
     }
 }

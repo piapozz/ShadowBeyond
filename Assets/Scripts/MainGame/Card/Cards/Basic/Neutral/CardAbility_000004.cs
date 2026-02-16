@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_4 : BaseCardAbility
+public class CardAbility_000004 : BaseCardAbility
 {
     public override void Initialize(CardData setCard)
     {
