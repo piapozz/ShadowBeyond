@@ -54,6 +54,7 @@ public class Target
     public TargetZone targetZone;
     public TargetCondition condition;
     public int count;
+    public bool isRandom;
 
     public Target()
     {
@@ -61,13 +62,15 @@ public class Target
         targetZone = TargetZone.Field;
         condition = TargetCondition.Any;
         count = 1;
+        isRandom = false;
     }
 
-    public Target(TargetSide setSide, TargetZone setZone, TargetCondition setCondition, int setCount = 0)
+    public Target(TargetSide setSide, TargetZone setZone, TargetCondition setCondition, int setCount = 0, bool setRandom = false)
     {
         targetSide = setSide;
         targetZone = setZone;
         condition = setCondition;
         count = setCount;
+        isRandom = setRandom;
     }
 }

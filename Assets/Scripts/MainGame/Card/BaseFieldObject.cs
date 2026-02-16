@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class BaseFieldObject : MonoBehaviour
@@ -34,8 +35,9 @@ public abstract class BaseFieldObject : MonoBehaviour
     {
         isSelectable = enable;
 
+        OutLineType outLine = enable ? OutLineType.Selectable : OutLineType.None;
         // Œ©‚½–Ú•ÏX
-        SetObjectOutLine(OutLineType.Selectable);
+        SetObjectOutLine(outLine);
     }
 
     /// <summary>
@@ -49,7 +51,9 @@ public abstract class BaseFieldObject : MonoBehaviour
     /// </summary>
     public void SetSelected(bool select)
     {
-        // Œ©‚½–Ú‚Ì•ÏX
+        OutLineType outLine = select ? OutLineType.IsSelect : OutLineType.None;
+        // Œ©‚½–Ú•ÏX
+        SetObjectOutLine(outLine);
     }
 
     public void OnPointerClick()

@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_6 : BaseCardAbility
+public class CardAbility_000006 : BaseCardAbility
 {
     private const int ENGAGE_COST = 0;
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Engage, null, ENGAGE_COST));
+        TargetCondition condition = TargetCondition.Any;
+        condition.type.Add(GameEnum.CardType.FOLLOWER);
+        selectTarget[(int)TargetTiming.Engage] = new Target(Target.TargetSide.Own, Target.TargetZone.Field, condition, 1);
     }
 
     public override void Fanfare(bool isOwn)
@@ -21,14 +24,14 @@ public class CardAbility_6 : BaseCardAbility
 
     public override void Engage(bool isOwn, List<BaseFieldObject> selected = null)
     {
+        base.Engage(isOwn);
         // これを破壊
         DestroyEffect destroyEffect = new DestroyEffect(null);
         destroyEffect.ExecuteEffect(sourceData);
-        // 自分の場のをフォロワーを1体選ぶ。突進
-        var field = BattleManager.instance.field;
-        var targetCard = field.GetRandomCard((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, ! isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
-        if (targetCard == null) return;
+        // 自分の場のをフォロワーに突進付与
+        if (selected == null) return;
+
         GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int>{(int)GameEnum.KeywordAbility.Rush });
-        giveKeywordAbilityEffect.ExecuteEffect(targetCard);
+        giveKeywordAbilityEffect.ExecuteEffect(selected[0] as CardObject);
     }
 }

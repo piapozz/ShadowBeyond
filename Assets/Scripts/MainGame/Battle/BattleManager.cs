@@ -511,10 +511,13 @@ public class BattleManager : SystemObject
             default: break;
         }
         // ランダムに除外
-        int takeCount = result.Count - target.count;
-        for (int i = 0, max = takeCount; i < max; i++)
+        if (target.isRandom)
         {
-            result.RemoveAt(rand.Next(0, result.Count));
+            int takeCount = result.Count - target.count;
+            for (int i = 0, max = takeCount; i < max; i++)
+            {
+                result.RemoveAt(rand.Next(0, result.Count));
+            }
         }
         return result;
     }

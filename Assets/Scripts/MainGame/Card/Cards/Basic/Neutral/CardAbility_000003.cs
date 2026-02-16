@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_3 : BaseCardAbility
+public class CardAbility_000003 : BaseCardAbility
 {
     private const int ENGAGE_COST = 0;
     public override void Initialize(CardData setCard)

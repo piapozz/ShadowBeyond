@@ -788,7 +788,6 @@ public class UIManager : SystemObject
 
     private void CompleteSelection(bool isComplete)
     {
-        Cleanup();
         List<BaseFieldObject> selected = isComplete ? _selected : null;
         _selectTcs.TrySetResult(new TargetSelectResult
         {
@@ -797,6 +796,7 @@ public class UIManager : SystemObject
         });
 
         _selectTcs = null;
+        Cleanup();
     }
 
     private void Cleanup()
