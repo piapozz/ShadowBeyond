@@ -196,21 +196,14 @@ public class RedrawUI : MonoBehaviour
         // 相手のマリガン処理
         var opponent = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OPPONENT);
         int opponentRedrawCount = opponentIsRedraw.FindAll(isRedraw => isRedraw).Count;
-        List<CardData> cardList = opponent.deck.PeekDeck(opponentRedrawCount);
+        List<CardData> returnCard = new List<CardData>();
         for (int i = 0; i < opponentIsRedraw.Count; i++)
         {
             if (!opponentIsRedraw[i]) continue;
-            var card = opponent.hand.GetCardAt(i);
-            opponent.hand.ReturnCardToDeck(card);
-            var cardData = cardList[0];
-            cardList.RemoveAt(0);
-            opponent.hand.InsertCardAt(cardData, i);
-            cardData.GetCardObject().SetCardState(CardObject.CardState.HAND);
-            var cardObject = cardData.GetCardObject().GetCardObject()[(int)CardObject.CardState.HAND];
-            CardLook cardLook = cardObject.GetComponent<CardLook>();
-            cardLook.SetCardFrontActive(false);
+            returnCard.Add(opponent.hand.GetCardAt(i));
         }
-
+        opponent.hand.ReturnCardToDeck(returnCard);
+        opponent.deck.DrawDeck(opponentRedrawCount);
 
         await UIManager.instance.IsCompleteAllSequenceTask();
         // 相手の手札

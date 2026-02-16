@@ -104,6 +104,23 @@ public class Hand
     }
 
     /// <summary>
+    /// 指定カードをデッキに戻す
+    /// </summary>
+    /// <param name="card"></param>
+    public void ReturnCardToDeck(List<CardData> cardList)
+    {
+        if (cardList == null || cardList.Count == 0) return;
+        for (int i = 0, max = cardList.Count; i < max; i++)
+        {
+            handCardList.Remove(cardList[i]);
+            deck.AddCard(cardList[i]);
+        }
+
+        // デッキに戻すアニメーション
+        UIManager.instance.ReturnCards(playerID, cardList);
+    }
+
+    /// <summary>
     /// 指定番目のカードを取得
     /// </summary>
     /// <param name="index"></param>
