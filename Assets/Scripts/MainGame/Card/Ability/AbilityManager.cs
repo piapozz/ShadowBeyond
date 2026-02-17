@@ -42,9 +42,15 @@ public class AbilityManager
     }
 
     // 実行待機キュー
-    private static Queue<ActiveAbility> _waitQueue = new Queue<ActiveAbility>();
+    private static Queue<ActiveAbility> _waitQueue = null;
 
-    private static Dictionary<TriggerTiming, List<ActiveAbility>> subscribeAbility = new Dictionary<TriggerTiming, List<ActiveAbility>>();
+    private static Dictionary<TriggerTiming, List<ActiveAbility>> subscribeAbility = null;
+
+    public static void Initialize()
+    {
+        _waitQueue = new Queue<ActiveAbility>();
+        subscribeAbility = new Dictionary<TriggerTiming, List<ActiveAbility>>();
+    }
 
     /// <summary>
     /// トリガーの通知
@@ -103,7 +109,7 @@ public class AbilityManager
             // キューから削除
             ActiveAbility ability = _waitQueue.Dequeue();
             // 条件を達成しているか
-            if (!ability.condition()) return;
+            if (ability.condition != null &&!ability.condition()) return;
             // 対象を取得
             List<BaseComponent> components;
             if (ability.target == null)
@@ -153,14 +159,20 @@ public class AbilityManager
     /// 能力の登録解除
     /// </summary>
     /// <param name="ability"></param>
-    public static void UnsubscribeAbility(ActiveAbility ability)
+    public static void UnsubscribeAbility(ActiveAbility ability, bool isOwn)
     {
-        if (subscribeAbility.TryGetValue(ability.timing, out var list))
+        TriggerTiming timing = ability.timing;
+        // 相手のだったらタイミングを反転
+        if (!isOwn)
+        {
+            timing = ReverseTiming(ability.timing);
+        }
+        if (subscribeAbility.TryGetValue(timing, out var list))
         {
             list.Remove(ability);
 
             if (list.Count == 0)
-                subscribeAbility.Remove(ability.timing);
+                subscribeAbility.Remove(timing);
         }
     }
 

@@ -121,7 +121,6 @@ public class CardData : BaseComponent
     {
         if (ability == null) return;
         CardActionExecutor.TryPlay(this, isOwn, isEnhance);
-        //GetCardObject().SetAttackPermissionLook();
     }
 
     // ターン開始時処理
@@ -201,8 +200,13 @@ public class CardData : BaseComponent
         // アビリティを登録解除
         for (int i = 0; i < abilityCount; i++)
         {
-            AbilityManager.UnsubscribeAbility(ability.activeAbilities[i]);
+            AbilityManager.UnsubscribeAbility(ability.activeAbilities[i], isOwn);
         }
+    }
+
+    public void OnEvolve(bool isOwn)
+    {
+        ability.AutoEvolve(isOwn);
     }
 
     public void OnAct(bool isOwn)
@@ -425,6 +429,7 @@ public class CardData : BaseComponent
         AddStatus(2, 2);
         SetAttackPermission(AttackPermission.CanAttackFollower);
         evolveState = EvolveState.Evolved;
+        OnEvolve(GetObject().isLocal);
     }
 
     public void SetSuperEvolve()
@@ -432,6 +437,7 @@ public class CardData : BaseComponent
         AddStatus(3, 3);
         SetAttackPermission(AttackPermission.CanAttackFollower);
         evolveState = EvolveState.SuperEvolved;
+        OnEvolve(GetObject().isLocal);
     }
 
     /// <summary>

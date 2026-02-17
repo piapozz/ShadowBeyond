@@ -3,31 +3,27 @@
         {
             "cards": [
                 {
+                    "cardId": 104,
+                    "count": 3
+                },
+                {
                     "cardId": 301,
                     "count": 2
                 },
                 {
-                    "cardId": 303,
-                    "count": 1
-                },
-                {
-                    "cardId": 0,
-                    "count": 3
-                },
-                {
                     "cardId": 1,
-                    "count": 2
+                    "count": 3
                 },
                 {
                     "cardId": 3,
                     "count": 3
                 },
                 {
-                    "cardId": 101,
+                    "cardId": 100,
                     "count": 3
                 },
                 {
-                    "cardId": 100,
+                    "cardId": 101,
                     "count": 3
                 },
                 {

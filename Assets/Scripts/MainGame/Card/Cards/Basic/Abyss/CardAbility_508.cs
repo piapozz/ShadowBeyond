@@ -14,7 +14,7 @@ public class CardAbility_508 : BaseCardAbility
            new BanishEffect(null),
            null,
            ActiveAbility.Zone.Field,
-           sourceData.GetObject().isLocal,
+           false,
            sourceData));
     }
 
