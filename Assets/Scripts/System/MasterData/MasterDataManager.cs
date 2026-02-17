@@ -16,6 +16,7 @@ public class MasterDataManager
 		cardTextData = Load<Entity_CardTextData, Entity_CardTextData.Sheet, Entity_CardTextData.Param>("CardTextData");
 		CardMasterUtility.MakeCardDataList();
 		AbilityFactory.Initialize();
+        CardTextureRegistry.Initialize();
     }
 
 	private static List<List<T3>> Load<T1, T2, T3>(string dataName) where T1 : ScriptableObject
