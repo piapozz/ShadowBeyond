@@ -13,7 +13,7 @@ public class CardAbility_309 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Engage, null, ENGAGE_COST));
     }
 
-    public override void Engage(bool isOwn, List<BaseFieldObject> selected = null)
+    public override void Engage(bool isOwn, List<BaseComponent> selected = null)
     {
         EarthSigleEffect enterCardFieldEffect = new EarthSigleEffect(new List<int>{1});
         enterCardFieldEffect.ExecuteEffect();

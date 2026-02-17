@@ -62,9 +62,29 @@ public abstract class BaseCardAbility
     // 引いたとき
     public virtual void Draw(bool isOwn) {  }
     // アクト
-    public virtual void Engage(bool isOwn, List<BaseFieldObject> selected = null)
+    public virtual void Engage(bool isOwn, List<BaseComponent> selected = null)
     {
         sourceData.OnAct();
+        // 通信
+        // 自身のインデックスと選択した対象のインデックスを渡す
+        if (isOwn)
+        {
+            int[] param =
+            {
+                BattleManager.instance.field.GetOwnFieldIndex(sourceData), // 場の何番目か
+            };
+            // 選択が含まれるなら、選択したコンポーネントのインデックスを渡す
+            if (selected != null)
+            {
+                for (int i = 0, max = selected.Count; i < max; i++)
+                {
+                    int index = BattleManager.instance.field.GetFieldIndex(selected[i]);
+                    if (index < 0) break;
+                    param[i + 1] = index;
+                }
+            }
+            BattleManager.instance.SendInputData(GameEnum.InputType.ACT, param);
+        }
     }
     // スペルブースト
     public virtual void SpellBoost(bool isOwn) { }

@@ -239,7 +239,7 @@ public class RedrawUI : MonoBehaviour
         // マリガンリストに移動
         if (isField)
         {
-            var cardData = card.cardData;
+            var cardData = card.GetCardData();
             int index = keepCard.IndexOf(cardData);
             if (index < 0) index = redrawCard.IndexOf(cardData);
             keepCard[index] = null;
@@ -257,7 +257,7 @@ public class RedrawUI : MonoBehaviour
         // もとに戻す
         else
         {
-            var cardData = card.cardData;
+            var cardData = card.GetCardData();
             int index = keepCard.IndexOf(cardData);
             if (index < 0) index = redrawCard.IndexOf(cardData);
             redrawCard[index] = null;

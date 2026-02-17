@@ -22,7 +22,7 @@ public class CardAbility_000006 : BaseCardAbility
         effect.ExecuteEffect(targetDeck, (card) => { return (card.type == GameEnum.CardType.FOLLOWER); });
     }
 
-    public override void Engage(bool isOwn, List<BaseFieldObject> selected = null)
+    public override void Engage(bool isOwn, List<BaseComponent> selected = null)
     {
         base.Engage(isOwn);
         // ‚±‚ê‚ð”j‰ó
@@ -32,6 +32,6 @@ public class CardAbility_000006 : BaseCardAbility
         if (selected == null) return;
 
         GiveKeywordAbilityEffect giveKeywordAbilityEffect = new GiveKeywordAbilityEffect(new List<int>{(int)GameEnum.KeywordAbility.Rush });
-        giveKeywordAbilityEffect.ExecuteEffect(selected[0] as CardObject);
+        giveKeywordAbilityEffect.ExecuteEffect(selected[0] as CardData);
     }
 }

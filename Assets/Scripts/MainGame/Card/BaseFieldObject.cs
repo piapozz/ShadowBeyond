@@ -12,6 +12,7 @@ public abstract class BaseFieldObject : MonoBehaviour
     public bool isLocal { get; private set; } = false;
     public bool isSelectable { get; private set; } = false;
     public event Action<BaseFieldObject> OnClick;
+    public BaseComponent component { get; protected set; } = null;
 
     public enum OutLineType
     {
@@ -51,7 +52,7 @@ public abstract class BaseFieldObject : MonoBehaviour
     /// </summary>
     public void SetSelected(bool select)
     {
-        OutLineType outLine = select ? OutLineType.IsSelect : OutLineType.None;
+        OutLineType outLine = select ? OutLineType.IsSelect : OutLineType.Selectable;
         // å©ÇΩñ⁄ïœçX
         SetObjectOutLine(outLine);
     }

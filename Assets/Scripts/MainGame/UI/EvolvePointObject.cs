@@ -46,13 +46,13 @@ public class EvolvePointObject : MonoBehaviour
         if (target == null) return;
         if (!target.isLocal) return;
         CardObject targetCard = target as CardObject;
-        if (targetCard == null || targetCard.currentState != CardState.FIELD || targetCard.cardData.type != GameEnum.CardType.FOLLOWER) return;
+        if (targetCard == null || targetCard.currentState != CardState.FIELD || targetCard.GetCardData().type != GameEnum.CardType.FOLLOWER) return;
 
         // 自分のフィールドの未進化のフォロワーなら進化可能
-        if (targetCard.cardData.isAnyEvolved) return;
+        if (targetCard.GetCardData().isAnyEvolved) return;
         BattleManager.instance.GetCurrentPlayer().leader.SetCanEvolve(false);
         GameEnum.InputType evolveType;
-        var ablity = targetCard.cardData.ability;
+        var ablity = targetCard.GetCardData().ability;
         Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
         if (isSuperEvolve)
         {
@@ -71,7 +71,7 @@ public class EvolvePointObject : MonoBehaviour
             if (ablity != null) ablity.Evolve(true);
         }
         // 送信
-        int fieldIndex = UIManager.instance.GetOwnFieldIndex(targetCard);
+        int fieldIndex = BattleManager.instance.field.GetOwnFieldIndex(targetCard.GetCardData());
         int[] param = new int[1] { fieldIndex };
         BattleManager.instance.SendInputData(evolveType, param);
     }
