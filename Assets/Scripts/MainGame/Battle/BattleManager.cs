@@ -44,6 +44,7 @@ public class BattleManager : SystemObject
         public Hand hand;
         public Leader leader;
         public Deck deck;
+        public List<ActiveAbility> crestList;
 
         int turn;
         bool extraPoint;
@@ -54,6 +55,7 @@ public class BattleManager : SystemObject
             extraPoint = false;
             hand = new Hand();
             deck = new Deck();
+            crestList = new List<ActiveAbility>();
 
             hand.Init(new List<CardData>());
         }
@@ -79,6 +81,16 @@ public class BattleManager : SystemObject
             hand.SetPlayerID(index);
             deck.SetPlayerID(index);
             leader.SetPlayerID(index);
+        }
+
+        public void AddCrest(ActiveAbility crest)
+        {
+            crestList.Add(crest);
+        }
+
+        public void RemoveCrest(ActiveAbility crest)
+        {
+            crestList.Remove(crest);
         }
     }
     public Player[] player { get; private set; }
