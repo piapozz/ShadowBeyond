@@ -48,7 +48,7 @@ public class DeckFormationManager : MonoBehaviour
         foreach (int cardID in deckList)
         {
             if (cardID < 0) continue;
-            var cardData = CardMasterUtility.GetCardData(cardID);
+            var cardData = CardMasterUtility.GetCardData(cardID, false);
 
             var cardObj = Instantiate(CardImage.gameObject, DeckArea);
             var cardImage = cardObj.GetComponent<CardImage>();
@@ -96,7 +96,7 @@ public class DeckFormationManager : MonoBehaviour
         if (sameCardCount >= 3) return;
 
         // デッキにカードを追加する処理
-        var cardData = CardMasterUtility.GetCardData(cardId);
+        var cardData = CardMasterUtility.GetCardData(cardId, false);
 
         var cardObj = Instantiate(CardImage.gameObject, DeckArea);
         var cardImage = cardObj.GetComponent<CardImage>();
@@ -178,8 +178,8 @@ public class DeckFormationManager : MonoBehaviour
         // コスト順 > リーダー順 > カードタイプ順　> レアリティ順 > 名前順でソート
         cardDataList.Sort((a, b) =>
         {
-            var aData = CardMasterUtility.GetCardData(a.cardId);
-            var bData = CardMasterUtility.GetCardData(b.cardId);
+            var aData = CardMasterUtility.GetCardData(a.cardId, false);
+            var bData = CardMasterUtility.GetCardData(b.cardId, false);
             int costComparison = aData.cost.CompareTo(bData.cost);
             if (costComparison != 0) return costComparison;
             int leaderComparison = aData.leaderClass.CompareTo(bData.leaderClass);
@@ -204,14 +204,14 @@ public class DeckFormationManager : MonoBehaviour
             // idからカードデータを取得
             if (card != null) 
             {
-                cardData = CardMasterUtility.GetCardData(card.cardId);
+                cardData = CardMasterUtility.GetCardData(card.cardId, false);
             }
 
 
-            cardDetailUI.EnableUI(true, cardData.name, cardData.text);
+            cardDetailUI.EnableUI(true, false, cardData);
             return;
         }
-        cardDetailUI.EnableUI(false);
+        cardDetailUI.EnableUI(false, false);
     }
 
     public CardImage GetFieldObject(Vector2 screenPos)

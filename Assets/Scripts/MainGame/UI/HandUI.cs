@@ -109,8 +109,6 @@ public class HandUI : MonoBehaviour
                 returnSequence.Add(card.ReturnOpponentCard(deckRoot,opponentHandRoot));
             }
         }
-        // –ß‚µ‚½Œã‚ÉèD‚ğ®—ñ‚³‚¹‚é
-        returnSequence.AddRange(ArrangeHandCard(isMine));
         // –ß‚·‹““®‚Æ®—ñ‚Ì‹““®‚ğ“o˜^
         UIManager.instance.AddSequence(returnSequence);
     }

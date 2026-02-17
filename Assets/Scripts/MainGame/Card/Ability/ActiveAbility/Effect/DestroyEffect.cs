@@ -9,6 +9,18 @@ public class DestroyEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        foreach (var target in context.targets)
+        {
+            if (target is CardData card)
+            {
+                ExecuteEffect(card);
+            }
+        }
+        return null;
+    }
+
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         if (targetCard.HaveKeyword(GameEnum.KeywordAbility.NoDestroy)) return;
@@ -18,9 +30,12 @@ public class DestroyEffect : BaseEffect
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
-        for (int i = 0, max = targetCards.Count; i < max; i++)
+        foreach (var target in targetCards)
         {
-            ExecuteEffect(targetCards[i]);
+            if (target is CardData card)
+            {
+                ExecuteEffect(card);
+            }
         }
     }
 }

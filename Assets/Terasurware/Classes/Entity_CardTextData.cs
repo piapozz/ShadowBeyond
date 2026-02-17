@@ -20,6 +20,7 @@ public class Entity_CardTextData : ScriptableObject
 		public int ID;
 		public string Name;
 		public string CardText;
+		public string CrestText;
 	}
 }
 

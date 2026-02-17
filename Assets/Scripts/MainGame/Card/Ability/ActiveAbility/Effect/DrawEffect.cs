@@ -10,9 +10,14 @@ public class DrawEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        Deck targetDeck = context.player.deck;
+        return ExecuteEffect(targetDeck);
+    }
+
     public override List<CardData> ExecuteEffect(Deck targetDeck, Func<CardData, bool> condition = null)
     {
-        List<CardData> drawCards = new List<CardData>();
         // ğŒ‚ª‚È‚¢‚È‚ç•’Ê‚Éƒhƒ[
         if (condition == null)
             return targetDeck.DrawDeck(param[0]);

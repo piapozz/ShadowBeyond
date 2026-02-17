@@ -9,22 +9,30 @@ public class DamageEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        foreach (var target in context.targets)
+        {
+            ExecuteEffect(target);
+        }
+        return null;
+    }
+
     public override void ExecuteEffect(BaseComponent targetComponent)
     {
         targetComponent.DealDamage(param[0]);
-        CardData targetCard = targetComponent as CardData;
-        if (targetCard != null)
+        if (targetComponent is CardData card)
         {
             // オブジェクトを除外
-            targetCard.GetCardObject().CheckDestroyCard();
+            card.GetCardObject().CheckDestroyCard();
         }
     }
 
     public override void ExecuteEffect(List<BaseComponent> targetComponents)
     {
-        for (int i = 0, max = targetComponents.Count; i < max; i++)
+        foreach (var target in targetComponents)
         {
-            ExecuteEffect(targetComponents[i]);
+            ExecuteEffect(target);
         }
     }
 }

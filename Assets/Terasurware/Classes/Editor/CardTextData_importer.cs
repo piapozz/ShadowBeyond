@@ -53,6 +53,7 @@ public class CardTextData_importer : AssetPostprocessor {
 					cell = row.GetCell(0); p.ID = (int)(cell == null ? 0 : cell.NumericCellValue);
 					cell = row.GetCell(1); p.Name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.CardText = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(3); p.CrestText = (cell == null ? "" : cell.StringCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);

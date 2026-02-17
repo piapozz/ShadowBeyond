@@ -3,6 +3,14 @@
         {
             "cards": [
                 {
+                    "cardId": 301,
+                    "count": 3
+                },
+                {
+                    "cardId": 303,
+                    "count": 3
+                },
+                {
                     "cardId": 0,
                     "count": 3
                 },
@@ -40,15 +48,11 @@
                 },
                 {
                     "cardId": 700,
-                    "count": 3
+                    "count": 2
                 },
                 {
                     "cardId": 704,
-                    "count": 3
-                },
-                {
-                    "cardId": 706,
-                    "count": 3
+                    "count": 1
                 },
                 {
                     "cardId": 6,

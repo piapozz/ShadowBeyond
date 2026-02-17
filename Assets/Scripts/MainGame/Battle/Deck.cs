@@ -69,7 +69,7 @@ public class Deck
 
         foreach (int id in idList)
         {
-            deckCardList.Add(CardMasterUtility.GetCardData(id));
+            deckCardList.Add(CardMasterUtility.GetCardData(id, true));
         }
     }
 
@@ -174,7 +174,7 @@ public class Deck
     public void PlayDeckToField(CardData card)
     {
         if (card == null) return;
-        field.PlayCard(card, playerID);
+        field.EnterCard(card, playerID == 0 ? true : false);
         deckCardList.Remove(card);
         UIManager.instance.PlayDeckToField(playerID, card);
     }

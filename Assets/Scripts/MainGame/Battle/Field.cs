@@ -55,29 +55,31 @@ public class Field
 
     // ===== フィールド操作 =====
     // カードを出す
-    public void PlayCard(CardData card, int currentIndex)
+    public void EnterCard(CardData card, bool isOwn)
     {
         if (card == null) return;
-        var targetList = currentIndex == 0 ? _ownFieldCardList : _opponentFieldCardList;
+        var targetList = isOwn ? _ownFieldCardList : _opponentFieldCardList;
         // 手札上限なし
         //if (targetList.Count >= MAX_FIELD) return; 
         targetList.Add(card);
+        card.OnEnterField(isOwn);
     }
 
-    public void PlayCards(List<CardData> cards, bool isOwn)
+    public void EnterCards(List<CardData> cards, bool isOwn)
     {
         for (int i = 0, max = cards.Count; i < max; i++)
         {
-            PlayCard(cards[i], isOwn ? 0 : 1);
+            EnterCard(cards[i], isOwn);
         }
     }
 
     // カードを除外する
-    public void RemoveCard(CardData card)
+    public void RemoveCard(CardData card, bool isOwn)
     {
         if (card == null) return;
         _ownFieldCardList.Remove(card);
         _opponentFieldCardList.Remove(card);
+        card.OnLeaveField(isOwn);
     }
 
     // ===== 条件検索 =====

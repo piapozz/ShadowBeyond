@@ -9,8 +9,18 @@ public class AddCardHandEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        Hand targetHand = context.player.hand;
+        if (targetHand == null) return null;
+
+        return ExecuteEffect(targetHand);
+    }
+
     public override List<CardData> ExecuteEffect(Hand targetHand)
     {
+        if (targetHand == null) return null;
+
         List<CardData> addCardList = new List<CardData>();
         List<CardObject> addCardObjectList = new List<CardObject>();
 
@@ -23,7 +33,7 @@ public class AddCardHandEffect : BaseEffect
             addCardList.Add(enterCard.GetCardData());
         }
         targetHand.AddCard(addCardList);
-        UIManager.instance.AddHandCard(targetHand.playerID, addCardList);
+        UIManager.instance.AddHandCard(targetHand.playerID == 0 ? true : false, addCardList);
 
         return addCardList;
     }

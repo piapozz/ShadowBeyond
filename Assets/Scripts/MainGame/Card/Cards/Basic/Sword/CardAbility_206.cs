@@ -15,7 +15,9 @@ public class CardAbility_206 : BaseCardAbility
            new Target(Target.TargetSide.Own, Target.TargetZone.Field, new TargetCondition(), 1),
            new BuffEffect(new List<int> { 1 ,1 }),
            null,
-           ActiveAbility.Zone.Field));
+           ActiveAbility.Zone.Field,
+           sourceData.GetObject().isLocal,
+           sourceData));
     }
 
 }

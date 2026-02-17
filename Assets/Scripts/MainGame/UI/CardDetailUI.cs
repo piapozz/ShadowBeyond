@@ -25,35 +25,35 @@ public class CardDetailUI : MonoBehaviour
     [SerializeField]
     private Button fusionButton = null;
 
-    public void EnableUI(bool enable, CardData card, Action setActAction = null, Action setFusionAction = null, bool isOwnTurn = false)
+    public void EnableUI(bool enable, bool isInGame, CardData card = null, Action setActAction = null, Action setFusionAction = null, bool isOwnTurn = false)
     {
         gameObject.SetActive(enable);
         if (enable)
         {
-            SetCardText(card.name, card.defaultCost, card.text, card.typeDetail);
-            SetButton(setActAction, setFusionAction, isOwnTurn, card.canAct, card.canFusion);
+            SetCardText(card.name, card.defaultCost, card.text, card.crestText, card.typeDetail);
+            if (isInGame)
+                SetButton(setActAction, setFusionAction, isOwnTurn, card.canAct, card.canFusion);
+            else
+                UnactiveButton();
         }
         else
         {
+            if (!isInGame) return;
             actButton.onClick.RemoveAllListeners();
             fusionButton.onClick.RemoveAllListeners();
         }
     }
 
-    public void EnableUI(bool enable, string name = "", string detail = "", int cost = -1, List<CardTypeDetail> type = null)
-    {
-        gameObject.SetActive(enable);
-        if (enable)
-        {
-            SetCardText(name, cost, detail, type);
-        }
-    }
-
-    private void SetCardText(string name,int cost, string detail, List<CardTypeDetail> type)
+    private void SetCardText(string name,int cost, string detail, string crest, List<CardTypeDetail> type)
     {
         cardNameText.text = name;
         cardCostText.text = cost.ToString();
         cardDetailText.text = detail;
+        if (crest != "")
+        {
+            cardDetailText.text += "\n" + crest;
+        }
+
         string typeText = "";
         if (type != null)
         {
@@ -89,5 +89,11 @@ public class CardDetailUI : MonoBehaviour
             fusionButton.onClick.AddListener(() => setFusionAction());
             fusionButton.interactable = isOwn && canFusion;
         }
+    }
+
+    private void UnactiveButton()
+    {
+        actArea.gameObject.SetActive(false);
+        fusionArea.gameObject.SetActive(false);
     }
 }

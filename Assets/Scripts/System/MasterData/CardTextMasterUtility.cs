@@ -40,6 +40,18 @@ public class CardTextMasterUtility : MonoBehaviour
     }
 
     /// <summary>
+    /// ID参照のCardCrestTextの取得
+    /// </summary>
+    /// <param name="ID"></param>
+    /// <returns></returns>
+    public static string GetCardCrestText(int ID)
+    {
+        var cardMaster = GetCardMaster(ID);
+        if (cardMaster == null) return null;
+        return cardMaster.CrestText;
+    }
+
+    /// <summary>
     /// カードのマスターデータからCardTextを取得
     /// </summary>
     /// <param name="cardMaster"></param>
