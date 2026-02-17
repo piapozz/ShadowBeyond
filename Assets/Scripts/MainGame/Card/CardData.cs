@@ -296,6 +296,9 @@ public class CardData : BaseComponent
         if (ability == null) return;
         ability.LastWord(GetObject().isLocal);
         // リーダーに記録
+        var isLocal = GetObject().isLocal;
+        Leader leader = BattleManager.instance.GetPlayer(isLocal ? 0 : 1).leader;
+        leader.AddHistory(BattleStatType.DestroyedFollowers, this);
     }
 
     // 消滅

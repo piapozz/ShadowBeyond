@@ -24,7 +24,7 @@ public class BattleStatValue
 {
     public int Count { get; private set; } = 0;
     public HashSet<string> UniqueNames { get; private set; } = new HashSet<string>();
-    public List<string> History { get; private set; } = new List<string>();
+    public List<CardData> History { get; private set; } = new List<CardData>();
 
     public void Add(int value = 1)
     {
@@ -37,10 +37,10 @@ public class BattleStatValue
             UniqueNames.Add(name);
     }
 
-    public void AddHistory(string name)
+    public void AddHistory(CardData card)
     {
-        if (!string.IsNullOrEmpty(name))
-            History.Add(name);
+        if (card != null)
+            History.Add(card);
     }
 
     public void Reset()
@@ -233,8 +233,8 @@ public class Leader : BaseComponent
     public void AddUniqueName(BattleStatType type, string name) => GetOrCreate(type).AddUnique(name);
 
     // --- —š—ğŠÇ— ---
-    public List<string> GetHistory(BattleStatType type) => GetOrCreate(type).History;
-    public void AddHistory(BattleStatType type, string name) => GetOrCreate(type).AddHistory(name);
+    public List<CardData> GetHistory(BattleStatType type) => GetOrCreate(type).History;
+    public void AddHistory(BattleStatType type, CardData card) => GetOrCreate(type).AddHistory(card);
 
     // --- ƒŠƒZƒbƒg ---
     public void ResetStat(BattleStatType type) => GetOrCreate(type).Reset();
