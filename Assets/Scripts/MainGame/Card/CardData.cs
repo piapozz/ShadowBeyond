@@ -240,6 +240,7 @@ public class CardData : BaseComponent
             ability.keywordAbilities = new List<KeywordAbilityInstance>();
         }
         ability.keywordAbilities.Add(addKeyword);
+        GetCardObject().SetAttackPermissionLook();
     }
 
     public void RemoveKeyword(KeywordAbility removeKeyword, CardData sourceCard = null)
@@ -258,6 +259,7 @@ public class CardData : BaseComponent
         {
             ability.keywordAbilities.RemoveAll(keyword => keyword.type == removeKeyword && keyword.source == sourceCard);
         }
+        GetCardObject().SetAttackPermissionLook();
     }
 
     public bool CanBeSelected() { return false; }

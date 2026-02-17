@@ -24,7 +24,7 @@ public class CardAbility_000006 : BaseCardAbility
 
     public override void Engage(bool isOwn, List<BaseComponent> selected = null)
     {
-        base.Engage(isOwn);
+        base.Engage(isOwn, selected);
         // ‚±‚ê‚ð”j‰ó
         DestroyEffect destroyEffect = new DestroyEffect(null);
         destroyEffect.ExecuteEffect(sourceData);

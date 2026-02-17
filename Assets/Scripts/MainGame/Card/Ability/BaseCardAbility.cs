@@ -69,14 +69,17 @@ public abstract class BaseCardAbility
         // 自身のインデックスと選択した対象のインデックスを渡す
         if (isOwn)
         {
-            int[] param =
+            int selectCount = selected.Count;
+            int[] param = new int[8];
+            for (int i = 0; i < param.Length; i++)
             {
-                BattleManager.instance.field.GetOwnFieldIndex(sourceData), // 場の何番目か
-            };
+                param[i] = -1;
+            }
+            param[0] = BattleManager.instance.field.GetOwnFieldIndex(sourceData); // 場の何番目か
             // 選択が含まれるなら、選択したコンポーネントのインデックスを渡す
             if (selected != null)
             {
-                for (int i = 0, max = selected.Count; i < max; i++)
+                for (int i = 0; i < selectCount; i++)
                 {
                     int index = BattleManager.instance.field.GetFieldIndex(selected[i]);
                     if (index < 0) break;
