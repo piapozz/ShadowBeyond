@@ -14,7 +14,7 @@ public class CardAbility_001417 : BaseCardAbility
     public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         int damage = 0;
-        var targgetHandList = GetPlayer(isOwn).hand.GetCards((card) => { return card != null });
+        var targgetHandList = GetPlayer(isOwn).hand.GetCards((card) => { return card != null; });
         var targetHand = targgetHandList[BattleManager.instance.rand.Next(0, targgetHandList.Count - 1)];
         if (targetHand == null) return;
         damage = targetHand.cost;

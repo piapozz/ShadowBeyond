@@ -25,7 +25,7 @@ public class CardAbility_001418 : BaseCardAbility
 
     public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
-        List<CardData> ownFieldCards = BattleManager.instance.field.GetActableCards((card) => { return card.cardID == Supreme_Golden_Dragon_ID || card.cardID == Supreme_Silver_Dragon_ID; }, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
+        List<CardData> ownFieldCards = BattleManager.instance.field.GetCards((card) => { return card.id == Supreme_Golden_Dragon_ID || card.id == Supreme_Silver_Dragon_ID; }, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         foreach (CardData card in ownFieldCards)
         {
             if (card.id == Supreme_Golden_Dragon_ID)
