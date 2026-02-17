@@ -321,7 +321,6 @@ public class CardData : BaseComponent
         if (defance <= 0)
             Destroy();
     }
-
     // 破壊する
     public void Destroy()
     {
@@ -333,14 +332,19 @@ public class CardData : BaseComponent
         if (ability == null) return;
         ability.LastWord(isOwn);
         // リーダーに記録
+        Leader leader = BattleManager.instance.GetPlayer(isOwn ? 0 : 1).leader;
+        leader.AddHistory(BattleStatType.DestroyedFollowers, this);
+        if (!isOwn) return;
+        UIManager.instance.AddInfo(this);
     }
 
     // 消滅
     public void Banish()
     {
         isDestroyed = true;
+        bool isOwn = GetObject().isLocal;
         // フィールドから除去
-        BattleManager.instance.field.RemoveCard(this, GetObject().isLocal);
+        BattleManager.instance.field.RemoveCard(this, isOwn);
     }
 
     /// <summary>
