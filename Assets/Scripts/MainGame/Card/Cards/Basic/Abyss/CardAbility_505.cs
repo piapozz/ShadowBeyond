@@ -10,13 +10,13 @@ public class CardAbility_505 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int> { GHOST_ID, 2 });
         enterCardFieldEffect.ExecuteEffect(isOwn);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int> { GHOST_ID, 2 });
         var enterList = enterCardFieldEffect.ExecuteEffect(isOwn);

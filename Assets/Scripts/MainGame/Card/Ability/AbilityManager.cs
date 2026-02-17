@@ -102,6 +102,8 @@ public class AbilityManager
         {
             // ƒLƒ…[‚©‚çíœ
             ActiveAbility ability = _waitQueue.Dequeue();
+            // ğŒ‚ğ’B¬‚µ‚Ä‚¢‚é‚©
+            if (!ability.condition()) return;
             // ‘ÎÛ‚ğæ“¾
             List<BaseComponent> components;
             if (ability.target == null)

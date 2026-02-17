@@ -9,7 +9,7 @@ public class CardAbility_704 : BaseCardAbility
     {
         sourceData = setCard;
     }
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int> { GEAR_OF_REMEMBRANCE_ID, 1 });
         addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);

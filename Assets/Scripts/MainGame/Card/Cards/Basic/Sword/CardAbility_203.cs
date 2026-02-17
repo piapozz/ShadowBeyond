@@ -9,7 +9,7 @@ public class CardAbility_203 : BaseCardAbility
         base.Initialize(setCard);
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 自分の手札1枚を選ぶ。それをデッキに戻す。自分のデッキからロイヤル・フォロワー2枚を引く。
         var targetPlayer = GetPlayer(isOwn);

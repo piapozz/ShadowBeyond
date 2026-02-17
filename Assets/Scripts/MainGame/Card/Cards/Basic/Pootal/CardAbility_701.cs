@@ -11,7 +11,7 @@ public class CardAbility_701 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Rush));
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int> { GEAR_OF_AMBITION_ID, 1 });
         addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);

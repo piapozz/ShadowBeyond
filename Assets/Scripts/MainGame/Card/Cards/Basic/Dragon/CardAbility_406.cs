@@ -9,7 +9,7 @@ public class CardAbility_406 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 自分のPP最大値を + 1する。その後、自分のPP最大値が10なら、自分のデッキから1枚を引く。
         var player = GetPlayer(isOwn);

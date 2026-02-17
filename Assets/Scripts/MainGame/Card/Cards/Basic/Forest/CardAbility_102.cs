@@ -10,7 +10,7 @@ public class CardAbility_102 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public　override void Fanfare(bool isOwn)
+    public　override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // コンボ3 進化
         var targetPlayer = GetPlayer(isOwn);

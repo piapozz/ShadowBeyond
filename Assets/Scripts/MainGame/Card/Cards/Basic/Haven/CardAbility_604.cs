@@ -9,7 +9,7 @@ public class CardAbility_604 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetCard = BattleManager.instance.field.GetRandomCard((card) =>
         {
@@ -21,7 +21,7 @@ public class CardAbility_604 : BaseCardAbility
         banishEffect.ExecuteEffect(targetCard);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetCard = BattleManager.instance.field.GetCards((card) =>
         {

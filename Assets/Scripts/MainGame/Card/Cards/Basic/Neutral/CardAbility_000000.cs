@@ -11,7 +11,7 @@ public class CardAbility_000000 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Enhance, null, ENHANCE_COST));
     }
 
-    public override void Enhance(bool isOwn)
+    public override void Enhance(bool isOwn, List<BaseComponent> selected = null)
     {
         // effect‚É“n‚·
         BuffEffect effect = new BuffEffect(new List<int> { 3, 3 });

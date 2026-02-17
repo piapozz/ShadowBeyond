@@ -9,7 +9,7 @@ public class CardAbility_404 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetCard = BattleManager.instance.field.GetRandomCard((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard == null) return;
@@ -18,7 +18,7 @@ public class CardAbility_404 : BaseCardAbility
         damageEffect.ExecuteEffect(component);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard.Count <= 0) return;

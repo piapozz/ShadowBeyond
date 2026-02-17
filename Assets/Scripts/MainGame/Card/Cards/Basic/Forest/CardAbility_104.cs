@@ -9,17 +9,17 @@ public class CardAbility_104 : BaseCardAbility
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
+        TargetCondition condition = TargetCondition.Any;
+        condition.type.Add(GameEnum.CardType.FOLLOWER);
+        selectTarget[(int)TargetTiming.Fanfare] = new Target(Target.TargetSide.Opponent, Target.TargetZone.Field, condition, 1);
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 【コンボ_3】相手の場のフォロワー1枚を選ぶ。それに3ダメージ。
-        var targetPlayer = GetPlayer(isOwn);
-        if (targetPlayer.leader.comboCount < COMBO_COST) return;
-        var targetCard = BattleManager.instance.field.GetRandomCard((card) => {return card.type == GameEnum.CardType.FOLLOWER; } , isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
-        if (targetCard == null) return;
+        //if (targetPlayer.leader.comboCount < COMBO_COST) return;
+        if (selected == null) return;
         DamageEffect damageEffect = new DamageEffect(new List<int> { 3 });
-        BaseComponent component = targetCard;
-        damageEffect.ExecuteEffect(component);
+        damageEffect.ExecuteEffect(selected);
     }
 }

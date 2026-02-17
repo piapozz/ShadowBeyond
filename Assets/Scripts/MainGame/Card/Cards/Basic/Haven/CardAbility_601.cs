@@ -9,7 +9,7 @@ public class CardAbility_601 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetPlayer = GetPlayer(isOwn);
         var targetCard = BattleManager.instance.field.GetRandomCard((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
@@ -18,12 +18,12 @@ public class CardAbility_601 : BaseCardAbility
         buffEffect.ExecuteEffect(targetCard);
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         Fanfare(isOwn);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         Fanfare(isOwn);
     }

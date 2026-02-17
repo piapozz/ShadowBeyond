@@ -9,7 +9,7 @@ public class CardAbility_501 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetPlayer  = GetPlayer(isOwn);
         DamageEffect damageEffect = new DamageEffect(new List<int> { 1 });

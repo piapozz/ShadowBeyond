@@ -9,7 +9,7 @@ public class CardAbility_503 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 【モード】1つを選んでその能力が働く。
         //（1）自分のデッキからフォロワー1枚を引く。

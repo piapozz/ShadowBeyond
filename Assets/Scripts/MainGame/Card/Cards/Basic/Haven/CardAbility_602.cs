@@ -10,7 +10,7 @@ public class CardAbility_602 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward));
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetPlayer = GetPlayer(isOwn);
         HealEffect healEffect = new HealEffect(new List<int> { 5 });

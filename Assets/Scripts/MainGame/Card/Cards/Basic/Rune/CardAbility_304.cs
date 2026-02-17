@@ -11,7 +11,7 @@ public class CardAbility_304 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         //if (BattleManager.instance.field.Get)
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int>{ GUARDIAN_GOLEM_ID, 1 });
@@ -20,7 +20,7 @@ public class CardAbility_304 : BaseCardAbility
         earthSigleEffect.ExecuteEffect();
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // 【超進化時】自分の場のゴーレム・フォロワー1枚を選ぶ。それは進化する。それは+3/+3する。
         var targetCard = BattleManager.instance.field.GetRandomCard(

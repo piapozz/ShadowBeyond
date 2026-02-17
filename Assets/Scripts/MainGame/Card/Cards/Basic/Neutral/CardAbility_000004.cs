@@ -9,7 +9,7 @@ public class CardAbility_000004 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // 自分のリーダーを2回復
         HealEffect effect = new HealEffect(new List<int> { 2 });
@@ -18,7 +18,7 @@ public class CardAbility_000004 : BaseCardAbility
         effect.ExecuteEffect(component);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // 自分のリーダーを2ではなく4回復
         HealEffect effect = new HealEffect(new List<int> { 4 });

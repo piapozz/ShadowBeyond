@@ -11,13 +11,13 @@ public class CardAbility_705 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward));
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int> { MECHANZED_BEAST, 1 });
         enterCardFieldEffect.ExecuteEffect(isOwn);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int> { MECHANZED_BEAST, 2 });
         enterCardFieldEffect.ExecuteEffect(isOwn);

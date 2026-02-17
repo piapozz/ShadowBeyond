@@ -21,7 +21,7 @@ public class ActiveAbility
     // 発動能力
     public BaseEffect effect { get; private set; }
     // 発動条件
-    public BaseCondition condition { get; private set; }
+    public Func<bool> condition { get; private set; }
     // 発動するエリア
     public Zone zone { get; private set; }
     // 自身の能力か否か
@@ -33,8 +33,8 @@ public class ActiveAbility
     // 詳細な条件
     public Func<CardData, bool> detailCondition { get; private set; }
 
-    public ActiveAbility(TriggerTiming setTiming, Target setTarget, BaseEffect setEffect, 
-        BaseCondition setCondition, Zone setZone, bool setIsOwn, CardData setSourceCard, BattleManager.Player setPlayer = default, Func<CardData, bool> setDetailCondition = null)
+    public ActiveAbility(TriggerTiming setTiming, Target setTarget, BaseEffect setEffect,
+        Func<bool> setCondition, Zone setZone, bool setIsOwn, CardData setSourceCard, BattleManager.Player setPlayer = default, Func<CardData, bool> setDetailCondition = null)
     {
         timing = setTiming;
         target = setTarget;

@@ -9,7 +9,7 @@ public class CardAbility_205 : BaseCardAbility
     {
         sourceData = setCard;
     }
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // 【超進化時】自分のデッキから『魔煌のトリックスター・ラスティ』すべてを引く。それは【疾走】を持つ。
         var targetPlayer = GetPlayer(isOwn);

@@ -21,7 +21,7 @@ public class CardAbility_103 : BaseCardAbility
             sourceData));
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // フェアリーを一枚手札に加える
         AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int>{ FAIRY_ID , 1});
