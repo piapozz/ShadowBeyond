@@ -604,14 +604,6 @@ public class CardObject : BaseFieldObject
         UIManager.instance.AddSequence(enterSequence);
     }
 
-
-
-
-
-
-
-
-
     public Sequence GetPlaySequence(Transform playCardRoot)
     {
         // プレイ時のアニメーション
