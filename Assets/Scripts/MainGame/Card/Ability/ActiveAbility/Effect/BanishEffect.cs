@@ -24,9 +24,7 @@ public class BanishEffect : BaseEffect
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         targetCard.Banish();
-        CardObject targetObject = targetCard.GetCardObject();
-        targetObject.SetCardState(CardObject.CardState.UNUSE);
-        UIManager.instance.RemoveFieldCard(targetObject);
+        targetCard.GetCardObject().CheckDestroyCard();
     }
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)

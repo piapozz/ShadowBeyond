@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static GameEnum;
 
@@ -584,6 +585,33 @@ public class CardObject : BaseFieldObject
         return enterSequence;
     }
 
+    public void UpdateCardEffect()
+    {
+        // 表示するべきエフェクトを取得
+        List<GameObject> activeEffect = GetCardEffectList();
+        DisableAllCardEffect();
+        Sequence enterSequence = DOTween.Sequence();
+        enterSequence
+        .AppendCallback(() =>
+        {
+            // エフェクトを有効化
+            foreach (GameObject effect in activeEffect)
+            {
+                effect.SetActive(true);
+            }
+        });
+
+        UIManager.instance.AddSequence(enterSequence);
+    }
+
+
+
+
+
+
+
+
+
     public Sequence GetPlaySequence(Transform playCardRoot)
     {
         // プレイ時のアニメーション
@@ -680,6 +708,23 @@ public class CardObject : BaseFieldObject
             if(GetCardData().HaveKeyword((GameEnum.KeywordAbility)i))
             {
                 activeEffect.Add(effectObject[i]);
+                if ((GameEnum.KeywordAbility)i == KeywordAbility.Countdown)
+                {
+                    // カウントダウンは残りカウント数に応じてエフェクトを変える
+                    TextMeshProUGUI text = effectObject[i].GetComponentInChildren<TextMeshProUGUI>();
+                    if (text != null)
+                    {
+                        int index = GetCardData().GetKeywordAbility((GameEnum.KeywordAbility)i).param;
+                        if (index >= 0)
+                        {
+                            text.text = index.ToString();
+                        }
+                        else
+                        {
+                            text.text = "";
+                        }
+                    }
+                }
             }
         }
 
