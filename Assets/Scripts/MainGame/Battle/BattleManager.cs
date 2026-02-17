@@ -255,6 +255,10 @@ public class BattleManager : SystemObject
 
         // 自分のターンなら手札とフィールドのカードの選択可能状態を更新
         field.OnStartTurn(IsOwnTurn());
+
+        bool isOwnTurn = instance.IsOwnTurn();
+        AbilityManager.TriggerTiming timing = isOwnTurn ? AbilityManager.TriggerTiming.OwnTurnStart : AbilityManager.TriggerTiming.OpponentTurnStart;
+        AbilityManager.Trigger(timing, isOwnTurn);
     }
 
     public async UniTask MainTurn()
@@ -365,6 +369,11 @@ public class BattleManager : SystemObject
         field.OnEndTurn(isOwn);
         if (isOwn)
             player[currentPlayerIndex].hand.SetOwnHandCardPlayable(false);
+
+        bool isOwnTurn = instance.IsOwnTurn();
+        AbilityManager.TriggerTiming timing = isOwnTurn ? AbilityManager.TriggerTiming.OwnTurnEnd : AbilityManager.TriggerTiming.OpponentTurnEnd;
+        AbilityManager.Trigger(timing, isOwnTurn);
+
         // ターン終了処理
         currentPlayerIndex = (currentPlayerIndex + 1) % 2;
 

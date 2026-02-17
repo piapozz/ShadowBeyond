@@ -513,7 +513,7 @@ MonoBehaviour:
       Cost: 1
       Attack: 1
       Defence: 1
-      Token: 0
+      Token: 1
       Trait: 05000000
     - ID: 600
       Class: 7
