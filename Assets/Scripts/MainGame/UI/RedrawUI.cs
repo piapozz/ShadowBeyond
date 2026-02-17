@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Unity.VisualScripting;
 using Sequence = DG.Tweening.Sequence;
+using static BattleManager;
+using System;
 
 public class RedrawUI : MonoBehaviour
 {
@@ -196,14 +198,24 @@ public class RedrawUI : MonoBehaviour
         // 相手のマリガン処理
         var opponent = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OPPONENT);
         int opponentRedrawCount = opponentIsRedraw.FindAll(isRedraw => isRedraw).Count;
+        List<CardData> poolCard = opponent.deck.PeekDeck(opponentRedrawCount);
         List<CardData> returnCard = new List<CardData>();
+        List<Sequence> opponentRedrawSequence = new List<Sequence>();
+        List<int> redrawIndex = new List<int>();
         for (int i = 0; i < opponentIsRedraw.Count; i++)
         {
             if (!opponentIsRedraw[i]) continue;
             returnCard.Add(opponent.hand.GetCardAt(i));
+            redrawIndex.Add(i);
         }
         opponent.hand.ReturnCardToDeck(returnCard);
-        opponent.deck.DrawDeck(opponentRedrawCount);
+        for (int i = 0; i < redrawIndex.Count; i++)
+        {
+            int index = redrawIndex[i];
+            opponentRedrawSequence.AddRange(UIManager.instance.GetInsertDrawCardSequence((int)GameEnum.PlayerType.OPPONENT, poolCard[0], i));
+            opponent.hand.InsertCardAt(poolCard[i], index);
+        }
+        UIManager.instance.AddSequence(opponentRedrawSequence);
 
         await UIManager.instance.IsCompleteAllSequenceTask();
         // 相手の手札

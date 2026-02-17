@@ -491,6 +491,20 @@ public class UIManager : SystemObject
         handUI.InsertDrawCard(isMine, drawCardObject, deckTransform, index);
     }
 
+    public List<Sequence> GetInsertDrawCardSequence(int playerID, CardData drawCard, int index)
+    {
+        CardObject drawCardObject;
+        CardObject cardObject = GetUnuseCardObject();
+        // カードデータセット
+        cardObject.SetCardData(drawCard);
+        cardObject.SetCardState(CardState.HAND);
+        drawCardObject = cardObject;
+
+        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
+        Transform deckTransform = isMine ? ownDeckObject.transform : opponentDeckObject.transform;
+        return handUI.GetInsertDrawCardSequence(isMine, drawCardObject, deckTransform, index);
+    }
+
     /// <summary>
     /// デッキにカードを戻す
     /// </summary>

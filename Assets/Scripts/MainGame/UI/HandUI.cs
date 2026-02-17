@@ -68,6 +68,27 @@ public class HandUI : MonoBehaviour
         UIManager.instance.AddSequence(drawSequence);
     }
 
+    public List<Sequence> GetInsertDrawCardSequence(bool isMine, CardObject drawCard, Transform deckRoot, int index)
+    {
+        List<Sequence> drawSequence = new List<Sequence>();
+        // カードの諸設定をし、ドローするアニメーションを登録
+        drawCard.SetIsLocal(isMine);
+        if (isMine)
+        {
+            ownHandCards.Insert(index, drawCard);
+            drawSequence.Add(drawCard.DrawOwnCard(deckRoot, ownDrawRoot, cardSlotList[index], ownHandRoot, 0.5f));
+        }
+        else
+        {
+            opponentHandCards.Insert(index, drawCard);
+            drawSequence.Add(drawCard.DrawOpponentCard(deckRoot, cardSlotList[index], opponentHandRoot));
+        }
+
+        drawSequence.AddRange(ArrangeHandCard(isMine, 1));
+        drawSequence.Add(AudioManager.instance.PlaySESequence(AudioManager.SEType.CARD_DRAW));
+        return drawSequence;
+    }
+
     // カードを戻す
     public void ReturnCardDeck(bool isMine, List<CardObject> returnCards, Transform deckRoot)
     {

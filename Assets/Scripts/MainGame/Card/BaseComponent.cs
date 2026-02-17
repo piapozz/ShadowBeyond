@@ -14,6 +14,12 @@ public abstract class BaseComponent
 
     public BaseFieldObject GetObject()
     {
+        if (_getObject == null)
+        {
+            var obj = UIManager.instance.GetUnuseCardObject();
+            obj.SetCardData((CardData)this);
+            SetGetObjectAction(() => obj);
+        }
         return _getObject();
     }
 
