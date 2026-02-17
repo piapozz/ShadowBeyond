@@ -32,7 +32,7 @@ public class CardDetailUI : MonoBehaviour
         {
             SetCardText(card.name, card.defaultCost, card.text, card.crestText, card.typeDetail);
             if (isInGame)
-                SetButton(setActAction, setFusionAction, isOwnTurn, card.canAct, card.canFusion);
+                SetButton(setActAction, setFusionAction, card.GetObject().isLocal, card.canAct, card.canFusion, isOwnTurn);
             else
                 UnactiveButton();
         }
@@ -65,7 +65,7 @@ public class CardDetailUI : MonoBehaviour
         cardTypeText.text = typeText;
     }
 
-    private void SetButton(Action setActAction, Action setFusionAction, bool isOwn, bool canAct, bool canFusion)
+    private void SetButton(Action setActAction, Action setFusionAction, bool isOwn, bool canAct, bool canFusion, bool isOwnTurn)
     {
         if (setActAction == null)
         {
@@ -76,7 +76,7 @@ public class CardDetailUI : MonoBehaviour
             actArea.gameObject.SetActive(true);
             actButton.onClick.RemoveAllListeners();
             actButton.onClick.AddListener(() => setActAction());
-            actButton.interactable = isOwn && canAct;
+            actButton.interactable = isOwn && canAct && isOwnTurn;
         }
         if (setFusionAction == null)
         {
@@ -87,7 +87,7 @@ public class CardDetailUI : MonoBehaviour
             fusionArea.gameObject.SetActive(true);
             fusionButton.onClick.RemoveAllListeners();
             fusionButton.onClick.AddListener(() => setFusionAction());
-            fusionButton.interactable = isOwn && canFusion;
+            fusionButton.interactable = isOwn && canFusion && isOwnTurn;
         }
     }
 
