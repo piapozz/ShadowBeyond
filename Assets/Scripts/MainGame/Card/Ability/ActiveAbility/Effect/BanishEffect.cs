@@ -9,6 +9,18 @@ public class BanishEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        foreach (var target in context.targets)
+        {
+            if (target is CardData targetCard)
+            {
+                ExecuteEffect(targetCard);
+            }
+        }
+        return null;
+    }
+
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         targetCard.Banish();
@@ -19,9 +31,12 @@ public class BanishEffect : BaseEffect
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
-        for (int i = 0, max = targetCards.Count; i < max; i++)
+        foreach (var target in targetCards)
         {
-            ExecuteEffect(targetCards[i]);
+            if (target is CardData targetCard)
+            {
+                ExecuteEffect(targetCard);
+            }
         }
     }
 }

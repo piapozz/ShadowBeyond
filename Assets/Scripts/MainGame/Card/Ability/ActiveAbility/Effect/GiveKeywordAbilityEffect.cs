@@ -9,6 +9,18 @@ public class GiveKeywordAbilityEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        foreach (var target in context.targets)
+        {
+            if (target is CardData targetCard)
+            {
+                ExecuteEffect(targetCard, context.sourceCard);
+            }
+        }
+        return null;
+    }
+
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         KeywordAbilityInstance keywordAbility = new KeywordAbilityInstance((GameEnum.KeywordAbility)param[0], sourceCard);
@@ -17,9 +29,12 @@ public class GiveKeywordAbilityEffect : BaseEffect
 
     public override void ExecuteEffect(List<CardData> targetCards, CardData sourceCard = null)
     {
-        for (int i = 0, max = targetCards.Count; i < max; i++)
+        foreach (var target in targetCards)
         {
-            ExecuteEffect(targetCards[i], sourceCard);
+            if (target is CardData targetCard)
+            {
+                ExecuteEffect(targetCard, sourceCard);
+            }
         }
     }
 }

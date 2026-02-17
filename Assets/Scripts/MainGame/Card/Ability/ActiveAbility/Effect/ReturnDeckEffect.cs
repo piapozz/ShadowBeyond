@@ -9,6 +9,26 @@ public class ReturnDeckEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        List<CardObject> cardObjects = new List<CardObject>();
+        // デッキに追加
+        Deck targetDeck = context.player.deck;
+        Hand targetHand = context.player.hand;
+        for (int i = 0, max = context.targets.Count; i < max; i++)
+        {
+            // カードでないならスキップ
+            if (!(context.targets[i] is CardData targetCard)) continue;
+            targetDeck.AddCard(targetCard);
+            // 手札から除外
+            targetHand.RemoveCard(targetCard);
+            cardObjects.Add(targetCard.GetCardObject());
+        }
+        // 挙動
+        UIManager.instance.SetReturnDeckSequence(cardObjects, context.isOwn);
+        return null;
+    }
+
     public override void ExecuteEffect(CardData targetCard, CardData sourceCard = null)
     {
         bool isOwn = targetCard.GetObject().isLocal;

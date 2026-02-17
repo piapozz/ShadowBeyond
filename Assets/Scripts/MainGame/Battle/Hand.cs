@@ -83,7 +83,7 @@ public class Hand
         card.SetCanPlay(false);
         handCardList.Remove(card);
         if (toField)
-            field.PlayCard(card, playerID);
+            field.EnterCard(card, playerID == 0 ? true: false);
     }
 
     /// <summary>
@@ -228,5 +228,15 @@ public class Hand
     public List<CardData> GetCards(TargetCondition condition)
     {
         return BattleManager.instance.GetCards(handCardList, condition);
+    }
+
+    public void SpellBoost(int boostCount)
+    {
+        for (int i = 0, max = handCardList.Count; i < max; i++)
+        {
+            KeywordAbilityInstance keyword = handCardList[i].GetKeywordAbility(GameEnum.KeywordAbility.SpellBoost);
+            if (keyword == null) return;
+            keyword.AddParam(boostCount);
+        }
     }
 }

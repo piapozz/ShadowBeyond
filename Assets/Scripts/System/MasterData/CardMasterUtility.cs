@@ -17,7 +17,7 @@ public class CardMasterUtility
             for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
             {
                 if (cardMasterList[i][j].ID == -1) continue;
-                CardData setCardData = GetCardData(cardMasterList[i][j]);
+                CardData setCardData = GetCardData(cardMasterList[i][j], false);
                 setCardData.SetPackType((PackType)i);
                 allCardList.Add(setCardData);
             }
@@ -29,7 +29,7 @@ public class CardMasterUtility
     /// </summary>
     /// <param name="ID"></param>
     /// <returns></returns>
-    public static CardData GetCardData(int ID)
+    public static CardData GetCardData(int ID, bool inGame)
     {
         List<List<Param>> cardMasterList = MasterDataManager.cardData;
         CardData cardData = null;
@@ -38,7 +38,7 @@ public class CardMasterUtility
             for (int j = 0, paramMax = cardMasterList[i].Count; j < paramMax; j++)
             {
                 if (cardMasterList[i][j].ID != ID) continue;
-                cardData = GetCardData(cardMasterList[i][j]);
+                cardData = GetCardData(cardMasterList[i][j], inGame);
                 cardData.SetPackType((PackType)i);
             }
         }
@@ -50,7 +50,7 @@ public class CardMasterUtility
     /// </summary>
     /// <param name="cardMaster"></param>
     /// <returns></returns>
-    public static CardData GetCardData(Param cardMaster)
+    public static CardData GetCardData(Param cardMaster, bool isGame)
     {
         CardData cardData = new CardData(
             cardMaster.ID,
@@ -64,7 +64,8 @@ public class CardMasterUtility
             cardMaster.Token,
             cardMaster.Trait);
         // テキストデータ取得
-        cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID));
+        cardData.SetText(CardTextMasterUtility.GetCardText(cardMaster.ID), CardTextMasterUtility.GetCardCrestText(cardMaster.ID));
+        if (isGame) cardData.Init();
         return cardData;
     }
 }

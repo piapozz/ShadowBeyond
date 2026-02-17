@@ -191,7 +191,7 @@ public class RedrawUI : MonoBehaviour
         var player = BattleManager.instance.GetPlayer((int)GameEnum.PlayerType.OWN);
         var playerHand = player.hand.GetCards((card)=> null != card);
         // カードを手札の位置に移動
-        UIManager.instance.AddHandCard((int)GameEnum.PlayerType.OWN, playerHand);
+        UIManager.instance.AddHandCard(true, playerHand);
         // 手札カードリスト
         Debug.Log($"[Battle] 🃏 手札カードリスト: {string.Join(", ", playerHand.ConvertAll(card => card != null ? card.name : "null"))}");
 

@@ -43,7 +43,7 @@ public class CardData : BaseComponent
     // ダメージの蓄積
     public int damage { get; private set; } = 0;
     // ステータスのバフ/デバフ
-    public List<FollowerStatus> addStatus { get; private set; }
+    public List<FollowerStatus> addStatus { get; private set; } = new List<FollowerStatus>();
     // 基本ステータス
     public FollowerStatus status { get; private set; }
     // プレイ可能かどうか
@@ -70,6 +70,7 @@ public class CardData : BaseComponent
     public int defaultCost { get; private set; }
     // カードテキスト
     public string text { get; private set; }
+    public string crestText { get; private set; }
     public bool isToken { get; private set; }
     public PackType packType { get; private set; }
     // 能力クラス
@@ -97,17 +98,15 @@ public class CardData : BaseComponent
         status = new FollowerStatus(setAttack, setDefence);
         isToken = setToken;
         SetTrait(setTrait);
-
-        Init();
     }
 
     public void Init()
     {
-        addStatus = new List<FollowerStatus>();
         ability = AbilityFactory.GetAbility(id);
         if (ability == null) return;
         ability.Initialize(this);
     }
+
 
     private void SetTrait(int[] setTrait)
     {
@@ -149,6 +148,38 @@ public class CardData : BaseComponent
         GetCardObject().SetAttackPermissionLook();
     }
 
+    /// <summary>
+    /// 場に出たとき処理
+    /// </summary>
+    /// <param name="isOwn"></param>
+    public void OnEnterField(bool isOwn)
+    {
+        if (ability == null) return;
+        int abilityCount = ability.activeAbilities.Count;
+        if (abilityCount <= 0) return;
+        // アビリティを登録
+        for (int i = 0; i < abilityCount; i++)
+        {
+            AbilityManager.SubscribeAbility(ability.activeAbilities[i]);
+        }
+    }
+
+    /// <summary>
+    /// 場を離れたとき処理
+    /// </summary>
+    /// <param name="isOwn"></param>
+    public void OnLeaveField(bool isOwn)
+    {
+        if (ability == null) return;
+        int abilityCount = ability.activeAbilities.Count;
+        if (abilityCount <= 0) return;
+        // アビリティを登録解除
+        for (int i = 0; i < abilityCount; i++)
+        {
+            AbilityManager.UnsubscribeAbility(ability.activeAbilities[i]);
+        }
+    }
+
     public void OnAct()
     {
         canAct = false;
@@ -182,9 +213,10 @@ public class CardData : BaseComponent
         cost = newCost;
     }
 
-    public void SetText(string setText)
+    public void SetText(string setText, string setCrestText = null)
     {
         text = setText;
+        crestText = setCrestText;
     }
 
     public void SetAbility(List<ActiveAbility> newAbility)
@@ -290,15 +322,13 @@ public class CardData : BaseComponent
     public void Destroy()
     {
         isDestroyed = true;
+        bool isOwn = GetObject().isLocal;
         // フィールドから除去
-        BattleManager.instance.field.RemoveCard(this);
+        BattleManager.instance.field.RemoveCard(this, isOwn);
         // ラストワード発動タイミング
         if (ability == null) return;
-        ability.LastWord(GetObject().isLocal);
+        ability.LastWord(isOwn);
         // リーダーに記録
-        var isLocal = GetObject().isLocal;
-        Leader leader = BattleManager.instance.GetPlayer(isLocal ? 0 : 1).leader;
-        leader.AddHistory(BattleStatType.DestroyedFollowers, this);
     }
 
     // 消滅
@@ -306,7 +336,7 @@ public class CardData : BaseComponent
     {
         isDestroyed = true;
         // フィールドから除去
-        BattleManager.instance.field.RemoveCard(this);
+        BattleManager.instance.field.RemoveCard(this, GetObject().isLocal);
     }
 
     /// <summary>

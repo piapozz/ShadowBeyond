@@ -9,6 +9,15 @@ public class HealEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        foreach (var target in context.targets)
+        {
+             ExecuteEffect(target);
+        }
+        return null;
+    }
+
     public override void ExecuteEffect(BaseComponent targetComponent)
     {
         targetComponent.HealDamage(param[0]);
@@ -16,6 +25,9 @@ public class HealEffect : BaseEffect
 
     public override void ExecuteEffect(List<BaseComponent> targetComponents)
     {
-        targetComponents.ForEach(component => component.HealDamage(param[0]));
+        foreach (var target in targetComponents)
+        {
+            ExecuteEffect(target);
+        }
     }
 }

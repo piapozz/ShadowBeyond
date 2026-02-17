@@ -26,7 +26,7 @@ public class CardImage : MonoBehaviour
     {
         cardId = id;
         if(cardObject != null) cardObject.SetActive(false);
-        var cardData = CardMasterUtility.GetCardData(cardId);
+        var cardData = CardMasterUtility.GetCardData(cardId, false);
         switch (cardData.type)
         {
             case GameEnum.CardType.FOLLOWER:

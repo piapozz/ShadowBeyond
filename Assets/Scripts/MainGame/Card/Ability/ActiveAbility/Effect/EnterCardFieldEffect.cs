@@ -9,19 +9,24 @@ public class EnterCardFieldEffect : BaseEffect
 
     }
 
+    public override List<CardData> ExecuteEffect(EffectContext context)
+    {
+        return ExecuteEffect(context.isOwn);
+    }
+
     public override List<CardData> ExecuteEffect(bool isOwn)
     {
         List<CardData> enterCardList = new List<CardData>();
         List<CardObject> enterCardObjectList = new List<CardObject>();
 
-        for (int i = 0; i < param[1]; ++i) 
-        { 
+        for (int i = 0; i < param[1]; ++i)
+        {
             // ƒJ[ƒh‚ð¶¬
             CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
             enterCardObjectList.Add(enterCard);
             enterCardList.Add(enterCard.GetCardData());
         }
-        BattleManager.instance.field.PlayCards(enterCardList, isOwn);
+        BattleManager.instance.field.EnterCards(enterCardList, isOwn);
         UIManager.instance.EnterFieldSequence(enterCardObjectList, isOwn);
 
         return enterCardList;

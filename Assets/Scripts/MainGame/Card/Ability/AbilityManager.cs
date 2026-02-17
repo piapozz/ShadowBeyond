@@ -9,39 +9,46 @@ public class AbilityManager
     public enum TriggerTiming
     {
         None = 0,
-        OwnTurnStart,       //自分のターン開始時
-        OwnTurnEnd,         //自分のターン終了時
-        OpponentTurnStart,  //相手のターン開始時
-        OpponentTurnEnd,    //相手のターン終了時
-        Play,               //自分がカードをプレイしたとき
-        OwnEnterField,      //自分の場にフォロワーが出たとき
-        OpponentEnterField, //相手の場にフォロワーが出たとき
-        Evolve,             //自分のフォロワーが進化したとき
-        OwnSuperEvolve,     //自分のフォロワーが超進化したとき
-        OpponentSuperEvolve,//相手のフォロワーが超進化したとき
-        Destory,            //自分のフォロワーが破壊されたとき
-        LeaveField,         //自分のフォロワーが場を離れたとき
-        OwnAttack,          //自分のフォロワーが攻撃した時
-        OpponentAttack,     //相手のフォロワーが攻撃した時
-        HealLeader,         //自分のリーダーが回復した時
-        Engage,             //自分のアミュレットをアクトしたとき
-        Draw,               //自分がカードを引いたとき
-        Mode,               //自分がモードを選んだとき
-        Fuse,               //自分が融合したとき
-        DamageFollower,     //自分のフォロワーがダメージを受けたとき
+        OwnTurnStart,   // ターン開始時
+        OwnTurnEnd,     // ターン終了時
+        OwnPlay,        // カードをプレイしたとき
+        OwnEnterField,  // 場にフォロワーが出たとき
+        OwnEvolve,      // フォロワーが進化したとき
+        OwnSuperEvolve, // フォロワーが超進化したとき
+        OwnDestory,     // フォロワーが破壊されたとき
+        OwnLeaveField,  // フォロワーが場を離れたとき
+        OwnAttack,      // フォロワーが攻撃した時
+        OwnHealLeader,  // リーダーが回復した時
+        OwnEngage,      // アミュレットをアクトしたとき
+        OwnDraw,        // カードを引いたとき
+        OwnMode,        // モードを選んだとき
+        OwnFuse,        // 融合したとき
+        OwnDamageFollower,      // フォロワーがダメージを受けたとき
+        OpponentTurnStart,      // ターン開始時
+        OpponentTurnEnd,        // ターン終了時
+        OpponentPlay,           // カードをプレイしたとき
+        OpponentEnterField,     // 場にフォロワーが出たとき
+        OpponentEvolve,         // フォロワーが進化したとき
+        OpponentSuperEvolve,    // フォロワーが超進化したとき
+        OpponentDestory,        // フォロワーが破壊されたとき
+        OpponentLeaveField,     // フォロワーが場を離れたとき
+        OpponentAttack,         // フォロワーが攻撃した時
+        OpponentHealLeader,     // リーダーが回復した時
+        OpponentEngage,         // アミュレットをアクトしたとき
+        OpponentDraw,           // カードを引いたとき
+        OpponentMode,           // モードを選んだとき
+        OpponentFuse,           // 融合したとき
+        OpponentDamageFollower, // フォロワーがダメージを受けたとき
     }
 
-    public static AbilityManager instance { get; private set; }
-
     // 実行待機キュー
-    private Queue<ActiveAbility> _timingQueue = null;
+    private static Queue<ActiveAbility> _waitQueue = null;
 
-    private Dictionary<TriggerTiming, List<ActiveAbility>> subscribeAbility;
+    private static Dictionary<TriggerTiming, List<ActiveAbility>> subscribeAbility;
 
-    public void Initialize()
+    public static void Initialize()
     {
-        instance = this;
-        _timingQueue = new Queue<ActiveAbility>();
+        _waitQueue = new Queue<ActiveAbility>();
         subscribeAbility = new Dictionary<TriggerTiming, List<ActiveAbility>>();
     }
 
@@ -49,23 +56,40 @@ public class AbilityManager
     /// トリガーの通知
     /// </summary>
     /// <param name="timing"></param>
-    public void Trigger(TriggerTiming addTrigger)
+    public static void Trigger(TriggerTiming addTrigger, bool isOwnTurn)
     {
         // 誘発する能力の検索、ソートして実行キューに追加
-        List<ActiveAbility> activeAbilities = SortActiveAbility(addTrigger);
+        List<ActiveAbility> activeAbilities = SortActiveAbility(addTrigger, isOwnTurn);
         for (int i = 0, max = activeAbilities.Count; i < max; i++)
         {
-            _timingQueue.Enqueue(activeAbilities[i]);
+            _waitQueue.Enqueue(activeAbilities[i]);
         }
         // 誘発能力発動
         ExecuteEffect();
     }
 
-    public List<ActiveAbility> SortActiveAbility(TriggerTiming sortTiming)
+    /// <summary>
+    /// 誘発する能力のソート
+    /// </summary>
+    /// <param name="sortTiming"></param>
+    /// <returns></returns>
+    public static List<ActiveAbility> SortActiveAbility(TriggerTiming sortTiming, bool isOwnTurn)
     {
         List<ActiveAbility> sortList = subscribeAbility[sortTiming];
         sortList.Sort((a, b) =>
         {
+            // 自ターンなら自分の能力から、相手ターンなら相手の能力からソート
+            if (a.isOwn != b.isOwn)
+            {
+                // 自ターンなら自分を先
+                if (isOwnTurn)
+                    return a.isOwn ? -1 : 1;
+                // 相手ターンなら相手を先
+                else
+                    return a.isOwn ? 1 : -1;
+            }
+
+            // 場所でソート
             return a.zone.CompareTo(b.zone);
         });
         return sortList;
@@ -74,15 +98,19 @@ public class AbilityManager
     /// <summary>
     /// キューに登録されている能力の実行
     /// </summary>
-    public void ExecuteEffect()
+    public static void ExecuteEffect()
     {
         // キューが空になるまで実行
-        while (_timingQueue.Count > 0)
+        while (_waitQueue.Count > 0)
         {
-            ActiveAbility ability = _timingQueue.Dequeue();
-            bool isOwn = ability.sourceCard.GetObject().isLocal;
-            List<BaseComponent> components = BattleManager.instance.GetTargetComponent(ability.target, isOwn);
-            ability.effect.ExecuteEffect(components);
+            // キューから削除
+            ActiveAbility ability = _waitQueue.Dequeue();
+            // 対象を取得
+            List<BaseComponent> components = BattleManager.instance.GetTargetComponent(ability.target, ability.isOwn);
+            // 能力発動時に渡すクラス作成
+            EffectContext context = new EffectContext(components, ability.sourceCard, ability.isOwn, ability.player, ability.detailCondition);
+            // 能力を発動
+            ability.effect.ExecuteEffect(context);
         }
     }
 
@@ -91,12 +119,21 @@ public class AbilityManager
     /// </summary>
     /// <param name="timing"></param>
     /// <param name="ability"></param>
-    public void SubscribeAbility(TriggerTiming timing, ActiveAbility ability)
+    public static void SubscribeAbility(ActiveAbility ability)
     {
-        if (!subscribeAbility.ContainsKey(timing))
+        if (!subscribeAbility.ContainsKey(ability.timing))
         {
-            subscribeAbility[timing] = new List<ActiveAbility>();
+            subscribeAbility[ability.timing] = new List<ActiveAbility>();
         }
-        subscribeAbility[timing].Add(ability);
+        subscribeAbility[ability.timing].Add(ability);
+    }
+
+    /// <summary>
+    /// 能力の登録解除
+    /// </summary>
+    /// <param name="ability"></param>
+    public static void UnsubscribeAbility(ActiveAbility ability)
+    {
+        subscribeAbility[ability.timing].Remove(ability);
     }
 }

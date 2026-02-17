@@ -146,7 +146,7 @@ public class UIManager : SystemObject
         {
             actAction = () =>
             {
-                cardDetailUI.EnableUI(false);
+                cardDetailUI.EnableUI(false, true);
                 CardActionExecutor.TryAct(cardData, cardObject.isLocal);
             };
         }
@@ -158,11 +158,11 @@ public class UIManager : SystemObject
             fusionAction = () =>
             {
                 cardData.ability.Fuse(cardObject.isLocal);
-                cardDetailUI.EnableUI(false);
+                cardDetailUI.EnableUI(false, true);
             };
         }
         bool isOwnTurn = BattleManager.instance.IsOwnTurn();
-        cardDetailUI.EnableUI(true, cardData, actAction, fusionAction, isOwnTurn);
+        cardDetailUI.EnableUI(true, true, cardData, actAction, fusionAction, isOwnTurn);
     }
 
     /// <summary>
@@ -194,12 +194,12 @@ public class UIManager : SystemObject
         // カードオブジェクトでないなら詳細画面を閉じる
         if (clickObject == null || cardObject == null)
         {
-            cardDetailUI.EnableUI(false);
+            cardDetailUI.EnableUI(false, true);
             return;
         }
         // 相手の手札は詳細画面を出さない
         if (clickObject.isLocal || cardObject.currentState == CardState.FIELD) return;
-        cardDetailUI.EnableUI(false);
+        cardDetailUI.EnableUI(false, true);
     }
 
     private void ClickSelectState(BaseFieldObject clickObject)
@@ -311,7 +311,7 @@ public class UIManager : SystemObject
     // ターン終了
     public void EndTurn()
     {
-        cardDetailUI.EnableUI(false);
+        cardDetailUI.EnableUI(false, true);
     }
 
     /// <summary>
@@ -337,7 +337,7 @@ public class UIManager : SystemObject
     public CardObject GetNewCardObject(int cardId)
     {
         CardObject newCard = GetUnuseCardObject();
-        newCard.SetCardData(CardMasterUtility.GetCardData(cardId));
+        newCard.SetCardData(CardMasterUtility.GetCardData(cardId, true));
         return newCard;
     }
 
@@ -527,7 +527,7 @@ public class UIManager : SystemObject
     }
 
     // 手札にカードを加える
-    public void AddHandCard(int playerID, List<CardData> addCard)
+    public void AddHandCard(bool isOwn, List<CardData> addCard)
     {
         int addCardNum = addCard.Count;
         List<CardObject> drawCardObjects = new List<CardObject>(addCardNum);
@@ -539,8 +539,7 @@ public class UIManager : SystemObject
             cardObject.SetCardState(CardObject.CardState.HAND);
             drawCardObjects.Add(cardObject);
         }
-        bool isMine = playerID == (int)GameEnum.PlayerType.OWN;
-        handUI.AddHandCard(isMine, drawCardObjects);
+        handUI.AddHandCard(isOwn, drawCardObjects);
     }
 
     public void EnterFieldSequence(List<CardObject> enterCards, bool isOwn)

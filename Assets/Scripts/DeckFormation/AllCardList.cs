@@ -66,7 +66,7 @@ public class AllCardList : MonoBehaviour
         // トークンカードを除外
         cardDatas.RemoveAll(card =>
         {
-            var data = CardMasterUtility.GetCardData(card.id);
+            var data = CardMasterUtility.GetCardData(card.id, false);
             return data.isToken == true;
         }
         );
@@ -78,7 +78,7 @@ public class AllCardList : MonoBehaviour
     // 更新処理
     public void UpdateCardList()
     {
-        var cardData = CardMasterUtility.GetCardData(currentPage);
+        var cardData = CardMasterUtility.GetCardData(currentPage, false);
 
         for(int i = currentPage * CardsPerPage; i < (currentPage + 1) * CardsPerPage; i++)
         {
@@ -113,7 +113,7 @@ public class AllCardList : MonoBehaviour
         // トークンカードを除外
         cardDatas.RemoveAll(card => 
             {
-                var data = CardMasterUtility.GetCardData(card.id);
+                var data = CardMasterUtility.GetCardData(card.id, false);
                 return data.isToken == true;
             }
         );
@@ -175,7 +175,7 @@ public class AllCardList : MonoBehaviour
         // トークンカードを除外
         cardDatas.RemoveAll(card =>
         {
-            var data = CardMasterUtility.GetCardData(card.id);
+            var data = CardMasterUtility.GetCardData(card.id, false);
             return data.isToken == true;
         }
         );
