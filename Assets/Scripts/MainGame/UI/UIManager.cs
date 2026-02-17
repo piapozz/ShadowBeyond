@@ -413,8 +413,10 @@ public class UIManager : SystemObject
     /// </summary>
     /// <param name="playCard"></param>
     /// <param name="isMine"></param>
-    public void PlayOwnCard(CardObject playCard)
+    public async UniTask PlayOwnCard(CardObject playCard)
     {
+        // 能力の選択がキャンセルされなければ場に出す
+
         // 手札から除外しフィールドに追加
         int handIndex =　handUI.GetOwnHandIndex(playCard);
         handUI.RemoveHandCard(true, playCard);

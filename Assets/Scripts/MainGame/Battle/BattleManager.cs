@@ -104,6 +104,7 @@ public class BattleManager : SystemObject
     public override async UniTask Initialize()
     {
         instance = this;
+        AbilityManager.Initialize();
 
         currentState = BattleState.START_BATTLE;
         localPlayerIndex = NetworkManager.Instance.localPlayerId;
