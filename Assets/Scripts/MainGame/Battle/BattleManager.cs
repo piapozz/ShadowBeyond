@@ -638,148 +638,148 @@ public class BattleManager : SystemObject
     }
 
     // 手札を表示
-    public void OnGUI()
-    {
-        if (!IsGame || player == null) return;
+    //public void OnGUI()
+    //{
+    //    if (!IsGame || player == null) return;
 
-        const int width = 300;
-        const int height = 1100;
+    //    const int width = 300;
+    //    const int height = 1100;
 
-        GUILayout.BeginArea(new Rect(10, 10, width, height), GUI.skin.box);
-        GUILayout.Label("=== Battle Debug GUI ===");
+    //    GUILayout.BeginArea(new Rect(10, 10, width, height), GUI.skin.box);
+    //    GUILayout.Label("=== Battle Debug GUI ===");
 
-        GUILayout.Space(5);
-        GUILayout.Label($"State : {currentState}");
-        GUILayout.Label($"Turn Player : {currentPlayerIndex}");
-        GUILayout.Label($"Is Own Turn : {IsOwnTurn()}");
+    //    GUILayout.Space(5);
+    //    GUILayout.Label($"State : {currentState}");
+    //    GUILayout.Label($"Turn Player : {currentPlayerIndex}");
+    //    GUILayout.Label($"Is Own Turn : {IsOwnTurn()}");
 
-        GUILayout.Space(10);
+    //    GUILayout.Space(10);
 
-        // ===== プレイヤー情報 =====
-        for (int i = 0; i < player.Length; i++)
-        {
-            var p = player[i];
-            if (p.leader == null) continue;
+    //    // ===== プレイヤー情報 =====
+    //    for (int i = 0; i < player.Length; i++)
+    //    {
+    //        var p = player[i];
+    //        if (p.leader == null) continue;
 
-            // ===== 手札の中身 =====
-            GUILayout.Label("Hand Cards:");
-            // ===== スクロールビュー開始 =====
-            Vector2 scrollPos = (i == (int)GameEnum.PlayerType.OWN)
-            ? handScrollPosOwn
-            : handScrollPosOpp;
+    //        // ===== 手札の中身 =====
+    //        GUILayout.Label("Hand Cards:");
+    //        // ===== スクロールビュー開始 =====
+    //        Vector2 scrollPos = (i == (int)GameEnum.PlayerType.OWN)
+    //        ? handScrollPosOwn
+    //        : handScrollPosOpp;
 
-            scrollPos = GUILayout.BeginScrollView(
-                scrollPos,
-                GUILayout.Height(100)
-            );
+    //        scrollPos = GUILayout.BeginScrollView(
+    //            scrollPos,
+    //            GUILayout.Height(100)
+    //        );
 
-            var cards = p.hand.GetCards((card) => { return card != null; });
-            for (int j = 0; j < cards.Count; j++)
-            {
-                var card = cards[j];
+    //        var cards = p.hand.GetCards((card) => { return card != null; });
+    //        for (int j = 0; j < cards.Count; j++)
+    //        {
+    //            var card = cards[j];
 
-                GUILayout.BeginHorizontal(GUI.skin.box);
+    //            GUILayout.BeginHorizontal(GUI.skin.box);
 
-                GUILayout.Label(
-                    $"[{j}] ID:{card.id}  {card.name}",
-                    GUILayout.Width(250)
-                );
+    //            GUILayout.Label(
+    //                $"[{j}] ID:{card.id}  {card.name}",
+    //                GUILayout.Width(250)
+    //            );
 
-                GUILayout.EndHorizontal();
-            }
-            GUILayout.EndScrollView();
-            GUILayout.Space(10);
+    //            GUILayout.EndHorizontal();
+    //        }
+    //        GUILayout.EndScrollView();
+    //        GUILayout.Space(10);
 
-            // デッキの中身
-            GUILayout.Label("Deck Cards:");
-            Vector2 deckScrollPos = (i == (int)GameEnum.PlayerType.OWN)
-            ? deckScrollPosOwn
-            : deckScrollPosOpp;
+    //        // デッキの中身
+    //        GUILayout.Label("Deck Cards:");
+    //        Vector2 deckScrollPos = (i == (int)GameEnum.PlayerType.OWN)
+    //        ? deckScrollPosOwn
+    //        : deckScrollPosOpp;
 
-            deckScrollPos = GUILayout.BeginScrollView(
-                deckScrollPos,
-                GUILayout.Height(100)
-            );
+    //        deckScrollPos = GUILayout.BeginScrollView(
+    //            deckScrollPos,
+    //            GUILayout.Height(100)
+    //        );
 
-            var deckCards = p.deck.GetCards((card) => { return card != null; });
-            for (int j = 0; j < deckCards.Count; j++)
-            {
-                var card = deckCards[j];
+    //        var deckCards = p.deck.GetCards((card) => { return card != null; });
+    //        for (int j = 0; j < deckCards.Count; j++)
+    //        {
+    //            var card = deckCards[j];
 
-                GUILayout.BeginHorizontal(GUI.skin.box);
+    //            GUILayout.BeginHorizontal(GUI.skin.box);
 
-                GUILayout.Label(
-                    $"[{j}] ID:{card.id}  {card.name}",
-                    GUILayout.Width(250)
-                );
+    //            GUILayout.Label(
+    //                $"[{j}] ID:{card.id}  {card.name}",
+    //                GUILayout.Width(250)
+    //            );
 
-                GUILayout.EndHorizontal();
-            }
-            GUILayout.EndScrollView();
-            GUILayout.Space(10);
+    //            GUILayout.EndHorizontal();
+    //        }
+    //        GUILayout.EndScrollView();
+    //        GUILayout.Space(10);
 
-            // ===== 場の中身 =====
-            GUILayout.Label("Field Cards:");
-            // ===== スクロールビュー開始 =====
-            Vector2 fieldscrollPos = (i == (int)GameEnum.PlayerType.OWN)
-            ? fieldScrollPosOwn
-            : fieldScrollPosOpp;
+    //        // ===== 場の中身 =====
+    //        GUILayout.Label("Field Cards:");
+    //        // ===== スクロールビュー開始 =====
+    //        Vector2 fieldscrollPos = (i == (int)GameEnum.PlayerType.OWN)
+    //        ? fieldScrollPosOwn
+    //        : fieldScrollPosOpp;
 
-            fieldscrollPos = GUILayout.BeginScrollView(
-                fieldscrollPos,
-                GUILayout.Height(100)
-            );
+    //        fieldscrollPos = GUILayout.BeginScrollView(
+    //            fieldscrollPos,
+    //            GUILayout.Height(100)
+    //        );
 
-            List<CardData> fieldCards;
-            if (i == 0)
-            {
-                fieldCards = field._ownFieldCardList;
-            }
-            else
-            {
-                fieldCards = field._opponentFieldCardList;
-            }
-            for (int j = 0; j < fieldCards.Count; j++)
-            {
-                var card = fieldCards[j];
+    //        List<CardData> fieldCards;
+    //        if (i == 0)
+    //        {
+    //            fieldCards = field._ownFieldCardList;
+    //        }
+    //        else
+    //        {
+    //            fieldCards = field._opponentFieldCardList;
+    //        }
+    //        for (int j = 0; j < fieldCards.Count; j++)
+    //        {
+    //            var card = fieldCards[j];
 
-                GUILayout.BeginHorizontal(GUI.skin.box);
+    //            GUILayout.BeginHorizontal(GUI.skin.box);
 
-                GUILayout.Label(
-                    $"[{j}] ID:{card.id}  {card.name}",
-                    GUILayout.Width(250)
-                );
+    //            GUILayout.Label(
+    //                $"[{j}] ID:{card.id}  {card.name}",
+    //                GUILayout.Width(250)
+    //            );
 
-                GUILayout.EndHorizontal();
-            }
-            GUILayout.EndScrollView();
-            GUILayout.Space(10);
+    //            GUILayout.EndHorizontal();
+    //        }
+    //        GUILayout.EndScrollView();
+    //        GUILayout.Space(10);
 
-            // スクロール位置保存
-            if (i == (int)GameEnum.PlayerType.OWN)
-                handScrollPosOwn = scrollPos;
-            else
-                handScrollPosOpp = scrollPos;
+    //        // スクロール位置保存
+    //        if (i == (int)GameEnum.PlayerType.OWN)
+    //            handScrollPosOwn = scrollPos;
+    //        else
+    //            handScrollPosOpp = scrollPos;
 
-            if (i == (int)GameEnum.PlayerType.OWN)
-                deckScrollPosOwn = deckScrollPos;
-            else
-                deckScrollPosOpp = deckScrollPos;
+    //        if (i == (int)GameEnum.PlayerType.OWN)
+    //            deckScrollPosOwn = deckScrollPos;
+    //        else
+    //            deckScrollPosOpp = deckScrollPos;
 
-            if (i == (int)GameEnum.PlayerType.OWN)
-                fieldScrollPosOwn = fieldscrollPos;
-            else
-                fieldScrollPosOpp = fieldscrollPos;
-        }
+    //        if (i == (int)GameEnum.PlayerType.OWN)
+    //            fieldScrollPosOwn = fieldscrollPos;
+    //        else
+    //            fieldScrollPosOpp = fieldscrollPos;
+    //    }
 
-        GUI.enabled = IsOwnTurn() && currentState == BattleState.MAIN_TURN;
-        if (GUILayout.Button("End Turn"))
-        {
-            SendInputData(GameEnum.InputType.TURN_END);
-            SetCurrentState(BattleState.END_TURN);
-        }
-        GUI.enabled = true;
+    //    GUI.enabled = IsOwnTurn() && currentState == BattleState.MAIN_TURN;
+    //    if (GUILayout.Button("End Turn"))
+    //    {
+    //        SendInputData(GameEnum.InputType.TURN_END);
+    //        SetCurrentState(BattleState.END_TURN);
+    //    }
+    //    GUI.enabled = true;
 
-        GUILayout.EndArea();
-    }
+    //    GUILayout.EndArea();
+    //}
 }
