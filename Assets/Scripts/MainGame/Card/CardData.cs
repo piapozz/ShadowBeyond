@@ -154,13 +154,17 @@ public class CardData : BaseComponent
     /// <param name="isOwn"></param>
     public void OnEnterField(bool isOwn)
     {
+        AbilityManager.TriggerTiming timing = isOwn ? AbilityManager.TriggerTiming.OwnEnterField : AbilityManager.TriggerTiming.OpponentEnterField;
+        bool isOwnTurn = BattleManager.instance.IsOwnTurn();
+        AbilityManager.Trigger(timing, isOwnTurn, this);
+
         if (ability == null) return;
         int abilityCount = ability.activeAbilities.Count;
         if (abilityCount <= 0) return;
         // ƒAƒrƒŠƒeƒB‚ð“o˜^
         for (int i = 0; i < abilityCount; i++)
         {
-            AbilityManager.SubscribeAbility(ability.activeAbilities[i]);
+            AbilityManager.SubscribeAbility(ability.activeAbilities[i], isOwn);
         }
     }
 

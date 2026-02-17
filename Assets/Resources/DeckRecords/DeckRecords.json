@@ -4,11 +4,11 @@
             "cards": [
                 {
                     "cardId": 301,
-                    "count": 3
+                    "count": 2
                 },
                 {
                     "cardId": 303,
-                    "count": 3
+                    "count": 1
                 },
                 {
                     "cardId": 0,
@@ -28,10 +28,6 @@
                 },
                 {
                     "cardId": 100,
-                    "count": 3
-                },
-                {
-                    "cardId": 103,
                     "count": 3
                 },
                 {
@@ -63,7 +59,15 @@
                     "count": 1
                 },
                 {
+                    "cardId": 206,
+                    "count": 3
+                },
+                {
                     "cardId": 306,
+                    "count": 3
+                },
+                {
+                    "cardId": 505,
                     "count": 3
                 }
             ]

@@ -12,12 +12,11 @@ public class CardAbility_206 : BaseCardAbility
 
         // 自分のフォロワーが場に出たとき、それは+1/+1する。
         activeAbilities.Add(new ActiveAbility(AbilityManager.TriggerTiming.OwnEnterField,
-           new Target(Target.TargetSide.Own, Target.TargetZone.Field, new TargetCondition(), 1),
+           null,
            new BuffEffect(new List<int> { 1 ,1 }),
            null,
            ActiveAbility.Zone.Field,
            sourceData.GetObject().isLocal,
            sourceData));
     }
-
 }
