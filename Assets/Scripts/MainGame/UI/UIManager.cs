@@ -828,6 +828,11 @@ public class UIManager : SystemObject
         backCanvas.enabled = false;
     }
 
+    public bool IsSelectUI()
+    {
+        return state == UIState.SELECT;
+    }
+
     public void OnGUI()
     {
         // デバッグ用UI

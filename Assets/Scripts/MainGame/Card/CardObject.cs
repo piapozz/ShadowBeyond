@@ -74,6 +74,7 @@ public class CardObject : BaseFieldObject
             UIManager.instance.SetCardDetailUI(this);
         }
         if (!isLocal) return;
+        if (UIManager.instance.IsSelectUI()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -99,6 +100,7 @@ public class CardObject : BaseFieldObject
     private void OnMouseDrag()
     {
         if (!isLocal) return;
+        if (UIManager.instance.IsSelectUI()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -130,6 +132,7 @@ public class CardObject : BaseFieldObject
     private async void OnMouseUp()
     {
         if (!isLocal) return;
+        if (UIManager.instance.IsSelectUI()) return;
         switch (currentState)
         {
             case CardState.HAND:
@@ -539,12 +542,9 @@ public class CardObject : BaseFieldObject
         }
         // プレイ
         PlayCard(isOwn);
-        if (isOwn)
-        {
-            // 手札からプレイ
-            Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-            currentHand.PlayCard(GetCardData(), false);
-        }
+        // 手札からプレイ
+        Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
+        currentHand.PlayCard(GetCardData(), false);
     }
 
     public void PlayCard(bool isOwn)
