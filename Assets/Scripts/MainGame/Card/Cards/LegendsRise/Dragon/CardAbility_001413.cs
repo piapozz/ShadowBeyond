@@ -2,21 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardAbility_716 : BaseCardAbility
+// 【ファンファーレ】相手の場のフォロワーすべては-0/-9する。
+// 【超進化時】自分のデッキから3枚を引く。
+
+public class CardAbility_001413 : BaseCardAbility
 {
     public override void Initialize(CardData setCard)
     {
         sourceData = setCard;
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Storm));
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Aura));
-        keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward));
     }
 
     public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, !isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard.Count <= 0) return;
-        DamageEffect damageEffect = new DamageEffect(new List<int> { 5 });
+        BuffEffect buffEffect = new BuffEffect(new List<int> { 0, -9 });
 
         List<BaseComponent> components = new List<BaseComponent>();
         BaseComponent component;
@@ -25,9 +25,13 @@ public class CardAbility_716 : BaseCardAbility
             component = card;
             components.Add(component);
         }
-        damageEffect.ExecuteEffect(components);
-        HealEffect healEffect = new HealEffect(new List<int> { 5 });
-        component = GetPlayer(isOwn).leader;
-        healEffect.ExecuteEffect(component);
+        buffEffect.ExecuteEffect(components);
+    }
+
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
+    {
+        DrawEffect effect = new DrawEffect(new List<int> { 3 });
+        var targetDeck = GetPlayer(isOwn).deck;
+        effect.ExecuteEffect(targetDeck);
     }
 }

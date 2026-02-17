@@ -1,3 +1,4 @@
+using CartoonFX;
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,6 +22,9 @@ public class EffectManager : SystemObject
 
     [SerializeField]
     private List<GameObject> effectPrefab = null;
+
+    [SerializeField]
+    private GameObject textEffectPrefab = null;
 
     public enum EffectType
     {
@@ -53,5 +57,15 @@ public class EffectManager : SystemObject
     {
         GameObject prefab = effectPrefab[(int)type];
         Instantiate(prefab, position, Quaternion.identity);
+    }
+
+    // テキストエフェクト再生
+    public void PlayTextEffect(string text, Vector3 position, float sec)
+    {
+        GameObject prefab = textEffectPrefab;
+        var obj = Instantiate(prefab, position, Quaternion.identity);
+        obj.GetComponent<CFXR_ParticleText>().SetText(text);
+
+        CommonModule.WaitAction(sec, () => Destroy(obj));
     }
 }

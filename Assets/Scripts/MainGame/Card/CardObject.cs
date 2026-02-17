@@ -691,6 +691,11 @@ public class CardObject : BaseFieldObject
         EffectManager.Instance.PlayEffect(type, transform.position + new Vector3(0, 1.0f, 0), sec);
     }
 
+    public void PlayTextEffect(string text, float sec)
+    {
+        EffectManager.Instance.PlayTextEffect(text, transform.position + new Vector3(0, 1.0f, 0), sec);
+    }
+
     public List<GameObject> GetCardEffectList()
     {
         List<GameObject> activeEffect = new List<GameObject>();
