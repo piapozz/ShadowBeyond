@@ -18,6 +18,8 @@ public class CardLook : MonoBehaviour
     private TextMeshPro cardDefence = null;
     [SerializeField]
     private MeshRenderer cardFrame = null;
+    [SerializeField]
+    private GameObject imageObj = null;
 
     public void SetCardText(CardData setCardData)
     {
@@ -26,6 +28,15 @@ public class CardLook : MonoBehaviour
         FollowerStatus status = setCardData.GetCurrentStatus();
         SetCardAttack(status.m_attack);
         SetCardDefence(status.m_defance);
+        SetCardImae(setCardData.id);
+    }
+
+    public void SetCardImae(int id)
+    {
+         Texture tex = CardTextureRegistry.GetTexture(id);
+        if (tex == null) return;
+        Material imageMaterial = imageObj.GetComponent<MeshRenderer>().material;
+        imageMaterial.SetTexture("_MainTex", tex);
     }
 
     public void SetCardName(string setName)

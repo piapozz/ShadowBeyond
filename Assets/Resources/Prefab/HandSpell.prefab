@@ -324,6 +324,7 @@ MonoBehaviour:
   cardAttack: {fileID: 0}
   cardDefence: {fileID: 0}
   cardFrame: {fileID: 6994092605345530433}
+  imageObj: {fileID: 2878626742014813859}
 --- !u!1 &8743668646707800176
 GameObject:
   m_ObjectHideFlags: 0
@@ -609,6 +610,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: fc874b06d075056408983e93e72f5a03, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39dc62fcaffd8354192284e72b93ea3f, type: 3}
+--- !u!1 &2878626742014813859 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -7242125498906614995, guid: 39dc62fcaffd8354192284e72b93ea3f, type: 3}
+  m_PrefabInstance: {fileID: 4362900619848369550}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3480520749585397983 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 39dc62fcaffd8354192284e72b93ea3f, type: 3}

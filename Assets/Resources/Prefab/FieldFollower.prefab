@@ -225,6 +225,7 @@ MonoBehaviour:
   cardAttack: {fileID: 7424573736009994342}
   cardDefence: {fileID: 3427186777069469758}
   cardFrame: {fileID: 2962049096389283714}
+  imageObj: {fileID: 8538436801007046066}
 --- !u!1 &8996522960611331379
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,5 +484,10 @@ GameObject:
 --- !u!4 &6342438084934848420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1785572e44e68b140ad7f9bdfa5f327d, type: 3}
+  m_PrefabInstance: {fileID: 6885551556650739791}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8538436801007046066 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3022192018704819709, guid: 1785572e44e68b140ad7f9bdfa5f327d, type: 3}
   m_PrefabInstance: {fileID: 6885551556650739791}
   m_PrefabAsset: {fileID: 0}
