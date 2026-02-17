@@ -20,7 +20,7 @@ public class AddCardHandEffect : BaseEffect
             CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
             enterCard.SetCardState(CardObject.CardState.HAND);
             addCardObjectList.Add(enterCard);
-            addCardList.Add(enterCard.cardData);
+            addCardList.Add(enterCard.GetCardData());
         }
         targetHand.AddCards(addCardList);
         UIManager.instance.AddHandCard(targetHand.playerID, addCardList);

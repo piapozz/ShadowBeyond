@@ -199,6 +199,54 @@ public class Field
         return false;
     }
 
+    /// <summary>
+    /// 自分の場のカード参照インデックス取得
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public int GetOwnFieldIndex(CardData card)
+    {
+        if (card == null) return -1;
+
+        return _ownFieldCardList.IndexOf(card);
+    }
+
+    /// <summary>
+    /// 相手の場のカード参照インデックス取得
+    /// </summary>
+    /// <param name="card"></param>
+    /// <returns></returns>
+    public int GetOpponentFieldIndex(CardData card)
+    {
+        if (card == null) return -1;
+
+        return _opponentFieldCardList.IndexOf(card);
+    }
+
+    public int GetFieldIndex(BaseComponent component)
+    {
+        bool isOwn = component.GetObject().isLocal;
+        if (component is Leader)
+        {
+            return isOwn ? 0 : 1;
+        }
+
+        if (component is CardData)
+        {
+            if (isOwn)
+            {
+                int index = GetOwnFieldIndex((CardData)component);
+                return index + 2;
+            }
+            else
+            {
+                int index = GetOpponentFieldIndex((CardData)component);
+                return index + 2 + _ownFieldCardList.Count;
+            }
+        }
+        return -1;
+    }
+
     // ===== 効果系 =====
     // 攻撃力をバフ/デバフ
     public void ModifyAttack(int value, System.Func<CardData, bool> condition = null)

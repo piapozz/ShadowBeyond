@@ -16,18 +16,21 @@ public class LeaderObject : BaseFieldObject
     [SerializeField]
     private Material frameMaterial = null;
 
-    public Leader leader { get; private set; } = null;
-
     /// <summary>
     /// ƒŠ[ƒ_[‚Ìî•ñ‚ğİ’è
     /// </summary>
     /// <param name="setLeader"></param>
     public void Initialize(Leader setLeader)
     {
-        leader = setLeader;
-        leader.SetGetObjectAction(() => { return this; });
+        component = setLeader;
+        GetLeader().SetGetObjectAction(() => { return this; });
         evolvePointObject.Initialize(false, isLocal);
         superEvolvePointObject.Initialize(true, isLocal);
+    }
+
+    public Leader GetLeader()
+    {
+        return (Leader)component;
     }
 
     public void SetDefenceText(int setDefence)

@@ -14,16 +14,8 @@ public class CardActionExecutor
     /// <returns></returns>
     private static async UniTask<TargetSelectResult> SelectTarget(List<BaseComponent> selectTarget, int targetCount)
     {
-        // オブジェクトのリストに変換
-        int targetObjectCount = selectTarget.Count;
-        List<BaseFieldObject> targetObjects = new List<BaseFieldObject>(targetObjectCount);
-        for (int i = 0, max = targetObjectCount; i < max; i++)
-        {
-            BaseFieldObject obj = selectTarget[i].GetObject();
-            targetObjects.Add(obj);
-        }
         TargetSelectResult selectResult = await UIManager.instance.SelectTargetAsync(
-            targetObjects, targetCount);
+            selectTarget, targetCount);
         return selectResult;
     }
 

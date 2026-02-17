@@ -138,7 +138,7 @@ public class UIManager : SystemObject
 
     public void SetCardDetailUI(CardObject cardObject)
     {
-        CardData cardData = cardObject.cardData;
+        CardData cardData = cardObject.GetCardData();
         // アクトを持っていて、場にあるならボタンを登録
         Action actAction = null;
         if (cardData.HaveKeyword(GameEnum.KeywordAbility.Engage) && 
@@ -351,16 +351,6 @@ public class UIManager : SystemObject
         return handUI.GetOwnHandIndex(card);
     }
 
-    public int GetOwnFieldIndex(CardObject card)
-    {
-        return fieldUI.GetOwnFieldIndex(card);
-    }
-
-    public int GetOpponentFieldIndex(CardObject card)
-    {
-        return fieldUI.GetOpponentFieldIndex(card);
-    }
-
     public CardObject GetOpponentCard(int index)
     {
         return fieldUI.GetOpponentCard(index);
@@ -411,7 +401,7 @@ public class UIManager : SystemObject
         // 手札整列と手札から出すアニメーション登録
         SetCardPlaySequence(true, playCard);
 
-        switch (playCard.cardData.type)
+        switch (playCard.GetCardData().type)
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
@@ -438,7 +428,7 @@ public class UIManager : SystemObject
         // 手札整列と手札から出すアニメーション登録
         SetCardPlaySequence(false, playCard);
 
-        switch (playCard.cardData.type)
+        switch (playCard.GetCardData().type)
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
@@ -723,16 +713,16 @@ public class UIManager : SystemObject
     public class TargetSelectResult
     {
         public bool result;
-        public List<BaseFieldObject> selected;
+        public List<BaseComponent> selected;
     }
     private UniTaskCompletionSource<TargetSelectResult> _selectTcs;
 
     private int _selectCount;
     private List<BaseFieldObject> _candidates;
-    private List<BaseFieldObject> _selected = new();
+    private List<BaseComponent> _selected = new();
 
     public UniTask<TargetSelectResult> SelectTargetAsync(
-    List<BaseFieldObject> candidates, int selectCount)
+    List<BaseComponent> candidates, int selectCount)
     {
         // 二重選択防止
         if (_selectTcs != null)
@@ -740,8 +730,18 @@ public class UIManager : SystemObject
             Debug.Log("二重選択");
         }
 
+
+        // オブジェクトのリストに変換
+        int targetObjectCount = candidates.Count;
+        List<BaseFieldObject> targetObjects = new List<BaseFieldObject>(targetObjectCount);
+        for (int i = 0, max = targetObjectCount; i < max; i++)
+        {
+            BaseFieldObject obj = candidates[i].GetObject();
+            targetObjects.Add(obj);
+        }
+
         _selectCount = selectCount;
-        _candidates = candidates;
+        _candidates = targetObjects;
         _selected.Clear();
 
         _selectTcs = new UniTaskCompletionSource<TargetSelectResult>();
@@ -769,14 +769,14 @@ public class UIManager : SystemObject
         if (!_candidates.Contains(fieldObject)) return;
 
         // 既に選択されている場合はトグル
-        if (_selected.Contains(fieldObject))
+        if (_selected.Contains(fieldObject.component))
         {
-            _selected.Remove(fieldObject);
+            _selected.Remove(fieldObject.component);
             fieldObject.SetSelected(false);
             return;
         }
         // 新規選択
-        _selected.Add(fieldObject);
+        _selected.Add(fieldObject.component);
         fieldObject.SetSelected(true);
 
         // 必要枚数選ばれたら完了
@@ -788,7 +788,7 @@ public class UIManager : SystemObject
 
     private void CompleteSelection(bool isComplete)
     {
-        List<BaseFieldObject> selected = isComplete ? _selected : null;
+        List<BaseComponent> selected = isComplete ? _selected : null;
         _selectTcs.TrySetResult(new TargetSelectResult
         {
             result = isComplete,
@@ -804,7 +804,6 @@ public class UIManager : SystemObject
         foreach (var card in _candidates)
         {
             card.EnableSelectable(false);
-            card.SetSelected(false);
             card.OnClick -= OnCardClicked;
         }
 

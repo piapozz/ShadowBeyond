@@ -45,7 +45,6 @@ public class CardObject : BaseFieldObject
     public CardState currentState { get; private set; } = CardState.HAND;
 
     // カードクラスの参照
-    public CardData cardData { get; private set; } = null;
     private GameObject[] cardObject = new GameObject[(int)CardState.MAX];
     public List<GameObject> GetCardObject() { return new List<GameObject>(cardObject); }
 
@@ -57,9 +56,14 @@ public class CardObject : BaseFieldObject
     /// </summary>
     public void SetCardData(CardData setCard)
     {
-        cardData = setCard;
-        cardData.SetGetObjectAction(() => { return this; });
+        component = setCard;
+        GetCardData().SetGetObjectAction(() => { return this; });
         SetCardLook();
+    }
+
+    public CardData GetCardData()
+    {
+        return (CardData)component;
     }
 
     private void OnMouseDown()
@@ -76,9 +80,9 @@ public class CardObject : BaseFieldObject
                 break;
             case CardState.FIELD:
                 // フォロワー以外は攻撃できない
-                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                if (GetCardData().type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.CanAttack(false)) return;
+                if (!GetCardData().CanAttack(false)) return;
                 UIManager.instance.SetUIState(UIManager.UIState.ATTACK);
                 // カードを持ち上げる
                 GetPickupSequence(true).Play();
@@ -99,7 +103,7 @@ public class CardObject : BaseFieldObject
         {
             case CardState.HAND:
                 // プレイ可能でないなら返す
-                if (!cardData.canPlay) return;
+                if (!GetCardData().canPlay) return;
                 // カードの位置更新
                 Vector3 position = UIManager.instance.GetMouseWorldPosition(transform);
                 position.y = OFFSET_Y;
@@ -107,9 +111,9 @@ public class CardObject : BaseFieldObject
                 break;
             case CardState.FIELD:
                 // フォロワー以外は攻撃できない
-                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                if (GetCardData().type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.CanAttack(false)) return;
+                if (!GetCardData().CanAttack(false)) return;
                 // 攻撃の線を出す
                 UIManager.instance.SetLineRenderer(lineRenderer, transform);
                 break;
@@ -130,15 +134,15 @@ public class CardObject : BaseFieldObject
         {
             case CardState.HAND:
                 // プレイ可能でないなら返す
-                if (!cardData.canPlay) return;
+                if (!GetCardData().canPlay) return;
                 // オブジェクトをUIにセット
                 UIManager.instance.DropCard(this);
                 break;
             case CardState.FIELD:
                 // フォロワー以外は攻撃できない
-                if (cardData.type != GameEnum.CardType.FOLLOWER) return;
+                if (GetCardData().type != GameEnum.CardType.FOLLOWER) return;
                 // 攻撃可否判定
-                if (!cardData.CanAttack(false)) return;
+                if (!GetCardData().CanAttack(false)) return;
                 lineRenderer.enabled = false;
                 // 攻撃処理
                 bool attackResult = Attack();
@@ -158,14 +162,14 @@ public class CardObject : BaseFieldObject
     {
         // 攻撃時に相手のフィールドのカードを持ち上げる
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        if (currentState != CardState.FIELD || cardData.type != GameEnum.CardType.FOLLOWER) return;
+        if (currentState != CardState.FIELD || GetCardData().type != GameEnum.CardType.FOLLOWER) return;
         GetPickupSequence(true).Play();
     }
 
     private void OnMouseExit()
     {
         if (isLocal || UIManager.instance.state != UIManager.UIState.ATTACK) return;
-        if (currentState != CardState.FIELD || cardData.type != GameEnum.CardType.FOLLOWER) return;
+        if (currentState != CardState.FIELD || GetCardData().type != GameEnum.CardType.FOLLOWER) return;
         GetPickupSequence(false).Play();
     }
 
@@ -213,21 +217,21 @@ public class CardObject : BaseFieldObject
     /// <param name="targetCard"></param>
     private bool AttackFollower(CardObject targetCard)
     {
-        CardData defenceCard = targetCard.cardData;
+        CardData defenceCard = targetCard.GetCardData();
         // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
         if (targetCard.currentState != CardState.FIELD || defenceCard.type != GameEnum.CardType.FOLLOWER) return false;
         // 攻撃可否判定
-        if (!cardData.CanAttack(false)) return false;
+        if (!GetCardData().CanAttack(false)) return false;
         if (!BattleManager.instance.IsAttackable(defenceCard)) return false;
 
         // 情報を送信
-        int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
-        int targetIndex = UIManager.instance.GetOpponentFieldIndex(targetCard);
+        int sourceIndex = BattleManager.instance.field.GetOwnFieldIndex(GetCardData());
+        int targetIndex = BattleManager.instance.field.GetOpponentFieldIndex(targetCard.GetCardData());
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
         // 挙動
         UIManager.instance.SetAttackFollowerSequence(this, targetCard);
         // 攻撃処理を依頼
-        BattleManager.instance.CardCombat(cardData, targetCard.cardData);
+        BattleManager.instance.CardCombat(GetCardData(), targetCard.GetCardData());
         return true;
     }
 
@@ -238,15 +242,15 @@ public class CardObject : BaseFieldObject
     private bool AttackLeader(LeaderObject leaderCard)
     {
         // 攻撃可否判定
-        if (!cardData.CanAttack(true)) return false;
+        if (!GetCardData().CanAttack(true)) return false;
         // 守護を持っているフォロワーがいるなら攻撃できない
         if (BattleManager.instance.IsWardOpponentField()) return false;
 
         // 情報を送信
-        int sourceIndex = UIManager.instance.GetOwnFieldIndex(this);
+        int sourceIndex = BattleManager.instance.field.GetOwnFieldIndex(GetCardData());
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_LEADER, new int[1] { sourceIndex });
         // 攻撃処理を依頼
-        BattleManager.instance.LeaderCombat(cardData, leaderCard.leader);
+        BattleManager.instance.LeaderCombat(GetCardData(), leaderCard.GetLeader());
         // 挙動
         UIManager.instance.SetAttackLeaderSequence(this);
         return true;
@@ -330,7 +334,7 @@ public class CardObject : BaseFieldObject
         }
 
         // オブジェクト設定
-        switch (cardData.type)
+        switch (GetCardData().type)
         {
             case GameEnum.CardType.FOLLOWER:
                 cardObject[(int)CardState.HAND] = Instantiate(cardPrefab[(int)CardObjectType.HAND_FOLLOWER], this.transform);
@@ -353,23 +357,23 @@ public class CardObject : BaseFieldObject
         // テキスト設定
         CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
         if (handLook == null) return;
-        handLook.SetCardText(cardData);
+        handLook.SetCardText(GetCardData());
         // マテリアル設定
-        handLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+        handLook.SetCardMaterial(cardMaterial[(int)GetCardData().rarity]);
 
         // フィールドオブジェクト設定
         // テキスト設定
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (handLook == null) return;
-        fieldLook.SetCardText(cardData);
+        fieldLook.SetCardText(GetCardData());
         // マテリアル設定
-        fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+        fieldLook.SetCardMaterial(cardMaterial[(int)GetCardData().rarity]);
 
         CardLook redrawLook = cardObject[(int)CardState.REDRAW].GetComponent<CardLook>();
         if (redrawLook == null) return;
-        redrawLook.SetCardText(cardData);
+        redrawLook.SetCardText(GetCardData());
         // マテリアル設定
-        redrawLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+        redrawLook.SetCardMaterial(cardMaterial[(int)GetCardData().rarity]);
 
         SetCardState(CardState.UNUSE);
     }
@@ -380,17 +384,17 @@ public class CardObject : BaseFieldObject
         // テキスト設定
         CardLook handLook = cardObject[(int)CardState.HAND].GetComponent<CardLook>();
         if (handLook == null) return;
-        handLook.SetCardText(cardData);
+        handLook.SetCardText(GetCardData());
 
         // フィールドオブジェクト設定
         // テキスト設定
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (handLook == null) return;
-        fieldLook.SetCardText(cardData);
+        fieldLook.SetCardText(GetCardData());
 
         CardLook redrawLook = cardObject[(int)CardState.REDRAW].GetComponent<CardLook>();
         if (redrawLook == null) return;
-        redrawLook.SetCardText(cardData);
+        redrawLook.SetCardText(GetCardData());
     }
 
     public Sequence GetFlipCard(float flipSpeed)
@@ -520,7 +524,7 @@ public class CardObject : BaseFieldObject
             });
         PlayCard(isOwn);
         Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-        currentHand.PlayCard(cardData, true);
+        currentHand.PlayCard(GetCardData(), true);
         return toFieldSequence;
     }
 
@@ -539,23 +543,23 @@ public class CardObject : BaseFieldObject
         {
             // 手札からプレイ
             Hand currentHand = BattleManager.instance.GetCurrentPlayer().hand;
-            currentHand.PlayCard(cardData, false);
+            currentHand.PlayCard(GetCardData(), false);
         }
     }
 
     public void PlayCard(bool isOwn)
     {
-        if (cardData == null) return;
+        if (GetCardData() == null) return;
         Leader leader = BattleManager.instance.GetCurrentPlayer().leader;
         // スペル、ファンファーレ、エンハンスはここで発動
-        int cardCost = cardData.GetPlayableCost(leader.currentPlayPoint);
+        int cardCost = GetCardData().GetPlayableCost(leader.currentPlayPoint);
         if (cardCost < 0) return;
         bool isEnhance = false;
-        if (cardCost != cardData.cost) isEnhance = true;
+        if (cardCost != GetCardData().cost) isEnhance = true;
         // PP消費
         leader.SetCurrentPlayPoint(leader.currentPlayPoint - cardCost);
         // プレイ時の能力
-        cardData.OnPlay(isOwn, isEnhance);
+        GetCardData().OnPlay(isOwn, isEnhance);
     }
 
     public Sequence GetEnterSequence(Transform enterTransform, Transform parent)
@@ -591,7 +595,7 @@ public class CardObject : BaseFieldObject
             .AppendCallback(() => AudioManager.instance.PlaySE(AudioManager.SEType.CARD_PLAY))
             .AppendInterval(0.3f);
         // カードタイプによって挙動を分ける
-        switch (cardData.type)
+        switch (GetCardData().type)
         {
             case GameEnum.CardType.FOLLOWER:
             case GameEnum.CardType.AMULET:
@@ -628,35 +632,35 @@ public class CardObject : BaseFieldObject
 
     public void EvolveFollower()
     {
-        cardData.SetEvolve();
+        GetCardData().SetEvolve();
         // モデルを切り替える
         cardObject[(int)CardState.FIELD].SetActive(false);
         cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.EVOLVE_FOLLOWER], this.transform);
         // テキスト設定
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (fieldLook == null) return;
-        fieldLook.SetCardText(cardData);
+        fieldLook.SetCardText(GetCardData());
         cardObject[(int)CardState.FIELD].SetActive(true);
         SetAttackPermissionLook();
     }
 
     public void SuperEvolveFollower()
     {
-        cardData.SetSuperEvolve();
+        GetCardData().SetSuperEvolve();
         // モデルを切り替える
         cardObject[(int)CardState.FIELD].SetActive(false);
         cardObject[(int)CardState.FIELD] = Instantiate(cardPrefab[(int)CardObjectType.SUPWER_EVOLVE_FOLLOWER], this.transform);
         // テキスト設定
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
         if (fieldLook == null) return;
-        fieldLook.SetCardText(cardData);
+        fieldLook.SetCardText(GetCardData());
         cardObject[(int)CardState.FIELD].SetActive(true);
         SetAttackPermissionLook();
     }
 
     public void CheckDestroyCard()
     {
-        if (!cardData.isDestroyed) return;
+        if (!GetCardData().isDestroyed) return;
 
         // フィールドから除外
         UIManager.instance.RemoveFieldCard(this);
@@ -673,7 +677,7 @@ public class CardObject : BaseFieldObject
         // ついている能力から表示するべきエフェクトを判定
         for (int i = 0; i < (int)GameEnum.KeywordAbility.MAX; i++)
         {
-            if(cardData.HaveKeyword((GameEnum.KeywordAbility)i))
+            if(GetCardData().HaveKeyword((GameEnum.KeywordAbility)i))
             {
                 activeEffect.Add(effectObject[i]);
             }
@@ -697,10 +701,10 @@ public class CardObject : BaseFieldObject
     public void SetAttackPermissionLook()
     {
         // フォロワー以外は無視
-        if (cardData.type != CardType.FOLLOWER) return;
+        if (GetCardData().type != CardType.FOLLOWER) return;
         // 現状はマテリアルで見た目変更
         CardLook fieldLook = cardObject[(int)CardState.FIELD].GetComponent<CardLook>();
-        CardData.AttackPermission currentAttackPermission = cardData.GetAttackPermission();
+        CardData.AttackPermission currentAttackPermission = GetCardData().GetAttackPermission();
         switch (currentAttackPermission)
         {
             case CardData.AttackPermission.NONE:
@@ -727,7 +731,7 @@ public class CardObject : BaseFieldObject
         switch (type)
         {
             case OutLineType.None:
-                fieldLook.SetCardMaterial(cardMaterial[(int)cardData.rarity]);
+                fieldLook.SetCardMaterial(cardMaterial[(int)GetCardData().rarity]);
                 break;
             case OutLineType.CanAttackFollower:
                 fieldLook.SetCardMaterial(outLineMaterials[((int)OutLineType.CanAttackFollower) - 1]);

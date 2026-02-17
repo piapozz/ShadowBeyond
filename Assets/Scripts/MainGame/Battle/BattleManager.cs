@@ -304,7 +304,7 @@ public class BattleManager : SystemObject
                 int evolveIndex = data.param[0];
                 CardObject evolveCard = UIManager.instance.GetOpponentCard(evolveIndex);
                 evolveCard.EvolveFollower();
-                evolveCard.cardData.ability.Evolve(false);
+                evolveCard.GetCardData().ability.Evolve(false);
                 break;
 
             case GameEnum.InputType.SUPER_EVOLVE:
@@ -312,14 +312,19 @@ public class BattleManager : SystemObject
                 int superEvolveIndex = data.param[0];
                 CardObject superEvolveCard = UIManager.instance.GetOpponentCard(superEvolveIndex);
                 superEvolveCard.SuperEvolveFollower();
-                superEvolveCard.cardData.ability.SuperEvolve(false);
+                superEvolveCard.GetCardData().ability.SuperEvolve(false);
                 break;
 
             case GameEnum.InputType.ACT:
                 // 能力使用
                 int actIndex = data.param[0];
                 CardObject actCard = UIManager.instance.GetOpponentCard(actIndex);
-                actCard.cardData.ability.Engage(false);
+                // 先頭の要素を消す
+                int[] newArray = new int[data.param.Length - 1];
+                Array.Copy(data.param, 1, newArray, 0, data.param.Length - 1);
+                data.param = newArray;
+                // 選択したコンポーネントを渡し、アクトを実行
+                actCard.GetCardData().ability.Engage(false, GetOpponentComponents(data.param));
                 break;
 
             case GameEnum.InputType.FUSION:
@@ -561,6 +566,32 @@ public class BattleManager : SystemObject
             return true;
 
         }).ToList();
+    }
+
+    /// <summary>
+    /// インデックスのリストからコンポーネントのリストを返す
+    /// </summary>
+    /// <param name="indexList"></param>
+    /// <returns></returns>
+    public List<BaseComponent> GetOpponentComponents(int[] indexList)
+    {
+        int indexCount = indexList.Length;
+        List<BaseComponent> components = new List<BaseComponent>(indexCount);
+        for (int i = 0; i < indexCount; i++)
+        {
+            int index = indexList[i];
+            if (index == 0) components[i] = player[(int)GameEnum.PlayerType.OPPONENT].leader;
+            else if (index == 1) components[i] = player[(int)GameEnum.PlayerType.OWN].leader;
+            else if (index > 1)
+            {
+                CardData card = field.GetFieldCard(indexList[i], Field.FieldType.OPPONENT);
+                if (card == null)
+                    card = field.GetFieldCard(indexList[i], Field.FieldType.OWN);
+                if (card != null)
+                    components[i] = card;
+            }
+        }
+        return components;
     }
 
     // ゲームを終了

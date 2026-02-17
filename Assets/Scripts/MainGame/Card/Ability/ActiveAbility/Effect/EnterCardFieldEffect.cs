@@ -19,7 +19,7 @@ public class EnterCardFieldEffect : BaseEffect
             // ƒJ[ƒh‚ğ¶¬
             CardObject enterCard = UIManager.instance.GetNewCardObject(param[0]);
             enterCardObjectList.Add(enterCard);
-            enterCardList.Add(enterCard.cardData);
+            enterCardList.Add(enterCard.GetCardData());
         }
         BattleManager.instance.field.PlayCards(enterCardList, isOwn);
         UIManager.instance.EnterFieldSequence(enterCardObjectList, isOwn);

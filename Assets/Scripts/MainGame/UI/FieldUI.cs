@@ -121,20 +121,6 @@ public class FieldUI : MonoBehaviour
         };
     }
 
-    public int GetOwnFieldIndex(CardObject cardObject)
-    {
-        if (cardObject == null) return -1;
-
-        return ownCards.IndexOf(cardObject);
-    }
-
-    public int GetOpponentFieldIndex(CardObject cardObject)
-    {
-        if (cardObject == null) return -1;
-
-        return opponentCards.IndexOf(cardObject);
-    }
-
     public CardObject GetOwnCard(int index)
     {
         return ownCards[index];
