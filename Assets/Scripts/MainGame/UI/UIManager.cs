@@ -35,7 +35,7 @@ public class UIManager : SystemObject
     [SerializeField] private PPUI opponentPPUI;
     //[SerializeField] private OptionUI optionUI;
     //[SerializeField] private HistoryUI historyUI;
-    //[SerializeField] private InfoUI infoUI;
+    [SerializeField] private InfoUI infoUI;
     [SerializeField] private LeaderUI leaderUI;
     [SerializeField] private GameObject ownDeckObject;
     [SerializeField] private GameObject opponentDeckObject;
@@ -134,6 +134,26 @@ public class UIManager : SystemObject
                 currentSequenceList[i].Play();
             }
         }
+    }
+
+    public void AddInfo(CardData cardData)
+    {
+        infoUI.AddDestroyInfo(cardData);
+    }
+
+    public void AddInfo(ActiveAbility crest)
+    {
+        infoUI.AddCrestInfo(crest);
+    }
+
+    public void RemoveInfo(CardData cardData)
+    {
+        infoUI.RemoveDestroyInfo(cardData);
+    }
+
+    public void RemoveInfo(ActiveAbility crest)
+    {
+        infoUI.RemoveCrestInfo(crest);
     }
 
     public void SetCardDetailUI(CardObject cardObject)
@@ -849,7 +869,7 @@ public class UIManager : SystemObject
         opponentPPUI.gameObject.SetActive(false);
         //optionUI.gameObject.SetActive(false);
         //historyUI.gameObject.SetActive(false);
-        //infoUI.gameObject.SetActive(false);
+        infoUI.gameObject.SetActive(false);
         leaderUI.gameObject.SetActive(false);
         cardDetailUI.gameObject.SetActive(false);
     }
@@ -863,7 +883,7 @@ public class UIManager : SystemObject
         opponentPPUI.gameObject.SetActive(true);
         //optionUI.gameObject.SetActive(true);
         //historyUI.gameObject.SetActive(true);
-        //infoUI.gameObject.SetActive(true);
+        infoUI.gameObject.SetActive(true);
         leaderUI.gameObject.SetActive(true);
         cardDetailUI.gameObject.SetActive(true);
     }
