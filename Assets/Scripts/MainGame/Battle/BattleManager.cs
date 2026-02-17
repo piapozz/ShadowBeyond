@@ -322,9 +322,8 @@ public class BattleManager : SystemObject
                 // 先頭の要素を消す
                 int[] newArray = new int[data.param.Length - 1];
                 Array.Copy(data.param, 1, newArray, 0, data.param.Length - 1);
-                data.param = newArray;
                 // 選択したコンポーネントを渡し、アクトを実行
-                actCard.GetCardData().ability.Engage(false, GetOpponentComponents(data.param));
+                actCard.GetCardData().ability.Engage(false, GetOpponentComponents(newArray));
                 break;
 
             case GameEnum.InputType.FUSION:
@@ -580,16 +579,15 @@ public class BattleManager : SystemObject
         for (int i = 0; i < indexCount; i++)
         {
             int index = indexList[i];
-            if (index == 0) components[i] = player[(int)GameEnum.PlayerType.OPPONENT].leader;
-            else if (index == 1) components[i] = player[(int)GameEnum.PlayerType.OWN].leader;
+            if (index == 0) components.Add(player[(int)GameEnum.PlayerType.OPPONENT].leader);
+            else if (index == 1) components.Add(player[(int)GameEnum.PlayerType.OWN].leader);
             else if (index > 1)
             {
-                CardData card = field.GetFieldCard(indexList[i], Field.FieldType.OPPONENT);
-                if (card == null)
-                    card = field.GetFieldCard(indexList[i], Field.FieldType.OWN);
-                if (card != null)
-                    components[i] = card;
+                int fixIndex = indexList[i] - 2;
+                CardData card = field.GetFieldCard(fixIndex, Field.FieldType.REVERSE_ALL);
+                components.Add(card);
             }
+            else components.Add(null);
         }
         return components;
     }

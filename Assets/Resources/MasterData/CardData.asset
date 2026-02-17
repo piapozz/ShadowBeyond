@@ -877,7 +877,7 @@ MonoBehaviour:
       Defence: 2
       Token: 1
       Trait: 00000000
-    - ID: 1009
+    - ID: 1010
       Class: 0
       Rarity: 3
       Type: 0
@@ -887,7 +887,7 @@ MonoBehaviour:
       Defence: 13
       Token: 1
       Trait: 00000000
-    - ID: 1010
+    - ID: 1011
       Class: 0
       Rarity: 3
       Type: 0
@@ -897,7 +897,7 @@ MonoBehaviour:
       Defence: 6
       Token: 1
       Trait: 00000000
-    - ID: 1011
+    - ID: 1012
       Class: 0
       Rarity: 3
       Type: 0
@@ -907,7 +907,7 @@ MonoBehaviour:
       Defence: 10
       Token: 1
       Trait: 00000000
-    - ID: 1012
+    - ID: 1013
       Class: 0
       Rarity: 3
       Type: 1

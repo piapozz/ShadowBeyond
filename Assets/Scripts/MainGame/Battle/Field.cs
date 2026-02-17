@@ -12,7 +12,8 @@ public class Field
     {
         OWN,
         OPPONENT,
-        ALL
+        ALL,
+        REVERSE_ALL
     }
 
     const int MAX_FIELD = 5;
@@ -23,6 +24,14 @@ public class Field
         var result = new List<CardData>();
         result.AddRange(_ownFieldCardList);
         result.AddRange(_opponentFieldCardList);
+        return result;
+    }
+
+    private List<CardData> GetAllReverseFieldCards()
+    {
+        var result = new List<CardData>();
+        result.AddRange(_opponentFieldCardList);
+        result.AddRange(_ownFieldCardList);
         return result;
     }
 
@@ -87,6 +96,9 @@ public class Field
                 break;
             case FieldType.ALL:
                 list = GetAllFieldCards();
+                break;
+            case FieldType.REVERSE_ALL:
+                list = GetAllReverseFieldCards();
                 break;
         }
         if (list == null) return null;

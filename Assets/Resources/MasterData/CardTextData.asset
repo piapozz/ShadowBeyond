@@ -275,16 +275,16 @@ MonoBehaviour:
     - ID: 1009
       Name: "\u30B4\u30D6\u30EA\u30F3"
       CardText: '-'
-    - ID: 1009
+    - ID: 1010
       Name: "\u30B5\u30BF\u30F3\u30BA\u30B5\u30FC\u30F4\u30A1\u30F3\u30C8"
       CardText: '-'
-    - ID: 1010
+    - ID: 1011
       Name: "\u8FBA\u7344\u306E\u60AA\u9B3C"
       CardText: "\u3010\u30D5\u30A1\u30F3\u30D5\u30A1\u30FC\u30EC\u3011\u76F8\u624B\u306E\u5834\u306E\u30D5\u30A9\u30ED\u30EF\u30FC2\u679A\u3092\u9078\u3076\u3002\u305D\u308C\u3068\u76F8\u624B\u306E\u30EA\u30FC\u30C0\u30FC\u306B6\u30C0\u30E1\u30FC\u30B8\u3002"
-    - ID: 1011
+    - ID: 1012
       Name: "\u6C88\u9ED9\u306E\u9B54\u5C06"
       CardText: "\u3010\u75BE\u8D70\u3011"
-    - ID: 1012
+    - ID: 1013
       Name: "\u30A2\u30B9\u30BF\u30ED\u30C8\u306E\u5BA3\u544A"
       CardText: "\u76F8\u624B\u306E\u30EA\u30FC\u30C0\u30FC\u306E\u4F53\u529B\u306E\u6700\u5927\u5024\u30921\u306B\u3059\u308B\u3002"
     - ID: 1100
