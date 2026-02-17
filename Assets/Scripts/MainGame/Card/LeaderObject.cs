@@ -43,6 +43,11 @@ public class LeaderObject : BaseFieldObject
         EffectManager.Instance.PlayEffect(type, transform.position, sec);
     }
 
+    public void PlayTextEffect(string text, float sec)
+    {
+        EffectManager.Instance.PlayTextEffect(text, transform.position, sec);
+    }
+
     public override void SetObjectOutLine(OutLineType type)
     {
         // 現状はマテリアルで見た目変更

@@ -206,6 +206,7 @@ public class Leader : BaseComponent
         SetCurrentDefense(currentDefense - damage);
         // ƒ_ƒ[ƒW‚ğó‚¯‚½‚Ìˆ—
         GetLeaderObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
+        GetLeaderObject().PlayTextEffect(damage.ToString(), 1.0f);
     }
 
     public override void HealDamage(int heal)

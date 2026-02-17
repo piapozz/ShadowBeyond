@@ -10,13 +10,6 @@ public class CardAbility_000001 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward, null));
     }
 
-    public override void Enhance(bool isOwn, List<BaseComponent> selected = null)
-    {
-        // effect‚É“n‚·
-        BuffEffect effect = new BuffEffect(new List<int> { 3, 3 });
-        effect.ExecuteEffect(sourceData);
-    }
-
     public override void LastWord(bool isOwn)
     {
         // ˆê–‡ˆø‚­

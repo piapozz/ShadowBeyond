@@ -54,3 +54,4 @@ MonoBehaviour:
   - {fileID: 5825773663736292529, guid: ec3f6335f037aa241a68672e8cd8cfb1, type: 3}
   - {fileID: 9034434110889469010, guid: 36962d5cd348afd43bac4b86566f9721, type: 3}
   - {fileID: 4141723568791099230, guid: 4318b088cf58e3341aa9e9ceeb44193e, type: 3}
+  textEffectPrefab: {fileID: 3334672129944077777, guid: 36caf423fd151f247b6c7ff998a63126, type: 3}

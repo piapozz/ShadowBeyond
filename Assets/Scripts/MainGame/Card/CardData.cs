@@ -339,6 +339,7 @@ public class CardData : BaseComponent
 
         GetCardObject().UpdateText();
         GetCardObject().PlayEffect(EffectManager.EffectType.AttackDamage, 1.0f);
+        GetCardObject().PlayTextEffect(damage.ToString(), 1.0f);
         AudioManager.instance.PlaySE(AudioManager.SEType.DAMAGE);
         CheckDestroyed();
     }

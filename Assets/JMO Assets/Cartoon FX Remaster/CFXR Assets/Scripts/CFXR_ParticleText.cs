@@ -20,7 +20,7 @@ namespace CartoonFX
         public bool isDynamic;
 
         [Header("Text")]
-        [SerializeField] string text;
+        [SerializeField] public string text;
         [SerializeField] float size = 1f;
         [SerializeField] float letterSpacing = 0.44f;
 
@@ -125,7 +125,46 @@ namespace CartoonFX
                 ps.gameObject.name = "MODEL";
             }
         }
+        /// <summary>
+        /// 安全にテキストのみ変更する簡易関数
+        /// </summary>
+        public void SetText(string newText)
+        {
+            if (string.IsNullOrEmpty(newText))
+                return;
 
+            // Dynamic じゃない場合は自動で有効化（例外防止）
+            if (!isDynamic)
+            {
+                Debug.LogWarning("[CFXR_ParticleText] isDynamic が false のため true に変更します。");
+                isDynamic = true;
+
+                if (Application.isPlaying)
+                {
+                    InitializeFirstParticle();
+                }
+            }
+
+            // フォント未設定チェック
+            if (font == null || !font.IsValid())
+            {
+                Debug.LogError("[CFXR_ParticleText] Font が未設定、または無効です。");
+                return;
+            }
+
+            // 不正文字を除去（例外を投げない）
+            string filtered = "";
+            foreach (char c in newText)
+            {
+                if (char.IsWhiteSpace(c) || font.CharSequence.IndexOf(c) >= 0)
+                {
+                    filtered += c;
+                }
+            }
+
+            // 実際に更新
+            UpdateText(filtered);
+        }
         public void UpdateText(
             string newText = null,
             float? newSize = null,
