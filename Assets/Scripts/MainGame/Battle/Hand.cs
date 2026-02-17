@@ -43,7 +43,7 @@ public class Hand
         UpdatePlayableCards();
     }
 
-    public void AddCards(List<CardData> cards)
+    public void AddCard(List<CardData> cards)
     {
         for (int i = 0, max = cards.Count; i < max; i++)
         {
@@ -71,9 +71,6 @@ public class Hand
         {
             handCardList.Insert(index, card);
         }
-
-        // 手札に加えるアニメーション
-        UIManager.instance.InsertDrawCards(playerID, card, index);
     }
 
     /// <summary>

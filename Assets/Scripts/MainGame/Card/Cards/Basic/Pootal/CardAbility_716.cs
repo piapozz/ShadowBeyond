@@ -17,9 +17,17 @@ public class CardAbility_716 : BaseCardAbility
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, isOwn ? Field.FieldType.OWN : Field.FieldType.OPPONENT);
         if (targetCard.Count <= 0) return;
         DamageEffect damageEffect = new DamageEffect(new List<int> { 5 });
-        damageEffect.ExecuteEffect(targetCard);
+
+        List<BaseComponent> components = new List<BaseComponent>();
+        BaseComponent component;
+        foreach (var card in targetCard)
+        {
+            component = card;
+            components.Add(component);
+        }
+        damageEffect.ExecuteEffect(components);
         HealEffect healEffect = new HealEffect(new List<int> { 5 });
-        BaseComponent component = GetPlayer(isOwn).leader;
+        component = GetPlayer(isOwn).leader;
         healEffect.ExecuteEffect(component);
     }
 }

@@ -219,6 +219,8 @@ public class Deck
         var targets = GetCards(condition);
         if (targets.Count == 0 && CheckDeckOut())
             return new List<CardData>();
+        if (targets.Count < drawCount)
+            drawCount = targets.Count;
 
         return DrawDeck(targets, drawCount);
     }

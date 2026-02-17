@@ -22,7 +22,7 @@ public class AddCardHandEffect : BaseEffect
             addCardObjectList.Add(enterCard);
             addCardList.Add(enterCard.GetCardData());
         }
-        targetHand.AddCards(addCardList);
+        targetHand.AddCard(addCardList);
         UIManager.instance.AddHandCard(targetHand.playerID, addCardList);
 
         return addCardList;
