@@ -212,7 +212,7 @@ public class RedrawUI : MonoBehaviour
         for (int i = 0; i < redrawIndex.Count; i++)
         {
             int index = redrawIndex[i];
-            opponentRedrawSequence.AddRange(UIManager.instance.GetInsertDrawCardSequence((int)GameEnum.PlayerType.OPPONENT, poolCard[0], i));
+            opponentRedrawSequence.AddRange(UIManager.instance.GetInsertDrawCardSequence((int)GameEnum.PlayerType.OPPONENT, poolCard[i], index));
             opponent.hand.InsertCardAt(poolCard[i], index);
         }
         UIManager.instance.AddSequence(opponentRedrawSequence);

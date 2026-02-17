@@ -271,6 +271,7 @@ public class BattleManager : SystemObject
             case GameEnum.InputType.PLAY_CARD:
                 // カードをプレイ
                 int handIndex = data.param[0];
+                Debug.Log($"[Battle] 🃏 カードプレイ: 手札{handIndex}");
                 UIManager.instance.PlayOpponentCard(handIndex);
                 break;
             case GameEnum.InputType.ATTACK_FOLLOWER:
