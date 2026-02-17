@@ -14,7 +14,7 @@ public class CardAbility_000006 : BaseCardAbility
         selectTarget[(int)TargetTiming.Engage] = new Target(Target.TargetSide.Own, Target.TargetZone.Field, condition, 1);
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // ƒtƒHƒƒ[‚ğˆê–‡ˆø‚­
         DrawEffect effect = new DrawEffect(new List<int>{ 1 });

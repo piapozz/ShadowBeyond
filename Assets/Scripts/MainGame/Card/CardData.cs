@@ -120,9 +120,8 @@ public class CardData : BaseComponent
     public void OnPlay(bool isOwn, bool isEnhance)
     {
         if (ability == null) return;
-        if (isEnhance) ability.Enhance(isOwn);
-        else ability.Fanfare(isOwn);
-        GetCardObject().SetAttackPermissionLook();
+        CardActionExecutor.TryPlay(this, isOwn, isEnhance);
+        //GetCardObject().SetAttackPermissionLook();
     }
 
     // ターン開始時処理
@@ -145,7 +144,23 @@ public class CardData : BaseComponent
     public void OnEndTurn()
     {
         remainAttackCount = 0;
-        GetCardObject().SetAttackPermissionLook();
+        CardObject cardObject = GetCardObject();
+        // 攻撃可否の更新
+        cardObject.SetAttackPermissionLook();
+        // カウントダウン
+        // カウントを進め、カウントがなくなったら破壊
+        KeywordAbilityInstance keyword = GetKeywordAbility(KeywordAbility.Countdown);
+        if (keyword != null)
+        {
+            keyword.RemoveParam(1);
+            if (keyword.IsNoCount())
+            {
+                DestroyEffect destroyEffect = new DestroyEffect(null);
+                destroyEffect.ExecuteEffect(this);
+            }
+        }
+        // エフェクトの更新
+        cardObject.UpdateCardEffect();
     }
 
     /// <summary>
@@ -154,6 +169,8 @@ public class CardData : BaseComponent
     /// <param name="isOwn"></param>
     public void OnEnterField(bool isOwn)
     {
+        GetCardObject().SetAttackPermissionLook();
+
         AbilityManager.TriggerTiming timing = isOwn ? AbilityManager.TriggerTiming.OwnEnterField : AbilityManager.TriggerTiming.OpponentEnterField;
         bool isOwnTurn = BattleManager.instance.IsOwnTurn();
         AbilityManager.Trigger(timing, isOwnTurn, this);
@@ -174,6 +191,10 @@ public class CardData : BaseComponent
     /// <param name="isOwn"></param>
     public void OnLeaveField(bool isOwn)
     {
+        AbilityManager.TriggerTiming timing = isOwn ? AbilityManager.TriggerTiming.OwnLeaveField : AbilityManager.TriggerTiming.OpponentLeaveField;
+        bool isOwnTurn = BattleManager.instance.IsOwnTurn();
+        AbilityManager.Trigger(timing, isOwnTurn, this);
+
         if (ability == null) return;
         int abilityCount = ability.activeAbilities.Count;
         if (abilityCount <= 0) return;
@@ -184,8 +205,12 @@ public class CardData : BaseComponent
         }
     }
 
-    public void OnAct()
+    public void OnAct(bool isOwn)
     {
+        AbilityManager.TriggerTiming timing = isOwn ? AbilityManager.TriggerTiming.OwnEngage : AbilityManager.TriggerTiming.OpponentEngage;
+        bool isOwnTurn = BattleManager.instance.IsOwnTurn();
+        AbilityManager.Trigger(timing, isOwnTurn, this);
+
         canAct = false;
     }
 
@@ -321,6 +346,7 @@ public class CardData : BaseComponent
         if (defance <= 0)
             Destroy();
     }
+
     // 破壊する
     public void Destroy()
     {

@@ -14,7 +14,7 @@ public class CardAbility_706 : BaseCardAbility
         // 自分のターン終了時、『操り人形』1枚を自分の手札に加える。
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int> { PUPPET_ID, 1 });
         addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);

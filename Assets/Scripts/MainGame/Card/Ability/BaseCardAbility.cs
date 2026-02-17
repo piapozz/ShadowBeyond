@@ -28,17 +28,17 @@ public abstract class BaseCardAbility
     public virtual void Initialize(CardData setCard) { }
 
     // ファンファーレ
-    public virtual void Fanfare(bool isOwn) { }
+    public virtual void Fanfare(bool isOwn, List<BaseComponent> selected = null) { }
     // エンハンス
-    public virtual void Enhance(bool isOwn) { }
+    public virtual void Enhance(bool isOwn, List<BaseComponent> selected = null) { }
     // 場に出たとき
     public virtual void EnterField(bool isOwn) { }
     // 進化時
-    public virtual void Evolve(bool isOwn) { }
+    public virtual void Evolve(bool isOwn, List<BaseComponent> selected = null) { }
     // 進化した時
     public virtual void AutoEvolve(bool isOwn) { }
     // 超進化時
-    public virtual void SuperEvolve(bool isOwn) { }
+    public virtual void SuperEvolve(bool isOwn, List<BaseComponent> selected = null) { }
     // 超進化した時
     public virtual void AutoSuperEvolve(bool isOwn) { }
     // ラストワード
@@ -64,7 +64,7 @@ public abstract class BaseCardAbility
     // アクト
     public virtual void Engage(bool isOwn, List<BaseComponent> selected = null)
     {
-        sourceData.OnAct();
+        sourceData.OnAct(isOwn);
         // 通信
         // 自身のインデックスと選択した対象のインデックスを渡す
         if (isOwn)

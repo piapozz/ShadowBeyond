@@ -11,7 +11,7 @@ public class CardAbility_302 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         EnterCardFieldEffect enterCardFieldEffect = new EnterCardFieldEffect(new List<int>{CLAYGOLEM_ID, 1});
         enterCardFieldEffect.ExecuteEffect(isOwn);

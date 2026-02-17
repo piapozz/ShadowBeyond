@@ -9,7 +9,7 @@ public class CardAbility_300 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 【ファンファーレ】【モード】1つを選んでその能力が働く。
         //（1）自分の手札すべては2回スペルブーストする。

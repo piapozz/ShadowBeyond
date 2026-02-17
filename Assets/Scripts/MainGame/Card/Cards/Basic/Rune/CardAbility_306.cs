@@ -9,7 +9,7 @@ public class CardAbility_306 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // 場のフォロワーすべてに2ダメージ。【土の秘術_1】自分のデッキから1枚を引く。
         var targetCard = BattleManager.instance.field.GetCards((card) => { return card.type == GameEnum.CardType.FOLLOWER; }, Field.FieldType.ALL);

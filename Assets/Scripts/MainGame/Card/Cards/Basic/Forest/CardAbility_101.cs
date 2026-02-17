@@ -9,7 +9,7 @@ public class CardAbility_101 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         // Ž©•ª‚ÌƒRƒ“ƒ{‚ð+1‚·‚é
         AddComboEffect effect = new AddComboEffect(new List<int> { 1 });

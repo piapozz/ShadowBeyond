@@ -20,6 +20,50 @@ public class CardActionExecutor
     }
 
     /// <summary>
+    /// カードのプレイを試行する
+    /// </summary>
+    /// <param name="card"></param>
+    /// <param name="isOwn"></param>
+    /// <returns></returns>
+    public static async UniTask TryPlay(CardData card, bool isOwn, bool isEnhance)
+    {
+        Debug.Log("TryPlay called");
+        var ability = card.ability;
+        Target selectTarget;
+        if (isEnhance)
+        {
+            selectTarget = ability.selectTarget[(int)BaseCardAbility.TargetTiming.Enhance];
+        }
+        else
+        {
+            selectTarget = ability.selectTarget[(int)BaseCardAbility.TargetTiming.Fanfare];
+        }
+        // ターゲット候補を取得
+        List<BaseComponent> targets = null;
+        if (selectTarget != null)
+            targets = BattleManager.instance.GetTargetComponent(selectTarget, isOwn);
+        // ターゲット選択が必要ないか対象がないなら普通に実行
+        if (selectTarget == null || targets.Count == 0)
+        {
+            if (isEnhance)
+                ability.Enhance(isOwn);
+            else
+                ability.Fanfare(isOwn);
+            return;
+        };
+        TargetSelectResult selectResult = await SelectTarget(targets, selectTarget.count);
+        // 完了していたなら処理を実行
+        if (selectResult.result)
+        {
+            if (isEnhance)
+                ability.Enhance(isOwn, selectResult.selected);
+            else
+                ability.Fanfare(isOwn, selectResult.selected);
+            return;
+        }
+    }
+
+    /// <summary>
     /// アクト処理を試行する
     /// </summary>
     /// <param name="card"></param>

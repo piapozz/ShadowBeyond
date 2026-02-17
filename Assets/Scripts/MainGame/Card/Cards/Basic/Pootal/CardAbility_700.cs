@@ -10,7 +10,7 @@ public class CardAbility_700 : BaseCardAbility
         sourceData = setCard;
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         AddCardHandEffect addCardHandEffect = new AddCardHandEffect(new List<int> { ENHANCED_PUPPET_ID, 1 });
         addCardHandEffect.ExecuteEffect(GetPlayer(isOwn).hand);

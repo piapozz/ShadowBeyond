@@ -472,6 +472,7 @@ public class BattleManager : SystemObject
     /// <returns></returns>
     public List<BaseComponent> GetTargetComponent(Target target, bool isOwn)
     {
+        if (target == null) return null;
         List<BaseComponent> result = new List<BaseComponent>();
         // TargetSideの反転
         if (!isOwn)

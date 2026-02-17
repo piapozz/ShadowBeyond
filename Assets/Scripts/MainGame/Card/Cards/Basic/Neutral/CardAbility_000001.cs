@@ -10,7 +10,7 @@ public class CardAbility_000001 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Ward, null));
     }
 
-    public override void Enhance(bool isOwn)
+    public override void Enhance(bool isOwn, List<BaseComponent> selected = null)
     {
         // effect‚É“n‚·
         BuffEffect effect = new BuffEffect(new List<int> { 3, 3 });
@@ -25,7 +25,7 @@ public class CardAbility_000001 : BaseCardAbility
         effect.ExecuteEffect(targetDeck);
     }
 
-    public override void Evolve(bool isOwn)
+    public override void Evolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // ˆê–‡ˆø‚­
         DrawEffect effect = new DrawEffect(new List<int>{ 1 });
@@ -33,7 +33,7 @@ public class CardAbility_000001 : BaseCardAbility
         effect.ExecuteEffect(targetDeck);
     }
 
-    public override void SuperEvolve(bool isOwn)
+    public override void SuperEvolve(bool isOwn, List<BaseComponent> selected = null)
     {
         // ˆê–‡ˆø‚­
         DrawEffect effect = new DrawEffect(new List<int> { 1 });

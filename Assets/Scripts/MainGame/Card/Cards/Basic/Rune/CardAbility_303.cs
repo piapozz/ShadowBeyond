@@ -14,7 +14,7 @@ public class CardAbility_303 : BaseCardAbility
         keywordAbilities.Add(new KeywordAbilityInstance(GameEnum.KeywordAbility.Engage, null, ENGAGE_COST));
     }
 
-    public override void Fanfare(bool isOwn)
+    public override void Fanfare(bool isOwn, List<BaseComponent> selected = null)
     {
         var targetPlayer = GetPlayer(isOwn);
         DrawEffect drawEffect = new DrawEffect(new List<int>{1});
