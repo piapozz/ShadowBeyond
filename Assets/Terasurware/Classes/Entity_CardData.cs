@@ -25,6 +25,7 @@ public class Entity_CardData : ScriptableObject
 		public int Cost;
 		public int Attack;
 		public int Defence;
+		public int IllustID;
 		public bool Token;
 		public int[] Trait;
 	}

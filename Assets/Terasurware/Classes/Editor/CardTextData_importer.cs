@@ -10,7 +10,7 @@ using NPOI.SS.UserModel;
 public class CardTextData_importer : AssetPostprocessor {
 	private static readonly string filePath = "Assets/Resources/MasterData/CardTextData.xlsx";
 	private static readonly string exportPath = "Assets/Resources/MasterData/CardTextData.asset";
-	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","BlossomingFate","Basic","CLC","DRK","ROB","TOG","WLD", };
+	private static readonly string[] sheetNames = { "BasicBeyond","LegendsRise","InfinityEvolved","HeirsOfTheOmen","SkyboundDragons","BlossomingFate","ApocalypsePact","Basic","CLC","DRK","ROB","TOG","WLD", };
 	
 	static void OnPostprocessAllAssets (string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 	{
@@ -54,6 +54,11 @@ public class CardTextData_importer : AssetPostprocessor {
 					cell = row.GetCell(1); p.Name = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(2); p.CardText = (cell == null ? "" : cell.StringCellValue);
 					cell = row.GetCell(3); p.CrestText = (cell == null ? "" : cell.StringCellValue);
+					p.Mode = new string[4];
+					cell = row.GetCell(4); p.Mode[0] = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(5); p.Mode[1] = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(6); p.Mode[2] = (cell == null ? "" : cell.StringCellValue);
+					cell = row.GetCell(7); p.Mode[3] = (cell == null ? "" : cell.StringCellValue);
 						s.list.Add (p);
 					}
 					data.sheets.Add(s);
