@@ -185,6 +185,7 @@ public class GameEnum
         HEIRS_OF_THE_OMEN,
         SKYBOUND_DRAGONS,
         BLOSSOMING_FATE,
+        APOCALYPSE_PACT,
         BASIC,
         CLC,
         DRK,

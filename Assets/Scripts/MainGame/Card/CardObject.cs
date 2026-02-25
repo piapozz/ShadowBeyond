@@ -222,20 +222,22 @@ public class CardObject : BaseFieldObject
     private bool AttackFollower(CardObject targetCard)
     {
         CardData defenceCard = targetCard.GetCardData();
-        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
-        if (targetCard.currentState != CardState.FIELD || defenceCard.type != GameEnum.CardType.FOLLOWER) return false;
         // 攻撃可否判定
         if (!GetCardData().CanAttack(false)) return false;
+        // 攻撃可能オブジェクトか判定(フィールドに出ている敵フォロワーか敵リーダー)
+        if (targetCard.currentState != CardState.FIELD || defenceCard.type != GameEnum.CardType.FOLLOWER) return false;
+        // 対象が生きてるかどうか
+        if (targetCard.GetCardData().isDestroyed) return false;
         if (!BattleManager.instance.IsAttackable(defenceCard)) return false;
 
         // 情報を送信
         int sourceIndex = BattleManager.instance.field.GetOwnFieldIndex(GetCardData());
         int targetIndex = BattleManager.instance.field.GetOpponentFieldIndex(targetCard.GetCardData());
         BattleManager.instance.SendInputData(GameEnum.InputType.ATTACK_FOLLOWER, new int[2] { sourceIndex, targetIndex });
-        // 挙動
-        UIManager.instance.SetAttackFollowerSequence(this, targetCard);
         // 攻撃処理を依頼
         BattleManager.instance.CardCombat(GetCardData(), targetCard.GetCardData());
+        // 挙動
+        UIManager.instance.SetAttackFollowerSequence(this, targetCard);
         return true;
     }
 

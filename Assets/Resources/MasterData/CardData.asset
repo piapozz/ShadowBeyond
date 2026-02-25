@@ -4583,6 +4583,16 @@ MonoBehaviour:
       Defence: 3
       Token: 0
       Trait: 00000000
+    - ID: 4310
+      Class: 3
+      Rarity: 3
+      Type: 1
+      Name: "\u30A2\u30EB\u30B9\u30FB\u30DE\u30B0\u30CA"
+      Cost: 1
+      Attack: 0
+      Defence: 0
+      Token: 1
+      Trait: 00000000
     - ID: 4400
       Class: 4
       Rarity: 0
